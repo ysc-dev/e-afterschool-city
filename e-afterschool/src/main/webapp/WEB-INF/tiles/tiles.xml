@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <!-- 웹 : 기본페이지 -->
+    <definition name="layout" template="/WEB-INF/tiles/layout/layout.jsp">
+        <put-attribute name="head" value="/WEB-INF/jsp/common/head.jsp" />
+    </definition>
+    
+    <!-- 학생등록 -->
+	<definition name="student/*" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/views/student/{1}.jsp" />
+    </definition>
+    
+    <!-- 수강신청 -->
+	<definition name="apply/*" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/views/apply/{1}.jsp" />
+    </definition>
+</tiles-definitions>
