@@ -6,6 +6,16 @@
     <!-- 웹 : 기본페이지 -->
     <definition name="layout" template="/WEB-INF/tiles/layout/layout.jsp">
         <put-attribute name="head" value="/WEB-INF/jsp/common/head.jsp" />
+        <put-attribute name="header" value="/WEB-INF/jsp/common/header.jsp" />
+    </definition>
+    
+    <definition name="footer-layout" template="/WEB-INF/tiles/layout/footer-layout.jsp">
+        <put-attribute name="head" value="/WEB-INF/jsp/common/head.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/common/footer.jsp" />
+    </definition>
+    
+	<definition name="*" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/views/{1}.jsp" />
     </definition>
     
     <!-- 학생등록 -->

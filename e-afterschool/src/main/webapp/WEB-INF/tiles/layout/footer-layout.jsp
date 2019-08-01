@@ -4,11 +4,9 @@
 <!DOCTYPE html>
 <html>
 	<tiles:insertAttribute name="head"/>
-<body class="layout-boxed-bg">
-	<div class="d-flex flex-column flex-1 layout-boxed">
-	 	<tiles:insertAttribute name="header"/>
-	 	
-	    <tiles:insertAttribute name="content"/>
-	</div>
+<body>
+    <tiles:insertAttribute name="content"/>
+    
+    <tiles:insertAttribute name="footer"/>
 </body>
 </html>
