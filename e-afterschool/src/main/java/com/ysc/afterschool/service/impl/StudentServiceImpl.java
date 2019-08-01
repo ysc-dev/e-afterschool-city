@@ -54,4 +54,14 @@ public class StudentServiceImpl implements StudentService {
 	private boolean isNew(Student domain) {
 		return !studentRepository.existsById(domain.getId());
 	}
+
+	@Override
+	public boolean searchJumin(Student student) {
+		return studentRepository.findByResidentNumber(student.getJumin1() + "-" + student.getJumin2()) != null;
+	}
+
+	@Override
+	public boolean search(Student student) {
+		return studentRepository.findByNameAndTel(student.getName(), student.getService() + student.getTel()) != null;
+	}
 }

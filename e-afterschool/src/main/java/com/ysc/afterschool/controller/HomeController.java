@@ -13,5 +13,16 @@ public class HomeController {
 	
 	@GetMapping("/home")
 	public void home() {
+		
+	}
+	
+	@GetMapping("/login")
+	public void login() {
+		
+	}
+	
+	@GetMapping("/info")
+	public void info() {
+		
 	}
 }

@@ -2,14 +2,16 @@ package com.ysc.afterschool.domain.db;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import com.ysc.afterschool.domain.Domain;
+import com.ysc.afterschool.domain.AbstractDomain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 /**
  * 학생 관리 도메인
@@ -20,11 +22,8 @@ import lombok.Data;
 @Entity
 @Table(name = "tb_student")
 @Data
-public class Student implements Domain {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+@EqualsAndHashCode(callSuper = false)
+public class Student extends AbstractDomain {
 	
 	/** 이름 */
 	@Column(nullable = false, length = 20)
@@ -53,4 +52,32 @@ public class Student implements Domain {
 	/** 주민등록번호 */
 	@Column(length = 15)
 	private String residentNumber;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private TargetType targetType;
+	
+	/** 핸드폰 앞자리 */
+	@Transient
+	private String service;
+	
+	@Transient
+	private String jumin1;
+	
+	@Transient
+	private String jumin2;
+	
+	@Getter
+	public enum TargetType {
+		전체("전체"),
+		초등("초등"),
+		중등("중등"),
+		초_중등("초,중등");
+		
+		private String name;
+		
+		private TargetType(String name) {
+			this.name = name;
+		}
+	}
 }

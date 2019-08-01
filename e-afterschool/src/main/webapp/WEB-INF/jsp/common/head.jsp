@@ -45,4 +45,6 @@
 	<script src="${contextName}/limitless/js/app.js"></script>
 	<!-- /theme JS files -->
 	
+	<script src="${contextName}/js/common.js"></script>
+	
 </head>

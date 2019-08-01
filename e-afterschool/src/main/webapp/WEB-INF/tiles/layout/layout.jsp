@@ -8,7 +8,11 @@
 	<div class="d-flex flex-column flex-1 layout-boxed">
 	 	<tiles:insertAttribute name="header"/>
 	 	
-	    <tiles:insertAttribute name="content"/>
+	 	<div class="page-content">
+			<div class="content-wrapper">
+				<tiles:insertAttribute name="content"/>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
