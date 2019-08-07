@@ -4,7 +4,7 @@
 <link href="${pageContext.request.contextPath}/css/student.css" rel="stylesheet" type="text/css">
 
 <div class="content d-flex justify-content-center align-items-center"> 
-	<form id="studentRegistForm" class="login-form form-validate" method="POST"> 
+	<form id="studentRegistForm" class="login-form form-validate" action="${pageContext.request.contextPath}/student/regist" method="POST"> 
 		<div class="card mb-0">
 			<div class="card-header bg-teal-400 text-white">
 				<h2>방과후학교 학생 등록</h2>
@@ -72,7 +72,7 @@
 							<option value="018">018</option>
 							<option value="019">019</option>
 						</select>
-						<input type="text" class="form-controlml-2" data-mask="9999-9999" name="tel" 
+						<input type="text" class="form-control ml-2" data-mask="9999-9999" name="tel" 
 							autocomplete="off" required>
 					</div>
 				</div>
@@ -103,7 +103,7 @@
 			</div>
 			<div class="card-footer text-center">
 				<button id="registBtn" type="submit" class="btn bg-teal-600 rounded-round custom-btn mr-2">학생등록</button>
-				<a href="${pageContext.request.contextPath}/home" class="btn btn-light rounded-round custom-btn">취 소</a>
+				<a href="${pageContext.request.contextPath}/home/${cityId}" class="btn btn-light rounded-round custom-btn">취 소</a>
 			</div>
 		</div>
 	</form>
@@ -135,8 +135,6 @@
 $('.format-phone-number').formatter({
     pattern: '{{9999}}-{{9999}}'
 });
-
-var agent = navigator.userAgent.toLowerCase();
 
 $("#agreeCheck").click(function(){
     if ($(this).is(':checked')){
@@ -182,11 +180,7 @@ $("#studentRegistForm").submit(function(e) {
 		
 		if (!validate()) {
 			isSubmitted = false;
-			if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
-				alert("올바른 주민번호가 아닙니다.");
-			} else {
-				swal({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
-			}
+			swal({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
 			return;
 		}
 		
@@ -197,11 +191,7 @@ $("#studentRegistForm").submit(function(e) {
 			success: function(response) {
 				if (response) {
 					isSubmitted = false;
-					if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
-						alert("이미 등록된 주민번호입니다.");
-					} else {
-						swal({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
-					}
+					swal({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
 				} else {
 					registStudent(student, url);
 				}
@@ -220,37 +210,24 @@ function registStudent(student, url) {
 		success: function(response) {
        		if (response) {
        			isSubmitted = false;
-       			if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
-       				alert("이미 등록된 학생 정보입니다.");
-       			} else {
-       				swal({title: "이미 등록된 학생 정보입니다.", type: "warning", position: 'top', confirmButtonClass: 'btn btn-warning',})
-       			}
+       			swal({title: "이미 등록된 학생 정보입니다.", type: "warning", position: 'top', confirmButtonClass: 'btn btn-warning',});
        		} else {
        			$.ajax({
        				type: "POST",
        	           	url: url,
        	           	data: student,
        	           	success: function(response) {
-	       	           	if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
-		       	        	alert("학생 등록 되었습니다.");
-		       	        	location.href = contextPath + "/home";
-	       	           	} else {
-		       	           	swal({
-			       				title: "학생 등록 되었습니다.", 
-			       				type: "success",
-			       				position: 'top'
-			       			}).then(function(e) {
-			       				location.href = contextPath + "/home";
-			       			});
-          	           	}
+	       	           	swal({
+		       				title: "학생 등록 되었습니다.", 
+		       				type: "success",
+		       				position: 'top'
+		       			}).then(function(e) {
+		       				location.href = contextPath + "/home/${cityId}";
+		       			});
        	           	},
        	            error: function(response) {
        	            	isSubmitted = false;
-       	            	if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
-       	            		alert("학생 등록을 실패하였습니다.");
-       	            	} else {
-	       	            	swal({title: "학생 등록을 실패하였습니다.", type: "error", position: 'top'})
-       	            	}
+       	            	swal({title: "학생 등록을 실패하였습니다.", type: "error", position: 'top'});
        	            }
        			});
        		}

@@ -33,6 +33,10 @@ public class Student extends AbstractDomain {
 	@Column(nullable = false, length = 45)
 	private String school;
 	
+	/** 소속(학교 명) - 간략히 */
+	@Column(nullable = false, length = 45)
+	private String schoolInfo;
+	
 	/** 학년 */
 	private int grade;
 	
@@ -69,15 +73,18 @@ public class Student extends AbstractDomain {
 	
 	@Getter
 	public enum TargetType {
-		전체("전체"),
-		초등("초등"),
-		중등("중등"),
-		초_중등("초,중등");
+		전체("전체", ""),
+		초등("초등", "초"),
+		중등("중등", "중"),
+		초_중등("초,중등", "");
 		
 		private String name;
 		
-		private TargetType(String name) {
+		private String info;
+		
+		private TargetType(String name, String info) {
 			this.name = name;
+			this.info = info;
 		}
 	}
 }

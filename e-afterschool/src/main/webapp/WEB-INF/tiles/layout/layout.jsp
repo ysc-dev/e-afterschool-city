@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<tiles:insertAttribute name="head"/>
-<body class="layout-boxed-bg">
+<body>
 	<div class="d-flex flex-column flex-1 layout-boxed">
 	 	<tiles:insertAttribute name="header"/>
 	 	

@@ -36,15 +36,14 @@
 	<script src="${contextName}/limitless/js/plugins/forms/inputs/inputmask.js"></script>
 	<script src="${contextName}/limitless/js/plugins/forms/inputs/maxlength.min.js"></script>
 	<script src="${contextName}/limitless/js/plugins/forms/inputs/formatter.min.js"></script>
-	
 	<script src="${contextName}/limitless/js/plugins/forms/selects/select2.min.js"></script>
-	<script src="${contextName}/limitless/js/plugins/notifications/sweet_alert.min.js"></script>
-	
 	<script src="${contextName}/limitless/js/plugins/forms/styling/uniform.min.js"></script>
+	<script src="${contextName}/limitless/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script src="${contextName}/limitless/js/plugins/notifications/sweet_alert.min.js"></script>
 	
 	<script src="${contextName}/limitless/js/app.js"></script>
 	<!-- /theme JS files -->
 	
 	<script src="${contextName}/js/common.js"></script>
-	
+	<script src="${contextName}/js/table.js"></script>
 </head>

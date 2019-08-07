@@ -5,8 +5,14 @@
 <html>
 	<tiles:insertAttribute name="head"/>
 <body>
-    <tiles:insertAttribute name="content"/>
-    
-    <tiles:insertAttribute name="footer"/>
+	<div class="d-flex flex-column flex-1 layout-boxed">
+	 	<div class="page-content">
+			<div class="content-wrapper">
+				<tiles:insertAttribute name="content"/>
+				
+				<tiles:insertAttribute name="footer"/>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -5,10 +5,6 @@ body { font-family:myFirstFont, NanumGothic,Verdana,Dotum,"돋움",sans-serif; fon
 input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,Verdana,Dotum,"돋움",sans-serif; color:#000; }
 * { -webkit-text-size-adjust:none; }
 
-.layout-boxed-bg {
-    background: url(../images/boxed_bg.png) repeat;
-}
-
 /*******************************************************************************************************
   공통 디자인
 *******************************************************************************************************/
@@ -21,6 +17,7 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 .swal2-title {
 	font-weight: bold;
 }
+
 /*******************************************************************************************************
  header 디자인
 *******************************************************************************************************/
@@ -37,6 +34,30 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 	height: 40px;
 }
 
+.header-icon [class^="icon-"] {
+	font-size: 24px;
+}
+
+/*******************************************************************************************************
+ Table 디자인
+*******************************************************************************************************/
+.table th {
+	font-weight: 600;
+}
+
+.datatable-header {
+	padding-top: 0rem;
+	border-bottom: 0;
+}
+
+.dataTables_wrapper .table-bordered {
+    border: 1px solid #ddd !important;
+}
+
+.dataTables_paginate .paginate_button.disabled, .dataTables_paginate .paginate_button.disabled:focus, .dataTables_paginate .paginate_button.disabled:hover {
+	background-color: transparent;
+}
+
 /*******************************************************************************************************
  cotent 디자인
 *******************************************************************************************************/
@@ -44,4 +65,7 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 	/* background-color: white; */
 }
 
-
+.cotent-title {
+	font-weight: bold;
+ 	color: #5D5D5D;
+}

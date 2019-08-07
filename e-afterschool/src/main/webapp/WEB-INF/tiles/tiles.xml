@@ -18,13 +18,11 @@
 		<put-attribute name="content" value="/WEB-INF/jsp/views/{1}.jsp" />
     </definition>
     
-    <!-- 학생등록 -->
-	<definition name="student/*" extends="layout">
-		<put-attribute name="content" value="/WEB-INF/jsp/views/student/{1}.jsp" />
+    <definition name="info" extends="footer-layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/views/info.jsp" />
     </definition>
-    
-    <!-- 수강신청 -->
-	<definition name="apply/*" extends="layout">
-		<put-attribute name="content" value="/WEB-INF/jsp/views/apply/{1}.jsp" />
+  
+    <definition name="*/*" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/views/{1}/{2}.jsp" />
     </definition>
 </tiles-definitions>

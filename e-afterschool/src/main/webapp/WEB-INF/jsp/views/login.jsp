@@ -31,6 +31,8 @@
 						<i class="icon-phone2 text-muted"></i>
 					</div>
 				</div>
+				
+				<input type="hidden" value="${cityId}" name="cityId"/>
 
 				<div class="form-group">
 					<button type="submit" class="btn bg-info-600 btn-block">로그인<i class="icon-circle-right2 ml-2"></i></button>

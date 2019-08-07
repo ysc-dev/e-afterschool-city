@@ -8,4 +8,6 @@ public interface StudentService extends CRUDService<Student, Integer> {
 
 	boolean search(Student student);
 
+	Student login(String name, String tel);
+
 }

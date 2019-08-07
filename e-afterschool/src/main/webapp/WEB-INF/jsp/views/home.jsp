@@ -61,14 +61,14 @@
 
 <script>
 $("#registBtn").click(function() {
-	location.href = contextPath + "/student/regist";
+	location.href = contextPath + "/student/regist/${cityId}";
 });
 
 $("#loginBtn").click(function() {
-	location.href = contextPath + "/login";
+	location.href = contextPath + "/login/${cityId}";
 });
 
 $("#infoBtn").click(function() {
-	location.href = contextPath + "/info";
+	location.href = contextPath + "/info/${cityId}";
 });
 </script>
