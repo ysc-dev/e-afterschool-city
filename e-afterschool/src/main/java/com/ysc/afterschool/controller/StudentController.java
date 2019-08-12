@@ -2,13 +2,18 @@ package com.ysc.afterschool.controller;
 
 import java.util.stream.Collectors;
 
+import javax.servlet.http.Cookie;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -97,9 +102,50 @@ public class StudentController {
 	 * @param model
 	 */
 	@GetMapping("update")
-	public void update(Model model, int infoId) { 
+	public void update(Model model, int infoId, Authentication authentication, @CookieValue(value = "cityId", required = false) Cookie cookie) { 
+		Student student = (Student) authentication.getPrincipal();
+		
 		model.addAttribute("schools", schoolService.getList().stream()
 				.map(data -> data.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("infoId", infoId);
+		model.addAttribute("cityId", cookie.getValue());
+		
+		if (student.isAgree()) {
+			String[] residentNumber = student.getResidentNumber().split("-");
+			student.setJumin1(residentNumber[0]);
+			student.setJumin2(residentNumber[1]);
+		}
+		model.addAttribute("student", student);
+	}
+	
+	/**
+	 * 학생 정보 변경 기능
+	 * @param student
+	 */
+	@PutMapping(value = "update")
+	@ResponseBody
+	public ResponseEntity<?> update(Student student) {
+		Student temp = studentService.get(student.getId());
+		temp.setSchool(student.getSchool());
+		temp.setGrade(student.getGrade());
+		temp.setClassType(student.getClassType());
+		temp.setNumber(student.getNumber());
+		temp.setAgree(student.isAgree());
+		if (student.isAgree()) {
+			temp.setResidentNumber(student.getJumin1() + "-" + student.getJumin2());
+		}
+		
+		String school = student.getSchool();
+		temp.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
+		
+		school = school.endsWith("초등학교") ? 
+				school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
+		temp.setSchoolInfo(school);
+		
+		if (studentService.update(temp)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 }

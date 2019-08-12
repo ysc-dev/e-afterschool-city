@@ -26,7 +26,8 @@
 				<tr>
 					<td class="font-size-sm">${status.count}</td>
 					<td>
-						<a href="#">${notice.title}</a>
+						<a href="${pageContext.request.contextPath}/notice/detail?infoId=${infoId}&noticeId=${notice.id}" 
+							class="text-primary font-weight-bold">${notice.title}</a>
 					</td>
 					<td class="font-size-sm"></td>
 					<td class="font-size-sm">

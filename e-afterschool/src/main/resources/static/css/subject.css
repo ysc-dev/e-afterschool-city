@@ -138,3 +138,46 @@
 .subject-group .btn-sm {
 	padding: .3125rem .75rem;
 }
+
+/*******************************************************************************************************
+ mylist µðÀÚÀÎ
+*******************************************************************************************************/
+.mylist-header {
+	width: 80px;
+	margin-left: 1rem !important;
+	justify-content: flex-end;
+}
+
+.result-empty {
+	background: white;
+	text-align: center;
+	padding: 1.2rem 0;
+	font-size: 15px;
+	border: 1px solid #D5D5D5;
+}
+
+.mylist-result {
+    width: 100%;
+    background: #f3f3f3;
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.mylist-result li {
+	padding: 0.4rem 1rem;
+}
+
+.mylist-result .advice {
+	border-top: 1px solid rgba(0,0,0,.125);
+	font-weight: bold;
+    color: #0089ed;
+}
+
+.text-right {
+    padding: 5px 0 5px 0;
+    text-align: right;
+    line-height: 2em;
+}
+
+.mylist-group .card-header {
+	padding: .9375rem 0.45rem;
+}

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -54,5 +55,24 @@ public class ApplyController {
 		}
 		
 		return new ResponseEntity<String>("수강신청 실패하였습니다.", HttpStatus.BAD_REQUEST);
+	}
+	
+	/**
+	 * 수강 취소 기능
+	 * @param subjectId
+	 * @param authentication
+	 * @return
+	 */
+	@DeleteMapping("delete")
+	public ResponseEntity<?> delete(int applyId) {
+		Apply apply = applyService.get(applyId);
+		if (applyService.delete(applyId)) {
+			Subject subject = apply.getSubject();
+			subject.setApplyNumber(subject.getApplyNumber() - 1);
+			if (subjectService.update(subject)) {
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
+		}
+		return new ResponseEntity<String>("수강취소 실패하였습니다.", HttpStatus.BAD_REQUEST);
 	}
 }

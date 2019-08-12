@@ -52,9 +52,20 @@
 				</div>
 			</div>
 			
-			<button type="button" class="btn btn-small-box bg-info-600" onclick="apply(${subject.id})">
-				<span>신 청 하 기</span>
-			</button>
+			<c:choose>
+				<c:when test="${subject.applyType == 'APPLY'}">
+			       <button type="button" class="btn btn-small-box bg-info-600" disabled="disabled"><span>신 청 완 료</span></button>
+			    </c:when>
+  				<c:when test="${subject.applyType == 'NOTAPPLY'}">
+ 					<button type="button" class="btn btn-small-box bg-danger-600" disabled="disabled"><span>신 청 불 가</span></button>
+  				</c:when>
+  				<c:when test="${subject.applyType == 'FILL'}">
+			       <button type="button" class="btn btn-small-box bg-orange-800" disabled="disabled"><span>정 원 초 과</span></button>
+			    </c:when>
+ 				<c:otherwise>
+ 					<button type="button" class="btn btn-small-box bg-info-600" onclick="apply(${subject.id})"><span>신 청 하 기</span></button>
+ 				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 </div>

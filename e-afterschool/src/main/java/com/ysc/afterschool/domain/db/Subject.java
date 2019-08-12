@@ -92,8 +92,19 @@ public class Subject extends AbstractDomain {
 	@Transient
 	private ApplyType applyType;
 	
+	@Getter
 	public enum ApplyType {
-		NONE, APPLY, WAIT, NOTAPPLY, FILL;
+		NONE(""), 
+		APPLY("신청완료"), 
+		NOTAPPLY("신청불가"),
+		FILL("정원초과"),
+		WAIT("");
+		
+		private String name;
+		
+		private ApplyType(String name) {
+			this.name = name;
+		}
 	}
 	
 	@Getter
@@ -115,5 +126,18 @@ public class Subject extends AbstractDomain {
 			this.min = min;
 			this.max = max;
 		}
+	}
+	
+	/**
+	 * 학생 학년에 따라 과목 대상학년만 보여지도록
+	 * @param gradeType
+	 * @param grade
+	 * @return
+	 */
+	public boolean targetTrue(GradeType gradeType, int grade) {
+		 if (gradeType == GradeType.NONE || (gradeType.getMin() <= grade && grade <= gradeType.getMax())) {
+			return true;
+		}
+		return false;
 	}
 }

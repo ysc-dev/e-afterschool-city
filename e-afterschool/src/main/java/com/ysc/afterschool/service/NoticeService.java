@@ -17,6 +17,10 @@ public class NoticeService {
 	@Autowired
 	private CityService cityService;
 	
+	public Notice get(int id) {
+		return noticeRepository.findById(id).get();
+	}
+	
 	public List<Notice> getList(int cityId) {
 		return noticeRepository.findByCity(cityService.get(cityId).getName());
 	}

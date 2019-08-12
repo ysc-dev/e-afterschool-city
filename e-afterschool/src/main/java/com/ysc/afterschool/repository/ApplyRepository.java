@@ -8,4 +8,6 @@ public interface ApplyRepository extends DefaultRepository<Apply, Integer> {
 
 	List<Apply> findByInvitationIdAndStudentId(int infoId, int studentId);
 
+	Apply findByInvitationIdAndStudentIdAndSubjectId(int infoId, int studentId, int subjectId);
+
 }

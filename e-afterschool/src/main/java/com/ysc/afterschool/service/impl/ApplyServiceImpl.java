@@ -59,4 +59,9 @@ public class ApplyServiceImpl implements ApplyService {
 	public List<Apply> getList(int infoId, int studentId) {
 		return applyRepository.findByInvitationIdAndStudentId(infoId, studentId);
 	}
+
+	@Override
+	public boolean search(int infoId, int studentId, int subjectId) {
+		return applyRepository.findByInvitationIdAndStudentIdAndSubjectId(infoId, studentId, subjectId) != null;
+	}
 }

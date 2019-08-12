@@ -17,29 +17,42 @@
 		<div class="card-header text-center bg-primary text-white">
 			<h6 class="card-title font-weight-bold">커 뮤 니 티</h6>
 		</div>
-		<div class="table-responsive">
-			<table class="table table-bordered table-striped" id="noticeTable">
-				<tbody class="tbody-xs">
-					<c:forEach var="notice" items="${subjectNotices}" varStatus="status">
-						<tr>
-							<td class="font-size-sm text-center">${status.count}</td>
-							<td class="font-size-sm text-center">${notice.userName}</td>
-							<td class="font-size-sm">${notice.title}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
+		
+		<table class="table" id="noticeTable">
+			<tbody class="tbody-xs">
+				<c:forEach var="notice" items="${subjectNotices}" varStatus="status">
+					<tr>
+						<td>${notice.id}</td>
+						<td class="font-size-sm text-center">${status.count}</td>
+						<td class="font-size-sm text-center">${notice.userName}</td>
+						<td class="font-size-sm">${notice.title}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </div>
 
 <script>
-$("#noticeTable").DataTable({
+var table = $("#noticeTable").DataTable({
+	select: {
+        style: 'single'
+    },
 	pageLength: 10,
 	order: [[0, 'asc']],
 	columns: [
-	{ width: "10%" },
-	{ width: "20%" },
-	{ width: "70%" }],
+		{ width: "0%" },
+		{ width: "10%" },
+		{ width: "20%" },
+		{ width: "70%" }
+	],
+ 	columnDefs: [
+ 		{ visible: false, targets: 0 }
+ 	]
 });
+
+$('#noticeTable tbody').on( 'click', 'tr', function () {
+    var noticeId = table.row(this).data()[0];
+    console.log(noticeId);
+} );
 </script>

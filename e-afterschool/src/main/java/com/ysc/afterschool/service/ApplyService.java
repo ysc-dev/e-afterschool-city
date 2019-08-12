@@ -8,4 +8,5 @@ public interface ApplyService extends CRUDService<Apply, Integer> {
 
 	List<Apply> getList(int infoId, int studentId);
 
+	boolean search(int infoId, int studentId, int subjectId);
 }

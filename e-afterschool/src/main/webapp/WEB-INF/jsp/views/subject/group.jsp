@@ -9,7 +9,7 @@
 
 <div class="content subject-content">
 	<div class="content-title d-flex justify-content-center align-items-center mt-3">
-		<span>${invitation.name}</span>
+		<span class="fs-18">${invitation.name}</span>
 	</div>
 	
 	<div class="navbar navbar-expand navbar-dark bg-info-700 navbar-component border-transparent mt-4">

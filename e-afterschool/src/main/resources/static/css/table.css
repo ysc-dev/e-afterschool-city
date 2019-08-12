@@ -10,3 +10,7 @@
 .table thead th {
 	border-bottom: 0px;
 }
+
+.dataTables_wrapper .table-bordered {
+    border: 0px solid #ddd !important;
+}

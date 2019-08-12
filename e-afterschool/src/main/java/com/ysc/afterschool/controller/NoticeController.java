@@ -1,5 +1,7 @@
 package com.ysc.afterschool.controller;
 
+import java.text.SimpleDateFormat;
+
 import javax.servlet.http.Cookie;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +37,20 @@ public class NoticeController {
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("notices", noticeService.getList(Integer.parseInt(cookie.getValue())));
+	}
+	
+	/**
+	 * 전체 공지사항 상세보기 화면
+	 * @param model
+	 * @param infoId
+	 * @param cookie
+	 */
+	@GetMapping("detail")
+	public void detail(Model model, int infoId, int noticeId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("infoId", infoId);
+		
+		model.addAttribute("localDateTimeFormat", new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss"));
+		model.addAttribute("notice", noticeService.get(noticeId));
 	}
 }
