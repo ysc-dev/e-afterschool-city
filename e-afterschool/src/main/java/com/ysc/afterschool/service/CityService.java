@@ -13,6 +13,10 @@ public class CityService {
 	
 	@Autowired
 	private CityRepository cityRepository;
+	
+	public City get(int id) {
+		return cityRepository.findById(id).get();
+	}
 
 	public City get(String link) {
 		return cityRepository.findByLink(link);

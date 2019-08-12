@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp" %>
 
-<div class="content d-flex justify-content-center align-items-center"> 
+<div class="content d-flex justify-content-center align-items-center px-3">
 	<form class="login-form form-validate" action="${pageContext.request.contextPath}/login" method="POST"> 
 		<div class="card mb-0">
 			<div class="card-body">
@@ -34,11 +34,15 @@
 				
 				<input type="hidden" value="${cityId}" name="cityId"/>
 
-				<div class="form-group">
+				<div class="form-group mb-3">
 					<button type="submit" class="btn bg-info-600 btn-block">로그인<i class="icon-circle-right2 ml-2"></i></button>
 				</div>
 				
-				<div class="form-group mt-4">
+				<div class="form-group text-center text-muted content-divider mb-3">
+					<span class="px-2"></span>
+				</div>
+				
+				<div class="form-group">
 					<a href="${pageContext.request.contextPath}/home/${cityId}" class="btn btn-light btn-block">
 						뒤로가기<i class="icon-circle-right2 ml-2"></i>
 					</a>

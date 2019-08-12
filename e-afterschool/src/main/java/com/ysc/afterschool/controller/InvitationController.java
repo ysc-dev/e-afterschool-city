@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.service.InvitationService;
@@ -25,19 +24,18 @@ public class InvitationController {
 	@Autowired
 	private InvitationService invitationService;
 	
-	@GetMapping("info")
-	public String home(@CookieValue(value = "cityId", required = false) Cookie cookie) {
-		return "info/" + cookie.getValue();
-	}
-	
 	/**
 	 * 안내장 목록 화면
 	 * @param model
 	 */
-	@GetMapping("info/{cityId}")
-	public String info(Model model, @PathVariable int cityId, @AuthenticationPrincipal Student student) {
+	@GetMapping("info")
+	public void info(Model model, int cityId, @AuthenticationPrincipal Student student,
+			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		if (cityId == 0) {
+			cityId = Integer.parseInt(cookie.getValue());
+		} 
 		model.addAttribute("invitations", invitationService.getList(cityId));
+		model.addAttribute("cityId", cityId);
 		model.addAttribute("student", student);
-		return "info";
 	}
 }

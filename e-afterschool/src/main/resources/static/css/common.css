@@ -19,6 +19,8 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 	text-shadow: 2px 2px 2px gray;
 }
 
+.font-size-md { font-size: 13px !important; }
+
 /*******************************************************************************************************
  header 디자인
 *******************************************************************************************************/
@@ -75,6 +77,14 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 	background-color: white;
 }
 
+.datatable-footer {
+	padding: 1rem 1.25rem 0 1.25rem;
+}
+
+.dataTables_paginate {
+	margin: 0 0 1rem 1.25rem;
+}
+
 /*******************************************************************************************************
  cotent 디자인
 *******************************************************************************************************/
@@ -84,6 +94,7 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 
 .content {
 	padding: 0.75rem;
+	margin-top: 3.75rem!important;
 }
 
 .info-content {
@@ -98,10 +109,15 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 }
 
 .content-title {
+	display: flex; 
  	font-size: 1rem;
  	font-weight: bold;
     color: #353535;
     text-shadow: 1px 1px 1px #D5D5D5;
+}
+
+.subject-info-body {
+	padding: 1rem;
 }
 
 /*******************************************************************************************************

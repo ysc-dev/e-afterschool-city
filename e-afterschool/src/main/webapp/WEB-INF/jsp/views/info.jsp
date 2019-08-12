@@ -1,18 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp" %>
 
-<div class="navbar navbar-expand-md navbar-light">
-	<div class="navbar-brand">
-		<a href="#" class="d-inline-block">
-			<img src="${pageContext.request.contextPath}/images/logo.png" alt="logo">
-		</a>
-	</div>
-	<div class="ml-auto d-flex align-items-center">
-		<a href="${pageContext.request.contextPath}/home/${cityId}" class="btn btn-outline bg-slate-300 text-slate-600 btn-sm header-icon px-0">
-			<i class="icon-circle-left2"></i>
-		</a>
-	</div>
-</div>
+<c:import url="/WEB-INF/jsp/common/header.jsp" >
+  	<c:param name="left" value="home/${cityId}" />
+</c:import>
 
 <div class="content info-content"> 
 	<div class="info-title justify-content-center align-items-center mt-2">
@@ -60,20 +51,22 @@ $("#invitationTable").DataTable({
 	columns: [
 	{ width: "5%" },
 	{ width: "50%" },
-	{ width: "20%" },
-	{ width: "25%" }],
+	{ width: "19%" },
+	{ width: "26%" }],
 });
 
 function applyClick(id) {
 	var student = "${student}";
-	if (student != null) {
-		location.href = contextPath + "/subject/group/" + id;
+	console.log(student);
+	if (student) {
+		location.href = contextPath + "/subject/group?infoId=" + id;
 	} else {
 		swal({
 			title: "로그인 한 후에 수강신청 할 수 있습니다.", 
 			type: "warning",
 			position: 'top'
 		});
+		return;
 	}
 }
 

@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,13 +37,11 @@ public class StudentController {
 	 * 학생 등록 화면
 	 * @param model
 	 */
-	@GetMapping("regist/{cityId}")
-	public String regist(Model model, @PathVariable int cityId) { 
+	@GetMapping("regist")
+	public void regist(Model model, int cityId) { 
 		model.addAttribute("schools", schoolService.getList().stream()
 				.map(data -> data.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("cityId", cityId);
-		
-		return "student/regist";
 	}
 	
 	/***
@@ -77,15 +74,12 @@ public class StudentController {
 	@ResponseBody
 	public ResponseEntity<?> regist(Student student) {
 		String school = student.getSchool();
-		System.err.println(student);
 		student.setTel(student.getService() + "-" + student.getTel());
 		student.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
 		
 		school = school.endsWith("초등학교") ? 
 				school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
 		student.setSchoolInfo(school);
-		
-		
 		
 		if (student.isAgree()) {
 			student.setResidentNumber(student.getJumin1() + "-" + student.getJumin2());
@@ -96,5 +90,16 @@ public class StudentController {
 		}
 		
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
+	/**
+	 * 학생 정보 변경 화면
+	 * @param model
+	 */
+	@GetMapping("update")
+	public void update(Model model, int infoId) { 
+		model.addAttribute("schools", schoolService.getList().stream()
+				.map(data -> data.getName()).sorted().collect(Collectors.toList()));
+		model.addAttribute("infoId", infoId);
 	}
 }

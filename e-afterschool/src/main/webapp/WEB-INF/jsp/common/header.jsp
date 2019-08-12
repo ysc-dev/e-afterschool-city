@@ -1,9 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="navbar navbar-expand-md navbar-light">
+<div class="navbar navbar-expand-md navbar-light fixed-top">
 	<div class="navbar-brand">
 		<a href="#" class="d-inline-block">
 			<img src="${pageContext.request.contextPath}/images/logo.png" alt="logo">
 		</a>
+	</div>
+	
+	<div class="ml-auto d-flex align-items-center">
+		<c:if test="${param.left ne null}">
+			<a href="${pageContext.request.contextPath}/${param.left}" 
+				class="btn btn-outline bg-slate-300 text-slate-600 header-icon px-0">
+				<i class="icon-circle-left2"></i>
+			</a>
+		</c:if>
+		
+		<c:if test="${param.home ne null}">
+			<a href="${pageContext.request.contextPath}/info?cityId=${cityId}" 
+				class="btn btn-outline bg-slate-300 text-slate-600 header-icon px-0 ml-1">
+				<i class="icon-home4"></i>
+			</a>
+		</c:if>
 	</div>
 </div>

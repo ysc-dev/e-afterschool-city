@@ -36,7 +36,7 @@ public class HomeController {
 
 	@GetMapping("home")
 	public String home(@CookieValue(value = "cityId", required = false) Cookie cookie) {
-		return "home/" + cookie.getValue();
+		return "redirect:home/" + cookie.getValue();
 	}
 	
 	@GetMapping("home/{cityId}")
@@ -45,13 +45,11 @@ public class HomeController {
 		return "home";
 	}
 	
-	@GetMapping("login/{cityId}")
-	public String login(Model model, @PathVariable int cityId, @RequestParam(value = "error", required = false) String error) {
+	@GetMapping("login")
+	public void login(Model model, int cityId, @RequestParam(value = "error", required = false) String error) {
 		if (error != null) {
 			model.addAttribute("error", "falied");
 		}
 		model.addAttribute("cityId", cityId);
-		
-		return "login";
 	}
 }

@@ -6,11 +6,11 @@
 	<tiles:insertAttribute name="head"/>
 <body>
 	<div class="d-flex flex-column flex-1 layout-boxed">
+	 	<tiles:insertAttribute name="header"/>
+	 	
 	 	<div class="page-content">
 			<div class="content-wrapper">
 				<tiles:insertAttribute name="content"/>
-				
-				<tiles:insertAttribute name="footer"/>
 			</div>
 		</div>
 	</div>

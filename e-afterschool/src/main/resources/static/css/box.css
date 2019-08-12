@@ -29,8 +29,20 @@
 	border-radius: .5rem;
 }
 
+.btn-small-box {
+	width: 100%;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 1.25rem 0rem;
+	border-radius: .5rem;
+}
+
 .btn-box span {
 	text-shadow: 1px 1px 1px #BDBDBD;
+}
+
+.btn-small-box span {
+	
 }
 
 .btn-outline:not(:hover):not(:active):not(.active):not([aria-expanded=true]) {

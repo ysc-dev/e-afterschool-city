@@ -1,22 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp"%>
 
-<link href="${pageContext.request.contextPath}/css/subjectGroup.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/subject.css" rel="stylesheet" type="text/css">
 
-<div class="navbar navbar-expand-md navbar-light">
-	<div class="navbar-brand">
-		<a href="#" class="d-inline-block">
-			<img src="${pageContext.request.contextPath}/images/logo.png" alt="logo">
-		</a>
-	</div>
-	<div class="ml-auto d-flex align-items-center">
-		<a href="${pageContext.request.contextPath}/info/${cityId}" class="btn btn-outline bg-slate-300 text-slate-600 btn-sm header-icon px-0">
-			<i class="icon-circle-left2"></i>
-		</a>
-	</div>
-</div>
+<c:import url="/WEB-INF/jsp/common/header.jsp" >
+  	<c:param name="left" value="info?cityId=${cityId}" />
+</c:import>
 
-<div class="content subject-group-content"> 
+<div class="content subject-content">
 	<div class="content-title d-flex justify-content-center align-items-center mt-3">
 		<span>${invitation.name}</span>
 	</div>
@@ -25,23 +16,23 @@
 		<div class="navbar-collapse">
 			<ul class="navbar-nav navbar-nav-highlight">
 				<li class="nav-item">
-					<a href="${pageContext.request.contextPath}/apply/info" class="navbar-nav-link">
-						<i class="icon-home mr-1"></i>전체공지사항
+					<a href="${pageContext.request.contextPath}/notice/list?infoId=${invitation.id}" class="navbar-nav-link">
+						<i class="icon-bubble-notification mr-1"></i>전체공지사항
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="${pageContext.request.contextPath}/apply/subscribe1" class="navbar-nav-link nav-border-left">
+					<a href="${pageContext.request.contextPath}/subject/mylist?infoId=${invitation.id}" class="navbar-nav-link nav-border-left">
 						<i class="icon-folder-search mr-1"></i>수강신청확인
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="${pageContext.request.contextPath}/apply/mylist" class="navbar-nav-link nav-border-left">
-						<i class="icon-list mr-1"></i>로그아웃
+					<a href="${pageContext.request.contextPath}/student/update?infoId=${invitation.id}" class="navbar-nav-link nav-border-left">
+						<i class="icon-user mr-1"></i>학생정보변경
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="${pageContext.request.contextPath}/apply/mylist" class="navbar-nav-link nav-border-left">
-						<i class="icon-list mr-1"></i>학생정보변경
+					<a href="${pageContext.request.contextPath}/logout" class="navbar-nav-link nav-border-left">
+						<i class="icon-exit mr-1"></i>로그아웃
 					</a>
 				</li>
 			</ul>
@@ -58,7 +49,7 @@
 						</a>
 					</h6>
 					<div class="header-elements subscribe-header">
-						<a href="subscribe2?groupId=${subjectGroup.id}" class="btn bg-info-600 btn-sm">과목 리스트</a>
+						<a href="list?infoId=${invitation.id}&groupId=${subjectGroup.id}" class="btn bg-info-600 btn-sm">과목 리스트</a>
 		           	</div>
 				</div>
 		

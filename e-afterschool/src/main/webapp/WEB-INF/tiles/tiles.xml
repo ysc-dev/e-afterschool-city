@@ -4,29 +4,33 @@
 
 <tiles-definitions>
     <!-- 웹 : 기본페이지 -->
-    <definition name="layout" template="/WEB-INF/tiles/layout/layout.jsp">
+    <definition name="basic" template="/WEB-INF/tiles/layout/basic.jsp">
         <put-attribute name="head" value="/WEB-INF/jsp/common/head.jsp" />
         <put-attribute name="header" value="/WEB-INF/jsp/common/header.jsp" />
     </definition>
     
-    <definition name="footer-layout" template="/WEB-INF/tiles/layout/footer-layout.jsp">
+    <definition name="layout" template="/WEB-INF/tiles/layout/layout.jsp">
         <put-attribute name="head" value="/WEB-INF/jsp/common/head.jsp" />
         <put-attribute name="footer" value="/WEB-INF/jsp/common/footer.jsp" />
     </definition>
     
-	<definition name="*" extends="layout">
+	<definition name="*" extends="basic">
 		<put-attribute name="content" value="/WEB-INF/jsp/views/{1}.jsp" />
     </definition>
     
-     <definition name="student/*" extends="layout">
+     <definition name="student/*" extends="basic">
 		<put-attribute name="content" value="/WEB-INF/jsp/views/student/{1}.jsp" />
     </definition>
     
-    <definition name="info" extends="footer-layout">
+    <definition name="info" extends="layout">
 		<put-attribute name="content" value="/WEB-INF/jsp/views/info.jsp" />
     </definition>
   
-    <definition name="subject/*" extends="footer-layout">
+    <definition name="subject/*" extends="layout">
 		<put-attribute name="content" value="/WEB-INF/jsp/views/subject/{1}.jsp" />
+    </definition>
+    
+    <definition name="notice/*" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/views/notice/{1}.jsp" />
     </definition>
 </tiles-definitions>

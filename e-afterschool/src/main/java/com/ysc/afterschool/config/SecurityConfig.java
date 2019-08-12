@@ -27,15 +27,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// 로그인 설정
 		http.authorizeRequests() // 요청을 어떻게 보안을 할 것인지 설정
 			.antMatchers("/subject/**").access("hasRole('ROLE_USER')")
+			.antMatchers("/notice/**").access("hasRole('ROLE_USER')")
 		.and()
 			// 로그인 페이지 및 성공 url, handler 그리고 로그인 시 사용되는 id, password 파라미터 정의
 			.formLogin()
 			.loginPage("/login")
-			.failureHandler(customAuthenticationFailHandler())
-			//.failureUrl("/login?error")
 			.usernameParameter("username")
             .passwordParameter("password")
+            //.failureUrl("/login?error")
             //.defaultSuccessUrl("/info")
+            .failureHandler(customAuthenticationFailHandler())
             .successHandler(customLoginSuccessHandler())
 		.and()
 			// 로그아웃 관련 설정
@@ -59,7 +60,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public CustomLoginSuccessHandler customLoginSuccessHandler() {
-		return new CustomLoginSuccessHandler();
+		CustomLoginSuccessHandler handler = new CustomLoginSuccessHandler();
+		//handler.setDefaultTargetUrl("/info?cityId=0");
+		return handler;
 	}
 	
 	@Bean

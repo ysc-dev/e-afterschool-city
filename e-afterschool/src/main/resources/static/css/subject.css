@@ -3,7 +3,7 @@
 /*******************************************************************************************************
  navbar µðÀÚÀÎ
 *******************************************************************************************************/
-.subject-group-content .navbar, .navbar-collapse {
+.subject-content .navbar, .navbar-collapse {
 	margin: 0;
     padding: 0;
 }
@@ -76,13 +76,8 @@
 }
 
 .card-header {
-	padding: .9375rem 0.45rem;
+	padding: .9375rem 0.75rem;
 	border-bottom: 0;
-}
-
-.card-header a {
-	font-size: .80rem;
-	letter-spacing: -.085em;
 }
 
 .card-header:not([class*=bg-]):not([class*=alpha-]) {
@@ -107,7 +102,7 @@
 }
 
 .subscribe-header {
-	width: 130px;
+	width: 80px;
 	margin-left: 0px !important;
 	justify-content: flex-end;
 }

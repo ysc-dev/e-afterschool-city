@@ -27,8 +27,7 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 		cookie.setMaxAge(maxAge);
 		response.addCookie(cookie);
 		
-		super.setDefaultTargetUrl("/info/" + cityId);
-		
+		super.setDefaultTargetUrl("/info?cityId=" + cityId);
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 }

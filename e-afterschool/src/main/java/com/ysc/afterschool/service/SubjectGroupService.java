@@ -17,4 +17,8 @@ public class SubjectGroupService {
 	public List<SubjectGroup> getList() {
 		return subjectGroupRepository.findAll();
 	}
+
+	public SubjectGroup get(int id) {
+		return subjectGroupRepository.findById(id).get();
+	}
 }
