@@ -51,6 +51,7 @@ public class HomeController {
 			model.addAttribute("error", "falied");
 		}
 		model.addAttribute("cityId", cityId);
+		
 		return "login";
 	}
 }

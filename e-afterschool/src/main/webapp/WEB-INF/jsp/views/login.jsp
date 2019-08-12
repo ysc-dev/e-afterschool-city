@@ -39,7 +39,9 @@
 				</div>
 				
 				<div class="form-group mt-4">
-					<a href="home" class="btn btn-light btn-block">뒤로가기<i class="icon-circle-right2 ml-2"></i></a>
+					<a href="${pageContext.request.contextPath}/home/${cityId}" class="btn btn-light btn-block">
+						뒤로가기<i class="icon-circle-right2 ml-2"></i>
+					</a>
 				</div>
 			</div>
 		</div>

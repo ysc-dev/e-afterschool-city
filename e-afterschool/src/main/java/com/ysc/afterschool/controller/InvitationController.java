@@ -3,12 +3,14 @@ package com.ysc.afterschool.controller;
 import javax.servlet.http.Cookie;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.service.InvitationService;
 
 /**
@@ -24,7 +26,7 @@ public class InvitationController {
 	private InvitationService invitationService;
 	
 	@GetMapping("info")
-	public String info(@CookieValue(value = "cityId", required = false) Cookie cookie) {
+	public String home(@CookieValue(value = "cityId", required = false) Cookie cookie) {
 		return "info/" + cookie.getValue();
 	}
 	
@@ -33,8 +35,9 @@ public class InvitationController {
 	 * @param model
 	 */
 	@GetMapping("info/{cityId}")
-	public String info(Model model, @PathVariable int cityId) {
+	public String info(Model model, @PathVariable int cityId, @AuthenticationPrincipal Student student) {
 		model.addAttribute("invitations", invitationService.getList(cityId));
+		model.addAttribute("student", student);
 		return "info";
 	}
 }

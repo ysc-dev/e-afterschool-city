@@ -39,6 +39,7 @@
 	<script src="${contextName}/limitless/js/plugins/forms/selects/select2.min.js"></script>
 	<script src="${contextName}/limitless/js/plugins/forms/styling/uniform.min.js"></script>
 	<script src="${contextName}/limitless/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script src="${contextName}/limitless/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
 	<script src="${contextName}/limitless/js/plugins/notifications/sweet_alert.min.js"></script>
 	
 	<script src="${contextName}/limitless/js/app.js"></script>

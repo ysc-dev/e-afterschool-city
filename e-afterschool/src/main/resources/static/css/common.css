@@ -14,8 +14,9 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 .fs-18 { font-size: 18px !important; }
 .fs-20 { font-size: 20px !important; }
 
-.swal2-title {
-	font-weight: bold;
+.nav-btn {
+	border-radius: 0;
+	text-shadow: 2px 2px 2px gray;
 }
 
 /*******************************************************************************************************
@@ -58,6 +59,22 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 	background-color: transparent;
 }
 
+.datatable-scroll td, .datatable-scroll th {
+    white-space: normal;
+}
+
+.table .tbody-xs td {
+	padding: .75rem .5rem;
+}
+
+.table th {
+	padding: .5rem .5rem;
+}
+
+.table tbody tr {
+	background-color: white;
+}
+
 /*******************************************************************************************************
  cotent 디자인
 *******************************************************************************************************/
@@ -65,7 +82,31 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 	/* background-color: white; */
 }
 
-.cotent-title {
+.content {
+	padding: 0.75rem;
+}
+
+.info-content {
+    padding: 1rem 0.75rem;
+}
+
+.info-title {
+ 	/* color: #5D5D5D; */
+ 	font-weight: bold;
+    color: #353535;
+    text-shadow: 1px 1px 1px #D5D5D5;
+}
+
+.content-title {
+ 	font-size: 1rem;
+ 	font-weight: bold;
+    color: #353535;
+    text-shadow: 1px 1px 1px #D5D5D5;
+}
+
+/*******************************************************************************************************
+ swal 디자인
+*******************************************************************************************************/
+.swal2-title {
 	font-weight: bold;
- 	color: #5D5D5D;
 }

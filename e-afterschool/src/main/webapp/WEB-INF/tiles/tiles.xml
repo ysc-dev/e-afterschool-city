@@ -18,11 +18,15 @@
 		<put-attribute name="content" value="/WEB-INF/jsp/views/{1}.jsp" />
     </definition>
     
+     <definition name="student/*" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/views/student/{1}.jsp" />
+    </definition>
+    
     <definition name="info" extends="footer-layout">
 		<put-attribute name="content" value="/WEB-INF/jsp/views/info.jsp" />
     </definition>
   
-    <definition name="*/*" extends="layout">
-		<put-attribute name="content" value="/WEB-INF/jsp/views/{1}/{2}.jsp" />
+    <definition name="subject/*" extends="footer-layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/views/subject/{1}.jsp" />
     </definition>
 </tiles-definitions>

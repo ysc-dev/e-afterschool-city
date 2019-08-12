@@ -3,7 +3,7 @@
 <link href="${pageContext.request.contextPath}/css/box.css" rel="stylesheet" type="text/css">
 
 <div class="content">
-	<div class="cotent-title justify-content-center align-items-center">
+	<div class="home-title justify-content-center align-items-center">
 		<span>경남교육청 <span class="text-info-600">캠퍼스형</span> 방과후학교</span>
 		<span>오신것을 환영합니다.</span>
 	</div>

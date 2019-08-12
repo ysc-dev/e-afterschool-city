@@ -47,13 +47,16 @@ public class Invitation extends AbstractDomain {
 	
 	@Getter
 	public enum InvitationType {
-		수강신청("수강신청하기"),
-		마감("마감되었습니다."),
-		지남("지난 모집 공고 입니다.");
+		수강신청(1, "수강신청하기"),
+		마감(2, "마감되었습니다."),
+		지남(3, "지난 모집 공고 입니다.");
+		
+		private int id;
 		
 		private String name;
 		
-		private InvitationType(String name) {
+		private InvitationType(int id, String name) {
+			this.id = id;
 			this.name = name;
 		}
 	}

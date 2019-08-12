@@ -10,10 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
-import lombok.Setter;
-
-@Setter
-public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 	
 	private final String COOKIE_NAME = "cityId";
 	private final int DEFAULT_MAX_AGE = 60 * 60 * 24 * 7;
@@ -25,11 +22,13 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 			Authentication authentication) throws IOException, ServletException {
 		
 		String cityId = request.getParameter(COOKIE_NAME);
+		
 		Cookie cookie = new Cookie(COOKIE_NAME, cityId);
 		cookie.setMaxAge(maxAge);
 		response.addCookie(cookie);
 		
 		super.setDefaultTargetUrl("/info/" + cityId);
+		
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 }

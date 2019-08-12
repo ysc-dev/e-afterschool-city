@@ -8,7 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import com.ysc.afterschool.provider.LoginSuccessHandler;
+import com.ysc.afterschool.provider.CustomAuthenticationFailHandler;
+import com.ysc.afterschool.provider.CustomLoginSuccessHandler;
 import com.ysc.afterschool.provider.UserAuthenticationProvider;
 
 @Configuration
@@ -25,15 +26,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		// 로그인 설정
 		http.authorizeRequests() // 요청을 어떻게 보안을 할 것인지 설정
-			.antMatchers("/apply/**").access("hasRole('ROLE_USER')")
+			.antMatchers("/subject/**").access("hasRole('ROLE_USER')")
 		.and()
 			// 로그인 페이지 및 성공 url, handler 그리고 로그인 시 사용되는 id, password 파라미터 정의
 			.formLogin()
 			.loginPage("/login")
-			.failureUrl("/login?error")
+			.failureHandler(customAuthenticationFailHandler())
+			//.failureUrl("/login?error")
 			.usernameParameter("username")
             .passwordParameter("password")
-            .successHandler(loginSuccessHandler())
+            //.defaultSuccessUrl("/info")
+            .successHandler(customLoginSuccessHandler())
 		.and()
 			// 로그아웃 관련 설정
 			.logout()
@@ -45,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		// session 관리
 		http.sessionManagement().sessionFixation().changeSessionId()
-			.maximumSessions(1).expiredUrl("/info");
+			.maximumSessions(1).expiredUrl("/home");
 	}
 	
 	@Override
@@ -55,7 +58,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 	
 	@Bean
-	public LoginSuccessHandler loginSuccessHandler() {
-		return new LoginSuccessHandler();
+	public CustomLoginSuccessHandler customLoginSuccessHandler() {
+		return new CustomLoginSuccessHandler();
+	}
+	
+	@Bean
+	public CustomAuthenticationFailHandler customAuthenticationFailHandler() {
+		return new CustomAuthenticationFailHandler();
 	}
 }

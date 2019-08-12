@@ -21,4 +21,8 @@ public class InvitationService {
 	public List<Invitation> getList(int cityId) {
 		return invitationRepository.findByCityId(cityId);
 	}
+
+	public Invitation get(int id) {
+		return invitationRepository.getOne(id);
+	}
 }
