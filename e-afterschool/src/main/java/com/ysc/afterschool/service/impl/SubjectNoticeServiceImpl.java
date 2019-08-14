@@ -57,6 +57,6 @@ public class SubjectNoticeServiceImpl implements SubjectNoticeService {
 
 	@Override
 	public List<SubjectNotice> getList(int subjectId) {
-		return subjectNoticeRepository.findBySubjectId(subjectId);
+		return subjectNoticeRepository.findBySubjectIdOrderByImportantDescCreateDateDesc(subjectId);
 	}
 }

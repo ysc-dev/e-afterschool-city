@@ -65,7 +65,7 @@ $("#registBtn").click(function() {
 });
 
 $("#loginBtn").click(function() {
-	location.href = contextPath + "/login?cityId=${cityId}";
+	location.href = contextPath + "/login/${cityId}";
 });
 
 $("#infoBtn").click(function() {

@@ -45,6 +45,20 @@ public class CommunityController {
 	}
 	
 	/**
+	 * 글 등록 화면
+	 * @param model
+	 * @param infoId
+	 * @param id
+	 * @param cookie
+	 */
+	@GetMapping("regist")
+	public void regist(Model model, int infoId, int subjectId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("infoId", infoId);
+		model.addAttribute("subjectId", subjectId);
+	}
+	
+	/**
 	 * 커뮤니티 상세보기 화면
 	 * @param model
 	 * @param infoId

@@ -46,10 +46,17 @@ public class HomeController {
 	}
 	
 	@GetMapping("login")
-	public void login(Model model, int cityId, @RequestParam(value = "error", required = false) String error) {
+	public String login(@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		return "redirect:login/" + cookie.getValue();
+	}
+	
+	@GetMapping("login/{cityId}")
+	public String login(Model model, @PathVariable int cityId, @RequestParam(value = "error", required = false) String error) {
 		if (error != null) {
 			model.addAttribute("error", "falied");
 		}
 		model.addAttribute("cityId", cityId);
+		
+		return "login";
 	}
 }

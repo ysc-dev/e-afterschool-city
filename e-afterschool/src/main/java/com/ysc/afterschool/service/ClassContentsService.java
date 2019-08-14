@@ -17,4 +17,8 @@ public class ClassContentsService {
 	public List<ClassContents> getList(int subjectId) {
 		return classContentsRepository.findBySubjectId(subjectId);
 	}
+
+	public ClassContents get(int id) {
+		return classContentsRepository.findById(id).get();
+	}
 }

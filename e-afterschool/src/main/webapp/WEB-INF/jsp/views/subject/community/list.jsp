@@ -15,7 +15,7 @@
 	
 	<div class="card mt-4">
 		<div class="card-header text-center bg-info-600 text-white">
-			<h6 class="card-title font-weight-bold">커 뮤 니 티</h6>
+			<h5 class="card-title font-weight-bold">커 뮤 니 티</h5>
 		</div>
 		
 		<table class="table" id="noticeTable">
@@ -25,11 +25,21 @@
 						<td>${notice.id}</td>
 						<td class="font-size-sm text-center">${status.count}</td>
 						<td class="font-size-sm text-center">${notice.userName}</td>
-						<td class="font-size-sm">${notice.title}</td>
+						<td class="font-size-sm">
+							<c:if test="${notice.important}">
+								<span class="text-danger font-weight-bold mr-1">[공지사항]</span>
+							</c:if>
+							${notice.title}
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+	</div>
+	
+	<div class="text-right">
+		<a href="${pageContext.request.contextPath}/subject/community/regist?infoId=${infoId}&subjectId=${subject.id}"
+			class="btn btn-primary btn-sm"><i class="icon-pencil7 mr-2"></i>글 등록</a>
 	</div>
 </div>
 

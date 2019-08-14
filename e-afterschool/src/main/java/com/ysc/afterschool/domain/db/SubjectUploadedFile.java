@@ -1,65 +1,55 @@
 package com.ysc.afterschool.domain.db;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ysc.afterschool.domain.Domain;
 
 import lombok.Data;
 
 /**
- * 횟수별 수업내용 테이블 도메인
+ * 과목 관련 첨부파일 관리 도메인
  * 
  * @author hgko
  *
  */
 @Entity
-@Table(name = "tb_class_contents")
+@Table(name = "tb_subject_uploaded_file")
 @Data
-public class ClassContents implements Domain {
+public class SubjectUploadedFile implements Domain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private int subjectId;
-	
-	@Lob
-	@NotNull
-	private String content;
-	
 	/** 파일 이름 */
-	@Column( length = 100)
+	@Column(nullable = false, length = 100)
 	private String fileName;
 
 	/** 파일 데이터 */
 	@Column(columnDefinition = "longblob")
-	private byte[] file;
+	private byte[] content;
 
 	/** 파일 확장자 */
-	@Column(length = 100)
+	@Column(nullable = false, length = 100)
 	private String contentType;
 	
 	@CreationTimestamp
 	private LocalDateTime createDate;
 	
-	@OneToMany(mappedBy = "classContents", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@Fetch(FetchMode.SUBSELECT)
-	private List<SubjectUploadedFile> uploadedFiles;
+	@ManyToOne
+	@JoinColumn(name = "class_contents_id")
+    @JsonIgnore
+    private ClassContents classContents;
 }

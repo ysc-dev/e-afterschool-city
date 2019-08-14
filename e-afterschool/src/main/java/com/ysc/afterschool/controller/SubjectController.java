@@ -19,7 +19,6 @@ import com.ysc.afterschool.domain.db.Student.TargetType;
 import com.ysc.afterschool.domain.db.Subject;
 import com.ysc.afterschool.domain.db.Subject.ApplyType;
 import com.ysc.afterschool.service.ApplyService;
-import com.ysc.afterschool.service.ClassContentsService;
 import com.ysc.afterschool.service.InvitationService;
 import com.ysc.afterschool.service.SubjectGroupService;
 import com.ysc.afterschool.service.SubjectService;
@@ -42,9 +41,6 @@ public class SubjectController {
 	
 	@Autowired
 	private InvitationService invitationService;
-	
-	@Autowired
-	private ClassContentsService classContentsService;
 	
 	@Autowired
 	private ApplyService applyService;
@@ -147,20 +143,5 @@ public class SubjectController {
 		Subject subject = subjectService.get(id);
 		subject.setTarget(subject.getTargetType().getName() + " " + subject.getGradeType().getName());
 		model.addAttribute("subject", subject);
-	}
-	
-	/**
-	 * 횟수별 수업내용 화면
-	 * @param model
-	 * @param infoId
-	 * @param id
-	 * @param cookie
-	 */
-	@GetMapping("class")
-	public void classView(Model model, int infoId, int id, @CookieValue(value = "cityId", required = false) Cookie cookie) {
-		model.addAttribute("cityId", cookie.getValue());
-		model.addAttribute("infoId", infoId);
-		model.addAttribute("subject", subjectService.get(id));
-		model.addAttribute("classContents", classContentsService.getList(id));
 	}
 }
