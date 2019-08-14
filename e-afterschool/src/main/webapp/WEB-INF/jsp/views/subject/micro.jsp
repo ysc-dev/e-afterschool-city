@@ -101,13 +101,13 @@ function apply(subjectId) {
 	       		swal({
        				title: "수강 신청이 되었습니다.", 
        				type: "success",
-       				position: 'top'
+       				position: "top"
        			}).then(function(e) {
        				location.reload();
        			});
 	       	},
 	        error: function(response) {
-	        	swal({title: response.responseText, type: "error", position: 'top'});
+	        	swal({title: response.responseText, type: "error", position: "top"});
 	        }
 		});
 	});

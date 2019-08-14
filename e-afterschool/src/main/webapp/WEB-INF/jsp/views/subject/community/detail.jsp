@@ -74,6 +74,13 @@
 				</c:forEach> 
 			</div>
 		</c:if>
+		<c:if test="${user.id == notice.userId && user.name == notice.userName}">
+			<div class="card-footer text-right">
+				<button type="button" class="btn bg-danger-400 btn-sm" onclick="deleteNotice(${notice.id})">
+					<i class="icon-trash mr-2"></i>삭 제
+				</button>
+			</div>
+		</c:if>
 	</div>
 </div>
 
@@ -143,6 +150,36 @@ function deleteComment(id) {
 	           	},
 	            error: function(response) {
 	            	swal({title: "댓글 삭제를 실패하였습니다.", type: "error"})
+	            }
+	    	}); 
+    	}
+    });
+}
+
+function deleteNotice(id) {
+	swal({
+        title: "등록 된 글을 삭제하시겠습니까?",
+        type: "warning",
+        confirmButtonText: "삭제",
+        confirmButtonClass: "btn btn-danger",
+        showCancelButton: true, 
+        cancelButtonText: "취소",
+    }).then(function(e) {
+    	if (e.value) {
+    		$.ajax({
+	    		url: contextPath + "/subject/community/delete",
+	    		type: "DELETE",
+	    		data: {"id": id},
+	    		success: function(response) {
+	    			swal({
+	       				title: "글이 삭제 되었습니다.", 
+	       				type: "success"
+	       			}).then(function(e) {
+	       				location.replace(contextPath + "/subject/community/list?infoId=${infoId}&id=${subjectId}");
+	       			});
+	           	},
+	            error: function(response) {
+	            	swal({title: "글 삭제를 실패하였습니다.", type: "error"})
 	            }
 	    	}); 
     	}
