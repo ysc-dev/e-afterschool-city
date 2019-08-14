@@ -22,7 +22,6 @@ import com.ysc.afterschool.service.ApplyService;
 import com.ysc.afterschool.service.ClassContentsService;
 import com.ysc.afterschool.service.InvitationService;
 import com.ysc.afterschool.service.SubjectGroupService;
-import com.ysc.afterschool.service.SubjectNoticeService;
 import com.ysc.afterschool.service.SubjectService;
 
 /**
@@ -40,9 +39,6 @@ public class SubjectController {
 	
 	@Autowired
 	private SubjectService subjectService;
-	
-	@Autowired
-	private SubjectNoticeService subjectNoticeService;
 	
 	@Autowired
 	private InvitationService invitationService;
@@ -98,7 +94,7 @@ public class SubjectController {
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subjectGroup", subjectGroupService.get(groupId));
-		model.addAttribute("subjects", subjectService.getList(groupId));
+		model.addAttribute("subjects", subjectService.getList(infoId, groupId));
 	}
 	
 	/**
@@ -151,21 +147,6 @@ public class SubjectController {
 		Subject subject = subjectService.get(id);
 		subject.setTarget(subject.getTargetType().getName() + " " + subject.getGradeType().getName());
 		model.addAttribute("subject", subject);
-	}
-	
-	/**
-	 * 커뮤니티 화면
-	 * @param model
-	 * @param infoId
-	 * @param id
-	 * @param cookie
-	 */
-	@GetMapping("community")
-	public void community(Model model, int infoId, int id, @CookieValue(value = "cityId", required = false) Cookie cookie) {
-		model.addAttribute("cityId", cookie.getValue());
-		model.addAttribute("infoId", infoId);
-		model.addAttribute("subject", subjectService.get(id));
-		model.addAttribute("subjectNotices", subjectNoticeService.getList(id));
 	}
 	
 	/**

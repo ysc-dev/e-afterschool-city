@@ -14,7 +14,7 @@
 	</div>
 	
 	<div class="card mt-4">
-		<div class="card-header text-center bg-primary text-white">
+		<div class="card-header text-center bg-info-600 text-white">
 			<h6 class="card-title font-weight-bold">커 뮤 니 티</h6>
 		</div>
 		
@@ -53,6 +53,6 @@ var table = $("#noticeTable").DataTable({
 
 $('#noticeTable tbody').on( 'click', 'tr', function () {
     var noticeId = table.row(this).data()[0];
-    console.log(noticeId);
+    location.href = contextPath + "/subject/community/detail?infoId=${infoId}&subjectId=${subject.id}&id=" + noticeId;
 } );
 </script>

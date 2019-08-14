@@ -76,7 +76,7 @@ $("#subjectInfoBtn").click(function() {
 });
 
 $("#communityBtn").click(function() {
-	location.href = contextPath + "/subject/community?infoId=${infoId}&id=${subject.id}";
+	location.href = contextPath + "/subject/community/list?infoId=${infoId}&id=${subject.id}";
 });
 
 $("#classContentsBtn").click(function() {

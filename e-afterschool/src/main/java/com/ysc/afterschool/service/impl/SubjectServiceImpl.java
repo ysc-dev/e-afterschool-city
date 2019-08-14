@@ -59,4 +59,9 @@ public class SubjectServiceImpl implements SubjectService {
 	public List<Subject> getList(int subjectGroupId) {
 		return subjectRepository.findBySubjectGroupId(subjectGroupId);
 	}
+
+	@Override
+	public List<Subject> getList(int infoId, int groupId) {
+		return subjectRepository.findByInvitationIdAndSubjectGroupId(infoId, groupId);
+	}
 }

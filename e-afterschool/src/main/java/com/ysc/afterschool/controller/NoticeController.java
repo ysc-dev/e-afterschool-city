@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ysc.afterschool.domain.db.Notice;
 import com.ysc.afterschool.service.NoticeService;
 
 /**
@@ -50,7 +51,11 @@ public class NoticeController {
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		
+		Notice notice = noticeService.get(noticeId);
+		model.addAttribute("notice", notice);
 		model.addAttribute("localDateTimeFormat", new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss"));
-		model.addAttribute("notice", noticeService.get(noticeId));
+		
+		notice.setHit(notice.getHit() + 1);
+		noticeService.update(notice);
 	}
 }

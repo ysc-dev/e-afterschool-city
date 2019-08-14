@@ -18,7 +18,7 @@
 		<put-attribute name="content" value="/WEB-INF/jsp/views/{1}.jsp" />
     </definition>
     
-     <definition name="student/*" extends="basic">
+    <definition name="student/*" extends="basic">
 		<put-attribute name="content" value="/WEB-INF/jsp/views/student/{1}.jsp" />
     </definition>
     
@@ -28,6 +28,10 @@
   
     <definition name="subject/*" extends="layout">
 		<put-attribute name="content" value="/WEB-INF/jsp/views/subject/{1}.jsp" />
+    </definition>
+  
+    <definition name="subject/*/*" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/views/subject/{1}/{2}.jsp" />
     </definition>
     
     <definition name="notice/*" extends="layout">

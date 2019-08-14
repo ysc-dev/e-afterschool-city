@@ -12,7 +12,7 @@
 	</div>
 	
 	<div class="card mt-4">
-		<div class="card-header text-center bg-primary text-white">
+		<div class="card-header text-center bg-info-600 text-white">
 			<h6 class="card-title font-weight-bold">과 목 특 징&nbsp;&nbsp;&nbsp;및&nbsp;&nbsp;&nbsp;과 목 정 보</h6>
 		</div>
 		<div class="card-body subject-info-body">

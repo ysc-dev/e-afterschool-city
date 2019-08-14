@@ -14,22 +14,20 @@
 	</div>
 	
 	<div class="card mt-4">
-		<div class="card-header text-center bg-primary text-white">
+		<div class="card-header text-center bg-info-600 text-white">
 			<h6 class="card-title font-weight-bold">횟수별 수업내용</h6>
 		</div>
-		<div class="table-responsive">
-			<table class="table table-bordered table-striped" id="contentTable">
-				<tbody class="tbody-xs">
-					<c:forEach var="content" items="${classContents}" varStatus="status">
-						<tr>
-							<td class="font-size-sm text-center">${status.count}</td>
-							<td class="font-size-sm">${content.content}</td>
-							<td class="font-size-sm"></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
+		<table class="table table-bordered" id="contentTable">
+			<tbody class="tbody-xs">
+				<c:forEach var="content" items="${classContents}" varStatus="status">
+					<tr>
+						<td class="font-size-sm text-center">${status.count}</td>
+						<td class="font-size-sm">${content.content}</td>
+						<td class="font-size-sm"></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </div>
 

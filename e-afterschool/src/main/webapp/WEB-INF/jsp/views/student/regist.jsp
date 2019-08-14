@@ -4,7 +4,7 @@
 <link href="${pageContext.request.contextPath}/css/student.css" rel="stylesheet" type="text/css">
 
 <div class="content d-flex justify-content-center align-items-center"> 
-	<form id="studentRegistForm" class="login-form form-validate" action="${pageContext.request.contextPath}/student/regist" method="POST"> 
+	<form id="studentRegistForm" class="form-validate" action="${pageContext.request.contextPath}/student/regist" method="POST"> 
 		<div class="card mb-0">
 			<div class="card-header bg-teal-400 text-white">
 				<h2>방과후학교 학생 등록</h2>

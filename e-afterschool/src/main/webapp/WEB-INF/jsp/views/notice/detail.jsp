@@ -16,7 +16,7 @@
 	
 	<div class="card notice-detail mt-4">
 		<div class="card-header bg-info-600">
-			<h4 class="card-title font-weight-bold">${notice.title}</h4>
+			<h5 class="card-title font-weight-bold">${notice.title}</h5>
 		</div>
 		<div class="card-body">
 			<div class="subject">

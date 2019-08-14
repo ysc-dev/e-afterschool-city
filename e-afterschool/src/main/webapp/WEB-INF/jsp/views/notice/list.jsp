@@ -6,7 +6,6 @@
   	<c:param name="home" value="info?cityId=${cityId}" />
 </c:import>
 
-
 <div class="content">
 	<div class="content-title d-flex justify-content-center align-items-center mt-3">
 		<span>전체 공지사항</span>

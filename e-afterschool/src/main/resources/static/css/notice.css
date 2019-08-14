@@ -5,9 +5,8 @@
 }
 
 .notice-detail .subject, .notice-detail .file {
-    padding: 12px 20px;
+    padding: 12px 15px;
     border-bottom: 1px solid rgba(0,0,0,.125);
-    font-size: 1rem;
 }
 
 .notice-detail .subject label, .notice-detail .file label {
@@ -17,8 +16,30 @@
 .notice-detail .content {
     padding: 1.2rem 1.2rem;
     min-height: 150px;
+    margin-top: 0 !important;
 }
 
 .card-header {
 	/* background-color: rgba(0,0,0,.035) !important; */
+}
+
+/*****************************************************
+  ¥Ò±€ Ω∫≈∏¿œ
+******************************************************/
+.comment-body {
+	padding: 1rem 1rem !important;
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.comment-list-body {
+	padding: 0rem 1.25rem !important;
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.comment-list {
+	margin: 1.0rem 0.5rem;
+}
+
+.media-title {
+	margin-bottom: .25rem;
 }
