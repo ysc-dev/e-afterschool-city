@@ -72,8 +72,7 @@
 							<option value="018">018</option>
 							<option value="019">019</option>
 						</select>
-						<input type="text" class="form-control ml-2" data-mask="9999-9999" name="tel" 
-							autocomplete="off" required>
+						<input type="tel" class="form-control ml-2" name="tel" autocomplete="off" required>
 					</div>
 				</div>
 				
@@ -132,7 +131,7 @@
 </div>
 
 <script>
-$('.format-phone-number').formatter({
+$('[name="tel"]').formatter({
     pattern: '{{9999}}-{{9999}}'
 });
 

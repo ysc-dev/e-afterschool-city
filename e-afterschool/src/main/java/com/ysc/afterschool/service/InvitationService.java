@@ -3,6 +3,7 @@ package com.ysc.afterschool.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.ysc.afterschool.domain.db.Invitation;
@@ -14,14 +15,12 @@ public class InvitationService {
 	@Autowired
 	private InvitationRepository invitationRepository;
 	
-	public List<Invitation> getList() {
-		return invitationRepository.findAll();
-	}
-
+	@Cacheable("invitation.getList")
 	public List<Invitation> getList(int cityId) {
 		return invitationRepository.findByCityId(cityId);
 	}
 
+	@Cacheable("invitation.get")
 	public Invitation get(int id) {
 		return invitationRepository.getOne(id);
 	}

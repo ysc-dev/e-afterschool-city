@@ -5,13 +5,20 @@
   	<c:param name="left" value="subject/micro?infoId=${infoId}&id=${subject.id}" />
   	<c:param name="home" value="info?cityId=${cityId}" />
 </c:import>
+
+<style>
+.col-form-label {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+</style>
  
 <div class="content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-3 px-2">
+	<div class="content-title d-flex justify-content-center align-items-center mt-2 px-2">
 		<span class="fs-18">${subject.name}</span>
 	</div>
 	
-	<div class="card mt-4">
+	<div class="card mt-3">
 		<div class="card-header text-center bg-info-600 text-white">
 			<h6 class="card-title font-weight-bold">과 목 특 징&nbsp;&nbsp;&nbsp;및&nbsp;&nbsp;&nbsp;과 목 정 보</h6>
 		</div>

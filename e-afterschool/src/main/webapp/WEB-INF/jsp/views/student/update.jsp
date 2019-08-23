@@ -65,7 +65,7 @@
 				<div class="form-group row">
 					<label class="col-form-label col-3">핸드폰</label>
 					<div class="col-9 d-flex">
-						<input type="text" class="form-control" name="tel" value="${student.tel}" disabled>
+						<input type="tel" class="form-control" name="tel" value="${student.tel}" disabled>
 					</div>
 				</div>
 				
@@ -125,6 +125,10 @@
 </div>
 
 <script>
+$('[name="tel"]').formatter({
+    pattern: '{{9999}}-{{9999}}'
+});
+
 if ("${student.agree}" == "true") {
 	$("#updateBtn").prop("disabled", true);
 }

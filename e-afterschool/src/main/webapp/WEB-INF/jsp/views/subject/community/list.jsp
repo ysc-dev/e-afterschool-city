@@ -9,11 +9,16 @@
 </c:import>
 
 <div class="content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-3 px-2">
+	<div class="content-title d-flex justify-content-center align-items-center mt-2 px-2">
 		<span class="fs-18">${subject.name}</span>
 	</div>
 	
-	<div class="card mt-4">
+	<div class="text-right mt-4 mb-2">
+		<a href="${pageContext.request.contextPath}/subject/community/regist?infoId=${infoId}&subjectId=${subject.id}"
+			class="btn btn-primary btn-sm"><i class="icon-pencil7 mr-2"></i>글 등록</a>
+	</div>
+	
+	<div class="card card-table">
 		<div class="card-header text-center bg-info-600 text-white">
 			<h5 class="card-title font-weight-bold">커 뮤 니 티</h5>
 		</div>
@@ -35,11 +40,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	</div>
-	
-	<div class="text-right">
-		<a href="${pageContext.request.contextPath}/subject/community/regist?infoId=${infoId}&subjectId=${subject.id}"
-			class="btn btn-primary btn-sm"><i class="icon-pencil7 mr-2"></i>글 등록</a>
 	</div>
 </div>
 

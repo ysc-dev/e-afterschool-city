@@ -14,3 +14,8 @@
 .dataTables_wrapper .table-bordered {
     border: 0px solid #ddd !important;
 }
+
+.card-table {
+	border: 0;
+	box-shadow: none!important;
+}

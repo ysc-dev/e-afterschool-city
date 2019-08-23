@@ -26,7 +26,7 @@
 				</div>
 				
 				<div class="form-group form-group-feedback form-group-feedback-left">
-					<input type="text" class="form-control" data-mask="999-9999-9999" placeholder="전화 번호" autocomplete="off" name="password" required>
+					<input type="tel" class="form-control" placeholder="전화 번호" autocomplete="off" name="password" required>
 					<div class="form-control-feedback">
 						<i class="icon-phone2 text-muted"></i>
 					</div>
@@ -51,3 +51,9 @@
 		</div>
 	</form>
 </div>
+
+<script>
+$('[name="password"]').formatter({
+    pattern: '{{999}}-{{9999}}-{{9999}}'
+});
+</script>

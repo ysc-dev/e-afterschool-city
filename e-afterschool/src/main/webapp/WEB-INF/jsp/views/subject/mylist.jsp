@@ -9,7 +9,7 @@
 </c:import>
 
 <div class="content mylist-group">
-	<div class="content-title justify-content-center align-items-center mt-3">
+	<div class="content-title justify-content-center align-items-center mt-2">
 		<span class="fs-18">수강신청 확인</span>
 	</div>
 
@@ -22,7 +22,7 @@
 	     <c:otherwise>
 	     	<div class="card-group-control card-group-control-left mt-4" id="accordion-group">
 	     		<c:forEach var="apply" items="${applies}" varStatus="status">
-	     			<div class="card">
+	     			<div class="card ${status.last ? 'card-last' : '' }">
 						<div class="card-header bg-light header-elements-inline">
 							<h6 class="card-title">
 								<a data-toggle="collapse" class="collapsed font-size-md text-default font-weight-bold" 

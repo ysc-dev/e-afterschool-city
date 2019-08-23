@@ -11,8 +11,8 @@
 </c:import>
 
 <div class="content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-3">
-		<span>커뮤니티 상세정보</span>
+	<div class="content-title d-flex justify-content-center align-items-center mt-2">
+		<span class="fs-18">커뮤니티 상세정보</span>
 	</div>
 	
 	<div class="card notice-detail mt-4">

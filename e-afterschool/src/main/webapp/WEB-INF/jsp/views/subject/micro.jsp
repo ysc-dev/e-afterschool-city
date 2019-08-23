@@ -8,64 +8,66 @@
   	<c:param name="home" value="info?cityId=${cityId}" />
 </c:import>
 
-<div class="content mt-5">  
+<div class="content">  
 	<div class="content-title justify-content-center align-items-center mt-3 px-2">  
 		<span class="fs-18">${subject.name}</span>
 	</div>
 	
-	<div class="row mt-5 mx-0">
-		<div class="col-6">
-			<button type="button" id="subjectInfoBtn" class="btn btn-box btn-outline bg-white border-slate-300">
-				<div class="fs-20 text-info-600 py-3">
-					<p><span>과 목 정 보 및</span></p>
-					<p class="mb-0"><span>과 목 특 징</span></p>
-				</div>
-			</button>
+	<div class="">
+		<div class="row mt-4 mx-0">
+			<div class="col-6">
+				<button type="button" id="subjectInfoBtn" class="btn btn-box btn-outline bg-white border-slate-300">
+					<div class="fs-20 text-info-600 py-3">
+						<p><span>과 목 정 보 및</span></p>
+						<p class="mb-0"><span>과 목 특 징</span></p>
+					</div>
+				</button>
+			</div>
+			<div class="col-6"> 
+				<button type="button" id="communityBtn" class="btn btn-box btn-outline bg-light border-slate-300">
+					<div class="fs-20 text-info-600">
+						<span>커 뮤 니 티</span>
+					</div>
+				</button>
+			</div>
 		</div>
-		<div class="col-6"> 
-			<button type="button" id="communityBtn" class="btn btn-box btn-outline bg-light border-slate-300">
-				<div class="fs-20 text-info-600">
-					<span>커 뮤 니 티</span>
-				</div>
-			</button>
-		</div>
-	</div>
-	
-	<div class="row mt-3 mx-0">
-		<div class="col-6">
-			<button type="button" id="classContentsBtn" class="btn btn-box btn-outline bg-light border-slate-300">
-				<div class="fs-20 text-info-600">
-					<p><span>횟수별</span></p>
-					<p class="mb-0"><span>수 업 내 용</span></p>
-				</div>
-			</button>
-		</div>
-		<div class="col-6">
-			<div class="guidance-content">
-				<div class="card mb-2"> 
-					<div class="card-body">
-						<div class="card-box">
-							<p class="mb-1">현재 정원</p>
-							<p>${subject.applyNumber}/${subject.fixedNumber}명</p>
+		
+		<div class="row mt-3 mx-0">
+			<div class="col-6">
+				<button type="button" id="classContentsBtn" class="btn btn-box btn-outline bg-light border-slate-300">
+					<div class="fs-20 text-info-600">
+						<p><span>횟수별</span></p>
+						<p class="mb-0"><span>수 업 내 용</span></p>
+					</div>
+				</button>
+			</div>
+			<div class="col-6">
+				<div class="guidance-content">
+					<div class="card mb-2"> 
+						<div class="card-body">
+							<div class="card-box">
+								<p class="mb-1">현재 정원</p>
+								<p>${subject.applyNumber}/${subject.fixedNumber}명</p>
+							</div>
 						</div>
 					</div>
 				</div>
+				
+				<c:choose>
+					<c:when test="${subject.applyType == 'APPLY'}">
+				       <button type="button" class="btn btn-small-box bg-info-600" disabled="disabled"><span>신 청 완 료</span></button>
+				    </c:when>
+	  				<c:when test="${subject.applyType == 'NOTAPPLY'}">
+	 					<button type="button" class="btn btn-small-box bg-danger-600" disabled="disabled"><span>신 청 불 가</span></button>
+	  				</c:when>
+	  				<c:when test="${subject.applyType == 'FILL'}">
+				       <button type="button" class="btn btn-small-box bg-orange-800" disabled="disabled"><span>정 원 초 과</span></button>
+				    </c:when>
+	 				<c:otherwise>
+	 					<button type="button" class="btn btn-small-box bg-info-600" onclick="apply(${subject.id})"><span>신 청 하 기</span></button>
+	 				</c:otherwise>
+				</c:choose>
 			</div>
-			
-			<c:choose>
-				<c:when test="${subject.applyType == 'APPLY'}">
-			       <button type="button" class="btn btn-small-box bg-info-600" disabled="disabled"><span>신 청 완 료</span></button>
-			    </c:when>
-  				<c:when test="${subject.applyType == 'NOTAPPLY'}">
- 					<button type="button" class="btn btn-small-box bg-danger-600" disabled="disabled"><span>신 청 불 가</span></button>
-  				</c:when>
-  				<c:when test="${subject.applyType == 'FILL'}">
-			       <button type="button" class="btn btn-small-box bg-orange-800" disabled="disabled"><span>정 원 초 과</span></button>
-			    </c:when>
- 				<c:otherwise>
- 					<button type="button" class="btn btn-small-box bg-info-600" onclick="apply(${subject.id})"><span>신 청 하 기</span></button>
- 				</c:otherwise>
-			</c:choose>
 		</div>
 	</div>
 </div>

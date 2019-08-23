@@ -11,37 +11,37 @@
 	</div>
 	
 	<table class="table table-border-solid mt-4" id="invitationTable">
-			<thead class="text-center">
-				<tr class="bg-info-600">
-					<th>번호</th> 
-					<th>안내장 제목</th>
-					<th>신청<br>마감일</th>
-					<th>수강<br>신청</th>
+		<thead class="text-center">
+			<tr class="bg-info-600">
+				<th>번호</th> 
+				<th>안내장 제목</th>
+				<th>신청<br>마감일</th>
+				<th>수강<br>신청</th>
+			</tr>
+		</thead>
+		<tbody class="tbody-xs text-center">
+			<c:forEach var="invitation" items="${invitations}" varStatus="status">
+				<tr class="">
+					<td class="font-size-sm">${status.count}</td>
+					<td>${invitation.name}</td>
+					<td class="font-size-sm">${invitation.deadlineDate}</td>
+					<td class="font-size-sm">
+						<c:choose>
+							<c:when test="${invitation.type.id == 1}">
+								<a href="#" class="text-shadow font-weight-bold" onclick="applyClick(${invitation.id})">${invitation.type.name}</a>
+							</c:when>
+							<c:when test="${invitation.type.id == 2}">
+								<a href="#" class="text-dark" onclick="deadlineClick()">${invitation.type.name}</a>
+							</c:when>
+							<c:otherwise>
+								${invitation.type.name}
+							</c:otherwise>
+						</c:choose>
+					</td>
 				</tr>
-			</thead>
-			<tbody class="tbody-xs text-center">
-				<c:forEach var="invitation" items="${invitations}" varStatus="status">
-					<tr class="">
-						<td class="font-size-sm">${status.count}</td>
-						<td>${invitation.name}</td>
-						<td class="font-size-sm">${invitation.deadlineDate}</td>
-						<td class="font-size-sm">
-							<c:choose>
-								<c:when test="${invitation.type.id == 1}">
-									<a href="#" class="text-shadow" onclick="applyClick(${invitation.id})">${invitation.type.name}</a>
-								</c:when>
-								<c:when test="${invitation.type.id == 2}">
-									<a href="#" class="text-dark" onclick="deadlineClick()">${invitation.type.name}</a>
-								</c:when>
-								<c:otherwise>
-									${invitation.type.name}
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+			</c:forEach>
+		</tbody>
+	</table>
 </div>
 
 <script>
@@ -57,7 +57,6 @@ $("#invitationTable").DataTable({
 
 function applyClick(id) {
 	var student = "${student}";
-	console.log(student);
 	if (student) {
 		location.href = contextPath + "/subject/group?infoId=" + id;
 	} else {

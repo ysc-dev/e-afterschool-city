@@ -8,7 +8,7 @@
 </c:import>
 
 <div class="content subject-content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-3">
+	<div class="content-title d-flex justify-content-center align-items-center mt-2">
 		<span class="fs-18">${invitation.name}</span>
 	</div>
 	
@@ -41,7 +41,7 @@
 	
 	<div class="card-group-control card-group-control-left subject-group mt-3" id="accordion-group"> 
 		<c:forEach var="subjectGroup" items="${subjectGroups}" varStatus="status">
-			<div class="card">
+			<div class="card ${status.last ? 'card-last' : '' }">
 				<div class="card-header bg-light header-elements-inline">
 					<h6 class="card-title">
 						<a data-toggle="collapse" class="collapsed text-default font-weight-bold" href="#accordion-item-group${subjectGroup.id}">

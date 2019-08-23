@@ -26,7 +26,7 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
  header µðÀÚÀÎ
 *******************************************************************************************************/
 .navbar-light {
-	/* border-bottom-color: white; */
+	border-bottom-color: white;
 }
 
 .navbar-brand {
@@ -95,7 +95,8 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 
 .content {
 	padding: 0.75rem;
-	margin-top: 3.75rem!important;
+	margin-top: 58px !important;
+	background-color: white;
 }
 
 .info-content {

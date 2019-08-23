@@ -75,6 +75,10 @@
 	/* box-shadow: 0 0px 0px rgba(0,0,0,.05) */
 }
 
+.card-last {
+	border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
 .card-header {
 	padding: .9375rem 0.75rem;
 	border-bottom: 0;

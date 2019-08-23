@@ -9,7 +9,7 @@
 </c:import>
 
 <div class="content subject-content"> 
-	<div class="content-title justify-content-center align-items-center mt-3">
+	<div class="content-title justify-content-center align-items-center mt-2">
 		<span class="fs-18">${subjectGroup.name} 과목(${fn:length(subjects)})</span>
 	</div>
 	
@@ -42,7 +42,7 @@
 	
 	<div class="card-group-control mt-3"> 
 		<c:forEach var="subject" items="${subjects}" varStatus="status">
-			<div class="card">
+			<div class="card ${status.last ? 'card-last' : '' }">
 				<div class="card-header bg-light header-elements-inline">
 					<h6 class="card-title">
 						<span class="font-size-md text-default font-weight-bold">${subject.name}</span>

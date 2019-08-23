@@ -7,8 +7,8 @@
 </c:import>
 
 <div class="content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-3">
-		<span>전체 공지사항</span>
+	<div class="content-title d-flex justify-content-center align-items-center mt-2">
+		<span class="fs-18">전체 공지사항</span>
 	</div>
 	
 	<table class="table table-border-solid mt-4" id="noticeTable">

@@ -9,23 +9,24 @@
 </c:import>
 
 <div class="content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-3 px-2">
+	<div class="content-title d-flex justify-content-center align-items-center mt-2 px-2">
 		<span class="fs-18">${subject.name}</span>
 	</div>
 	
-	<div class="card mt-4">
+	<div class="card card-table mt-4">
 		<div class="card-header text-center bg-info-600 text-white">
 			<h5 class="card-title font-weight-bold">횟수별 수업내용</h5>
 		</div>
-		<table class="table table-bordered" id="contentTable">
+		<table class="table" id="contentTable">
 			<tbody class="tbody-xs">
 				<c:forEach var="content" items="${classContents}" varStatus="status">
 					<tr>
 						<td class="font-size-sm text-center">${status.count}</td>
-						<td class="font-size-sm">${content.content}</td>
+						<td class="font-size-sm font-weight-bold">${content.content}</td>
 						<td class="font-size-sm">
-							<button type="button" class="btn btn-outline bg-primary text-primary-600 btn-sm" 
-								onClick="imageModal(${content.id})"><i class="icon-images2"></i></button>
+							<button type="button" class="btn btn-outline bg-primary text-primary-600 btn-sm font-weight-bold" 
+								onClick="imageModal(${content.id})">첨부파일</button>
+								<!-- <i class="icon-images2"></i> -->
 						</td>
 					</tr>
 				</c:forEach>
