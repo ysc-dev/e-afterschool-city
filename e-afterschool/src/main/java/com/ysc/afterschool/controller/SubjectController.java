@@ -19,6 +19,7 @@ import com.ysc.afterschool.domain.db.Student.TargetType;
 import com.ysc.afterschool.domain.db.Subject;
 import com.ysc.afterschool.domain.db.Subject.ApplyType;
 import com.ysc.afterschool.service.ApplyService;
+import com.ysc.afterschool.service.ApplyWaitService;
 import com.ysc.afterschool.service.InvitationService;
 import com.ysc.afterschool.service.SubjectGroupService;
 import com.ysc.afterschool.service.SubjectService;
@@ -44,6 +45,9 @@ public class SubjectController {
 	
 	@Autowired
 	private ApplyService applyService;
+	
+	@Autowired
+	private ApplyWaitService applyWaitService;
 
 	/**
 	 * 수강신청 첫 화면 - 과목 리스트
@@ -111,6 +115,10 @@ public class SubjectController {
 		Subject subject = subjectService.get(id);
 		if (applyService.search(infoId, student.getId(), subject.getId())) {
 			subject.setApplyType(ApplyType.APPLY);
+		} else if (applyWaitService.search(infoId, student.getId(), subject.getId())) {
+			subject.setApplyType(ApplyType.APPLYWAIT);
+		} else if (subject.getWaitFixedNumber() <= subject.getWaitingNumber()) {
+			subject.setApplyType(ApplyType.WAITING);
 		} else if (subject.getFixedNumber() <= subject.getApplyNumber()) {
 			subject.setApplyType(ApplyType.FILL);
 		} else {

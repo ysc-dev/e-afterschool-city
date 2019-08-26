@@ -2,7 +2,6 @@ package com.ysc.afterschool.domain.db;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,20 +15,19 @@ import org.hibernate.annotations.CreationTimestamp;
 import com.ysc.afterschool.domain.Domain;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 수강 신청 관리 테이블 도메인
+ * 수강 신청 대기 관리 테이블 도메인
  * 
  * @author hgko
  *
  */
 @Entity
-@Table(name = "tb_apply")
+@Table(name = "tb_apply_wait")
 @Data
 @NoArgsConstructor
-public class Apply implements Domain {
+public class ApplyWait implements Domain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,34 +46,17 @@ public class Apply implements Domain {
 	/** 안내장 */
 	private int invitationId;
 	
-	/** 소속(학교 명) */
-	@Column(nullable = false, length = 45)
-	private String school;
-	
-	/** 학년 */
-	private int grade;
+	/** 대기 순서 */
+	private int orderNumber;
 	
 	@CreationTimestamp
 	private LocalDateTime createDate;
 	
-	public Apply(int invitationId, Student student, Subject subject) {
-		this.invitationId = invitationId;
+	public ApplyWait(int infoId, Student student, Subject subject, int order) {
+		this.invitationId = infoId;
 		this.student = student;
 		this.subject = subject;
-		this.school = student.getSchool();
-		this.grade = student.getGrade();
+		this.orderNumber = order;
+		
 	}
-	
-	@Getter
-	public enum OrderType {
-		오름차순("asc"),
-		내림차순("desc");
-		
-		private String name;
-		
-		private OrderType(String name) {
-			this.name = name;
-		}
-	}
-		
 }

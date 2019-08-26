@@ -73,6 +73,12 @@ public class Subject extends AbstractDomain {
 	/** 수강신청 인원 */
 	private int applyNumber;
 	
+	/** 대기 정원 */
+	private int waitFixedNumber;
+	
+	/** 신청 대기 인원 */
+	private int waitingNumber;
+	
 	/** 과목특징 */
 	@Column(nullable = false, length = 255)
 	private String description;
@@ -96,9 +102,10 @@ public class Subject extends AbstractDomain {
 	public enum ApplyType {
 		NONE(""), 
 		APPLY("신청완료"), 
+		APPLYWAIT("신청완료"), 
 		NOTAPPLY("신청불가"),
 		FILL("정원초과"),
-		WAIT("");
+		WAITING("신청대기중");
 		
 		private String name;
 		

@@ -30,7 +30,7 @@
 						<i class="icon-user mr-1"></i>학생정보변경
 					</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item bg-grey">
 					<a href="${pageContext.request.contextPath}/logout" class="navbar-nav-link nav-border-left">
 						<i class="icon-exit mr-1"></i>로그아웃
 					</a>

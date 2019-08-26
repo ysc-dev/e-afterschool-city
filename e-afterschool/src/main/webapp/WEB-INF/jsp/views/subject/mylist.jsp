@@ -100,7 +100,11 @@ function applyCancel(applyId) {
 	       			});
 	           	},
 	            error: function(response) {
-	            	swal({title: response.responseText, type: "error", position: 'top'})
+		            if (response.responseText == "취소불가") {
+		            	location.reload();
+		            } else {
+		            	swal({title: response.responseText, type: "error", position: 'top'})
+		            }
 	            }
 	    	});
     	}

@@ -8,6 +8,14 @@
     padding: 0;
 }
 
+.navbar-component {
+	border: 0px;
+}
+
+.navbar-expand.navbar-dark .navbar-collapse {
+	border-top: 0px;
+}
+
 .navbar-expand .navbar-expand {
 	display: flex !important;
 	flex-basis: auto !important;
@@ -34,7 +42,7 @@
 }
 
 .navbar-nav li {
-    width: 33.333333%;
+    width: 25%;
 }
 
 .navbar-nav a {

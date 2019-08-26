@@ -57,11 +57,17 @@
 					<c:when test="${subject.applyType == 'APPLY'}">
 				       <button type="button" class="btn btn-small-box bg-info-600" disabled="disabled"><span>신 청 완 료</span></button>
 				    </c:when>
+				    <c:when test="${subject.applyType == 'APPLYWAIT'}">
+				       <button type="button" class="btn btn-small-box bg-info-600" disabled="disabled"><span>신청 대기 중</span></button>
+				    </c:when>
 	  				<c:when test="${subject.applyType == 'NOTAPPLY'}">
 	 					<button type="button" class="btn btn-small-box bg-danger-600" disabled="disabled"><span>신 청 불 가</span></button>
 	  				</c:when>
 	  				<c:when test="${subject.applyType == 'FILL'}">
-				       <button type="button" class="btn btn-small-box bg-orange-800" disabled="disabled"><span>정 원 초 과</span></button>
+				       <button type="button" class="btn btn-small-box bg-orange-600" onclick="applyWait(${subject.id})"><span>정 원 초 과</span></button>
+				    </c:when>
+	  				<c:when test="${subject.applyType == 'WAITING'}">
+				       <button type="button" class="btn btn-small-box bg-warning-600" disabled="disabled"><span>대기인원 초과</span></button>
 				    </c:when>
 	 				<c:otherwise>
 	 					<button type="button" class="btn btn-small-box bg-info-600" onclick="apply(${subject.id})"><span>신 청 하 기</span></button>
@@ -85,8 +91,53 @@ $("#classContentsBtn").click(function() {
 	location.href = contextPath + "/subject/class?infoId=${infoId}&id=${subject.id}";
 });
 
-function apply(subjectId) {
+function waitCommon(subjectId) {
 	swal({
+        title: "정원 초과입니다.\n수강신청 대기하시겠습니까?",
+        type: "info",
+        confirmButtonText: "삭제",
+        confirmButtonClass: "btn btn-info",
+        showCancelButton: true, 
+        cancelButtonText: "취소",
+        position: "top"
+    }).then(function(e) {
+    	$.ajax({
+    		url: contextPath + "/apply/wait/regist",
+      		data: {"infoId": ${infoId}, "subjectId": subjectId},
+      		type: "POST",
+           	success: function(response) {
+           		location.reload();
+           	},
+            error: function(response) {
+            	swal({title: response.responseText, type: "error", position: "top"});
+            }
+    	});
+    });
+}
+
+function apply(subjectId) {
+	$.ajax({
+		url: contextPath + "/apply/regist",
+  		data: {"infoId": ${infoId}, "subjectId": subjectId},
+  		type: "POST",
+       	success: function(response) {
+       		swal({
+   				title: "수강 신청이 되었습니다.", 
+   				type: "success",
+   				position: "top"
+   			}).then(function(e) {
+   				location.reload();
+   			});
+       	},
+        error: function(response) {
+			if (response.responseText == "정원초과") {
+				waitCommon(subjectId);
+			} else {
+	        	swal({title: response.responseText, type: "error", position: "top"});
+			}
+        }
+	});
+	/* swal({
 	    title: "수강신청 하시겠습니까?",
 	    type: "question",
 	    confirmButtonText: "확인",
@@ -95,23 +146,11 @@ function apply(subjectId) {
 	    cancelButtonText: "닫기",
 	    position: "top"
 	}).then(function(e) {
-		$.ajax({
-			url: contextPath + "/apply/regist",
-	  		data: {"infoId": ${infoId}, "subjectId": subjectId},
-	  		type: "POST",
-	       	success: function(response) {
-	       		swal({
-       				title: "수강 신청이 되었습니다.", 
-       				type: "success",
-       				position: "top"
-       			}).then(function(e) {
-       				location.reload();
-       			});
-	       	},
-	        error: function(response) {
-	        	swal({title: response.responseText, type: "error", position: "top"});
-	        }
-		});
-	});
+		
+	}); */
+}
+
+function applyWait(subjectId) {
+	waitCommon(subjectId);
 }
 </script>

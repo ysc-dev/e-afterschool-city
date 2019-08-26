@@ -51,9 +51,6 @@ $('#registForm').submit(function(e) {
     var url = form.attr('action');
     var formData = new FormData($("#registForm")[0]);
 
-    console.log(form);
-    console.log(formData);
-
     $.ajax({
 		type: "POST",
        	url: url,
@@ -61,7 +58,6 @@ $('#registForm').submit(function(e) {
        	processData: false,
        	contentType: false,
        	success: function(response) {
-           	console.log(response);
        		swal({
    				title: "글 등록이 되었습니다.", 
    				type: "success",
