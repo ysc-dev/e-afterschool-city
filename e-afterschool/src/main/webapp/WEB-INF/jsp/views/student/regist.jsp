@@ -64,7 +64,7 @@
 				<div class="form-group row">
 					<label class="col-form-label col-3">핸드폰</label>
 					<div class="col-9 d-flex">
-						<select class="form-control select2-size" name="service">
+						<select class="form-control select2-size" name="service" data-width="120">
 							<option value="010">010</option>
 							<option value="011">011</option>
 							<option value="016">016</option>
@@ -131,10 +131,20 @@
 </div>
 
 <script>
+var agent = navigator.userAgent.toLowerCase();
+function checkIE() {
+	if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 $('[name="tel"]').formatter({
     pattern: '{{9999}}-{{9999}}'
 });
 
+/** 개인정보 동의 체크 버튼 클릭 시 */
 $("#agreeCheck").click(function(){
     if ($(this).is(':checked')){
     	$("#residentNumberInput").removeClass("d-none");
@@ -146,19 +156,20 @@ $("#agreeCheck").click(function(){
     }
 });
 
+/** 단체보험 가입 확인 버튼 클릭 시 */
 $("#confirmBtn").click(function() {
 	$("#modalBtn").prop("disabled", true);
 	$("#registBtn").prop("disabled", false);
 	$("#modal").modal('hide');
 });
 
-//전송 상태 설정 : false
+// 전송 상태 설정 : false
 var isSubmitted = false;
 
 $("#studentRegistForm").submit(function(e) {
 	e.preventDefault();
 	
-	// 한번 등록버튼을 클릭 시 중복으로 클릭이 안되도록
+	// 한번 등록 버튼을 클릭 시 중복으로 클릭이 안되도록
 	if (isSubmitted) { 
 		isSubmitted = false;
 		return;
@@ -178,8 +189,12 @@ $("#studentRegistForm").submit(function(e) {
 		}
 		
 		if (!validate()) {
+			if (checkIE()) {
+				alert("올바른 주민번호가 아닙니다.");
+			} else {
+				swal({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
+			}
 			isSubmitted = false;
-			swal({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
 			return;
 		}
 		
@@ -189,8 +204,12 @@ $("#studentRegistForm").submit(function(e) {
 			data: student,
 			success: function(response) {
 				if (response) {
+					if (checkIE()) {
+						alert("이미 등록된 주민번호입니다.");
+					} else {
+						swal({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
+					}
 					isSubmitted = false;
-					swal({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
 				} else {
 					registStudent(student, url);
 				}
@@ -208,25 +227,37 @@ function registStudent(student, url) {
 		data: student,
 		success: function(response) {
        		if (response) {
+       			if (checkIE()) {
+					alert("이미 등록된 학생 정보입니다.");
+				} else {
+					swal({title: "이미 등록된 학생 정보입니다.", type: "warning", position: 'top', confirmButtonClass: 'btn btn-warning',});
+				}
        			isSubmitted = false;
-       			swal({title: "이미 등록된 학생 정보입니다.", type: "warning", position: 'top', confirmButtonClass: 'btn btn-warning',});
        		} else {
        			$.ajax({
        				type: "POST",
        	           	url: url,
        	           	data: student,
        	           	success: function(response) {
-	       	           	swal({
-		       				title: "학생 등록 되었습니다.", 
-		       				type: "success",
-		       				position: 'top'
-		       			}).then(function(e) {
-		       				location.href = contextPath + "/home/${cityId}";
-		       			});
+	       	           	if (checkIE()) {
+	       	           		location.href = contextPath + "/home/${cityId}";
+	       	           	} else {
+		       	           	swal({
+			       				title: "학생 등록 되었습니다.", 
+			       				type: "success",
+			       				position: 'top'
+			       			}).then(function(e) {
+			       				location.href = contextPath + "/home/${cityId}";
+			       			});
+	       	           	}
        	           	},
        	            error: function(response) {
+       	            	if (checkIE()) {
+           	            	alert("학생 등록을 실패하였습니다.");
+       	            	} else {
+       	            		swal({title: "학생 등록을 실패하였습니다.", type: "error", position: 'top'});
+       	            	}
        	            	isSubmitted = false;
-       	            	swal({title: "학생 등록을 실패하였습니다.", type: "error", position: 'top'});
        	            }
        			});
        		}
@@ -234,7 +265,7 @@ function registStudent(student, url) {
 	});
 }
 
-//주민번호 검증 확인
+// 주민번호 검증 확인
 function validate() {
     var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
     var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;

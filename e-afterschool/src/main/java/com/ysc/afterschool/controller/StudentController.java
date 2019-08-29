@@ -44,8 +44,7 @@ public class StudentController {
 	 */
 	@GetMapping("regist")
 	public void regist(Model model, int cityId) { 
-		model.addAttribute("schools", schoolService.getList().stream()
-				.map(data -> data.getName()).sorted().collect(Collectors.toList()));
+		model.addAttribute("schools", schoolService.getList().stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("cityId", cityId);
 	}
 	
@@ -82,8 +81,7 @@ public class StudentController {
 		student.setTel(student.getService() + "-" + student.getTel());
 		student.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
 		
-		school = school.endsWith("초등학교") ? 
-				school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
+		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
 		student.setSchoolInfo(school);
 		
 		if (student.isAgree()) {
@@ -105,8 +103,7 @@ public class StudentController {
 	public void update(Model model, int infoId, Authentication authentication, @CookieValue(value = "cityId", required = false) Cookie cookie) { 
 		Student student = (Student) authentication.getPrincipal();
 		
-		model.addAttribute("schools", schoolService.getList().stream()
-				.map(data -> data.getName()).sorted().collect(Collectors.toList()));
+		model.addAttribute("schools", schoolService.getList().stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("cityId", cookie.getValue());
 		
@@ -138,8 +135,7 @@ public class StudentController {
 		String school = student.getSchool();
 		temp.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
 		
-		school = school.endsWith("초등학교") ? 
-				school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
+		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
 		temp.setSchoolInfo(school);
 		
 		if (studentService.update(temp)) {

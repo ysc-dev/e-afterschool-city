@@ -79,6 +79,15 @@
 </div>
 
 <script>
+var agent = navigator.userAgent.toLowerCase();
+function checkIE() {
+	if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 $("#subjectInfoBtn").click(function() {
 	location.href = contextPath + "/subject/info?infoId=${infoId}&id=${subject.id}";
 });
@@ -91,28 +100,45 @@ $("#classContentsBtn").click(function() {
 	location.href = contextPath + "/subject/class?infoId=${infoId}&id=${subject.id}";
 });
 
-function waitCommon(subjectId) {
-	swal({
-        title: "정원 초과입니다.\n수강신청 대기하시겠습니까?",
-        type: "info",
-        confirmButtonText: "삭제",
-        confirmButtonClass: "btn btn-info",
-        showCancelButton: true, 
-        cancelButtonText: "취소",
-        position: "top"
-    }).then(function(e) {
-    	$.ajax({
-    		url: contextPath + "/apply/wait/regist",
-      		data: {"infoId": ${infoId}, "subjectId": subjectId},
-      		type: "POST",
-           	success: function(response) {
-           		location.reload();
-           	},
-            error: function(response) {
+function registWait(subjectId) {
+	$.ajax({
+		url: contextPath + "/apply/wait/regist",
+  		data: {"infoId": ${infoId}, "subjectId": subjectId},
+  		type: "POST",
+       	success: function(response) {
+       		location.reload();
+       	},
+        error: function(response) {
+            if (checkIE()) {
+                alert(response.responseText);
+            } else {
             	swal({title: response.responseText, type: "error", position: "top"});
             }
-    	});
-    });
+        }
+	});
+}
+
+function commonWait(subjectId) {
+	if (checkIE()) {
+		var result = confirm("정원 초과입니다.\n수강신청 대기하시겠습니까?");
+		if (result) {
+			registWait(subjectId);
+		}
+	} else {
+		swal({
+	        title: "정원 초과입니다.\n수강신청 대기하시겠습니까?",
+	        type: "info",
+	        confirmButtonText: "삭제",
+	        confirmButtonClass: "btn btn-info",
+	        showCancelButton: true, 
+	        cancelButtonText: "취소",
+	        position: "top"
+	    }).then(function(e) {
+	    	if (e.value) {
+		    	registWait(subjectId);
+	    	}
+	    });
+	}
 }
 
 function apply(subjectId) {
@@ -121,19 +147,28 @@ function apply(subjectId) {
   		data: {"infoId": ${infoId}, "subjectId": subjectId},
   		type: "POST",
        	success: function(response) {
-       		swal({
-   				title: "수강 신청이 되었습니다.", 
-   				type: "success",
-   				position: "top"
-   			}).then(function(e) {
-   				location.reload();
-   			});
+       		if (checkIE()) {
+           		alert("수강 신청이 되었습니다.");
+           		location.reload();
+       		} else {
+       			swal({
+       				title: "수강 신청이 되었습니다.", 
+       				type: "success",
+       				position: "top"
+       			}).then(function(e) {
+       				location.reload();
+       			});
+       		}
        	},
         error: function(response) {
 			if (response.responseText == "정원초과") {
-				waitCommon(subjectId);
+				commonWait(subjectId);
 			} else {
-	        	swal({title: response.responseText, type: "error", position: "top"});
+				if (checkIE()) {
+					alert(response.responseText);
+				} else {
+					swal({title: response.responseText, type: "error", position: "top"});
+				}
 			}
         }
 	});
@@ -151,6 +186,6 @@ function apply(subjectId) {
 }
 
 function applyWait(subjectId) {
-	waitCommon(subjectId);
+	commonWait(subjectId);
 }
 </script>

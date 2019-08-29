@@ -5,6 +5,18 @@ body { font-family:myFirstFont, NanumGothic,Verdana,Dotum,"돋움",sans-serif; fon
 input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,Verdana,Dotum,"돋움",sans-serif; color:#000; }
 * { -webkit-text-size-adjust:none; }
 
+@media (min-width: 1200px) {
+	.layout-boxed, .layout-boxed>.navbar {
+	    width: 900px;
+	}
+}
+
+@media (min-width: 576px) {
+	.login-form {
+	    width: 25rem;
+	}
+}
+
 /*******************************************************************************************************
   공통 디자인
 *******************************************************************************************************/

@@ -62,7 +62,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public boolean search(Student student) {
-		return studentRepository.findByNameAndTel(student.getName(), student.getService() + student.getTel()) != null;
+		return studentRepository.findByNameAndTel(student.getName(), student.getService() + "-" + student.getTel()) != null;
 	}
 
 	@Override

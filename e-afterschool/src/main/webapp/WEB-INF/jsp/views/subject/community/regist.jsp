@@ -44,6 +44,15 @@
 </div>
 
 <script>
+var agent = navigator.userAgent.toLowerCase();
+function checkIE() {
+	if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 $('#registForm').submit(function(e) {
 	e.preventDefault();
 
@@ -58,16 +67,24 @@ $('#registForm').submit(function(e) {
        	processData: false,
        	contentType: false,
        	success: function(response) {
-       		swal({
-   				title: "글 등록이 되었습니다.", 
-   				type: "success",
-   				position: "top"
-   			}).then(function(e) {
-   				location.replace(contextPath + "/subject/community/list?infoId=${infoId}&id=${subject.id}");
-   			});
+           	if (checkIE()) {
+           		location.replace(contextPath + "/subject/community/list?infoId=${infoId}&id=${subject.id}");
+           	} else {
+           		swal({
+       				title: "글 등록이 되었습니다.", 
+       				type: "success",
+       				position: "top"
+       			}).then(function(e) {
+       				location.replace(contextPath + "/subject/community/list?infoId=${infoId}&id=${subject.id}");
+       			});
+           	}
        	},
         error: function(response) {
-        	swal({title: "글 등록을 실패하였습니다.", type: "error", position: "top"})
+        	if (checkIE()) {
+            	alert("글 등록을 실패하였습니다.");
+        	} else {
+        		swal({title: "글 등록을 실패하였습니다.", type: "error", position: "top"});
+           	}
         }
 	});
 });

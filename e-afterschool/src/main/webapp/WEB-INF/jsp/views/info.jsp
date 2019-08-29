@@ -45,6 +45,15 @@
 </div>
 
 <script>
+var agent = navigator.userAgent.toLowerCase();
+function checkIE() {
+	if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 $("#invitationTable").DataTable({
 	pageLength: 5,
 	order: [[0, 'asc']],
@@ -60,20 +69,20 @@ function applyClick(id) {
 	if (student) {
 		location.href = contextPath + "/subject/group?infoId=" + id;
 	} else {
-		swal({
-			title: "로그인 한 후에 수강신청 할 수 있습니다.", 
-			type: "warning",
-			position: 'top'
-		});
+		if (checkIE()) {
+			alert("로그인 한 후에 수강신청 할 수 있습니다.");
+		} else {
+			swal({ title: "로그인 한 후에 수강신청 할 수 있습니다.", type: "warning", position: 'top' });
+		}
 		return;
 	}
 }
 
 function deadlineClick() {
-	swal({
-		title: "추가접수 문의는 274–0518", 
-		type: "info",
-		position: 'top'
-	});
+	if (checkIE()) {
+		alert("추가접수 문의는 274–0518");
+	} else {
+		swal({title: "추가접수 문의는 274–0518", type: "info", position: 'top'});
+	}
 }
 </script>

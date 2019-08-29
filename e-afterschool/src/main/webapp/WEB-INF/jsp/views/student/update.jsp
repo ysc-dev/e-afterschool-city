@@ -125,6 +125,15 @@
 </div>
 
 <script>
+var agent = navigator.userAgent.toLowerCase();
+function checkIE() {
+	if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 $('[name="tel"]').formatter({
     pattern: '{{9999}}-{{9999}}'
 });
@@ -176,8 +185,12 @@ $("#studentUpdateForm").submit(function(e) {
 		}
 		
 		if (!validate()) {
+			if (checkIE()) {
+				alert("올바른 주민번호가 아닙니다.");
+			} else {
+				swal({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
+			}
 			isSubmitted = false;
-			swal({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
 			return;
 		}
 
@@ -188,8 +201,12 @@ $("#studentUpdateForm").submit(function(e) {
 				data: student,
 				success: function(response) {
 					if (response) {
+						if (checkIE()) {
+							alert("이미 등록된 주민번호입니다.");
+						} else {
+							swal({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
+						}
 						isSubmitted = false;
-						swal({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
 					} else {
 						updateStudent(student, url);
 					}
@@ -209,17 +226,25 @@ function updateStudent(student, url) {
 		type: "PUT",
        	data: student,
        	success: function(response) {
-           	swal({
-  				title: "학생 정보 수정 되었습니다.", 
-  				type: "success",
-  				position: 'top'
-  			}).then(function(e) {
-  				location.href = contextPath + "/home/${cityId}";
-  			});
+       		if (checkIE()) {
+       			location.href = contextPath + "/home/${cityId}";
+       		} else {
+       			swal({
+      				title: "학생 정보 수정 되었습니다.", 
+      				type: "success",
+      				position: 'top'
+      			}).then(function(e) {
+      				location.href = contextPath + "/home/${cityId}";
+      			});
+       		}
        	},
         error: function(response) {
+        	if (checkIE()) {
+            	alert("학생 정보 수정을 실패하였습니다.");
+        	} else {
+        		swal({title: "학생 정보 수정을 실패하였습니다.", type: "error", position: 'top'});
+           	}
           	isSubmitted = false;
-          	swal({title: "학생 정보 수정을 실패하였습니다.", type: "error", position: 'top'});
         }
 	});
 }

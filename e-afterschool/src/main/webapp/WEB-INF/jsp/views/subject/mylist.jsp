@@ -75,39 +75,68 @@
 </div>
 
 <script>
+var agent = navigator.userAgent.toLowerCase();
+function checkIE() {
+	if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function deleteApply(applyId) {
+	$.ajax({
+		url: contextPath + "/apply/delete",
+  		data: {"applyId": applyId},
+  		type: "DELETE",
+       	success: function(response) {
+       		if (checkIE()) {
+           		alert("수강 취소 되었습니다.");
+           		location.reload();
+       	 	} else {
+	       	 	swal({
+	   				title: "수강 취소 되었습니다.", 
+	   				type: "success",
+	   				position: 'top'
+	   			}).then(function(e) {
+	   				location.reload();
+	   			});
+       	 	}
+       	},
+        error: function(response) {
+            if (response.responseText == "취소불가") {
+            	location.reload();
+            } else {
+                if (checkIE()) {
+                    alert(response.responseText);
+                } else {
+                	swal({title: response.responseText, type: "error", position: 'top'});
+                }
+            }
+        }
+	});
+}
+
 function applyCancel(applyId) {
-	swal({
-        title: "수강취소 하시겠습니까?",
-        type: "question",
-        confirmButtonText: "확인",
-        confirmButtonClass: "btn btn-danger",
-        showCancelButton: true, 
-        cancelButtonText: "닫기",
-        position: "top"
-    }).then(function(e) {
-    	if (e.value) {
-    		$.ajax({
-	    		url: contextPath + "/apply/delete",
-	      		data: {"applyId": applyId},
-	      		type: "DELETE",
-	           	success: function(response) {
-	           		swal({
-	       				title: "수강 취소 되었습니다.", 
-	       				type: "success",
-	       				position: 'top'
-	       			}).then(function(e) {
-	       				location.reload();
-	       			});
-	           	},
-	            error: function(response) {
-		            if (response.responseText == "취소불가") {
-		            	location.reload();
-		            } else {
-		            	swal({title: response.responseText, type: "error", position: 'top'})
-		            }
-	            }
-	    	});
-    	}
-    });
+	if (checkIE()) {
+		var result = confirm("수강취소 하시겠습니까?");
+		if (result) {
+			deleteApply(applyId);
+		}
+	} else {
+		swal({
+	        title: "수강취소 하시겠습니까?",
+	        type: "question",
+	        confirmButtonText: "확인",
+	        confirmButtonClass: "btn btn-danger",
+	        showCancelButton: true, 
+	        cancelButtonText: "닫기",
+	        position: "top"
+	    }).then(function(e) {
+	    	if (e.value) {
+	    		deleteApply(applyId);
+	    	}
+	    });
+	}
 }
 </script>

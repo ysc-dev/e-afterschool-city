@@ -53,7 +53,7 @@
 							<c:if test="${user.id == comment.userId && user.name == comment.userName}">
 								<div>
 									<a href="#" onclick="updateBtnClick(${comment.id})" class="text-primary font-weight-bold">수정</a>
-									<a href="#" onclick="deleteComment(${comment.id})" class="text-danger font-weight-bold ml-1">삭제</a>
+									<a href="#" onclick="deleteCommentClick(${comment.id})" class="text-danger font-weight-bold ml-1">삭제</a>
 								</div>
 							</c:if>
 						</div>
@@ -76,7 +76,7 @@
 		</c:if>
 		<c:if test="${user.id == notice.userId && user.name == notice.userName}">
 			<div class="card-footer text-right">
-				<button type="button" class="btn bg-danger-400 btn-sm" onclick="deleteNotice(${notice.id})">
+				<button type="button" class="btn bg-danger-400 btn-sm" onclick="deleteNoticeClick(${notice.id})">
 					<i class="icon-trash mr-2"></i>삭 제
 				</button>
 			</div>
@@ -85,6 +85,15 @@
 </div>
 
 <script>
+var agent = navigator.userAgent.toLowerCase();
+function checkIE() {
+	if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 $("#commentRegistBtn").click(function() {
 	var content = $("#commentInput").val();
 	if (content) {
@@ -93,19 +102,31 @@ $("#commentRegistBtn").click(function() {
     		type: "POST",
     		data: {"subjectNoticeId": "${notice.id}", "content": content},
     		success: function(response) {
-    			swal({
-           			title: "댓글이 추가되었습니다.",
-       				type: "success"
-       			}).then(function(e) {
-       				location.reload();
-       			});
+        		if (checkIE()) {
+        			location.reload();
+           		} else {
+           			swal({
+               			title: "댓글이 추가되었습니다.",
+           				type: "success"
+           			}).then(function(e) {
+           				location.reload();
+           			});
+           		}
     		},
     		error: function(response) {
-            	swal({title: "댓글 추가을 실패하였습니다.", type: "error"})
+    			if (checkIE()) { 
+        			alert("댓글 추가을 실패하였습니다.");
+    			} else {
+    				swal({title: "댓글 추가을 실패하였습니다.", type: "error"});
+       			}
             }
     	});
 	} else {
-		swal({title: "댓글 내용을 입력하세요.", type: "warning"});
+		if (checkIE()) { 
+			alert("댓글 내용을 입력하세요.");
+		} else {
+			swal({title: "댓글 내용을 입력하세요.", type: "warning"});
+		}
 	}
 });
 
@@ -130,59 +151,86 @@ function cancel(id) {
 	$("#updateInput_" + id).val("")
 }
 
-/** 댓글 삭제 버튼 클릭시 */
 function deleteComment(id) {
-	swal({
-        title: "삭제하시겠습니까?",
-        type: "warning",
-        confirmButtonText: "삭제",
-        confirmButtonClass: "btn btn-danger",
-        showCancelButton: true, 
-        cancelButtonText: "취소",
-    }).then(function(e) {
-    	if (e.value) {
-    		$.ajax({
-	    		url: contextPath + "/comment/delete",
-	    		type: "DELETE",
-	    		data: {"id": id},
-	    		success: function(response) {
-	    			location.reload();
-	           	},
-	            error: function(response) {
-	            	swal({title: "댓글 삭제를 실패하였습니다.", type: "error"})
-	            }
-	    	}); 
-    	}
-    });
+	$.ajax({
+		url: contextPath + "/comment/delete",
+		type: "DELETE",
+		data: {"id": id},
+		success: function(response) {
+			location.reload();
+       	},
+        error: function(response) {
+        	if (checkIE()) {
+            	alert("댓글 삭제를 실패하였습니다.");
+           	} else {
+           		swal({title: "댓글 삭제를 실패하였습니다.", type: "error"});
+           	}
+        }
+	}); 
+}
+
+/** 댓글 삭제 버튼 클릭 시 */
+function deleteCommentClick(id) {
+	if (checkIE()) {
+		var result = confirm("삭제하시겠습니까?");
+		if (result) {
+			deleteComment(id);
+		}
+	} else {
+		swal({
+	        title: "삭제하시겠습니까?",
+	        type: "warning",
+	        confirmButtonText: "삭제",
+	        confirmButtonClass: "btn btn-danger",
+	        showCancelButton: true, 
+	        cancelButtonText: "취소",
+	    }).then(function(e) {
+	    	if (e.value) {
+	    		deleteComment(id);
+	    	}
+	    });
+	}
 }
 
 function deleteNotice(id) {
-	swal({
-        title: "등록 된 글을 삭제하시겠습니까?",
-        type: "warning",
-        confirmButtonText: "삭제",
-        confirmButtonClass: "btn btn-danger",
-        showCancelButton: true, 
-        cancelButtonText: "취소",
-    }).then(function(e) {
-    	if (e.value) {
-    		$.ajax({
-	    		url: contextPath + "/subject/community/delete",
-	    		type: "DELETE",
-	    		data: {"id": id},
-	    		success: function(response) {
-	    			swal({
-	       				title: "글이 삭제 되었습니다.", 
-	       				type: "success"
-	       			}).then(function(e) {
-	       				location.replace(contextPath + "/subject/community/list?infoId=${infoId}&id=${subjectId}");
-	       			});
-	           	},
-	            error: function(response) {
-	            	swal({title: "글 삭제를 실패하였습니다.", type: "error"})
-	            }
-	    	}); 
-    	}
-    });
+	$.ajax({
+		url: contextPath + "/subject/community/delete",
+		type: "DELETE",
+		data: {"id": id},
+		success: function(response) {
+			swal({
+   				title: "글이 삭제 되었습니다.", 
+   				type: "success"
+   			}).then(function(e) {
+   				location.replace(contextPath + "/subject/community/list?infoId=${infoId}&id=${subjectId}");
+   			});
+       	},
+        error: function(response) {
+        	swal({title: "글 삭제를 실패하였습니다.", type: "error"})
+        }
+	}); 
+}
+
+/** 공지사항 삭제 버튼 클릭 시 */
+function deleteNoticeClick(id) {
+	if (checkIE()) {
+		var result = confirm("등록 된 글을 삭제하시겠습니까?");
+		if (result) {
+			deleteNotice(id);
+		}
+	} else {
+		swal({
+	        title: "등록 된 글을 삭제하시겠습니까?",
+	        type: "warning",
+	        confirmButtonText: "삭제",
+	        confirmButtonClass: "btn btn-danger",
+	        showCancelButton: true, 
+	        cancelButtonText: "취소",
+	    }).then(function(e) {
+	    	if (e.value) {
+	    		deleteNotice(id);
+	    	}
+	    });
+	}
 }
 </script>
