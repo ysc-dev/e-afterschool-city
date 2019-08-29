@@ -76,7 +76,8 @@ public class Student extends AbstractDomain {
 		전체("전체", ""),
 		초등("초등", "초"),
 		중등("중등", "중"),
-		초_중등("초,중등", "");
+		기초("기초", ""),
+		심화("심화", "");
 		
 		private String name;
 		

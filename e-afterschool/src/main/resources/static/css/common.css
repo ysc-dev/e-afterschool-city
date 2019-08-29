@@ -17,6 +17,10 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 	}
 }
 
+.image-modal-body {
+	padding: 0.5rem;	
+}
+
 /*******************************************************************************************************
   공통 디자인
 *******************************************************************************************************/
@@ -33,6 +37,7 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 }
 
 .font-size-md { font-size: 13px !important; }
+.font-size-xs { font-size: 10.5px !important;}
 
 /*******************************************************************************************************
  header 디자인

@@ -22,6 +22,6 @@ public class InvitationService {
 
 	@Cacheable("invitation.get")
 	public Invitation get(int id) {
-		return invitationRepository.getOne(id);
+		return invitationRepository.findById(id).get();
 	}
 }

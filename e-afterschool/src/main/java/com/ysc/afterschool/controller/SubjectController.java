@@ -122,8 +122,11 @@ public class SubjectController {
 		} else if (subject.getFixedNumber() <= subject.getApplyNumber()) {
 			subject.setApplyType(ApplyType.FILL);
 		} else {
-			if (subject.getTargetType() == TargetType.전체 || subject.getTargetType() == student.getTargetType()
-					|| subject.getTargetType() == TargetType.초_중등) {
+			System.err.println(subject.getTargetType() + " , " + student.getTargetType());
+			if (subject.getTargetType() == TargetType.전체 || subject.getTargetType() == TargetType.기초 
+					|| subject.getTargetType() == TargetType.심화) {
+				subject.setApplyType(ApplyType.NONE);
+			} else if (subject.getTargetType() == student.getTargetType()) {
 				if (subject.targetTrue(subject.getGradeType(), student.getGrade())) {
 					subject.setApplyType(ApplyType.NONE);
 				} else {
