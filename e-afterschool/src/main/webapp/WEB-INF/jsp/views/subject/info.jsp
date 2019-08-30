@@ -41,7 +41,7 @@
 	    	</div>
 	    	<div>
 	    		<label class="col-form-label text-primary font-weight-bold"><i class="icon-arrow-right13 mr-1"></i>강사이름 : </label>
-	    		<label class="col-form-label ml-1">${subject.teacher.name}</label>
+	    		<label class="col-form-label ml-1">${subject.teacher.content}</label>
 	    	</div>
 	    	<div class="align-items-stretch">
 	    		<label class="col-form-label text-primary font-weight-bold pb-0"><i class="icon-arrow-right13 mr-1"></i>수업장소 : </label>

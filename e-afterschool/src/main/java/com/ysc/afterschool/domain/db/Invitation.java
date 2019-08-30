@@ -57,7 +57,7 @@ public class Invitation extends AbstractDomain {
 	
 	@OneToMany(mappedBy = "invitation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@Fetch(FetchMode.SUBSELECT)
-	private List<InvitationUploadedFile> uploadedFiles;
+	private List<InvitationFile> uploadedFiles;
 	
 	@Transient
 	private MultipartFile[] images;
