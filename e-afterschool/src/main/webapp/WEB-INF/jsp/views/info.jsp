@@ -90,8 +90,11 @@ function showInfo(id) {
         data: {"id" : id},
         success : function(response) {
 	        response.uploadedFiles.forEach(function(file, index) {
-				var imageContent = `<img src="data:\${file.fileContentType};base64,\${file.content}" class="img-fluid"/>`;
-		        $("#image-viewer").append(imageContent);
+	        	var img = document.createElement("img");
+	        	img.setAttribute("src", "data:" + file.fileContentType + ";base64," + file.content);
+	        	img.setAttribute("class", "img-fluid");
+				//var imageContent = `<img src="data:\${file.fileContentType};base64,\${file.content}" class="img-fluid"/>`;
+		        $("#image-viewer").append(img);
             });
         	$("#imageModal").modal();
         }
@@ -100,6 +103,7 @@ function showInfo(id) {
 
 function applyClick(id) {
 	var student = "${student}";
+	console.log(student);
 	if (student) {
 		location.href = contextPath + "/subject/group?infoId=" + id;
 	} else {

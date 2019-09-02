@@ -2,6 +2,13 @@
 
 <link href="${pageContext.request.contextPath}/css/box.css" rel="stylesheet" type="text/css">
 
+<style>
+#registBtn { background-color: #ffffcc!important; }
+#loginBtn { background-color: #ffcc66!important; }
+#infoBtn { background-color: #99cc99!important; }
+.info-card { background-color: #cccc66!important; }
+</style>
+
 <div class="content">
 	<div class="home-title justify-content-center align-items-center">
 		<span>경남교육청 <span class="text-info-600">캠퍼스형</span> 방과후학교</span>
@@ -30,14 +37,14 @@
 	<div class="row mt-4">
 		<div class="col-6">
 			<button type="button" id="infoBtn" class="btn btn-box btn-outline bg-light border-slate-300">
-				<div class="fs-20 text-info-600">
+				<div class="fs-20 text-white">
 					<p><span>프 로 그 램</span></p>
 					<p class="mb-0"><span>안&nbsp;&nbsp;&nbsp;&nbsp;내&nbsp;&nbsp;&nbsp;&nbsp;장</span></p>
 				</div>
 			</button>
 		</div>
 		<div class="col-6 guidance-content">
-			<div class="card">
+			<div class="card info-card">
 				<div class="card-body">
 					<div class="card-box">
 						<div class="text-center">

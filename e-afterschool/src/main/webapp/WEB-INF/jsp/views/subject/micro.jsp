@@ -128,7 +128,7 @@ function commonWait(subjectId) {
 		swal({
 	        title: "정원 초과입니다.\n수강신청 대기하시겠습니까?",
 	        type: "info",
-	        confirmButtonText: "삭제",
+	        confirmButtonText: "대기",
 	        confirmButtonClass: "btn btn-info",
 	        showCancelButton: true, 
 	        cancelButtonText: "취소",

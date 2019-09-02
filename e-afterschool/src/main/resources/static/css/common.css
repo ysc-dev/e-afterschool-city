@@ -18,7 +18,7 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 }
 
 .image-modal-body {
-	padding: 0.5rem;	
+	padding: 0rem;	
 }
 
 /*******************************************************************************************************
@@ -113,6 +113,7 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 .content {
 	padding: 0.75rem;
 	margin-top: 58px !important;
+	margin-bottom: 60px !important;
 	background-color: white;
 }
 
