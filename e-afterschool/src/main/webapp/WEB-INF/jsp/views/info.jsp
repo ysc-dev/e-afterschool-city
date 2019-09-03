@@ -54,7 +54,7 @@
                 </h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body image-modal-body">
+            <div class="modal-body image-modal-body text-center">
                <div id="image-viewer"></div>
             </div>
         </div>

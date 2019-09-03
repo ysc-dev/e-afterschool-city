@@ -15,8 +15,14 @@
 
 .notice-detail .content {
     padding: 1.2rem 1.2rem;
-    min-height: 150px;
+    min-height: 120px;
     margin-top: 0 !important;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    margin-bottom: 0 !important;
+}
+
+.notice-detail .image-content {
+	padding: 1rem 1rem;
 }
 
 .card-header {

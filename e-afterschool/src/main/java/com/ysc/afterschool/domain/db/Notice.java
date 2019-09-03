@@ -1,14 +1,20 @@
 package com.ysc.afterschool.domain.db;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.ysc.afterschool.domain.AbstractDomain;
 
@@ -48,9 +54,9 @@ public class Notice extends AbstractDomain {
 	@Column(nullable = false, length = 100)
 	private String userName;
 	
-	@OneToOne
-    @JoinColumn(name = "file_id")
-	private UploadedFile uploadedFile;
+	@OneToMany(mappedBy = "notice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SUBSELECT)
+	private List<UploadedFile> uploadedFiles;
 	
 	public enum PostStatus {
 		Y, N

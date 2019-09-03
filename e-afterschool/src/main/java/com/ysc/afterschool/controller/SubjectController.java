@@ -18,6 +18,7 @@ import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.domain.db.Student.TargetType;
 import com.ysc.afterschool.domain.db.Subject;
 import com.ysc.afterschool.domain.db.Subject.ApplyType;
+import com.ysc.afterschool.domain.db.Subject.GradeType;
 import com.ysc.afterschool.service.ApplyService;
 import com.ysc.afterschool.service.ApplyWaitService;
 import com.ysc.afterschool.service.InvitationService;
@@ -122,9 +123,16 @@ public class SubjectController {
 		} else if (subject.getFixedNumber() <= subject.getApplyNumber()) {
 			subject.setApplyType(ApplyType.FILL);
 		} else {
-			if (subject.getTargetType() == TargetType.전체 || subject.getTargetType() == TargetType.기초 
-					|| subject.getTargetType() == TargetType.심화) {
-				subject.setApplyType(ApplyType.NONE);
+			if (subject.getTargetType() == TargetType.전체) {
+				if (student.getTargetType() == TargetType.초등) {
+					if (subject.targetTrue(subject.getGradeType(), student.getGrade())) {
+						subject.setApplyType(ApplyType.NONE);
+					} else {
+						subject.setApplyType(ApplyType.NOTAPPLY);
+					}
+				} else {
+					subject.setApplyType(ApplyType.NONE);
+				}
 			} else if (subject.getTargetType() == student.getTargetType()) {
 				if (subject.targetTrue(subject.getGradeType(), student.getGrade())) {
 					subject.setApplyType(ApplyType.NONE);
@@ -139,7 +147,7 @@ public class SubjectController {
 	}
 	
 	/**
-	 * 과목정보 및 과목특정 화면
+	 * 과목정보 및 과목특징 화면
 	 * @param model
 	 * @param infoId
 	 * @param id
@@ -151,7 +159,15 @@ public class SubjectController {
 		model.addAttribute("infoId", infoId);
 		
 		Subject subject = subjectService.get(id);
-		subject.setTarget(subject.getTargetType().getName() + " " + subject.getGradeType().getName());
+		if (subject.getTargetType() == TargetType.전체) {
+			if (subject.getGradeType() == GradeType.초_3_6_중등) {
+				subject.setTarget(subject.getGradeType().getName());
+			} else {
+				subject.setTarget("전체");
+			}
+		} else {
+			subject.setTarget(subject.getTargetType().getName() + " " + subject.getGradeType().getName());
+		}
 		model.addAttribute("subject", subject);
 	}
 }

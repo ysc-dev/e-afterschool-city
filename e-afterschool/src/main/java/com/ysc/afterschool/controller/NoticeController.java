@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import javax.servlet.http.Cookie;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -57,5 +59,15 @@ public class NoticeController {
 		
 		notice.setHit(notice.getHit() + 1);
 		noticeService.update(notice);
+	}
+	
+	/**
+	 * 공지사항 첨부파일 가져오기
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("get")
+	public ResponseEntity<?> getFile(int id) {
+		return new ResponseEntity<>(noticeService.get(id), HttpStatus.OK);
 	}
 }

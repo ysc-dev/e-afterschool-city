@@ -11,6 +11,13 @@
     padding-top: 2px;
     padding-bottom: 2px;
 }
+
+@media (max-width: 576px) {
+	.long-label {
+	    margin-left: 1.25rem!important;
+	    padding-bottom: .3125rem!important;
+	}
+}
 </style>
  
 <div class="content">
@@ -29,7 +36,7 @@
 	    	</div>
 	    	<div>
 	    		<label class="col-form-label text-primary font-weight-bold"><i class="icon-arrow-right13 mr-1"></i>수업일시 : </label>
-	    		<label class="col-form-label ml-1">${subject.week} (${subject.time})</label>
+	    		<label class="col-form-label ml-1 long-label">${subject.week} (${subject.time})</label>
 	    	</div>
 	    	<div>
 	    		<label class="col-form-label text-primary font-weight-bold"><i class="icon-arrow-right13 mr-1"></i>대상학년 : </label>
@@ -45,11 +52,11 @@
 	    	</div>
 	    	<div class="align-items-stretch">
 	    		<label class="col-form-label text-primary font-weight-bold pb-0"><i class="icon-arrow-right13 mr-1"></i>수업장소 : </label>
-	    		<label class="col-form-label ml-3 pt-1">${subject.location}</label>
+	    		<label class="col-form-label ml-1 long-label">${subject.location}</label>
 	    	</div>
 	    	<div class="align-items-stretch">
 	    		<label class="col-form-label text-primary font-weight-bold pb-0"><i class="icon-arrow-right13 mr-1"></i>과목특징 : </label>
-	    		<label class="col-form-label ml-3 pt-1">${subject.description}</label>
+	    		<label class="col-form-label ml-1 long-label">${subject.description}</label>
 	    	</div>
 		</div>
 	</div>

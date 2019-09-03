@@ -16,7 +16,6 @@
 			<tr class="bg-info-600">
 				<th>번호</th> 
 				<th>제목</th>
-				<th>파일</th>
 				<th>등록일</th>
 			</tr>
 		</thead>
@@ -28,25 +27,41 @@
 						<a href="${pageContext.request.contextPath}/notice/detail?infoId=${infoId}&noticeId=${notice.id}" 
 							class="text-primary font-weight-bold">${notice.title}</a>
 					</td>
-					<td class="font-size-sm"></td>
 					<td class="font-size-sm">
 						<fmt:parseDate value="${notice.createDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime"  />
 						<fmt:formatDate pattern="yyyy년 M월 d일" value="${parsedDateTime}" />
 					</td>
-				</tr>
+				</tr> 
 			</c:forEach>
 		</tbody>
 	</table>
 </div>
 
+<!-- 이미지 모달창 -->
+<div id="imageModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title">
+                    <i class="icon-images2 mr-2"></i>공지사항 첨부파일
+                </h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body image-modal-body text-center">
+               <div id="image-viewer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
 $("#noticeTable").DataTable({
 	pageLength: 10,
 	order: [[0, 'asc']],
-	columns: [
+	columns: [ 
 	{ width: "12%" },
-	{ width: "55%" },
-	{ width: "15%" },
-	{ width: "18%" }],
+	{ width: "65%" },
+	{ width: "23%" }],
 });
 </script>
