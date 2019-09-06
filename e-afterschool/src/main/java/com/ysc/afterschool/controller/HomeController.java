@@ -1,5 +1,7 @@
 package com.ysc.afterschool.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.Cookie;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ysc.afterschool.domain.db.City;
 import com.ysc.afterschool.service.CityService;
+import com.ysc.afterschool.service.SmsService;
 
 /**
  * 인트로 화면 및 홈 화면
@@ -24,6 +27,9 @@ public class HomeController {
 	
 	@Autowired
 	private CityService cityService;
+	
+	@Autowired
+	private SmsService smsService;
 	
 	@GetMapping("/{link}")
 	public String index(@PathVariable String link) {
@@ -58,5 +64,11 @@ public class HomeController {
 		model.addAttribute("cityId", cityId);
 		
 		return "login";
+	}
+	
+	@GetMapping("send")
+	public String send() throws IOException {
+		smsService.send("010-4613-1202");
+		return "home";
 	}
 }

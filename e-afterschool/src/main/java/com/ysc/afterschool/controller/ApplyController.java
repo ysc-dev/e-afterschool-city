@@ -1,5 +1,6 @@
 package com.ysc.afterschool.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.ysc.afterschool.domain.db.Subject;
 import com.ysc.afterschool.domain.db.Apply.OrderType;
 import com.ysc.afterschool.service.ApplyService;
 import com.ysc.afterschool.service.ApplyWaitService;
+import com.ysc.afterschool.service.SmsService;
 import com.ysc.afterschool.service.SubjectService;
 
 @Controller
@@ -32,6 +34,9 @@ public class ApplyController {
 	
 	@Autowired
 	private SubjectService subjectService;
+	
+	@Autowired
+	private SmsService smsService;
 	
 	/**
 	 * 수강 신청 기능
@@ -118,12 +123,11 @@ public class ApplyController {
 				
 				if (applyService.regist(new Apply(applyWait.getInvitationId(), applyWait.getStudent(), subject))) {
 					if (applyWaitService.delete(applyWait.getId())) {
-						/***
-						  형준이형 이 부분에 문자 서비스 넣어주세요!!!
-						
-						
-						
-						***/
+//						try {
+//							smsService.send(apply.getStudent().getTel());
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						}
 						return new ResponseEntity<>(HttpStatus.OK);
 					}
 				}
