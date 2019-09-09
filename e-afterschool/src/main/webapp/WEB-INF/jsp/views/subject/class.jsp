@@ -25,8 +25,7 @@
 						<td class="font-size-sm font-weight-bold">${content.content}</td>
 						<td class="font-size-sm">
 							<button type="button" class="btn btn-outline bg-primary text-primary-600 btn-sm font-weight-bold" 
-								onClick="imageModal(${content.id})">첨부파일</button>
-								<!-- <i class="icon-images2"></i> -->
+								onClick="imageModal(${content.id})">사진/동영상</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -36,7 +35,7 @@
 </div>
 
 <!-- 모달창 -->
-<div id="imageModal" class="modal fade" role="dialog">
+<div id="fileModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header modal-header-sm bg-info">
@@ -45,8 +44,8 @@
                 </h6>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body">
-               <div id="image-viewer"></div>
+            <div class="modal-body file-modal-body text-center">
+               <div id="file-viewer"></div>
             </div>
         </div>
     </div>
@@ -59,22 +58,39 @@ $("#contentTable").DataTable({
 	columns: [
 	{ width: "10%" },
 	{ width: "70%" },
-	{ width: "20%" }],
+	{ width: "12%" }],
 });
 
 function imageModal(id) {
-	$("#image-viewer").empty();
+	$("#file-viewer").empty();
 	
 	$.ajax({
         url: contextPath + "/subject/class/file/get",
         type: "GET",
         data: {"id" : id},
         success : function(response) {
-	        response.uploadedFiles.forEach(function(file, index) {
-				var imageContent = `<img src="data:\${file.fileContentType};base64,\${file.content}" class="img-fluid"/>`;
-		        $("#image-viewer").append(imageContent);
+	        response.forEach(function(file, index) {
+				if (file.fileType == 'IMAGE') {
+					var img = document.createElement("img");
+		        	img.setAttribute("src", "data:" + file.contentType + ";base64," + file.content);
+		        	img.setAttribute("class", "img-fluid");
+			        $("#file-viewer").append(img);
+				} else {
+					var div = document.createElement("div");
+					div.setAttribute("class", "card-img embed-responsive embed-responsive-16by9");
+					var video = document.createElement("video");
+					video.setAttribute("class", "embed-responsive-item");
+					video.setAttribute("controls", "controls");
+					video.setAttribute("src", "data:" + file.contentType + ";base64," + file.content);
+					div.append(video);
+					
+					/* fileContent = `<div class="card-img embed-responsive embed-responsive-16by9">`
+						+ `<video class="embed-responsive-item" src="data:\${file.contentType};base64,\${file.content}" controls></video>`
+						+ `</div>`; */
+					$("#file-viewer").append(div);
+				}
             });
-        	$("#imageModal").modal();
+        	$("#fileModal").modal();
         }
     });
 }

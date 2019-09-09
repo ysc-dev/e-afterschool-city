@@ -36,12 +36,7 @@
 			</div>
 			<div class="image-content">
 				<label class="font-weight-bold">첨부파일 :</label>
-				<div class="image-file">
-				
-				</div>
-				<%-- <c:forEach var="file" items="${notice.uploadedFiles}">
-					<img src="data:${file.contentType};base64,${file.content}" class="img-fluid"/>
-				</c:forEach> --%>
+				<div class="image-file"></div>
 			</div>
 		</div>
 	</div>
@@ -56,7 +51,7 @@ $.ajax({
         console.log(response);
         response.uploadedFiles.forEach(function(file, index) {
         	var img = document.createElement("img");
-        	img.setAttribute("src", "data:" + file.fileContentType + ";base64," + file.content);
+        	img.setAttribute("src", "data:" + file.contentType + ";base64," + file.content);
         	img.setAttribute("class", "img-fluid");
 	        $(".image-file").append(img);
         });

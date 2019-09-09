@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ysc.afterschool.domain.db.Apply;
+import com.ysc.afterschool.domain.db.Apply.OrderType;
 import com.ysc.afterschool.domain.db.ApplyWait;
 import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.domain.db.Subject;
-import com.ysc.afterschool.domain.db.Apply.OrderType;
 import com.ysc.afterschool.service.ApplyService;
 import com.ysc.afterschool.service.ApplyWaitService;
 import com.ysc.afterschool.service.SmsService;
@@ -123,11 +123,11 @@ public class ApplyController {
 				
 				if (applyService.regist(new Apply(applyWait.getInvitationId(), applyWait.getStudent(), subject))) {
 					if (applyWaitService.delete(applyWait.getId())) {
-//						try {
-//							smsService.send(apply.getStudent().getTel());
-//						} catch (IOException e) {
-//							e.printStackTrace();
-//						}
+						try {
+							smsService.send(apply.getStudent().getTel());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 						return new ResponseEntity<>(HttpStatus.OK);
 					}
 				}

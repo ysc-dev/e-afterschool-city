@@ -40,26 +40,16 @@ public class ClassContents implements Domain {
 	
 	private int subjectId;
 	
+	@Column(nullable = false, length = 45)
+	private String userId;
+	
+	@Column(nullable = false, length = 100)
+	private String userName;
+	
 	@Lob
 	@NotNull
 	private String content;
 	
-	/** 파일 이름 */
-	@Column( length = 100)
-	private String fileName;
-
-	/** 파일 데이터 */
-	@Column(columnDefinition = "longblob")
-	private byte[] file;
-
-	/** 파일 확장자 */
-	@Column(length = 100)
-	private String contentType;
-	
 	@CreationTimestamp
 	private LocalDateTime createDate;
-	
-	@OneToMany(mappedBy = "classContents", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@Fetch(FetchMode.SUBSELECT)
-	private List<SubjectUploadedFile> uploadedFiles;
 }
