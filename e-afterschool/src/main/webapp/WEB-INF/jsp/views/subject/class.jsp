@@ -69,10 +69,10 @@ function imageModal(id) {
         type: "GET",
         data: {"id" : id},
         success : function(response) {
-	        response.forEach(function(file, index) {
+	        response.uploadedFiles.forEach(function(file, index) {
 				if (file.fileType == 'IMAGE') {
 					var img = document.createElement("img");
-		        	img.setAttribute("src", "data:" + file.contentType + ";base64," + file.content);
+		        	img.setAttribute("src", contextPath + "/uploads/class/" + file.fileName);
 		        	img.setAttribute("class", "img-fluid");
 			        $("#file-viewer").append(img);
 				} else {
@@ -81,7 +81,7 @@ function imageModal(id) {
 					var video = document.createElement("video");
 					video.setAttribute("class", "embed-responsive-item");
 					video.setAttribute("controls", "controls");
-					video.setAttribute("src", "data:" + file.contentType + ";base64," + file.content);
+					video.setAttribute("src", contextPath + "/uploads/class/" + file.fileName);
 					div.append(video);
 					
 					/* fileContent = `<div class="card-img embed-responsive embed-responsive-16by9">`

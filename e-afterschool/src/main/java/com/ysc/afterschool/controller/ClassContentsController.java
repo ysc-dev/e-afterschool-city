@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ysc.afterschool.service.ClassContentsService;
 import com.ysc.afterschool.service.SubjectService;
-import com.ysc.afterschool.service.SubjectUploadedFileService;
 
 @Controller
 @RequestMapping("subject/class")
@@ -25,9 +24,6 @@ public class ClassContentsController {
 	@Autowired
 	private ClassContentsService classContentsService;
 	
-	@Autowired
-	private SubjectUploadedFileService subjectUploadedFileService;
-
 	/**
 	 * 횟수별 수업내용 화면
 	 * @param model
@@ -45,6 +41,6 @@ public class ClassContentsController {
 	
 	@GetMapping("file/get")
 	public ResponseEntity<?> getFile(int id) {
-		return new ResponseEntity<>(subjectUploadedFileService.getList(id), HttpStatus.OK);
+		return new ResponseEntity<>(classContentsService.get(id), HttpStatus.OK);
 	}
 }

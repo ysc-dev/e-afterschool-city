@@ -52,4 +52,8 @@ public class ClassContents implements Domain {
 	
 	@CreationTimestamp
 	private LocalDateTime createDate;
+	
+	@OneToMany(mappedBy = "classContents", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
+	private List<SubjectUploadedFile> uploadedFiles;
 }

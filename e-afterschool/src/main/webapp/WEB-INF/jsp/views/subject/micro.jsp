@@ -64,7 +64,7 @@
 	 					<button type="button" class="btn btn-small-box bg-danger-600" disabled="disabled"><span>신 청 불 가</span></button>
 	  				</c:when>
 	  				<c:when test="${subject.applyType == 'FILL'}">
-				       <button type="button" class="btn btn-small-box bg-orange-600" onclick="applyWait(${subject.id})"><span>정 원 초 과</span></button>
+				       <button type="button" class="btn btn-small-box bg-orange-600" onclick="applyWait(${subject.id})"><span>대 기 신 청</span></button>
 				    </c:when>
 	  				<c:when test="${subject.applyType == 'WAITING'}">
 				       <button type="button" class="btn btn-small-box bg-warning-600" disabled="disabled"><span>대기인원 초과</span></button>
