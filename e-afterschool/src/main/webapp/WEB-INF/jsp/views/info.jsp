@@ -102,7 +102,6 @@ function showInfo(id) {
 
 function applyClick(id) {
 	var student = "${student}";
-	console.log(student);
 	if (student) {
 		location.href = contextPath + "/subject/group?infoId=" + id;
 	} else {

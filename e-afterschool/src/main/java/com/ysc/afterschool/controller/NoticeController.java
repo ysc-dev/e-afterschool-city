@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ysc.afterschool.domain.db.Notice;
+import com.ysc.afterschool.repository.UploadedFileRepository;
 import com.ysc.afterschool.service.NoticeService;
 
 /**
@@ -28,6 +29,9 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
+	@Autowired
+	private UploadedFileRepository uploadedFileRepository;
 	
 	/**
 	 * 전체 공지사항 화면
@@ -62,12 +66,22 @@ public class NoticeController {
 	}
 	
 	/**
-	 * 공지사항 첨부파일 가져오기
+	 * 공지사항 정보 가져오기
 	 * @param id
 	 * @return
 	 */
 	@GetMapping("get")
-	public ResponseEntity<?> getFile(int id) {
+	public ResponseEntity<?> get(int id) {
 		return new ResponseEntity<>(noticeService.get(id), HttpStatus.OK);
+	}
+	
+	/**
+	 * 공지사항 정보 가져오기
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("get/file")
+	public ResponseEntity<?> getFile(int id) {
+		return new ResponseEntity<>(uploadedFileRepository.findById(id).get(), HttpStatus.OK);
 	}
 }

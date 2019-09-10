@@ -36,6 +36,7 @@
 			</div>
 			<div class="image-content">
 				<label class="font-weight-bold">첨부파일 :</label>
+				<div id="fileInfo" class=""></div>
 				<div class="image-file"></div>
 			</div>
 		</div>
@@ -43,18 +44,97 @@
 </div>
 
 <script>
+var agent = navigator.userAgent.toLowerCase();
+function checkIE() {
+	if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 $.ajax({
     url: contextPath + "/notice/get",
     type: "GET",
     data: {"id" : '${notice.id}'},
     success : function(response) {
-        console.log(response);
-        response.uploadedFiles.forEach(function(file, index) {
+    	$.each(response.uploadedFiles, function(index, file) {
+    		var element = '<a href="#" class="" onclick="fileDownload(' + file.id + ')">' + (index + 1) + ') ' + file.fileName + '</a><br>';
+		  	$("#fileInfo").append(element);
+        	
+        	var a = document.createElement("a");
+        	a.setAttribute("href", "data:" + file.contentType + ";base64," + file.content);
+        	//aTag.setAttribute("onclick", "fileDownload(" + file.id + ")");
+        	a.setAttribute("download", "download");
+            
         	var img = document.createElement("img");
         	img.setAttribute("src", "data:" + file.contentType + ";base64," + file.content);
         	img.setAttribute("class", "img-fluid");
-	        $(".image-file").append(img);
+        	a.appendChild(img);
+        	
+	        $(".image-file").append(a);
         });
     }
 });
+
+function fileDownload(id) {
+	if (checkIE()) {
+		var result = confirm("다운로드 하시겠습니까?");
+		if (result) {
+			$.ajax({
+		  		url: contextPath + "/notice/get/file",
+		  		data: {"id": id},
+		  		type: "get",
+		  		dataType: "json",
+		  		success: function(response) {
+		  			var file = base64ToArrayBuffer(response.content);
+		  			var fileURL = window.URL.createObjectURL(new Blob([file]));
+	  		 	 	window.navigator.msSaveBlob(new Blob([file]), response.fileName);
+		 		}
+			});
+		} 
+	} else {
+		swal({
+	        title: "다운로드 하시겠습니까?",
+	        type: "question",
+	        confirmButtonText: "확인",
+	        confirmButtonClass: "btn btn-info",
+	        showCancelButton: true, 
+	        cancelButtonText: "닫기",
+	        position: "top"
+	    }).then(function(e) {
+	    	if (e.value) {
+	    		$.ajax({
+	    	  		url: contextPath + "/notice/get/file",
+	    	  		data: {"id": id},
+	    	  		type: "get",
+	    	  		dataType: "json",
+	    	  		success: function(response) {
+	    	  			var file = base64ToArrayBuffer(response.content);
+        	  		   	var a = document.createElement('a');
+        	  		   	a.href = window.URL.createObjectURL(new Blob([file]));
+        	  		   	a.download = response.fileName;
+        	  		   	// Firefox에서 다운로드 안되는 문제 수정용 코드
+        	  		   	// (Firefox는 a가 화면에 실존할 때만 다운로드 가능)
+        	  		   	document.body.appendChild(a);
+        	  		   	a.click();
+        	  		   	document.body.removeChild(a); 
+	    	 		}
+	    		});
+	    	}
+	    });
+	}
+}
+
+/** 버퍼 변환 */
+function base64ToArrayBuffer(base64) {
+    var binaryString = window.atob(base64);
+    var binaryLen = binaryString.length;
+    var bytes = new Uint8Array(binaryLen);
+    for (var i = 0; i < binaryLen; i++) {
+       var ascii = binaryString.charCodeAt(i);
+       bytes[i] = ascii;
+    }
+    return bytes;
+}
 </script>

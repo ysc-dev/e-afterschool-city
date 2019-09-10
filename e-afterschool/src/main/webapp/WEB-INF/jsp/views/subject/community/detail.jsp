@@ -145,10 +145,29 @@ function updateBtnClick(id) {
 	});
 }
 
+function updateComment(id) {
+	var content = $("#updateInput_" + id).val();
+	if (content) {
+		$.ajax({
+      		url: contextPath + "/comment/update",
+      		data: {"id": id, "content": content},
+      		type: "PUT",
+      		success: function(response) {
+      			location.reload();
+     		},
+            error: function(response) {
+            	swal({title: "댓글 수정을 실패하였습니다.", type: "error"})
+            }
+		});
+	} else {
+		swal({title: "댓글 내용을 입력하세요.", type: "warning"});
+	}
+}
+
 function cancel(id) {
 	$("#content_" + id).removeClass("d-none");
 	$("#update_" + id).addClass("d-none");
-	$("#updateInput_" + id).val("")
+	$("#updateInput_" + id).val("");
 }
 
 function deleteComment(id) {
@@ -192,25 +211,6 @@ function deleteCommentClick(id) {
 	}
 }
 
-function deleteNotice(id) {
-	$.ajax({
-		url: contextPath + "/subject/community/delete",
-		type: "DELETE",
-		data: {"id": id},
-		success: function(response) {
-			swal({
-   				title: "글이 삭제 되었습니다.", 
-   				type: "success"
-   			}).then(function(e) {
-   				location.replace(contextPath + "/subject/community/list?infoId=${infoId}&id=${subjectId}");
-   			});
-       	},
-        error: function(response) {
-        	swal({title: "글 삭제를 실패하였습니다.", type: "error"})
-        }
-	}); 
-}
-
 /** 공지사항 삭제 버튼 클릭 시 */
 function deleteNoticeClick(id) {
 	if (checkIE()) {
@@ -232,5 +232,24 @@ function deleteNoticeClick(id) {
 	    	}
 	    });
 	}
+}
+
+function deleteNotice(id) {
+	$.ajax({
+		url: contextPath + "/subject/community/delete",
+		type: "DELETE",
+		data: {"id": id},
+		success: function(response) {
+			swal({
+   				title: "글이 삭제 되었습니다.", 
+   				type: "success"
+   			}).then(function(e) {
+   				location.replace(contextPath + "/subject/community/list?infoId=${infoId}&id=${subjectId}");
+   			});
+       	},
+        error: function(response) {
+        	swal({title: "글 삭제를 실패하였습니다.", type: "error"})
+        }
+	}); 
 }
 </script>
