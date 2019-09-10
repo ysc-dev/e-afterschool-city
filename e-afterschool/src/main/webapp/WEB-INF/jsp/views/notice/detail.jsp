@@ -36,7 +36,6 @@
 			</div>
 			<div class="image-content">
 				<label class="font-weight-bold">첨부파일 :</label>
-				<div id="fileInfo" class=""></div>
 				<div class="image-file"></div>
 			</div>
 		</div>
@@ -59,13 +58,10 @@ $.ajax({
     data: {"id" : '${notice.id}'},
     success : function(response) {
     	$.each(response.uploadedFiles, function(index, file) {
-    		var element = '<a href="#" class="" onclick="fileDownload(' + file.id + ')">' + (index + 1) + ') ' + file.fileName + '</a><br>';
-		  	$("#fileInfo").append(element);
-        	
         	var a = document.createElement("a");
-        	a.setAttribute("href", "data:" + file.contentType + ";base64," + file.content);
-        	//aTag.setAttribute("onclick", "fileDownload(" + file.id + ")");
-        	a.setAttribute("download", "download");
+        	a.setAttribute("href", "#");
+        	a.setAttribute("onclick", "fileDownload(" + file.id + ")");
+        	//a.setAttribute("download", "download");
             
         	var img = document.createElement("img");
         	img.setAttribute("src", "data:" + file.contentType + ";base64," + file.content);

@@ -29,8 +29,9 @@ public class SmsService {
 	private String tokenType;
 	private String token = "ysc2019:";
 	
-	private final String message = "캠퍼스형방과후학교-대기신청하신 과목의 수강등록이 완료되었습니다. 수강을 원하지않으시면 취소신청을 꼭 해주시기바랍니다.";
-	private final String callback = "0552870513"; //0552740518
+	//private final String message = "캠퍼스형방과후학교-대기신청하신 과목의 수강등록이 완료되었습니다. 수강을 원하지않으시면 취소신청을 꼭 해주시기바랍니다.";
+	private final String message = "캠퍼스형방과후 수강대기중인 과목의 수강이 승인되었습니다. 전화 연락 부탁드립니다.";
+	private final String callback = "0552740518"; //0552870513
 	
 	@PostConstruct
 	public void init() throws IOException {
@@ -72,6 +73,11 @@ public class SmsService {
 		}
 	}
 
+	/**
+	 * 메시지 전송
+	 * @param phone
+	 * @throws IOException
+	 */
 	public void send(String phone) throws IOException {
 		phone = phone.replaceAll("-", "");
 		

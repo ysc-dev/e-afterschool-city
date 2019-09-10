@@ -89,12 +89,11 @@ function showInfo(id) {
         type: "GET",
         data: {"id" : id},
         success : function(response) {
-	        response.uploadedFiles.forEach(function(file, index) {
-	        	var img = document.createElement("img");
-	        	img.setAttribute("src", "data:" + file.contentType + ";base64," + file.content);
-	        	img.setAttribute("class", "img-fluid");
-		        $("#image-viewer").append(img);
-            });
+	        $.each(response.uploadedFiles, function(index, file){ 
+	        	var imageContent = '<img src="' + contextPath + '/uploads/invitation/' + file.fileName + '" class="img-fluid"/>';
+		        $("#image-viewer").append(imageContent);
+	        });
+            
         	$("#imageModal").modal();
         }
     });
