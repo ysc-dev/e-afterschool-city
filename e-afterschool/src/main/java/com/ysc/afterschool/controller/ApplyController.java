@@ -117,18 +117,20 @@ public class ApplyController {
 				}
 			} else { // 대기 인원이 있을 경우
 				List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
-				if (applies.size() == 2) {
-					return new ResponseEntity<String>("취소불가", HttpStatus.BAD_REQUEST);
-				}
-				
-				if (applyService.regist(new Apply(applyWait.getInvitationId(), applyWait.getStudent(), subject))) {
-					if (applyWaitService.delete(applyWait.getId())) {
-						try {
-							smsService.send(apply.getStudent().getTel());
-						} catch (IOException e) {
-							e.printStackTrace();
+				if (applies.size() < 3) { // 수강신청 한 과목이 두개가 아닐 경우
+					if (applyService.regist(new Apply(applyWait.getInvitationId(), applyWait.getStudent(), subject))) {
+						if (applyWaitService.delete(applyWait.getId())) {
+							subject.setWaitingNumber(subject.getWaitingNumber() - 1);
+							if (subjectService.update(subject)) {
+								try {
+									smsService.send(applyWait.getStudent().getTel());
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+								
+								return new ResponseEntity<>(HttpStatus.OK);
+							}
 						}
-						return new ResponseEntity<>(HttpStatus.OK);
 					}
 				}
 			}
