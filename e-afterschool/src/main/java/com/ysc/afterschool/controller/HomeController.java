@@ -31,8 +31,13 @@ public class HomeController {
 	@Autowired
 	private SmsService smsService;
 	
+	@GetMapping("/")
+	public String index() {
+		return "redirect:ch";
+	}
+	
 	@GetMapping("/{link}")
-	public String index(@PathVariable String link) {
+	public String link(@PathVariable String link) {
 		City city = cityService.get(link);
 		if (city != null) {
 			return "redirect:home/" + city.getId();
