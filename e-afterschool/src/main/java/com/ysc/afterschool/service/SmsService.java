@@ -2,8 +2,6 @@ package com.ysc.afterschool.service;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.commons.codec.binary.Base64;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -17,12 +15,15 @@ import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.internal.http.RealResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 가비아 문자 API 연동 서비스
  * 
  * @author hgko
  *
  */
+@Slf4j
 @Service
 public class SmsService {
 	
@@ -33,7 +34,6 @@ public class SmsService {
 	private final String message = "캠퍼스형방과후 수강대기중인 과목의 수강이 승인되었습니다. 전화 연락 부탁드립니다.";
 	private final String callback = "0552740518"; //0552870513
 	
-	@PostConstruct
 	public void init() throws IOException {
 		String text = "ysc2019:505e4c6d61dbe9dbf93e0f8861dc2c5d";
 		byte[] encodedBytes = Base64.encodeBase64(text.getBytes());
@@ -42,8 +42,6 @@ public class SmsService {
 		//byte[] decodedBytes = Base64.decodeBase64(encodedBytes); 
 //		System.out.println("인코딩 전 : " + text); 
 //		System.out.println("인코딩 text : " + new String(encodedBytes));
-
-		OkHttpClient client = new OkHttpClient();
 
 		MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
 		RequestBody body = RequestBody.create(mediaType, "grant_type=client_credentials");
@@ -55,7 +53,9 @@ public class SmsService {
 		.addHeader("cache-control", "no-cache")
 		.build();
 
+		OkHttpClient client = new OkHttpClient();
 		Response response = client.newCall(request).execute();
+		log.debug("init response : " + response.toString());
 		if (response.isSuccessful()) {
 			RealResponseBody result = (RealResponseBody) response.body();
 			try {
@@ -79,9 +79,9 @@ public class SmsService {
 	 * @throws IOException
 	 */
 	public void send(String phone) throws IOException {
-		phone = phone.replaceAll("-", "");
+		init();
 		
-		OkHttpClient client = new OkHttpClient();
+		phone = phone.replaceAll("-", "");
 
 		MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
 		RequestBody body = RequestBody.create(mediaType, "phone=" + phone + "&callback=" + callback + "&message=" + message + "&refkey=12132214");
@@ -90,10 +90,13 @@ public class SmsService {
 		.post(body)
 		.addHeader("Content-Type", "application/x-www-form-urlencoded")
 		.addHeader("Authorization", tokenType + " " + new String(Base64.encodeBase64(token.getBytes())))
+		.addHeader("cache-control", "no-cache")
 		.build();
 
+		OkHttpClient client = new OkHttpClient();
 		Response response = client.newCall(request).execute();
 		System.err.println("response : " + response.toString());
+		log.debug("send response : " + response.toString());
 	}
 	
 }

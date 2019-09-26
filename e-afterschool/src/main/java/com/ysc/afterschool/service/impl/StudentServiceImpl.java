@@ -62,11 +62,18 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public boolean search(Student student) {
-		return studentRepository.findByNameAndTel(student.getName(), student.getService() + "-" + student.getTel()) != null;
+		String tel = student.getTel();
+		if (!tel.contains("-")) {
+			tel = tel.substring(0, 4) + "-" + tel.substring(4, tel.length());
+		}
+		return studentRepository.findByNameAndTel(student.getName(), student.getService() + "-" + tel) != null;
 	}
 
 	@Override
 	public Student login(String name, String tel) {
+		if (!tel.contains("-")) {
+			tel = tel.substring(0, 3) + "-" + tel.substring(3, 7) + "-" + tel.substring(7, tel.length());
+		}
 		return studentRepository.findByNameAndTel(name, tel);
 	}
 }

@@ -78,7 +78,14 @@ public class StudentController {
 	@ResponseBody
 	public ResponseEntity<?> regist(Student student) {
 		String school = student.getSchool();
-		student.setTel(student.getService() + "-" + student.getTel());
+		
+		if (!student.getTel().contains("-")) {
+			String tel = student.getTel();
+			tel = tel.substring(0, 4) + "-" + tel.substring(4, tel.length());
+			student.setTel(student.getService() + "-" + tel);
+		} else {
+			student.setTel(student.getService() + "-" + student.getTel());
+		}
 		student.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
 		
 		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);

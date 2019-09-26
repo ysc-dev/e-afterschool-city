@@ -34,7 +34,7 @@
 								<a href="#" class="text-shadow font-weight-bold" onclick="applyClick(${invitation.id})">${invitation.type.name}</a>
 							</c:when>
 							<c:otherwise>
-								<a href="#" class="text-warning-400" onclick="deadlineClick()">${invitation.type.name}</a>
+								<a href="#" class="text-warning-400" onclick="deadlineClick(${invitation.id})">${invitation.type.name}</a>
 							</c:otherwise>
 						</c:choose>
 					</td>
@@ -113,11 +113,24 @@ function applyClick(id) {
 	}
 }
 
-function deadlineClick() {
-	if (checkIE()) {
+function deadlineClick(id) {
+	var student = "${student}";
+	console.log(student);
+	if (student) {
+		location.href = contextPath + "/subject/group?infoId=" + id;
+	} else {
+		if (checkIE()) {
+			alert("로그인 한 후에 확인 할 수 있습니다.");
+		} else {
+			swal({ title: "로그인 한 후에 확인 할 수 있습니다.", type: "warning", position: 'top' });
+		}
+		return;
+	}
+	
+	/* if (checkIE()) {
 		alert("추가접수 문의는 274–0518");
 	} else {
 		swal({title: "추가접수 문의는 274–0518", type: "info", position: 'top'});
-	}
+	} */
 }
 </script>

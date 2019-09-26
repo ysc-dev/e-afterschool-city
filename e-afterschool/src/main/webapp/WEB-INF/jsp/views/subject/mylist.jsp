@@ -4,7 +4,7 @@
 <link href="${pageContext.request.contextPath}/css/subject.css" rel="stylesheet" type="text/css">
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
-  	<c:param name="left" value="subject/group?infoId=${infoId}" />
+  	<c:param name="left" value="subject/group?infoId=${invitation.id}" />
   	<c:param name="home" value="info?cityId=${cityId}" />
 </c:import>
 
@@ -31,7 +31,14 @@
 								</a>
 							</h6>
 							<div class="header-elements mylist-header">
-								<button type="button" class="btn btn-danger btn-sm" onclick="applyCancel(${apply.id})">신청취소</button>
+								<c:choose>
+									<c:when test="${invitation.type.id == 2}">
+										<button type="button" class="btn btn-danger btn-sm" onclick="applyCancel(${apply.id})">신청취소</button>
+									</c:when>
+									<c:otherwise>
+										<button type="button" class="btn btn-danger btn-sm" disabled>신청취소</button>
+									</c:otherwise>
+								</c:choose>
 				           	</div>
 						</div>
 				

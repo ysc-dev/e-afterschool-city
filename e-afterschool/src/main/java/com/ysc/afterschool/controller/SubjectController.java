@@ -73,7 +73,7 @@ public class SubjectController {
 	public void mylist(Model model, int infoId, Authentication authentication, 
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 		model.addAttribute("cityId", cookie.getValue());
-		model.addAttribute("infoId", infoId);
+		model.addAttribute("invitation", invitationService.get(infoId));
 		
 		Student student = (Student) authentication.getPrincipal();
 		List<Apply> applies = applyService.getList(infoId, student.getId()).stream().map(data -> {
@@ -109,7 +109,7 @@ public class SubjectController {
 	public void micro(Model model, int infoId, int id, Authentication authentication, 
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 		model.addAttribute("cityId", cookie.getValue());
-		model.addAttribute("infoId", infoId);
+		model.addAttribute("invitation", invitationService.get(infoId));
 		
 		Student student = (Student) authentication.getPrincipal();
 		

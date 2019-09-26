@@ -4,7 +4,7 @@
 <link href="${pageContext.request.contextPath}/css/box.css" rel="stylesheet" type="text/css">
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
-  	<c:param name="left" value="subject/group?infoId=${infoId}" />
+  	<c:param name="left" value="subject/group?infoId=${invitation.id}" />
   	<c:param name="home" value="info?cityId=${cityId}" />
 </c:import>
 
@@ -52,26 +52,32 @@
 						</div>
 					</div>
 				</div>
-				
 				<c:choose>
-					<c:when test="${subject.applyType == 'APPLY'}">
-				       <button type="button" class="btn btn-small-box bg-info-600" disabled="disabled"><span>신 청 완 료</span></button>
-				    </c:when>
-				    <c:when test="${subject.applyType == 'APPLYWAIT'}">
-				       <button type="button" class="btn btn-small-box bg-info-600" disabled="disabled"><span>신청 대기 중</span></button>
-				    </c:when>
-	  				<c:when test="${subject.applyType == 'NOTAPPLY'}">
-	 					<button type="button" class="btn btn-small-box bg-danger-600" disabled="disabled"><span>신 청 불 가</span></button>
-	  				</c:when>
-	  				<c:when test="${subject.applyType == 'FILL'}">
-				       <button type="button" class="btn btn-small-box bg-orange-600" onclick="applyWait(${subject.id})"><span>대 기 신 청</span></button>
-				    </c:when>
-	  				<c:when test="${subject.applyType == 'WAITING'}">
-				       <button type="button" class="btn btn-small-box bg-warning-600" disabled="disabled"><span>대기인원 초과</span></button>
-				    </c:when>
-	 				<c:otherwise>
-	 					<button type="button" class="btn btn-small-box bg-info-600" onclick="apply(${subject.id})"><span>신 청 하 기</span></button>
-	 				</c:otherwise>
+					<c:when test="${invitation.type.id == 2}">
+						<c:choose>
+							<c:when test="${subject.applyType == 'APPLY'}">
+						       <button type="button" class="btn btn-small-box bg-info-600" disabled="disabled"><span>신 청 완 료</span></button>
+						    </c:when>
+						    <c:when test="${subject.applyType == 'APPLYWAIT'}">
+						       <button type="button" class="btn btn-small-box bg-info-600" disabled="disabled"><span>신청 대기 중</span></button>
+						    </c:when>
+			  				<c:when test="${subject.applyType == 'NOTAPPLY'}">
+			 					<button type="button" class="btn btn-small-box bg-danger-600" disabled="disabled"><span>신 청 불 가</span></button>
+			  				</c:when>
+			  				<c:when test="${subject.applyType == 'FILL'}">
+						       <button type="button" class="btn btn-small-box bg-orange-600" onclick="applyWait(${subject.id})"><span>대 기 신 청</span></button>
+						    </c:when>
+			  				<c:when test="${subject.applyType == 'WAITING'}">
+						       <button type="button" class="btn btn-small-box bg-warning-600" disabled="disabled"><span>대기인원 초과</span></button>
+						    </c:when>
+			 				<c:otherwise>
+			 					<button type="button" class="btn btn-small-box bg-info-600" onclick="apply(${subject.id})"><span>신 청 하 기</span></button>
+			 				</c:otherwise>
+						</c:choose>
+					</c:when>
+					<c:otherwise>
+						<button type="button" class="btn btn-small-box bg-info-600" disabled><span>신 청 완 료</span></button>
+					</c:otherwise>
 				</c:choose>
 			</div>
 		</div>
@@ -89,21 +95,21 @@ function checkIE() {
 }
 
 $("#subjectInfoBtn").click(function() {
-	location.href = contextPath + "/subject/info?infoId=${infoId}&id=${subject.id}";
+	location.href = contextPath + "/subject/info?infoId=${invitation.id}&id=${subject.id}";
 });
 
 $("#communityBtn").click(function() {
-	location.href = contextPath + "/subject/community/list?infoId=${infoId}&id=${subject.id}";
+	location.href = contextPath + "/subject/community/list?infoId=${invitation.id}&id=${subject.id}";
 });
 
 $("#classContentsBtn").click(function() {
-	location.href = contextPath + "/subject/class?infoId=${infoId}&id=${subject.id}";
+	location.href = contextPath + "/subject/class?infoId=${invitation.id}&id=${subject.id}";
 });
 
 function registWait(subjectId) {
 	$.ajax({
 		url: contextPath + "/apply/wait/regist",
-  		data: {"infoId": ${infoId}, "subjectId": subjectId},
+  		data: {"infoId": ${invitation.id}, "subjectId": subjectId},
   		type: "POST",
        	success: function(response) {
        		location.reload();
@@ -144,7 +150,7 @@ function commonWait(subjectId) {
 function apply(subjectId) {
 	$.ajax({
 		url: contextPath + "/apply/regist",
-  		data: {"infoId": ${infoId}, "subjectId": subjectId},
+  		data: {"infoId": ${invitation.id}, "subjectId": subjectId},
   		type: "POST",
        	success: function(response) {
        		if (checkIE()) {
@@ -181,7 +187,6 @@ function apply(subjectId) {
 	    cancelButtonText: "닫기",
 	    position: "top"
 	}).then(function(e) {
-		
 	}); */
 }
 

@@ -168,6 +168,7 @@ var isSubmitted = false;
 
 $("#studentRegistForm").submit(function(e) {
 	e.preventDefault();
+	$("#registBtn").prop("disabled", true);
 	
 	// 한번 등록 버튼을 클릭 시 중복으로 클릭이 안되도록
 	if (isSubmitted) { 
@@ -185,6 +186,7 @@ $("#studentRegistForm").submit(function(e) {
 		if ($("#jumin1").val() == '' || $("#jumin2").val() == '') {
 			$("#jumin1").focus();
 			isSubmitted = false;
+			$("#registBtn").prop("disabled", false);
 			return;
 		}
 		
@@ -195,6 +197,7 @@ $("#studentRegistForm").submit(function(e) {
 				swal({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
 			}
 			isSubmitted = false;
+			$("#registBtn").prop("disabled", false);
 			return;
 		}
 		
@@ -210,6 +213,7 @@ $("#studentRegistForm").submit(function(e) {
 						swal({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
 					}
 					isSubmitted = false;
+					$("#registBtn").prop("disabled", false);
 				} else {
 					registStudent(student, url);
 				}
@@ -233,6 +237,7 @@ function registStudent(student, url) {
 					swal({title: "이미 등록된 학생 정보입니다.", type: "warning", position: 'top', confirmButtonClass: 'btn btn-warning',});
 				}
        			isSubmitted = false;
+       			$("#registBtn").prop("disabled", false);
        		} else {
        			$.ajax({
        				type: "POST",
@@ -258,6 +263,7 @@ function registStudent(student, url) {
        	            		swal({title: "학생 등록을 실패하였습니다.", type: "error", position: 'top'});
        	            	}
        	            	isSubmitted = false;
+       	            	$("#registBtn").prop("disabled", false);
        	            }
        			});
        		}
