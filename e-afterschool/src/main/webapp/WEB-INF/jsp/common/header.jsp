@@ -6,6 +6,9 @@
 		<a href="#" class="d-inline-block">
 			<img src="${pageContext.request.contextPath}/images/logo.png" alt="logo">
 		</a>
+		<a href="#" class="d-inline-block ml-1">
+			<img src="${pageContext.request.contextPath}/images/logo2.png" alt="logo">
+		</a>
 	</div>
 	
 	<div class="ml-auto d-flex align-items-center">
