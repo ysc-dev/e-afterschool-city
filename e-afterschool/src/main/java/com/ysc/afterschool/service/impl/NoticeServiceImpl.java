@@ -61,6 +61,6 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public List<Notice> getList(int cityId) {
-		return noticeRepository.findByCity(cityService.get(cityId).getName());
+		return noticeRepository.findByCityOrderByCreateDateDesc(cityService.get(cityId).getName());
 	}
 }

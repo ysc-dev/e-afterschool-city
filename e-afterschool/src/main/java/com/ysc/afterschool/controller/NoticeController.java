@@ -59,7 +59,7 @@ public class NoticeController {
 		
 		Notice notice = noticeService.get(noticeId);
 		model.addAttribute("notice", notice);
-		model.addAttribute("localDateTimeFormat", new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss"));
+		model.addAttribute("localDateTimeFormat", new SimpleDateFormat("yyyy-MM-dd'T'hh:mm"));
 		
 		notice.setHit(notice.getHit() + 1);
 		noticeService.update(notice);

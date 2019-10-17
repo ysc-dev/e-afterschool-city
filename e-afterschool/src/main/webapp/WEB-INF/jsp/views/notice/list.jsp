@@ -28,7 +28,7 @@
 							class="text-primary font-weight-bold">${notice.title}</a>
 					</td>
 					<td class="font-size-sm">
-						<fmt:parseDate value="${notice.createDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime"  />
+						<fmt:parseDate dateStyle="full" value="${notice.createDate}" pattern="yyyy-MM-dd" var="parsedDateTime"  />
 						<fmt:formatDate pattern="yyyy년 M월 d일" value="${parsedDateTime}" />
 					</td>
 				</tr> 
@@ -54,8 +54,7 @@
     </div>
 </div>
 
-
-<script>
+<!-- <script>
 $("#noticeTable").DataTable({
 	pageLength: 10,
 	order: [[0, 'asc']],
@@ -64,4 +63,4 @@ $("#noticeTable").DataTable({
 	{ width: "65%" },
 	{ width: "23%" }],
 });
-</script>
+</script> -->

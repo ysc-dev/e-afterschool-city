@@ -6,6 +6,6 @@ import com.ysc.afterschool.domain.db.Notice;
 
 public interface NoticeRepository extends DefaultRepository<Notice, Integer> {
 
-	List<Notice> findByCity(String city);
+	List<Notice> findByCityOrderByCreateDateDesc(String city);
 
 }

@@ -27,7 +27,7 @@
 				<label class="ml-1">${notice.hit}</label>
 			</div>
 			<div class="subject">
-				<fmt:formatDate var="createDate" value="${localDateTimeFormat.parse(notice.createDate)}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				<fmt:formatDate var="createDate" value="${localDateTimeFormat.parse(notice.createDate)}" pattern="yyyy-MM-dd HH:mm"/>
 				<label class="font-weight-bold">날짜 :</label>
 				<label class="ml-1">${createDate}</label>
 			</div>
