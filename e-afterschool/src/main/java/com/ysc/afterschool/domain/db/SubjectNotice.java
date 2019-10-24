@@ -1,10 +1,20 @@
 package com.ysc.afterschool.domain.db;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ysc.afterschool.domain.AbstractDomain;
 
@@ -44,4 +54,11 @@ public class SubjectNotice extends AbstractDomain {
 	private String userName;
 	
 	private int subjectId;
+	
+	@Transient
+	private MultipartFile[] files;
+	
+	@OneToMany(mappedBy = "subjectNotice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
+	private List<SubjectNoticeFile> uploadedFiles;
 }

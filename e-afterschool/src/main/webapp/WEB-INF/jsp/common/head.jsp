@@ -42,6 +42,7 @@
 	<script src="${contextName}/limitless/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
 	<script src="${contextName}/limitless/js/plugins/tables/datatables/extensions/select.min.js"></script>
 	<script src="${contextName}/limitless/js/plugins/notifications/sweet_alert.min.js"></script>
+	<script src="${contextName}/limitless/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
 	
 	<script src="${contextName}/limitless/js/app.js"></script>
 	<!-- /theme JS files -->

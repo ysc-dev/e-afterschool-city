@@ -1,6 +1,8 @@
 package com.ysc.afterschool.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 
@@ -16,12 +18,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.ysc.afterschool.domain.CommonFile;
 import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.domain.db.SubjectNotice;
+import com.ysc.afterschool.domain.db.SubjectNoticeFile;
 import com.ysc.afterschool.service.CommentService;
 import com.ysc.afterschool.service.SubjectNoticeService;
 import com.ysc.afterschool.service.SubjectService;
+import com.ysc.afterschool.service.impl.FileUploadService;
 
 /**
  * 커뮤니티 관리 컨트롤러
@@ -41,6 +47,9 @@ public class CommunityController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private FileUploadService fileUploadService;
 	
 	/**
 	 * 커뮤니티 화면
@@ -80,9 +89,22 @@ public class CommunityController {
 	@PostMapping("regist")
 	@ResponseBody
 	public ResponseEntity<?> notice(SubjectNotice subjectNotice, Authentication authentication) {
+		List<SubjectNoticeFile> uploadedFiles = new ArrayList<>();
+		for (MultipartFile file : subjectNotice.getFiles()) {
+			String fileName = file.getOriginalFilename();
+			if (!fileName.isEmpty()) {
+				CommonFile commonFile = fileUploadService.restore(file, CommonFile.COMMUNITY_PATH);
+				SubjectNoticeFile uploadedFile = new SubjectNoticeFile(commonFile);
+				uploadedFile.setSubjectNotice(subjectNotice);
+				
+				uploadedFiles.add(uploadedFile);
+			}
+		}
+		
 		Student student = (Student) authentication.getPrincipal();
 		subjectNotice.setUserId(student.getId());
 		subjectNotice.setUserName(student.getName());
+		subjectNotice.setUploadedFiles(uploadedFiles);
 		
 		if (subjectNoticeService.regist(subjectNotice)) {
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -126,5 +148,10 @@ public class CommunityController {
 		}
 		
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
+	@GetMapping("file/get")
+	public ResponseEntity<?> getFile(int id) {
+		return new ResponseEntity<>(subjectNoticeService.get(id), HttpStatus.OK);
 	}
 }

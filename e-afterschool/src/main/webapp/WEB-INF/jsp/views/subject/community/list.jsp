@@ -31,10 +31,17 @@
 						<td class="font-size-sm text-center">${status.count}</td>
 						<td class="font-size-sm text-center">${notice.userName}</td>
 						<td class="font-size-sm">
-							<c:if test="${notice.important}">
-								<span class="text-danger font-weight-bold mr-1">[공지사항]</span>
-							</c:if>
-							${notice.title}
+							<a href="${pageContext.request.contextPath}/subject/community/detail?infoId=${infoId}&subjectId=${subject.id}&id=${notice.id}" 
+								class="text-default font-weight-bold">
+								<c:if test="${notice.important}">
+									<span class="text-danger font-weight-bold mr-1">[공지사항]</span>
+								</c:if>
+								${notice.title}
+							</a>
+						</td>
+						<td class="font-size-sm">
+							<button type="button" class="btn btn-outline bg-primary text-primary-600 btn-sm font-weight-bold" 
+								onClick="imageModal(${notice.id})"><i class="icon-images2"></i></button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -43,26 +50,64 @@
 	</div>
 </div>
 
+<!-- 모달창 -->
+<div id="fileModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-sm bg-info">
+                <h6 class="modal-title">
+                    <i class="icon-images2 mr-2"></i>수업내용 첨부파일
+                </h6>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body file-modal-body text-center">
+               <div id="file-viewer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 var table = $("#noticeTable").DataTable({
-	select: {
+	/* select: {
         style: 'single'
-    },
+    }, */
 	pageLength: 10,
 	order: [[0, 'asc']],
 	columns: [
 		{ width: "0%" },
 		{ width: "10%" },
 		{ width: "20%" },
-		{ width: "70%" }
+		{ width: "70%" },
+		{ width: "10%" }
 	],
  	columnDefs: [
  		{ visible: false, targets: 0 }
  	]
 });
 
-$('#noticeTable tbody').on( 'click', 'tr', function () {
+/* $('#noticeTable tbody').on( 'click', 'tr', function () {
     var noticeId = table.row(this).data()[0];
     location.href = contextPath + "/subject/community/detail?infoId=${infoId}&subjectId=${subject.id}&id=" + noticeId;
-} );
+}); */
+
+function imageModal(id) {
+	$("#file-viewer").empty();
+	
+	$.ajax({
+        url: contextPath + "/subject/community/file/get",
+        type: "GET",
+        data: {"id" : id},
+        success: function(response) {
+	        response.uploadedFiles.forEach(function(file, index) {
+	        	var img = document.createElement("img");
+	        	img.setAttribute("src", contextPath + "/uploads/community/" + file.fileName);
+	        	img.setAttribute("class", "img-fluid");
+		        $("#file-viewer").append(img);
+            });
+            
+        	$("#fileModal").modal();
+        }
+    });
+}
 </script>
