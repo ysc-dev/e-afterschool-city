@@ -33,7 +33,7 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String index() {
-		return "redirect:ch";
+		return "redirect:cw";
 	}
 	
 	@GetMapping("/{link}")
@@ -52,7 +52,8 @@ public class HomeController {
 	
 	@GetMapping("home/{cityId}")
 	public String home(Model model, @PathVariable int cityId) {
-		model.addAttribute("cityId", cityId);
+		City city = cityService.get(cityId);
+		model.addAttribute("city", city);
 		return "home";
 	}
 	

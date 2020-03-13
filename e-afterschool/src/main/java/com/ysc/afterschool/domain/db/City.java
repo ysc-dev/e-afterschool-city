@@ -32,4 +32,7 @@ public class City implements Domain {
 	
 	@Column(nullable = false, length = 20)
 	private String link;
+	
+	@Column(nullable = false, length = 20)
+	private String content;
 }

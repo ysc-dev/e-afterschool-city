@@ -11,7 +11,7 @@
 
 <div class="content">
 	<div class="home-title justify-content-center align-items-center">
-		<span>경남교육청 <span class="text-info-600">캠퍼스형</span> 방과후학교</span>
+		<span>${city.content} <span class="text-info-600">캠퍼스형</span> 방과후학교</span>
 		<span>오신것을 환영합니다.</span>
 	</div>
 	
@@ -68,14 +68,14 @@
 
 <script>
 $("#registBtn").click(function() {
-	location.href = contextPath + "/student/regist?cityId=${cityId}";
+	location.href = contextPath + "/student/regist?cityId=${city.id}";
 });
 
 $("#loginBtn").click(function() {
-	location.href = contextPath + "/login/${cityId}";
+	location.href = contextPath + "/login/${city.id}";
 });
 
 $("#infoBtn").click(function() {
-	location.href = contextPath + "/info?cityId=${cityId}";
+	location.href = contextPath + "/info?cityId=${city.id}";
 });
 </script>
