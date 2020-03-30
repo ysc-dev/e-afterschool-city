@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/jsp/common/tagLib.jsp" %>
 
 <link href="${pageContext.request.contextPath}/css/box.css" rel="stylesheet" type="text/css">
 
@@ -49,7 +50,9 @@
 					<div class="card-box">
 						<div class="text-center">
 							수강신청주소<br>
-							<span class="fs-11" style="letter-spacing:0rem">http://e-afterschool.kr</span>
+							<span class="fs-11" style="letter-spacing:0rem">
+								http://e-afterschool.kr/${city.link}
+							</span>
 						</div>
 						<div class="text-center mt-2">
 							수강신청문의<br>
