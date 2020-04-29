@@ -18,7 +18,6 @@ import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.domain.db.Student.TargetType;
 import com.ysc.afterschool.domain.db.Subject;
 import com.ysc.afterschool.domain.db.Subject.ApplyType;
-import com.ysc.afterschool.domain.db.Subject.GradeType;
 import com.ysc.afterschool.service.ApplyService;
 import com.ysc.afterschool.service.ApplyWaitService;
 import com.ysc.afterschool.service.InvitationService;
@@ -160,11 +159,7 @@ public class SubjectController {
 		
 		Subject subject = subjectService.get(id);
 		if (subject.getTargetType() == TargetType.전체) {
-			if (subject.getGradeType() == GradeType.초_3_6_중등) {
-				subject.setTarget(subject.getGradeType().getName());
-			} else {
-				subject.setTarget("전체");
-			}
+			subject.setTarget("전체");
 		} else {
 			subject.setTarget(subject.getTargetType().getName() + " " + subject.getGradeType().getName());
 		}
