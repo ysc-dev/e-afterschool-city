@@ -28,7 +28,7 @@
 					<td class="font-size-sm">
 						<c:choose>
 							<c:when test="${invitation.type.id == 1}">
-								${invitation.type.name}
+								<a href="#" class="text-grey-600" onclick="deadlineClick(${invitation.id})">${invitation.type.name}</a>
 							</c:when>
 							<c:when test="${invitation.type.id == 2}">
 								<a href="#" class="text-shadow font-weight-bold" onclick="applyClick(${invitation.id})">${invitation.type.name}</a>
@@ -115,7 +115,6 @@ function applyClick(id) {
 
 function deadlineClick(id) {
 	var student = "${student}";
-	console.log(student);
 	if (student) {
 		location.href = contextPath + "/subject/group?infoId=" + id;
 	} else {

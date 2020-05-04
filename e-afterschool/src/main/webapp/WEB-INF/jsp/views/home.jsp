@@ -56,11 +56,11 @@
 						</div>
 						<div class="text-center mt-2">
 							수강신청문의<br>
-							055-274-0518
+							${city.tel1}
 						</div>
 						<div class="text-center mt-2">
 							기타운영문의<br>
-							055-274-0521
+							${city.tel2}
 						</div>
 					</div>
 				</div>

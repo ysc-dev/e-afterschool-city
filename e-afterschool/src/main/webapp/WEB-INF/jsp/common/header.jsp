@@ -4,7 +4,17 @@
 <div class="navbar navbar-expand-md navbar-light fixed-top">
 	<div class="navbar-brand">
 		<a href="#" class="d-inline-block">
-			<img src="${pageContext.request.contextPath}/images/logo.png" alt="logo">
+		<c:choose>
+		    <c:when test="${cityId eq '1'}">
+		        <img src="${pageContext.request.contextPath}/images/cw_logo.png" alt="logo">
+		    </c:when>
+		    <c:when test="${cityId eq '2'}">
+		        <img src="${pageContext.request.contextPath}/images/jj_logo.png" alt="logo">
+		    </c:when>
+		    <c:otherwise>
+		        <img src="${pageContext.request.contextPath}/images/logo.png" alt="logo">
+		    </c:otherwise>
+		</c:choose>
 		</a>
 		<a href="#" class="d-inline-block ml-1">
 			<img src="${pageContext.request.contextPath}/images/logo2.png" alt="logo">
