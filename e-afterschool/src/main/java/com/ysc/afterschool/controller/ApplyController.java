@@ -106,9 +106,8 @@ public class ApplyController {
 	@DeleteMapping("delete")
 	public ResponseEntity<?> delete(int applyId) {
 		Apply apply = applyService.get(applyId);
+		Subject subject = subjectService.get(apply.getSubjectId());
 		if (applyService.delete(applyId)) {
-			Subject subject = apply.getSubject();
-			
 			ApplyWait applyWait = applyWaitService.get(apply.getInvitationId(), subject.getId(), OrderType.오름차순);
 			if (applyWait == null) {  // 대기 인원이 없을 경우
 				subject.setApplyNumber(subject.getApplyNumber() - 1);

@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SmsService {
 	
 	private String tokenType;
-	private String token = "ysc2019:";
+	private String token;
 	
 	//private final String message = "캠퍼스형방과후학교-대기신청하신 과목의 수강등록이 완료되었습니다. 수강을 원하지않으시면 취소신청을 꼭 해주시기바랍니다.";
 	private final String message = "캠퍼스형방과후 수강대기중인 과목의 수강이 승인되었습니다. 전화 연락 부탁드립니다.";
@@ -55,7 +55,7 @@ public class SmsService {
 
 		OkHttpClient client = new OkHttpClient();
 		Response response = client.newCall(request).execute();
-		log.debug("init response : " + response.toString());
+//		log.debug("init response : " + response.toString());
 		if (response.isSuccessful()) {
 			RealResponseBody result = (RealResponseBody) response.body();
 			try {
@@ -64,7 +64,7 @@ public class SmsService {
 				
 				String accessToken = (String) jsonObject.get("access_token");
 				tokenType = (String) jsonObject.get("token_type");
-				token += accessToken;
+				token = "ysc2019:" + accessToken;
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -86,17 +86,17 @@ public class SmsService {
 		MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
 		RequestBody body = RequestBody.create(mediaType, "phone=" + phone + "&callback=" + callback + "&message=" + message + "&refkey=12132214");
 		Request request = new Request.Builder()
-		.url("https://sms.gabia.com/api/send/sms")
-		.post(body)
-		.addHeader("Content-Type", "application/x-www-form-urlencoded")
-		.addHeader("Authorization", tokenType + " " + new String(Base64.encodeBase64(token.getBytes())))
-		.addHeader("cache-control", "no-cache")
-		.build();
+			.url("https://sms.gabia.com/api/send/sms")
+			.post(body)
+			.addHeader("Content-Type", "application/x-www-form-urlencoded")
+			.addHeader("Authorization", tokenType + " " + new String(Base64.encodeBase64(token.getBytes())))
+			.addHeader("cache-control", "no-cache")
+			.build();
 
 		OkHttpClient client = new OkHttpClient();
 		Response response = client.newCall(request).execute();
-		System.err.println("response : " + response.toString());
-		log.debug("send response : " + response.toString());
+		response.body().close();
+//		log.debug("send response : " + response.toString());
 	}
 	
 }

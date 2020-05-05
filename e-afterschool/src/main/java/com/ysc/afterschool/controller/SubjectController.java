@@ -77,7 +77,9 @@ public class SubjectController {
 		
 		Student student = (Student) authentication.getPrincipal();
 		List<Apply> applies = applyService.getList(infoId, student.getId()).stream().map(data -> {
-			data.getSubject().setTarget(data.getSubject().getTargetType().getName() + " " + data.getSubject().getGradeType().getName());
+			Subject subject = subjectService.get(data.getSubjectId());
+			subject.setTarget(subject.getTargetType().getName() + " " + subject.getGradeType().getName());
+			data.setSubject(subject);
 			return data;
 		}).collect(Collectors.toList());
 		model.addAttribute("applies", applies);

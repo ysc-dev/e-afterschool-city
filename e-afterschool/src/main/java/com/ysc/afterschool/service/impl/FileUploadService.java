@@ -41,11 +41,6 @@ public class FileUploadService {
 			uploadedFile.setContentType(multipartFile.getContentType());
 			uploadedFile.setFileType(FileType.stringToType(uploadedFile.getContentType()));
 
-//			System.out.println("originFilename : " + originFilename);
-//			System.out.println("extensionName : " + extName);
-//			System.out.println("size : " + size);
-//			System.out.println("saveFileName : " + saveFileName);
-
 			writeFile(multipartFile, path + "/" + saveFileName);
 		} catch (IOException e) {
 			// 원래라면 RuntimeException 을 상속받은 예외가 처리되어야 하지만

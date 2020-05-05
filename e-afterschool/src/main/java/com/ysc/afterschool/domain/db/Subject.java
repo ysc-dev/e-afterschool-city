@@ -33,9 +33,7 @@ public class Subject extends AbstractDomain {
 	private String name;
 	
 	/** 안내장 */
-	@OneToOne
-    @JoinColumn(name = "invitation_id")
-	private Invitation invitation;
+	private int invitationId;
 	
 	/** 강사 */
 	@OneToOne

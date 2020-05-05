@@ -49,7 +49,6 @@ public class InvitationController {
 	@GetMapping("info/get")
 	@ResponseBody
 	public ResponseEntity<?> get(int id) {
-		System.err.println(id);
 		return new ResponseEntity<>(invitationService.get(id), HttpStatus.OK);
 	}
 }

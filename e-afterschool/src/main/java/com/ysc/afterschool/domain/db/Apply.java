@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -41,9 +42,7 @@ public class Apply implements Domain {
 	private Student student;
 	
 	/** 과목 */
-	@OneToOne
-    @JoinColumn(name = "subject_id")
-	private Subject subject;
+	private int subjectId;
 	
 	/** 안내장 */
 	private int invitationId;
@@ -58,10 +57,13 @@ public class Apply implements Domain {
 	@CreationTimestamp
 	private LocalDateTime createDate;
 	
+	@Transient
+	private Subject subject;
+	
 	public Apply(int invitationId, Student student, Subject subject) {
 		this.invitationId = invitationId;
 		this.student = student;
-		this.subject = subject;
+		this.subjectId = subject.getId();
 		this.school = student.getSchool();
 		this.grade = student.getGrade();
 	}
