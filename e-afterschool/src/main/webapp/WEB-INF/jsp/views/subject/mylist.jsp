@@ -101,7 +101,7 @@ function deleteApply(applyId) {
            		alert("수강 취소 되었습니다.");
            		location.reload();
        	 	} else {
-	       	 	swal({
+       	 	swalInit.fire({
 	   				title: "수강 취소 되었습니다.", 
 	   				type: "success",
 	   				position: 'top'
@@ -117,7 +117,7 @@ function deleteApply(applyId) {
                 if (checkIE()) {
                     alert(response.responseText);
                 } else {
-                	swal({title: response.responseText, type: "error", position: 'top'});
+                	swalInit.fire({title: response.responseText, type: "error", position: 'top'});
                 }
             }
         }
@@ -131,7 +131,7 @@ function applyCancel(applyId) {
 			deleteApply(applyId);
 		}
 	} else {
-		swal({
+		swalInit.fire({
 	        title: "수강취소 하시겠습니까?",
 	        type: "question",
 	        confirmButtonText: "확인",

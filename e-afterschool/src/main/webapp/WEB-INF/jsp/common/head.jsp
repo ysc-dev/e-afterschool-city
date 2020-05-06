@@ -15,8 +15,7 @@
 	<c:set var="contextName">${pageContext.request.contextPath}</c:set>
 	
 	<!-- Global stylesheets -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
-	<link href="${contextName}/limitless/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+	<link href="${contextName}/limitless/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css">
 	<link href="${contextName}/limitless/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link href="${contextName}/limitless/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css">
 	<link href="${contextName}/limitless/css/layout.min.css" rel="stylesheet" type="text/css">

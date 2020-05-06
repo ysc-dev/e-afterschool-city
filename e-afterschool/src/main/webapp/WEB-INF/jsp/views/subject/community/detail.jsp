@@ -105,7 +105,7 @@ $("#commentRegistBtn").click(function() {
         		if (checkIE()) {
         			location.reload();
            		} else {
-           			swal({
+           			swalInit.fire({
                			title: "댓글이 추가되었습니다.",
            				type: "success"
            			}).then(function(e) {
@@ -117,7 +117,7 @@ $("#commentRegistBtn").click(function() {
     			if (checkIE()) { 
         			alert("댓글 추가을 실패하였습니다.");
     			} else {
-    				swal({title: "댓글 추가을 실패하였습니다.", type: "error"});
+    				swalInit.fire({title: "댓글 추가을 실패하였습니다.", type: "error"});
        			}
             }
     	});
@@ -125,7 +125,7 @@ $("#commentRegistBtn").click(function() {
 		if (checkIE()) { 
 			alert("댓글 내용을 입력하세요.");
 		} else {
-			swal({title: "댓글 내용을 입력하세요.", type: "warning"});
+			swalInit.fire({title: "댓글 내용을 입력하세요.", type: "warning"});
 		}
 	}
 });
@@ -156,11 +156,11 @@ function updateComment(id) {
       			location.reload();
      		},
             error: function(response) {
-            	swal({title: "댓글 수정을 실패하였습니다.", type: "error"})
+            	swalInit.fire({title: "댓글 수정을 실패하였습니다.", type: "error"})
             }
 		});
 	} else {
-		swal({title: "댓글 내용을 입력하세요.", type: "warning"});
+		swalInit.fire({title: "댓글 내용을 입력하세요.", type: "warning"});
 	}
 }
 
@@ -182,7 +182,7 @@ function deleteComment(id) {
         	if (checkIE()) {
             	alert("댓글 삭제를 실패하였습니다.");
            	} else {
-           		swal({title: "댓글 삭제를 실패하였습니다.", type: "error"});
+           		swalInit.fire({title: "댓글 삭제를 실패하였습니다.", type: "error"});
            	}
         }
 	}); 
@@ -196,7 +196,7 @@ function deleteCommentClick(id) {
 			deleteComment(id);
 		}
 	} else {
-		swal({
+		swalInit.fire({
 	        title: "삭제하시겠습니까?",
 	        type: "warning",
 	        confirmButtonText: "삭제",
@@ -219,7 +219,7 @@ function deleteNoticeClick(id) {
 			deleteNotice(id);
 		}
 	} else {
-		swal({
+		swalInit.fire({
 	        title: "등록 된 글을 삭제하시겠습니까?",
 	        type: "warning",
 	        confirmButtonText: "삭제",
@@ -240,7 +240,7 @@ function deleteNotice(id) {
 		type: "DELETE",
 		data: {"id": id},
 		success: function(response) {
-			swal({
+			swalInit.fire({
    				title: "글이 삭제 되었습니다.", 
    				type: "success"
    			}).then(function(e) {
@@ -248,7 +248,7 @@ function deleteNotice(id) {
    			});
        	},
         error: function(response) {
-        	swal({title: "글 삭제를 실패하였습니다.", type: "error"})
+        	swalInit.fire({title: "글 삭제를 실패하였습니다.", type: "error"})
         }
 	}); 
 }

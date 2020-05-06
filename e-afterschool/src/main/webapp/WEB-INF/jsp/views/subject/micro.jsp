@@ -118,7 +118,7 @@ function registWait(subjectId) {
             if (checkIE()) {
                 alert(response.responseText);
             } else {
-            	swal({title: response.responseText, type: "error", position: "top"});
+            	swalInit.fire({title: response.responseText, type: "error", position: "top"});
             }
         }
 	});
@@ -131,7 +131,7 @@ function commonWait(subjectId) {
 			registWait(subjectId);
 		}
 	} else {
-		swal({
+		swalInit.fire({
 	        title: "정원 초과입니다.\n수강신청 대기하시겠습니까?",
 	        type: "info",
 	        confirmButtonText: "대기",
@@ -147,7 +147,18 @@ function commonWait(subjectId) {
 	}
 }
 
+//수강신청 상태 설정 : false
+var isApplied = false;
+
 function apply(subjectId) {
+	// 한번 수강신청 버튼을 클릭 시 중복으로 클릭이 안되도록
+	if (isApplied) { 
+		isApplied = false;
+		return;
+	}
+
+	isApplied = true;
+	
 	$.ajax({
 		url: contextPath + "/apply/regist",
   		data: {"infoId": ${invitation.id}, "subjectId": subjectId},
@@ -157,10 +168,10 @@ function apply(subjectId) {
            		alert("수강 신청이 되었습니다.");
            		location.reload();
        		} else {
-       			swal({
+       			swalInit.fire({
        				title: "수강 신청이 되었습니다.", 
        				type: "success",
-       				position: "top"
+       				position: "top",
        			}).then(function(e) {
        				location.reload();
        			});
@@ -173,12 +184,12 @@ function apply(subjectId) {
 				if (checkIE()) {
 					alert(response.responseText);
 				} else {
-					swal({title: response.responseText, type: "error", position: "top"});
+					swalInit.fire({title: response.responseText, type: "error", position: "top"});
 				}
 			}
         }
 	});
-	/* swal({
+	/* swalInit.fire({
 	    title: "수강신청 하시겠습니까?",
 	    type: "question",
 	    confirmButtonText: "확인",
@@ -190,7 +201,17 @@ function apply(subjectId) {
 	}); */
 }
 
+//수강신청 상태 설정 : false
+var isApplyWaited = false;
+
 function applyWait(subjectId) {
+	if (isApplyWaited) { 
+		isApplyWaited = false;
+		return;
+	}
+
+	isApplyWaited = true;
+	
 	commonWait(subjectId);
 }
 </script>

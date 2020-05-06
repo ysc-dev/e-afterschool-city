@@ -81,7 +81,7 @@ $('#registForm').submit(function(e) {
            	if (checkIE()) {
            		location.replace(contextPath + "/subject/community/list?infoId=${infoId}&id=${subject.id}");
            	} else {
-           		swal({
+           		swalInit.fire({
        				title: "글 등록이 되었습니다.", 
        				type: "success",
        				position: "top"
@@ -94,7 +94,7 @@ $('#registForm').submit(function(e) {
         	if (checkIE()) {
             	alert("글 등록을 실패하였습니다.");
         	} else {
-        		swal({title: "글 등록을 실패하였습니다.", type: "error", position: "top"});
+        		swalInit.fire({title: "글 등록을 실패하였습니다.", type: "error", position: "top"});
            	}
         }
 	});

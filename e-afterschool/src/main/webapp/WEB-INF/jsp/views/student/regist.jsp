@@ -194,7 +194,7 @@ $("#studentRegistForm").submit(function(e) {
 			if (checkIE()) {
 				alert("올바른 주민번호가 아닙니다.");
 			} else {
-				swal({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
+				swalInit.fire({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
 			}
 			isSubmitted = false;
 			$("#registBtn").prop("disabled", false);
@@ -210,7 +210,7 @@ $("#studentRegistForm").submit(function(e) {
 					if (checkIE()) {
 						alert("이미 등록된 주민번호입니다.");
 					} else {
-						swal({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
+						swalInit.fire({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
 					}
 					isSubmitted = false;
 					$("#registBtn").prop("disabled", false);
@@ -234,7 +234,7 @@ function registStudent(student, url) {
        			if (checkIE()) {
 					alert("이미 등록된 학생 정보입니다.");
 				} else {
-					swal({title: "이미 등록된 학생 정보입니다.", type: "warning", position: 'top', confirmButtonClass: 'btn btn-warning',});
+					swalInit.fire({title: "이미 등록된 학생 정보입니다.", type: "warning", position: 'top', confirmButtonClass: 'btn btn-warning',});
 				}
        			isSubmitted = false;
        			$("#registBtn").prop("disabled", false);
@@ -247,7 +247,7 @@ function registStudent(student, url) {
 	       	           	if (checkIE()) {
 	       	           		location.href = contextPath + "/home/${cityId}";
 	       	           	} else {
-		       	           	swal({
+	       	           	swalInit.fire({
 			       				title: "학생 등록 되었습니다.", 
 			       				type: "success",
 			       				position: 'top'
@@ -260,7 +260,7 @@ function registStudent(student, url) {
        	            	if (checkIE()) {
            	            	alert("학생 등록을 실패하였습니다.");
        	            	} else {
-       	            		swal({title: "학생 등록을 실패하였습니다.", type: "error", position: 'top'});
+       	            		swalInit.fire({title: "학생 등록을 실패하였습니다.", type: "error", position: 'top'});
        	            	}
        	            	isSubmitted = false;
        	            	$("#registBtn").prop("disabled", false);

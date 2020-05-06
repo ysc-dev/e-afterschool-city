@@ -90,7 +90,7 @@ function fileDownload(id) {
 			});
 		} 
 	} else {
-		swal({
+		swalInit.fire({
 	        title: "다운로드 하시겠습니까?",
 	        type: "question",
 	        confirmButtonText: "확인",

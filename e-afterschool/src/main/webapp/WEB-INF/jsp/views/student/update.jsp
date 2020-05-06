@@ -188,7 +188,7 @@ $("#studentUpdateForm").submit(function(e) {
 			if (checkIE()) {
 				alert("올바른 주민번호가 아닙니다.");
 			} else {
-				swal({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
+				swalInit.fire({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
 			}
 			isSubmitted = false;
 			return;
@@ -204,7 +204,7 @@ $("#studentUpdateForm").submit(function(e) {
 						if (checkIE()) {
 							alert("이미 등록된 주민번호입니다.");
 						} else {
-							swal({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
+							swalInit.fire({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
 						}
 						isSubmitted = false;
 					} else {
@@ -229,7 +229,7 @@ function updateStudent(student, url) {
        		if (checkIE()) {
        			location.href = contextPath + "/home/${cityId}";
        		} else {
-       			swal({
+       			swalInit.fire({
       				title: "학생 정보 수정 되었습니다.", 
       				type: "success",
       				position: 'top'
@@ -242,7 +242,7 @@ function updateStudent(student, url) {
         	if (checkIE()) {
             	alert("학생 정보 수정을 실패하였습니다.");
         	} else {
-        		swal({title: "학생 정보 수정을 실패하였습니다.", type: "error", position: 'top'});
+        		swalInit.fire({title: "학생 정보 수정을 실패하였습니다.", type: "error", position: 'top'});
            	}
           	isSubmitted = false;
         }
