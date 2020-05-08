@@ -33,7 +33,7 @@
 							<div class="header-elements mylist-header">
 								<c:choose>
 									<c:when test="${invitation.type.id == 2}">
-										<button type="button" class="btn btn-danger btn-sm" onclick="applyCancel(${apply.id})">신청취소</button>
+										<button type="button" id="deleteBtn" class="btn btn-danger btn-sm" onclick="applyCancel(${apply.id})">신청취소</button>
 									</c:when>
 									<c:otherwise>
 										<button type="button" class="btn btn-danger btn-sm" disabled>신청취소</button>
@@ -116,8 +116,11 @@ function deleteApply(applyId) {
             } else {
                 if (checkIE()) {
                     alert(response.responseText);
+                    location.reload();
                 } else {
-                	swalInit.fire({title: response.responseText, type: "error", position: 'top'});
+                	swalInit.fire({title: response.responseText, type: "error", position: 'top'}).then(function(e) {
+						location.reload();
+	       			});
                 }
             }
         }
@@ -125,10 +128,14 @@ function deleteApply(applyId) {
 }
 
 function applyCancel(applyId) {
+	$("#deleteBtn").prop("disabled", true);
+	
 	if (checkIE()) {
 		var result = confirm("수강취소 하시겠습니까?");
 		if (result) {
 			deleteApply(applyId);
+		} else {
+			$("#deleteBtn").prop("disabled", false);
 		}
 	} else {
 		swalInit.fire({
@@ -142,6 +149,8 @@ function applyCancel(applyId) {
 	    }).then(function(e) {
 	    	if (e.value) {
 	    		deleteApply(applyId);
+	    	} else {
+	    		$("#deleteBtn").prop("disabled", false);
 	    	}
 	    });
 	}

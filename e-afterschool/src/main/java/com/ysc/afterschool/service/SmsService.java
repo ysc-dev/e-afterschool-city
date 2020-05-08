@@ -39,7 +39,7 @@ public class SmsService {
 		byte[] encodedBytes = Base64.encodeBase64(text.getBytes());
 		
 		/* base64 decoding */ 
-		//byte[] decodedBytes = Base64.decodeBase64(encodedBytes); 
+		//byte[] decodedBytes = Base64.decodeBase64(encodedBytes);
 //		System.out.println("인코딩 전 : " + text); 
 //		System.out.println("인코딩 text : " + new String(encodedBytes));
 
@@ -82,7 +82,11 @@ public class SmsService {
 		init();
 		
 		phone = phone.replaceAll("-", "");
-
+		
+//		Apply apply = applyService.get(applyId);
+//		Invitation invitation = invitationService.get(apply.getId());
+//		String callback = invitation.getCity().getTel1().replaceAll("-", "");
+		
 		MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
 		RequestBody body = RequestBody.create(mediaType, "phone=" + phone + "&callback=" + callback + "&message=" + message + "&refkey=12132214");
 		Request request = new Request.Builder()

@@ -107,33 +107,82 @@ public class ApplyController {
 	public ResponseEntity<?> delete(int applyId) {
 		Apply apply = applyService.get(applyId);
 		Subject subject = subjectService.get(apply.getSubjectId());
+		
+////		List<ApplyWait> applyWaits = applyWaitService.getList(144);
+////		for (ApplyWait applyWait : applyWaits) {
+////			List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
+////			System.err.println(applies.size());
+////			if (applies.size() < 2) {
+////				System.err.println(applyWait);
+////				return new ResponseEntity<String>("수강취소 실패하였습니다.", HttpStatus.BAD_REQUEST);
+////			}
+////		}
+		
 		if (applyService.delete(applyId)) {
-			ApplyWait applyWait = applyWaitService.get(apply.getInvitationId(), subject.getId(), OrderType.오름차순);
-			if (applyWait == null) {  // 대기 인원이 없을 경우
+			//ApplyWait applyWait = applyWaitService.get(apply.getInvitationId(), subject.getId(), OrderType.오름차순);
+			List<ApplyWait> applyWaits = applyWaitService.getList(subject.getId());
+			if (applyWaits.size() == 0) {  // 대기 인원이 없을 경우
 				subject.setApplyNumber(subject.getApplyNumber() - 1);
 				if (subjectService.update(subject)) {
 					return new ResponseEntity<>(HttpStatus.OK);
 				}
 			} else { // 대기 인원이 있을 경우
-				List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
-				if (applies.size() < 3) { // 수강신청 한 과목이 두개가 아닐 경우
-					if (applyService.regist(new Apply(applyWait.getInvitationId(), applyWait.getStudent(), subject))) {
-						if (applyWaitService.delete(applyWait.getId())) {
-							subject.setWaitingNumber(subject.getWaitingNumber() - 1);
-							if (subjectService.update(subject)) {
-								try {
-									smsService.send(applyWait.getStudent().getTel());
-								} catch (IOException e) {
-									e.printStackTrace();
+				for (ApplyWait applyWait : applyWaits) {
+					List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
+					if (applies.size() < 2) { // 수강대기 첫번째 학생의 수강신청 한 과목이 두개가 아닐 경우
+						if (applyService.regist(new Apply(applyWait.getInvitationId(), applyWait.getStudent(), subject))) {
+							if (applyWaitService.delete(applyWait.getId())) {
+								subject.setWaitingNumber(subject.getWaitingNumber() - 1);
+								if (subjectService.update(subject)) {
+									try {
+										smsService.send(applyWait.getStudent().getTel());
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+									
+									return new ResponseEntity<>(HttpStatus.OK);
 								}
-								
-								return new ResponseEntity<>(HttpStatus.OK);
 							}
 						}
 					}
 				}
+				 
+				// 대기 인원은 있는데 수강대기 학생들이 최대로(2과목) 수강신청 한 경우
+				subject.setApplyNumber(subject.getApplyNumber() - 1);
+				if (subjectService.update(subject)) {
+					return new ResponseEntity<>(HttpStatus.OK);
+				}
 			}
 		}
+		
+//		if (applyService.delete(applyId)) {
+//			ApplyWait applyWait = applyWaitService.get(apply.getInvitationId(), subject.getId(), OrderType.오름차순);
+//			if (applyWait == null) {  // 대기 인원이 없을 경우
+//				subject.setApplyNumber(subject.getApplyNumber() - 1);
+//				if (subjectService.update(subject)) {
+//					return new ResponseEntity<>(HttpStatus.OK);
+//				}
+//			} else { // 대기 인원이 있을 경우
+//				List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
+//				if (applies.size() < 3) { // 수강신청 한 과목이 두개가 아닐 경우
+//					if (applyService.regist(new Apply(applyWait.getInvitationId(), applyWait.getStudent(), subject))) {
+//						if (applyWaitService.delete(applyWait.getId())) {
+//							subject.setWaitingNumber(subject.getWaitingNumber() - 1);
+//							if (subjectService.update(subject)) {
+//								try {
+//									smsService.send(applyWait.getStudent().getTel());
+//								} catch (IOException e) {
+//									e.printStackTrace();
+//								}
+//								
+//								return new ResponseEntity<>(HttpStatus.OK);
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+		
 		return new ResponseEntity<String>("수강취소 실패하였습니다.", HttpStatus.BAD_REQUEST);
 	}
 }

@@ -18,4 +18,6 @@ public interface ApplyWaitRepository extends DefaultRepository<ApplyWait, Intege
 	@Query(value = "SELECT * FROM tb_apply_wait WHERE invitation_id = ?1 and subject_id = ?2 ORDER BY order_number desc limit 1 ", nativeQuery = true)
 	ApplyWait getDesc(int infoId, int subjectId, String order);
 
+	@Query(value = "SELECT * FROM tb_apply_wait WHERE subject_id = ?1 ORDER BY order_number asc", nativeQuery = true)
+	List<ApplyWait> findBySubjectId(int subjectId);
 }

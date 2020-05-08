@@ -69,4 +69,9 @@ public class ApplyWaitServiceImpl implements ApplyWaitService {
 			return applyWaitRepository.getDesc(infoId, subjectId, type.getName());
 		}
 	}
+
+	@Override
+	public List<ApplyWait> getList(int subjectId) {
+		return applyWaitRepository.findBySubjectId(subjectId);
+	}
 }
