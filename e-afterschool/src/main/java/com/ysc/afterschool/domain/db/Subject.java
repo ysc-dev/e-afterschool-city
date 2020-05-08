@@ -103,7 +103,8 @@ public class Subject extends AbstractDomain {
 		APPLYWAIT("신청완료"), 
 		NOTAPPLY("신청불가"),
 		FILL("정원초과"),
-		WAITING("신청대기중");
+		WAITING("신청대기중"),
+		APPLYFILL("수강신청완료");
 		
 		private String name;
 		

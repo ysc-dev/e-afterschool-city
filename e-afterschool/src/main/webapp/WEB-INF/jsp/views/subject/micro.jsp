@@ -65,13 +65,13 @@
 			 					<button type="button" class="btn btn-small-box bg-danger-600" disabled="disabled"><span>신 청 불 가</span></button>
 			  				</c:when>
 			  				<c:when test="${subject.applyType == 'FILL'}">
-						       <button type="button" class="btn btn-small-box bg-orange-600" onclick="applyWait(${subject.id})"><span>대 기 신 청</span></button>
+						       <button type="button" id="applyWaitBtn" class="btn btn-small-box bg-orange-600" onclick="applyWait(${subject.id})"><span>대 기 신 청</span></button>
 						    </c:when>
 			  				<c:when test="${subject.applyType == 'WAITING'}">
 						       <button type="button" class="btn btn-small-box bg-warning-600" disabled="disabled"><span>대기인원 초과</span></button>
 						    </c:when>
 			 				<c:otherwise>
-			 					<button type="button" class="btn btn-small-box bg-info-600" onclick="apply(${subject.id})"><span>신 청 하 기</span></button>
+			 					<button type="button" id="applyBtn" class="btn btn-small-box bg-info-600" onclick="apply(${subject.id})"><span>신 청 하 기</span></button>
 			 				</c:otherwise>
 						</c:choose>
 					</c:when>
@@ -117,8 +117,11 @@ function registWait(subjectId) {
         error: function(response) {
             if (checkIE()) {
                 alert(response.responseText);
+                location.reload();
             } else {
-            	swalInit.fire({title: response.responseText, type: "error", position: "top"});
+            	swalInit.fire({title: response.responseText, type: "error", position: "top"}).then(function(e) {
+					location.reload();
+       			});
             }
         }
 	});
@@ -141,7 +144,7 @@ function commonWait(subjectId) {
 	        position: "top"
 	    }).then(function(e) {
 	    	if (e.value) {
-		    	registWait(subjectId);
+	    		registWait(subjectId);
 	    	}
 	    });
 	}
@@ -151,6 +154,7 @@ function commonWait(subjectId) {
 var isApplied = false;
 
 function apply(subjectId) {
+	$("#applyBtn").prop("disabled", true);
 	// 한번 수강신청 버튼을 클릭 시 중복으로 클릭이 안되도록
 	if (isApplied) { 
 		isApplied = false;
@@ -169,7 +173,7 @@ function apply(subjectId) {
            		location.reload();
        		} else {
        			swalInit.fire({
-       				title: "수강 신청이 되었습니다.", 
+       				title: "수강 신청이 되었습니다.",
        				type: "success",
        				position: "top",
        			}).then(function(e) {
@@ -183,8 +187,11 @@ function apply(subjectId) {
 			} else {
 				if (checkIE()) {
 					alert(response.responseText);
+					location.reload();
 				} else {
-					swalInit.fire({title: response.responseText, type: "error", position: "top"});
+					swalInit.fire({title: response.responseText, type: "error", position: "top"}).then(function(e) {
+						location.reload();
+	       			});
 				}
 			}
         }
@@ -205,6 +212,8 @@ function apply(subjectId) {
 var isApplyWaited = false;
 
 function applyWait(subjectId) {
+	$("#applyWaitBtn").prop("disabled", true);
+	
 	if (isApplyWaited) { 
 		isApplyWaited = false;
 		return;

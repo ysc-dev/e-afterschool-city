@@ -116,13 +116,19 @@ public class SubjectController {
 		Student student = (Student) authentication.getPrincipal();
 		
 		Subject subject = subjectService.get(id);
+		
+//		long applyCount = applyService.count(infoId, student.getId());
+//		if (applyCount > 2) {
+//			subject.setApplyType(ApplyType.NOTAPPLY);
+//		} 
+			
 		if (applyService.search(infoId, student.getId(), subject.getId())) {
 			subject.setApplyType(ApplyType.APPLY);
 		} else if (applyWaitService.search(infoId, student.getId(), subject.getId())) {
 			subject.setApplyType(ApplyType.APPLYWAIT);
 		} else if (subject.getWaitFixedNumber() <= subject.getWaitingNumber()) {
 			subject.setApplyType(ApplyType.WAITING);
-		} else if (subject.getFixedNumber() <= subject.getApplyNumber()) {
+		} else if (subject.getFixedNumber() <= subject.getApplyNumber()) { // 정원초과 일 경우
 			subject.setApplyType(ApplyType.FILL);
 		} else {
 			if (subject.getTargetType() == TargetType.전체) {

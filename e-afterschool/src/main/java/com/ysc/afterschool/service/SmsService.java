@@ -52,10 +52,10 @@ public class SmsService {
 		.addHeader("Authorization", "Basic " + new String(encodedBytes))
 		.addHeader("cache-control", "no-cache")
 		.build();
-
+		
 		OkHttpClient client = new OkHttpClient();
 		Response response = client.newCall(request).execute();
-//		log.debug("init response : " + response.toString());
+		log.debug("init response : " + response.toString());
 		if (response.isSuccessful()) {
 			RealResponseBody result = (RealResponseBody) response.body();
 			try {
@@ -96,7 +96,7 @@ public class SmsService {
 		OkHttpClient client = new OkHttpClient();
 		Response response = client.newCall(request).execute();
 		response.body().close();
-//		log.debug("send response : " + response.toString());
+		log.debug("send response : " + response.toString());
 	}
 	
 }

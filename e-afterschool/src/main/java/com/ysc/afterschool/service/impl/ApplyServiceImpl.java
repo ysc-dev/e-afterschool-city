@@ -64,4 +64,9 @@ public class ApplyServiceImpl implements ApplyService {
 	public boolean search(int infoId, int studentId, int subjectId) {
 		return applyRepository.findByInvitationIdAndStudentIdAndSubjectId(infoId, studentId, subjectId) != null;
 	}
+
+	@Override
+	public long count(int infoId, int studentId) {
+		return applyRepository.findCountByInvitationIdAndStudentId(infoId, studentId);
+	}
 }
