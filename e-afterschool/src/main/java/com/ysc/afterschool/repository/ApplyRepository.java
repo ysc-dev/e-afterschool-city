@@ -14,4 +14,7 @@ public interface ApplyRepository extends DefaultRepository<Apply, Integer> {
 	
 	@Query(value = "SELECT count(*) FROM tb_apply WHERE invitation_id = ?1 and student_id = ?2", nativeQuery = true)
 	Long findCountByInvitationIdAndStudentId(int infoId, int studentId);
+
+	@Query(value = "SELECT * FROM tb_apply WHERE invitation_id = ?1 GROUP BY student_id", nativeQuery = true)
+	List<Apply> findByInvitationIdGroupByStudentId(int invitationId);
 }

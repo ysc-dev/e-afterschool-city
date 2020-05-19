@@ -31,8 +31,10 @@ public class SmsService {
 	private String token;
 	
 	//private final String message = "캠퍼스형방과후학교-대기신청하신 과목의 수강등록이 완료되었습니다. 수강을 원하지않으시면 취소신청을 꼭 해주시기바랍니다.";
-	private final String message = "캠퍼스형방과후 수강대기중인 과목의 수강이 승인되었습니다. 전화 연락 부탁드립니다.";
-	private final String callback = "0552740518"; //0552870513
+//	private final String message = "캠퍼스형방과후 수강대기중인 과목의 수강이 승인되었습니다. 전화 연락 부탁드립니다.";
+	private final String message = "<캠퍼스형방과후학교 알림> 수업시작일은 등교개학완료 후 개별 문자통보됩니다.";
+//	private final String callback = "0552740518"; //0552870513, 창원
+	private final String callback = "0557930159"; //진주
 	
 	public void init() throws IOException {
 		String text = "ysc2019:505e4c6d61dbe9dbf93e0f8861dc2c5d";

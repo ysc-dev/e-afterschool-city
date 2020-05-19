@@ -75,6 +75,10 @@ public class HomeController {
 	@GetMapping("send")
 	public String send() throws IOException {
 		smsService.send("010-4613-1202");
+//		for (Apply apply : applyService.getList(9)) {
+//			smsService.send(apply.getStudent().getTel());
+////			System.err.println(apply.getStudent().getTel());
+//		}
 		return "home";
 	}
 }

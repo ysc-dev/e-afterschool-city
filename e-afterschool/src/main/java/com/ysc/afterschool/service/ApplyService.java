@@ -11,4 +11,6 @@ public interface ApplyService extends CRUDService<Apply, Integer> {
 	boolean search(int infoId, int studentId, int subjectId);
 	
 	long count(int infoId, int studentId);
+	
+	List<Apply> getList(int invitationId);
 }

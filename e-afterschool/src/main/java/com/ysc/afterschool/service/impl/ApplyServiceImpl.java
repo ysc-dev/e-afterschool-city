@@ -69,4 +69,9 @@ public class ApplyServiceImpl implements ApplyService {
 	public long count(int infoId, int studentId) {
 		return applyRepository.findCountByInvitationIdAndStudentId(infoId, studentId);
 	}
+
+	@Override
+	public List<Apply> getList(int invitationId) {
+		return applyRepository.findByInvitationIdGroupByStudentId(invitationId);
+	}
 }
