@@ -31,6 +31,9 @@ public class HomeController {
 	@Autowired
 	private SmsService smsService;
 	
+//	@Autowired
+//	private ApplyService applyService;
+	
 	@GetMapping("/")
 	public String index() {
 		return "redirect:cw";
@@ -75,7 +78,7 @@ public class HomeController {
 	@GetMapping("send")
 	public String send() throws IOException {
 		smsService.send("010-4613-1202");
-//		for (Apply apply : applyService.getList(9)) {
+//		for (Apply apply : applyService.getList(8)) {
 //			smsService.send(apply.getStudent().getTel());
 ////			System.err.println(apply.getStudent().getTel());
 //		}

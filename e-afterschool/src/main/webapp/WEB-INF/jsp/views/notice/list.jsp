@@ -7,7 +7,7 @@
 </c:import>
 
 <div class="content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-2">
+	<div class="content-title d-flex justify-content-center align-items-center mt-3">
 		<span class="fs-18">전체 공지사항</span>
 	</div>
 	

@@ -9,7 +9,7 @@
 </c:import>
 
 <div class="content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-2 px-2">
+	<div class="content-title d-flex justify-content-center align-items-center mt-3">
 		<span class="fs-18">${subject.name}</span>
 	</div>
 	

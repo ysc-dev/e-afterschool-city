@@ -22,6 +22,12 @@ import com.ysc.afterschool.service.ApplyWaitService;
 import com.ysc.afterschool.service.SmsService;
 import com.ysc.afterschool.service.SubjectService;
 
+/**
+ * 수강신청 기능
+ * 
+ * @author hgko
+ *
+ */
 @Controller
 @RequestMapping("apply")
 public class ApplyController {

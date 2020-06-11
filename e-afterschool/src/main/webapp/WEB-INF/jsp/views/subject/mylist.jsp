@@ -39,7 +39,7 @@
 										<button type="button" class="btn btn-danger btn-sm" disabled>신청취소</button>
 									</c:otherwise>
 								</c:choose> --%>
-								<button type="button" id="deleteBtn" class="btn btn-danger btn-sm" onclick="applyCancel(${apply.id})">신청취소</button>
+								<button type="button" id="deleteBtn" class="btn btn-danger btn-sm" onclick="applyCancel(${apply.id})" disabled>신청취소</button>
 				           	</div>
 						</div>
 				

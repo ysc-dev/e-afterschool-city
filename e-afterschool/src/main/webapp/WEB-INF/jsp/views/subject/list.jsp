@@ -9,7 +9,7 @@
 </c:import>
 
 <div class="content subject-content"> 
-	<div class="content-title justify-content-center align-items-center mt-2">
+	<div class="content-title justify-content-center align-items-center mt-3">
 		<span class="fs-18">${subjectGroup.name} 과목(${fn:length(subjects)})</span>
 	</div>
 	

@@ -14,7 +14,7 @@
 		<span class="fs-18">공지사항 상세정보</span>
 	</div> -->
 	
-	<div class="card notice-detail">
+	<div class="card notice-detail mt-2">
 		<div class="card-header bg-info-600">
 			<h5 class="card-title font-weight-bold">${notice.title}</h5>
 		</div>

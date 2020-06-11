@@ -16,7 +16,7 @@
 	<div class="">
 		<div class="row mt-4 mx-0">
 			<div class="col-6">
-				<button type="button" id="subjectInfoBtn" class="btn btn-box btn-outline bg-white border-slate-300">
+				<button type="button" id="subjectInfoBtn" class="btn btn-box btn-outline bg-light border-slate-300">
 					<div class="fs-20 text-info-600 py-3">
 						<p><span>과 목 정 보 및</span></p>
 						<p class="mb-0"><span>과 목 특 징</span></p>

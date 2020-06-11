@@ -103,7 +103,7 @@ public class Subject extends AbstractDomain {
 		APPLYWAIT("신청완료"), 
 		NOTAPPLY("신청불가"),
 		FILL("정원초과"),
-		WAITING("신청대기중"),
+		WAITING("대기인원초과"),
 		APPLYFILL("수강신청완료");
 		
 		private String name;
@@ -145,7 +145,7 @@ public class Subject extends AbstractDomain {
 	 * @return
 	 */
 	public boolean targetTrue(GradeType gradeType, int grade) {
-		 if (gradeType == GradeType.NONE || (gradeType.getMin() <= grade && grade <= gradeType.getMax())) {
+		if (gradeType == GradeType.NONE || (gradeType.getMin() <= grade && grade <= gradeType.getMax())) {
 			return true;
 		}
 		return false;

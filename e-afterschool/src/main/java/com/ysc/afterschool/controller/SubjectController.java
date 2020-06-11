@@ -128,14 +128,22 @@ public class SubjectController {
 			subject.setApplyType(ApplyType.FILL);
 		} else {
 			if (subject.getTargetType() == TargetType.전체) {
-				if (student.getTargetType() == TargetType.초등) {
-					if (subject.targetTrue(subject.getGradeType(), student.getGrade())) {
+				if (subject.getGradeType() == GradeType.초_3_6_중등) {
+					if (student.getTargetType() == TargetType.초등) {
+						if (subject.targetTrue(subject.getGradeType(), student.getGrade())) {
+							applyCheck(subject, applyCount);
+						} else {
+							subject.setApplyType(ApplyType.NOTAPPLY);
+						}
+					} else if (student.getTargetType() == TargetType.중등) {
 						applyCheck(subject, applyCount);
-					} else { // 중학생이 초등 과목에 신청할 경우
-						subject.setApplyType(ApplyType.NOTAPPLY);
 					}
 				} else {
-					applyCheck(subject, applyCount);
+					if (subject.targetTrue(subject.getGradeType(), student.getGrade())) {
+						applyCheck(subject, applyCount);
+					} else {
+						subject.setApplyType(ApplyType.NOTAPPLY);
+					}
 				}
 			} else if (subject.getTargetType() == student.getTargetType()) {
 				if (subject.targetTrue(subject.getGradeType(), student.getGrade())) { // 학생의 학년이 과목의 학년 범위에 해당할 경우
@@ -147,6 +155,7 @@ public class SubjectController {
 				subject.setApplyType(ApplyType.NOTAPPLY);
 			}
 		}
+		
 		model.addAttribute("subject", subject);
 	}
 	
