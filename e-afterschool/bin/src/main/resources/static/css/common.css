@@ -1,0 +1,152 @@
+@charset "EUC-KR";
+
+body { font-family:myFirstFont, NanumGothic,Verdana,Dotum,"돋움",sans-serif; font-size:14px; color:#000; }
+@font-face { font-family:myFirstFont; src:local('NanumGothic') }
+input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,Verdana,Dotum,"돋움",sans-serif; color:#000; }
+* { -webkit-text-size-adjust:none; }
+
+@media (min-width: 1200px) {
+	.layout-boxed, .layout-boxed>.navbar {
+	    width: 900px;
+	}
+}
+
+@media (min-width: 576px) {
+	.login-form {
+	    width: 25rem;
+	}
+}
+
+.image-modal-body {
+	padding: 0rem;	
+}
+
+.file-modal-body {
+	padding: 0.5rem;
+}
+
+/*******************************************************************************************************
+  공통 디자인
+*******************************************************************************************************/
+.fs-11 { font-size: 11px !important; }
+.fs-12 { font-size: 12px !important; }
+.fs-14 { font-size: 14px !important; }
+.fs-16 { font-size: 16px !important; }
+.fs-18 { font-size: 18px !important; }
+.fs-20 { font-size: 20px !important; }
+
+.nav-btn {
+	border-radius: 0;
+	text-shadow: 2px 2px 2px gray;
+}
+
+.font-size-md { font-size: 13px !important; }
+.font-size-xs { font-size: 10.5px !important;}
+
+/*******************************************************************************************************
+ header 디자인
+*******************************************************************************************************/
+.navbar-light {
+	border-bottom-color: white;
+}
+
+.navbar-brand {
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
+
+.navbar-brand img {
+	height: 45px;
+}
+
+.header-icon [class^="icon-"] {
+	font-size: 24px;
+}
+
+/*******************************************************************************************************
+ Table 디자인
+*******************************************************************************************************/
+.table th {
+	font-weight: 600;
+}
+
+.datatable-header {
+	padding-top: 0rem;
+	border-bottom: 0;
+}
+
+.dataTables_wrapper .table-bordered {
+    border: 1px solid #ddd !important;
+}
+
+.dataTables_paginate .paginate_button.disabled, .dataTables_paginate .paginate_button.disabled:focus, .dataTables_paginate .paginate_button.disabled:hover {
+	background-color: transparent;
+}
+
+.datatable-scroll td, .datatable-scroll th {
+    white-space: normal;
+}
+
+.table .tbody-xs td {
+	padding: .75rem .5rem;
+}
+
+.table th {
+	padding: .5rem .5rem;
+}
+
+.table tbody tr {
+	background-color: white;
+}
+
+.datatable-footer {
+	padding: 1rem 1.25rem 0 1.25rem;
+}
+
+.dataTables_paginate {
+	margin: 0 0 1rem 1.25rem;
+}
+
+/*******************************************************************************************************
+ cotent 디자인
+*******************************************************************************************************/
+.layout-boxed .page-content {
+	/* background-color: white; */
+}
+
+.content {
+	padding: 0.75rem;
+	margin-top: 58px !important;
+	margin-bottom: 60px !important;
+	background-color: white;
+}
+
+.info-content {
+    padding: 1rem 0.75rem;
+}
+
+.info-title {
+ 	/* color: #5D5D5D; */
+ 	font-weight: bold;
+    color: #353535;
+    text-shadow: 1px 1px 1px #D5D5D5;
+}
+
+.content-title {
+	display: flex; 
+ 	font-size: 1rem;
+ 	font-weight: bold;
+    color: #353535;
+    text-shadow: 1px 1px 1px #D5D5D5;
+}
+
+.subject-info-body {
+	padding: 1rem;
+}
+
+/*******************************************************************************************************
+ swal 디자인
+*******************************************************************************************************/
+.swal2-title {
+	font-weight: bold;
+}

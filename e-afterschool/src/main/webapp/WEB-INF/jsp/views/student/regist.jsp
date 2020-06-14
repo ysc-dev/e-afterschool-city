@@ -6,7 +6,7 @@
 <div class="content d-flex justify-content-center align-items-center"> 
 	<form id="studentRegistForm" class="form-validate" action="${pageContext.request.contextPath}/student/regist" method="POST"> 
 		<div class="card mb-0">
-			<div class="card-header bg-teal-400 text-white">
+			<div class="card-header bg-teal-400 text-white py-2">
 				<h2>방과후학교 학생 등록</h2>
 			</div>
 			<div class="card-body student-content">
@@ -79,17 +79,17 @@
 				<fieldset class="mb-0">
 					<legend class="text-uppercase font-weight-bold">개인정보제공 동의</legend>
 					<label class="text-grey-600">학생보험 가입 시 필요한 개인정보제공에 동의를 해 주셔야 가입이 가능합니다.<br>보험가입목적 외에는 절대 사용하지 않습니다.</label>
-					<div class="form-check mt-2">
+					<div class="form-check mt-1">
 						<label class="form-check-label">
 							<input id="agreeCheck" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
 							보험가입에 필요한 개인정보를 보험사에 제공하는 것에 동의합니다.
 						</label>
 					</div>
-					<div id="residentNumberInput" class="mt-2 d-none">
-						<div class="form-group ml-3 mb-3">
+					<div id="residentNumberInput" class="mt-1 d-none">
+						<div class="form-group ml-3">
 							<button id="modalBtn" type="button" class="btn bg-teal-600 px-2" data-toggle="modal" data-target="#modal">보험관련 규약추가항목 확인</button>
 						</div>
-						<div class="form-group">
+						<div class="form-group mt-2">
 							<label class="font-weight-bold">학생주민등록번호 입력 :</label>
 							<div class="d-flex align-items-center">
 								<input type="text" class="form-control format-jumin1" id="jumin1" name="jumin1">

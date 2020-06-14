@@ -75,7 +75,7 @@ $("#invitationTable").DataTable({
 	pageLength: 5,
 	order: [[0, 'asc']],
 	columns: [
-	{ width: "5%" },
+	{ width: "8%" },
 	{ width: "50%" },
 	{ width: "19%" },
 	{ width: "26%" }],

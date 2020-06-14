@@ -34,15 +34,15 @@
 				
 				<input type="hidden" value="${cityId}" name="cityId"/>
 
-				<div class="form-group mb-3">
+				<div class="form-group mb-2">
 					<button type="submit" class="btn bg-info-600 btn-block">로그인<i class="icon-circle-right2 ml-2"></i></button>
 				</div>
 				
-				<div class="form-group text-center text-muted content-divider mb-3">
+				<div class="form-group text-center text-muted content-divider mb-2">
 					<span class="px-2"></span>
 				</div>
 				
-				<div class="form-group">
+				<div class="form-group mb-1">
 					<a href="${pageContext.request.contextPath}/home/${cityId}" class="btn btn-light btn-block">
 						뒤로가기<i class="icon-circle-right2 ml-2"></i>
 					</a>

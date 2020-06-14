@@ -1,0 +1,21 @@
+@charset "EUC-KR";
+
+/*******************************************************************************************************
+ header 없는 테이블 디자인
+*******************************************************************************************************/
+.table th {
+	padding: 0;
+}
+
+.table thead th {
+	border-bottom: 0px;
+}
+
+.dataTables_wrapper .table-bordered {
+    border: 0px solid #ddd !important;
+}
+
+.card-table {
+	border: 0;
+	box-shadow: none!important;
+}

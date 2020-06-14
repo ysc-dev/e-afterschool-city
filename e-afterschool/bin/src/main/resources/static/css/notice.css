@@ -1,0 +1,51 @@
+@charset "EUC-KR";
+
+.notice-detail .card-body {
+	padding: 0 !important;
+}
+
+.notice-detail .subject, .notice-detail .file {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.notice-detail .subject label, .notice-detail .file label {
+	margin-bottom: 0;
+}
+
+.notice-detail .content {
+    padding: 1.2rem 1.2rem;
+    min-height: 120px;
+    margin-top: 0 !important;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    margin-bottom: 0 !important;
+}
+
+.notice-detail .image-content {
+	padding: 1rem 1rem;
+}
+
+.card-header {
+	/* background-color: rgba(0,0,0,.035) !important; */
+}
+
+/*****************************************************
+  ¥Ò±€ Ω∫≈∏¿œ
+******************************************************/
+.comment-body {
+	padding: 1rem 1rem !important;
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.comment-list-body {
+	padding: 0rem 1.25rem !important;
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.comment-list {
+	margin: 1.0rem 0.5rem;
+}
+
+.media-title {
+	margin-bottom: .25rem;
+}

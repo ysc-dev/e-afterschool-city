@@ -1,0 +1,48 @@
+@charset "EUC-KR";
+
+/*******************************************************************************************************
+ content µðÀÚÀÎ
+*******************************************************************************************************/
+.content {
+	padding: 0.9rem 0.9rem;
+}
+
+.card-header h2 {
+	display: block;
+    margin: 0 auto;
+    padding: 0;
+    /* border-bottom: 1px dashed #a0a0a0; */
+    text-align: center;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.card-body .info-text {
+	font-size: 15px;
+    color: #0075cc;
+    font-weight: bold;
+    text-align: center;
+}
+
+.student-content .col-form-label {
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    float: left;
+    padding: 6px 10px 0 10px;
+}
+
+.custom-btn {
+	width: 120px;
+    height: 40px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 16px;
+}
+
+legend {
+	padding-top: .4rem;
+    padding-bottom: .4rem;
+    margin-bottom: .5rem;
+    font-size: 15px;
+}

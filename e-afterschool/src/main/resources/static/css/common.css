@@ -28,6 +28,7 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 /*******************************************************************************************************
   공통 디자인
 *******************************************************************************************************/
+.fs-10 { font-size: 0.6875rem !important; }
 .fs-11 { font-size: 11px !important; }
 .fs-12 { font-size: 12px !important; }
 .fs-14 { font-size: 14px !important; }
@@ -46,6 +47,10 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 /*******************************************************************************************************
  header 디자인
 *******************************************************************************************************/
+.navbar {
+	padding: 0 0.5rem 0 0;
+}
+
 .navbar-light {
 	border-bottom-color: white;
 }
@@ -53,6 +58,7 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 .navbar-brand {
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
+	margin-right: 0;
 }
 
 .navbar-brand img {
@@ -111,7 +117,7 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
  cotent 디자인
 *******************************************************************************************************/
 .layout-boxed .page-content {
-	/* background-color: white; */
+	background-color: white;
 }
 
 .content {

@@ -6,7 +6,7 @@
 <div class="content d-flex justify-content-center align-items-center"> 
 	<form id="studentUpdateForm" class="form-validate" action="${pageContext.request.contextPath}/student/update"> 
 		<div class="card mb-0">
-			<div class="card-header bg-teal-400 text-white">
+			<div class="card-header bg-teal-400 text-white py-2">
 				<h2>방과후학교 학생 정보 변경</h2>
 			</div>
 			<div class="card-body student-content">
