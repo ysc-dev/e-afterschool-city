@@ -8,7 +8,7 @@
   	<c:param name="home" value="info?cityId=${cityId}" />
 </c:import>
 
-<div class="content subject-content px-1"> 
+<div class="content subject-content px-0"> 
 	<div class="content-title justify-content-center align-items-center mt-2">
 		<span class="fs-18">${subjectGroup.name} 과목(${fn:length(subjects)})</span>
 	</div>
@@ -40,7 +40,7 @@
 		</div>
 	</div>
 	
-	<div class="card-group-control mt-2"> 
+	<div class="card-group-control"> 
 		<c:forEach var="subject" items="${subjects}" varStatus="status">
 			<div class="card ${status.last ? 'card-last' : '' }">
 				<div class="card-header bg-light header-elements-inline">

@@ -113,12 +113,6 @@
 	padding-left: 1.2rem;
 }
 
-.subscribe-header {
-	width: 80px;
-	margin-left: 0px !important;
-	justify-content: flex-end;
-}
-
 .card-body {
 	padding: 1rem 1rem;
 	border-top: 1px solid rgba(0,0,0,.125);

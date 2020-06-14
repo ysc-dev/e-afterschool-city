@@ -7,7 +7,7 @@
   	<c:param name="left" value="info?cityId=${cityId}" />
 </c:import>
 
-<div class="content subject-content px-1">
+<div class="content subject-content px-0">
 	<div class="content-title d-flex justify-content-center align-items-center mt-2">
 		<span class="fs-18">${invitation.name}</span>
 	</div>
@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	
-	<div class="card-group-control card-group-control-left subject-group mt-2" id="accordion-group"> 
+	<div class="card-group-control card-group-control-left subject-group" id="accordion-group"> 
 		<c:forEach var="subjectGroup" items="${subjectGroups}" varStatus="status">
 			<div class="card ${status.last ? 'card-last' : '' }">
 				<div class="card-header bg-light header-elements-inline">
@@ -48,7 +48,7 @@
 							${subjectGroup.name}
 						</a>
 					</h6>
-					<div class="header-elements subscribe-header">
+					<div class="header-elements">
 						<a href="list?infoId=${invitation.id}&groupId=${subjectGroup.id}" class="btn bg-teal btn-sm">과목 리스트</a>
 		           	</div>
 				</div>

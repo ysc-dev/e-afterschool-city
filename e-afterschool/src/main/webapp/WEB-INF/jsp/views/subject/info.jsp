@@ -11,9 +11,14 @@
     padding-top: 4px;
     padding-bottom: 4px;
 }
+
+.card {
+	border: 0px;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
 </style>
  
-<div class="content">
+<div class="content px-0">
 	<div class="content-title d-flex justify-content-center align-items-center mt-2">
 		<span class="fs-18">${subject.name}</span>
 	</div>
