@@ -88,7 +88,7 @@
 }
 
 .card-header {
-	padding: .9375rem 0.75rem;
+	padding: .75rem .75rem;
 	border-bottom: 0;
 }
 
@@ -135,7 +135,7 @@
 }
 
 .subject-group .card-header {
-	padding: .9375rem 1.25rem;
+	padding: .9375rem;
 }
 
 .subject-group .card-header a {

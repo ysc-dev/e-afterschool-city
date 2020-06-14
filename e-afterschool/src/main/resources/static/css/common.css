@@ -1,6 +1,10 @@
 @charset "EUC-KR";
 
-body { font-family:myFirstFont, NanumGothic,Verdana,Dotum,"µ¸¿ò",sans-serif; font-size:14px; color:#000; }
+body {
+	/* font-family: myFirstFont, NanumGothic, Verdana, Dotum, "µ¸¿ò", sans-serif; */
+	font-size: 14px;
+	color: #000;
+}
 @font-face { font-family:myFirstFont; src:local('NanumGothic') }
 input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,Verdana,Dotum,"µ¸¿ò",sans-serif; color:#000; }
 * { -webkit-text-size-adjust:none; }
@@ -35,6 +39,8 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 .fs-16 { font-size: 16px !important; }
 .fs-18 { font-size: 18px !important; }
 .fs-20 { font-size: 20px !important; }
+.fs-28 { font-size: 28px !important; }
+.fs-32 { font-size: 32px !important; }
 
 .nav-btn {
 	border-radius: 0;
@@ -42,13 +48,13 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 }
 
 .font-size-md { font-size: 13px !important; }
-.font-size-xs { font-size: 10.5px !important;}
+.font-size-xs { font-size: 10px !important;}
 
 /*******************************************************************************************************
  header µðÀÚÀÎ
 *******************************************************************************************************/
 .navbar {
-	padding: 0 0.5rem 0 0;
+	/* padding: 0 0.2rem 0 0.2rem; */
 }
 
 .navbar-light {
@@ -62,7 +68,7 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 }
 
 .navbar-brand img {
-	height: 45px;
+	height: 35px;
 }
 
 .header-icon [class^="icon-"] {
@@ -74,6 +80,11 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 *******************************************************************************************************/
 .table th {
 	font-weight: 600;
+	padding: .5rem .5rem;
+}
+
+.table {
+	border-bottom: 1px solid #ddd;
 }
 
 .datatable-header {
@@ -94,10 +105,6 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 }
 
 .table .tbody-xs td {
-	padding: .75rem .5rem;
-}
-
-.table th {
 	padding: .5rem .5rem;
 }
 
@@ -122,25 +129,14 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 
 .content {
 	padding: 0.75rem;
-	margin-top: 58px !important;
-	margin-bottom: 60px !important;
+	margin-top: 50px !important;
+	margin-bottom: 50px !important;
 	background-color: white;
-}
-
-.info-content {
-    padding: 1rem 0.75rem;
-}
-
-.info-title {
- 	/* color: #5D5D5D; */
- 	font-weight: bold;
-    color: #353535;
-    text-shadow: 1px 1px 1px #D5D5D5;
 }
 
 .content-title {
 	display: flex; 
- 	font-size: 1rem;
+ 	font-size: 18px;
  	font-weight: bold;
     color: #353535;
     text-shadow: 1px 1px 1px #D5D5D5;

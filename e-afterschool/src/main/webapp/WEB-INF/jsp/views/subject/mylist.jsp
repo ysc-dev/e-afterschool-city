@@ -15,7 +15,7 @@
 
 	<c:choose>
 		<c:when test="${fn:length(applies) == 0}">
-	       	<div class="result-empty mt-4"> 
+	       	<div class="result-empty mt-3"> 
 				수강신청내역이 없습니다.
 			</div>
 	    </c:when>

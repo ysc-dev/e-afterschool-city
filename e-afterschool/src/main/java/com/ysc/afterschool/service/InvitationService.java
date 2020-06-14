@@ -17,7 +17,7 @@ public class InvitationService {
 	
 	@Cacheable("invitation.getList")
 	public List<Invitation> getList(int cityId) {
-		return invitationRepository.findByCityId(cityId);
+		return invitationRepository.findByCityIdOrderByDeadlineDateDesc(cityId);
 	}
 
 	@Cacheable("invitation.get")

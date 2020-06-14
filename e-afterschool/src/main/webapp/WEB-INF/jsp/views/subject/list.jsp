@@ -8,12 +8,12 @@
   	<c:param name="home" value="info?cityId=${cityId}" />
 </c:import>
 
-<div class="content subject-content"> 
-	<div class="content-title justify-content-center align-items-center mt-3">
+<div class="content subject-content px-1"> 
+	<div class="content-title justify-content-center align-items-center mt-2">
 		<span class="fs-18">${subjectGroup.name} 과목(${fn:length(subjects)})</span>
 	</div>
 	
-	<div class="navbar navbar-expand navbar-dark bg-info-700 navbar-component border-transparent mt-4">
+	<div class="navbar navbar-expand navbar-dark bg-info-700 navbar-component border-transparent mt-3">
 		<div class="navbar-collapse">
 			<ul class="navbar-nav navbar-nav-highlight">
 				<li class="nav-item">
@@ -40,15 +40,15 @@
 		</div>
 	</div>
 	
-	<div class="card-group-control mt-3"> 
+	<div class="card-group-control mt-2"> 
 		<c:forEach var="subject" items="${subjects}" varStatus="status">
 			<div class="card ${status.last ? 'card-last' : '' }">
 				<div class="card-header bg-light header-elements-inline">
 					<h6 class="card-title">
 						<span class="font-size-md text-default font-weight-bold">${subject.name}</span>
 					</h6>
-					<div class="header-elements subscribe-header">
-						<a href="micro?infoId=${infoId}&id=${subject.id}" class="btn bg-info-600 btn-sm">상세보기</a>
+					<div class="header-elements">
+						<a href="micro?infoId=${infoId}&id=${subject.id}" class="btn bg-teal btn-sm px-2">상세보기</a>
 		           	</div>
 				</div>
 			</div>

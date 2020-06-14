@@ -8,12 +8,12 @@
   	<c:param name="home" value="info?cityId=${cityId}" />
 </c:import>
 
-<div class="content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-3">
+<div class="content px-0">
+	<div class="content-title d-flex justify-content-center align-items-center mt-2">
 		<span class="fs-18">${subject.name}</span>
 	</div>
 	
-	<div class="card card-table mt-4">
+	<div class="card card-table mt-3">
 		<div class="card-header text-center bg-info-600 text-white">
 			<h5 class="card-title font-weight-bold">횟수별 수업내용</h5>
 		</div>
@@ -52,14 +52,14 @@
 </div>
 
 <script>
-$("#contentTable").DataTable({
+/* $("#contentTable").DataTable({
 	pageLength: 10,
 	order: [[0, 'asc']],
 	columns: [
 	{ width: "10%" },
 	{ width: "70%" },
 	{ width: "12%" }],
-});
+}); */
 
 function imageModal(id) {
 	$("#file-viewer").empty();

@@ -8,26 +8,25 @@
   	<c:param name="home" value="info?cityId=${cityId}" />
 </c:import>
 
-<div class="content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-3">
+<div class="content px-0">
+	<div class="content-title d-flex justify-content-center align-items-center mt-2">
 		<span class="fs-18">${subject.name}</span>
 	</div>
 	
-	<div class="text-right mt-4 mb-2">
-		<a href="${pageContext.request.contextPath}/subject/community/regist?infoId=${infoId}&subjectId=${subject.id}"
-			class="btn btn-primary btn-sm"><i class="icon-pencil7 mr-2"></i>글 등록</a>
-	</div>
-	
-	<div class="card card-table">
-		<div class="card-header text-center bg-info-600 text-white">
+	<div class="card card-table mt-3">
+		<div class="card-header bg-info-600 text-white d-flex justify-content-between p-2">
+			<div>&nbsp;</div>
 			<h5 class="card-title font-weight-bold">커 뮤 니 티</h5>
+			<div class="text-right">
+				<a href="${pageContext.request.contextPath}/subject/community/regist?infoId=${infoId}&subjectId=${subject.id}"
+					class="btn bg-primary-700 btn-sm"><i class="icon-pencil7 mr-2"></i>등록</a>
+			</div>
 		</div>
 		
 		<table class="table" id="noticeTable">
 			<tbody class="tbody-xs">
 				<c:forEach var="notice" items="${subjectNotices}" varStatus="status">
 					<tr>
-						<td>${notice.id}</td>
 						<td class="font-size-sm text-center">${status.count}</td>
 						<td class="font-size-sm text-center">${notice.userName}</td>
 						<td class="font-size-sm">
@@ -68,10 +67,10 @@
 </div>
 
 <script>
-var table = $("#noticeTable").DataTable({
-	/* select: {
+/* var table = $("#noticeTable").DataTable({
+	select: {
         style: 'single'
-    }, */
+    },
 	pageLength: 10,
 	order: [[0, 'asc']],
 	columns: [
@@ -84,7 +83,7 @@ var table = $("#noticeTable").DataTable({
  	columnDefs: [
  		{ visible: false, targets: 0 }
  	]
-});
+}); */
 
 /* $('#noticeTable tbody').on( 'click', 'tr', function () {
     var noticeId = table.row(this).data()[0];
@@ -99,6 +98,7 @@ function imageModal(id) {
         type: "GET",
         data: {"id" : id},
         success: function(response) {
+            console.log(response);
 	        response.uploadedFiles.forEach(function(file, index) {
 	        	var img = document.createElement("img");
 	        	img.setAttribute("src", contextPath + "/uploads/community/" + file.fileName);

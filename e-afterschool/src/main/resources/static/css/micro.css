@@ -1,0 +1,68 @@
+@charset "EUC-KR";
+
+/*******************************************************************************************************
+ 박스형 버튼 화면 디자인
+*******************************************************************************************************/
+ .home-title {
+	display: flex; 
+	flex-direction: column;
+	height: 100px;
+	width: 100%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #353535;
+    text-shadow: 1px 1px 1px #BDBDBD;
+}
+
+.col-6 {
+	padding-left: 0.4rem;
+	padding-right: 0.4rem;
+}
+
+.btn-box {
+	width: 100%;
+	height: 100%;
+	font-size: 1rem;
+	font-weight: bold;
+	color: #5D5D5D;
+	padding: 1.25rem 0rem;
+	border-radius: .5rem;
+	box-shadow: 2px 2px 2px #D5D5D5;
+}
+
+.btn-small-box {
+	width: 100%;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 1.25rem 0rem;
+	border-radius: .5rem;
+}
+
+.btn-box span {
+	text-shadow: 1px 1px 1px #D5D5D5;
+}
+
+.btn-outline:not(:hover):not(:active):not(.active):not([aria-expanded=true]) {
+	background-color: white !important;
+}
+
+.guidance-content .card {
+	height: 100%;
+	border: 1px solid #90a4ae;
+	border-radius: .5rem;
+}
+
+.guidance-content .card-body {
+	padding: 1rem 0rem 0.2rem 0rem;
+}
+
+.card-box {
+	display: flex; 
+	flex-direction: column;
+    justify-content: center!important;
+	align-items: center!important;
+	height: 100%;
+	font-size: 15px;
+	font-weight: bold;
+	color: #5D5D5D;
+}

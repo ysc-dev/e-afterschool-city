@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp"%>
 
-<link href="${pageContext.request.contextPath}/css/box.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/micro.css" rel="stylesheet" type="text/css">
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
   	<c:param name="left" value="subject/group?infoId=${invitation.id}" />
@@ -9,7 +9,7 @@
 </c:import>
 
 <div class="content">  
-	<div class="content-title justify-content-center align-items-center mt-3 px-2">  
+	<div class="content-title justify-content-center align-items-center mt-2 px-2">  
 		<span class="fs-18">${subject.name}</span>
 	</div>
 	
@@ -47,7 +47,7 @@
 						<div class="card-body">
 							<div class="card-box">
 								<p class="mb-1">현재 정원</p>
-								<p>${subject.applyNumber}/${subject.fixedNumber}명</p>
+								<p>${subject.applyNumber} / ${subject.fixedNumber}명</p>
 							</div>
 						</div>
 					</div>

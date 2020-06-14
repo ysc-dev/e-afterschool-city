@@ -16,6 +16,7 @@
 	
 	<!-- Global stylesheets -->
 	<link href="${contextName}/limitless/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css">
+	<link href="${contextName}/limitless/css/icons/fontawesome/styles.min.css" rel="stylesheet" type="text/css">
 	<link href="${contextName}/limitless/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link href="${contextName}/limitless/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css">
 	<link href="${contextName}/limitless/css/layout.min.css" rel="stylesheet" type="text/css">

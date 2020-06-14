@@ -11,17 +11,10 @@
     padding-top: 4px;
     padding-bottom: 4px;
 }
-
-/* @media (max-width: 576px) {
-	.long-label {
-	    margin-left: 1.25rem!important;
-	    padding-bottom: .3125rem!important;
-	}
-} */
 </style>
  
 <div class="content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-3">
+	<div class="content-title d-flex justify-content-center align-items-center mt-2">
 		<span class="fs-18">${subject.name}</span>
 	</div>
 	
@@ -50,9 +43,9 @@
 	    		<label class="col-form-label text-primary font-weight-bold"><i class="icon-arrow-right13 mr-1"></i>강사이름 : </label>
 	    		<label class="col-form-label ml-2">${subject.teacher.content}</label>
 	    	</div>
-	    	<div class="d-flex">
-	    		<label class="col-form-label text-primary font-weight-bold"><i class="icon-arrow-right13 mr-1"></i>수업장소 : </label>
-	    		<label class="col-form-label ml-2">${subject.location}</label>
+	    	<div class="d-flex flex-column">
+	    		<label class="col-form-label text-primary font-weight-bold pb-0"><i class="icon-arrow-right13 mr-1"></i>수업장소 : </label>
+	    		<label class="col-form-label mx-3">${subject.location}</label>
 	    	</div>
 	    	<div class="d-flex flex-column">
 	    		<label class="col-form-label text-primary font-weight-bold pb-0"><i class="icon-arrow-right13 mr-1"></i>과목특징 : </label>

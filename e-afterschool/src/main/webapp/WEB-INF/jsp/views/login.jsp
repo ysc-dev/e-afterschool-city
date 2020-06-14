@@ -35,7 +35,8 @@
 				<input type="hidden" value="${cityId}" name="cityId"/>
 
 				<div class="form-group mb-2">
-					<button type="submit" class="btn bg-info-600 btn-block">로그인<i class="icon-circle-right2 ml-2"></i></button>
+					<!-- <button type="submit" class="btn bg-info-600 btn-block">로그인<i class="icon-circle-right2 ml-2"></i></button> -->
+					<button type="submit" class="btn btn-primary btn-lg rounded-round btn-block">로그인<i class="icon-circle-right2 ml-2"></i></button>
 				</div>
 				
 				<div class="form-group text-center text-muted content-divider mb-2">
@@ -43,7 +44,7 @@
 				</div>
 				
 				<div class="form-group mb-1">
-					<a href="${pageContext.request.contextPath}/home/${cityId}" class="btn btn-light btn-block">
+					<a href="${pageContext.request.contextPath}/home/${cityId}" class="btn btn-outline text-slate border-slate-300 rounded-round btn-block">
 						뒤로가기<i class="icon-circle-right2 ml-2"></i>
 					</a>
 				</div>

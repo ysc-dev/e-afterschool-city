@@ -6,15 +6,15 @@
   	<c:param name="home" value="info?cityId=${cityId}" />
 </c:import>
 
-<div class="content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-3">
+<div class="content px-0">
+	<div class="content-title d-flex justify-content-center align-items-center mt-2">
 		<span class="fs-18">전체 공지사항</span>
 	</div>
 	
-	<table class="table table-border-solid mt-4" id="noticeTable">
+	<table class="table table-border-solid mt-3" id="noticeTable">
 		<thead class="text-center">
 			<tr class="bg-info-600">
-				<th>번호</th> 
+				<th>No</th> 
 				<th>제목</th>
 				<th>등록일</th>
 			</tr>
@@ -23,7 +23,7 @@
 			<c:forEach var="notice" items="${notices}" varStatus="status">
 				<tr>
 					<td class="font-size-sm">${status.count}</td>
-					<td>
+					<td class="text-left">
 						<a href="${pageContext.request.contextPath}/notice/detail?infoId=${infoId}&noticeId=${notice.id}" 
 							class="text-primary font-weight-bold">${notice.title}</a>
 					</td>

@@ -7,12 +7,12 @@
   	<c:param name="left" value="info?cityId=${cityId}" />
 </c:import>
 
-<div class="content subject-content">
-	<div class="content-title d-flex justify-content-center align-items-center mt-3">
+<div class="content subject-content px-1">
+	<div class="content-title d-flex justify-content-center align-items-center mt-2">
 		<span class="fs-18">${invitation.name}</span>
 	</div>
 	
-	<div class="navbar navbar-expand navbar-dark bg-info-700 navbar-component border-transparent mt-4">
+	<div class="navbar navbar-expand navbar-dark bg-info-700 navbar-component border-transparent mt-3">
 		<div class="navbar-collapse">
 			<ul class="navbar-nav navbar-nav-highlight">
 				<li class="nav-item">
@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	
-	<div class="card-group-control card-group-control-left subject-group mt-3" id="accordion-group"> 
+	<div class="card-group-control card-group-control-left subject-group mt-2" id="accordion-group"> 
 		<c:forEach var="subjectGroup" items="${subjectGroups}" varStatus="status">
 			<div class="card ${status.last ? 'card-last' : '' }">
 				<div class="card-header bg-light header-elements-inline">
@@ -49,7 +49,7 @@
 						</a>
 					</h6>
 					<div class="header-elements subscribe-header">
-						<a href="list?infoId=${invitation.id}&groupId=${subjectGroup.id}" class="btn bg-info-600 btn-sm">과목 리스트</a>
+						<a href="list?infoId=${invitation.id}&groupId=${subjectGroup.id}" class="btn bg-teal btn-sm">과목 리스트</a>
 		           	</div>
 				</div>
 		

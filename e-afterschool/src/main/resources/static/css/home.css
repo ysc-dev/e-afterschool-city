@@ -1,0 +1,36 @@
+@charset "EUC-KR";
+
+/*******************************************************************************************************
+ 박스형 버튼 화면 디자인
+*******************************************************************************************************/
+
+.home-content .row {
+	border-top: 1px solid #90a4ae;
+	border-bottom: 1px solid #90a4ae;
+	padding: 12px;
+}
+
+.border-right {
+	border-right: 1px solid #90a4ae;
+}
+
+.border-bottom {
+	border-bottom: 1px solid #90a4ae;
+}
+
+ .home-title {
+	display: flex; 
+	flex-direction: column;
+	height: 100px;
+	width: 100%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #353535;
+    text-shadow: 2px 2px 2px #D5D5D5;
+}
+
+.btn-title {
+	font-size: 18px;
+	font-weight: 600;
+	text-shadow: 2px 2px 2px #D5D5D5;
+}
