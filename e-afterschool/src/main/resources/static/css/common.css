@@ -21,6 +21,11 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 	}
 }
 
+@media (min-width: 576px) {
+	.info-title-text {font-size: 14px;}
+	.info-content-text {font-size: 13px;}
+}
+
 .image-modal-body {
 	padding: 0rem;	
 }
@@ -48,7 +53,6 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 }
 
 .font-size-md { font-size: 13px !important; }
-.font-size-xs { font-size: 10px !important;}
 
 /*******************************************************************************************************
  header µðÀÚÀÎ

@@ -16,16 +16,16 @@
 		<thead class="text-center">
 			<tr class="bg-info-600">
 				<th>안내장 제목</th>
-				<th>신청 마감일</th>
-				<th>수강 안내</th>
+				<th>마감일</th>
+				<th>수강안내</th>
 			</tr>
 		</thead>
 		<tbody class="tbody-xs text-center">
 			<c:forEach var="invitation" items="${invitations}" varStatus="status">
 				<tr>
-					<td class="font-size-sm text-left"><a href="#" class="text-dark font-weight-bold" onclick="showInfo(${invitation.id})">${invitation.name}</a></td>
-					<td class="font-size-xs">${invitation.deadlineDate}</td>
-					<td class="fs-11">
+					<td class="font-size-sm info-title-text"><a href="#" class="text-dark font-weight-bold" onclick="showInfo(${invitation.id})">${invitation.name}</a></td>
+					<td class="font-size-xs info-content-text">${invitation.deadlineDate}</td>
+					<td class="font-size-xs info-content-text">
 						<c:choose>
 							<c:when test="${invitation.type.id == 1}">
 								<a href="#" class="text-grey-600" onclick="deadlineClick(${invitation.id})">${invitation.type.name}</a>

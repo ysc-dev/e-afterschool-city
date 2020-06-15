@@ -16,6 +16,9 @@
 #loginBtn { background-color: #F3E9E8!important; box-shadow: 5px 5px 5px #eee;}
 #infoBtn { background-color: #E4D4DE!important; box-shadow: 5px 5px 5px #eee;}
 .info-card { background-color: #F4F9FC!important; border-radius: .5rem; }  */
+.regist-title {color : #f39c12!important;}
+.login-title {color : #3498db!important;}
+.info-title {color : #2ecc71!important;}
 </style>
 
 <div class="content home-content">
@@ -24,38 +27,44 @@
 	</div>
 	
 	<div class="row mt-3">
-		<div class="col-6 p-3 px-md-5 border-right border-bottom">
-			<div class="d-flex flex-column text-center">
-				<div class="mb-2">
-					<i class="fas fa-user-plus fa-2x text-grey-400"></i>
+		<div class="col-6 border-right border-bottom">
+			<button type="button" id="registBtn" class="btn btn-block bg-transparent py-4" data-fouc>
+				<div class="d-flex flex-column text-center">
+					<div class="mb-2">
+						<i class="fas fa-user-plus fa-2x text-grey-400 regist-title"></i>
+					</div>
+					<div class="btn-title regist-title">학생 등록</div>
+					<div class="fs-12 text-grey-400">처음이신가요?</div>
+					<!-- <button type="button" id="registBtn" class="btn btn-outline-info btn-lg rounded-round mt-2">들어가기</button> -->
 				</div>
-				<div class="btn-title text-grey-800">학생 등록</div>
-				<div class="text-grey-400">처음이신가요?</div>
-				<button type="button" id="registBtn" class="btn btn-outline-info btn-lg rounded-round mt-2">들어가기</button>
-			</div>
+			</button>
 		</div>
-		<div class="col-6 p-3 px-md-5 border-bottom"> 
-			<div class="d-flex flex-column text-center">
-				<div class="mb-2">
-					<i class="fas fa-sign-in-alt fa-2x text-grey-400"></i>
+		<div class="col-6 border-bottom"> 
+			<button type="button" id="loginBtn" class="btn btn-block bg-transparent py-4" data-fouc>
+				<div class="d-flex flex-column text-center">
+					<div class="mb-2">
+						<i class="fas fa-sign-in-alt fa-2x text-grey-400 login-title"></i>
+					</div>
+					<div class="btn-title text-grey-800 login-title">로그인</div>
+					<div class="fs-12 text-grey-400">&nbsp;로그인하시겠습니까?</div>
+					<!-- <button type="button" id="loginBtn" class="btn btn-outline-info btn-lg rounded-round mt-2">들어가기</button> -->
 				</div>
-				<div class="btn-title text-grey-800">로그인</div>
-				<div class="text-grey-400">&nbsp;로그인 하시겠습니까?</div>
-				<button type="button" id="loginBtn" class="btn btn-outline-info btn-lg rounded-round mt-2">들어가기</button>
-			</div>
+			</button>
 		</div>
-		<div class="col-6 p-3 px-md-5 border-right">
-			<div class="d-flex flex-column text-center">
-				<div class="mb-2">
-					<i class="fas fa-info-circle fa-2x text-grey-400"></i>
+		<div class="col-6 border-right">
+			<button type="button" id="infoBtn" class="btn btn-block bg-transparent py-4" data-fouc>
+				<div class="d-flex flex-column text-center">
+					<div class="mb-2">
+						<i class="fas fa-info-circle fa-2x text-grey-400 info-title"></i>
+					</div>
+					<div class="btn-title info-title">프로그램 안내</div>
+					<div class="fs-12 text-grey-400">안내장 정보입니다.</div>
+					<!-- <button type="button" id="infoBtn" class="btn btn-outline-info btn-lg rounded-round mt-2">들어가기</button> -->
 				</div>
-				<div class="btn-title text-grey-800">프로그램 안내</div>
-				<div class="text-grey-400">안내장 정보입니다.</div>
-				<button type="button" id="infoBtn" class="btn btn-outline-info btn-lg rounded-round mt-2">들어가기</button>
-			</div>
+			</button>
 		</div>
-		<div class="col-6 py-3 px-0">
-			<div class="d-flex flex-column align-items-center text-center">
+		<div class="col-6 py-2 px-0">
+			<div class="d-flex flex-column align-items-center text-center text-grey-800">
 				<div>
 					<div>수강신청주소</div>
 					<span class="fs-10 font-weight-bold" style="letter-spacing:0rem">

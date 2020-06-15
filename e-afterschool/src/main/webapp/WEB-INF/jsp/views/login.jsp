@@ -44,7 +44,8 @@
 				</div>
 				
 				<div class="form-group mb-1">
-					<a href="${pageContext.request.contextPath}/home/${cityId}" class="btn btn-outline text-slate border-slate-300 rounded-round btn-block">
+					<a href="${pageContext.request.contextPath}/home/${cityId}" 
+						class="btn btn-outline text-slate border-slate-300 bg-slate-300 rounded-round btn-block">
 						뒤로가기<i class="icon-circle-right2 ml-2"></i>
 					</a>
 				</div>

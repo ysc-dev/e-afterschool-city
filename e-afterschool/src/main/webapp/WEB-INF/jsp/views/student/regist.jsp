@@ -77,19 +77,19 @@
 				</div>
 				
 				<fieldset class="mb-0">
-					<legend class="text-uppercase font-weight-bold">개인정보제공 동의</legend>
+					<legend class="fs-14 font-weight-bold">개인정보제공 동의</legend>
 					<label class="text-grey-600">학생보험 가입 시 필요한 개인정보제공에 동의를 해 주셔야 가입이 가능합니다.<br>보험가입목적 외에는 절대 사용하지 않습니다.</label>
-					<div class="form-check mt-1">
+					<div class="form-check mt-1 mb-0">
 						<label class="form-check-label">
 							<input id="agreeCheck" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
 							보험가입에 필요한 개인정보를 보험사에 제공하는 것에 동의합니다.
 						</label>
 					</div>
-					<div id="residentNumberInput" class="mt-1 d-none">
+					<div id="residentNumberInput" class="mt-1 mb-0 d-none">
 						<div class="form-group ml-3">
 							<button id="modalBtn" type="button" class="btn bg-teal-600 px-2" data-toggle="modal" data-target="#modal">보험관련 규약추가항목 확인</button>
 						</div>
-						<div class="form-group mt-2">
+						<div class="form-group mt-2 mb-0">
 							<label class="font-weight-bold">학생주민등록번호 입력 :</label>
 							<div class="d-flex align-items-center">
 								<input type="text" class="form-control format-jumin1" id="jumin1" name="jumin1">
