@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ysc.afterschool.domain.db.Apply;
 import com.ysc.afterschool.domain.db.City;
+import com.ysc.afterschool.service.ApplyService;
 import com.ysc.afterschool.service.CityService;
-import com.ysc.afterschool.service.SmsService;
+import com.ysc.afterschool.service.common.SmsService;
 
 /**
  * 인트로 화면 및 홈 화면
@@ -31,8 +33,8 @@ public class HomeController {
 	@Autowired
 	private SmsService smsService;
 	
-//	@Autowired
-//	private ApplyService applyService;
+	@Autowired
+	private ApplyService applyService;
 	
 	@GetMapping("/")
 	public String index() {
@@ -78,7 +80,7 @@ public class HomeController {
 	@GetMapping("send")
 	public String send() throws IOException {
 		smsService.send("010-4613-1202");
-//		for (Apply apply : applyService.getList(8)) {
+//		for (Apply apply : applyService.getList(9)) {
 //			smsService.send(apply.getStudent().getTel());
 ////			System.err.println(apply.getStudent().getTel());
 //		}

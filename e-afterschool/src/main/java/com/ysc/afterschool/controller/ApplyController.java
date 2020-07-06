@@ -19,8 +19,8 @@ import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.domain.db.Subject;
 import com.ysc.afterschool.service.ApplyService;
 import com.ysc.afterschool.service.ApplyWaitService;
-import com.ysc.afterschool.service.SmsService;
 import com.ysc.afterschool.service.SubjectService;
+import com.ysc.afterschool.service.common.SmsService;
 
 /**
  * 수강신청 기능

@@ -31,15 +31,15 @@
 								</a>
 							</h6>
 							<div class="header-elements mylist-header">
-								<%-- <c:choose>
+								<c:choose>
 									<c:when test="${invitation.type.id == 2}">
 										<button type="button" id="deleteBtn" class="btn btn-danger btn-sm" onclick="applyCancel(${apply.id})">신청취소</button>
 									</c:when>
 									<c:otherwise>
 										<button type="button" class="btn btn-danger btn-sm" disabled>신청취소</button>
 									</c:otherwise>
-								</c:choose> --%>
-								<button type="button" id="deleteBtn" class="btn btn-danger btn-sm" onclick="applyCancel(${apply.id})" disabled>신청취소</button>
+								</c:choose>
+								<%-- <button type="button" id="deleteBtn" class="btn btn-danger btn-sm" onclick="applyCancel(${apply.id})" disabled>신청취소</button> --%>
 				           	</div>
 						</div>
 				
