@@ -57,6 +57,5 @@ public class ApplyWait implements Domain {
 		this.student = student;
 		this.subject = subject;
 		this.orderNumber = order;
-		
 	}
 }

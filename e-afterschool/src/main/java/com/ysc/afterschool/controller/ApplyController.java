@@ -141,7 +141,7 @@ public class ApplyController {
 								subject.setWaitingNumber(subject.getWaitingNumber() - 1);
 								if (subjectService.update(subject)) {
 									try {
-										smsService.send(applyWait.getStudent().getTel());
+										smsService.send(applyWait.getStudent().getTel(), applyWait.getInvitationId());
 									} catch (IOException e) {
 										e.printStackTrace();
 									}

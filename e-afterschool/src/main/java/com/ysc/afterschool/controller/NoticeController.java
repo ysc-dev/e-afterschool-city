@@ -76,7 +76,7 @@ public class NoticeController {
 	}
 	
 	/**
-	 * 공지사항 정보 가져오기
+	 * 공지사항 파일 가져오기
 	 * @param id
 	 * @return
 	 */

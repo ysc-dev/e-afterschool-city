@@ -6,6 +6,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.squareup.okhttp.MediaType;
@@ -14,6 +15,8 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.internal.http.RealResponseBody;
+import com.ysc.afterschool.domain.db.Invitation;
+import com.ysc.afterschool.service.InvitationService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,12 +30,15 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class SmsService {
 	
+	@Autowired
+	private InvitationService invitationService;
+	
 	private String tokenType;
 	private String token;
 	
 	private final String message = "캠퍼스형방과후 수강대기중인 과목의 수강이 승인되었습니다. 전화 연락 부탁드립니다.";
 //	private final String message = "캠퍼스형방과후학교\r\n2분기 수강신청기간\r\n8/18 오전 9시 선착순 접수\r\nhttp://e-afterschool.kr/cw";
-	private final String callback = "0552740518"; //0552870513, 창원
+//	private final String callback = "0552740518"; //0552870513, 창원
 //	private final String callback = "0557930159"; //진주
 	
 	public void init() throws IOException {
@@ -79,8 +85,17 @@ public class SmsService {
 	 * @param phone
 	 * @throws IOException
 	 */
-	public void send(String phone) throws IOException {
+	public void send(String phone, int invitationId) throws IOException {
 		init();
+		
+		String callback = "0552740518";
+		
+		Invitation invitation = invitationService.get(invitationId);
+		if (invitation.getCity().getName().contains("창원")) {
+			callback = "0552740518";
+		} else if (invitation.getCity().getName().contains("진주")) {
+			callback = "0557930159";
+		}
 		
 		phone = phone.replaceAll("-", "");
 		

@@ -28,13 +28,13 @@ public class SmsController {
 	
 	@GetMapping("send")
 	public String send() throws IOException {
-		smsService.send("010-4613-1202");
+		smsService.send("010-4613-1202", 8);
 //		for (Apply apply : applyService.getList(8)) {
 //			smsService.send(apply.getStudent().getTel());
 //		}
-		for (ApplyWait wait : applyWaitService.getGroupList(8)) {
-			smsService.send(wait.getStudent().getTel());
-		}
+//		for (ApplyWait wait : applyWaitService.getGroupList(8)) {
+//			smsService.send(wait.getStudent().getTel(), 8);
+//		}
 		return "home";
 	}
 }
