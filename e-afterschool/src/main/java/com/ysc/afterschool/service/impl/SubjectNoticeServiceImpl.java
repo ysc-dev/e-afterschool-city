@@ -17,11 +17,13 @@ public class SubjectNoticeServiceImpl implements SubjectNoticeService {
 	@Autowired
 	private SubjectNoticeRepository subjectNoticeRepository;
 
+	@Transactional(readOnly = true)
 	@Override
 	public SubjectNotice get(Integer id) {
 		return subjectNoticeRepository.findById(id).get();
 	}
 	
+	@Transactional(readOnly = true)
 	@Override
 	public List<SubjectNotice> getList() {
 		return subjectNoticeRepository.findAll();

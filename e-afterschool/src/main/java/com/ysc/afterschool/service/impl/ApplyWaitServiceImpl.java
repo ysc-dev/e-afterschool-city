@@ -23,6 +23,7 @@ public class ApplyWaitServiceImpl implements ApplyWaitService {
 		return applyWaitRepository.findById(id).get();
 	}
 	
+	@Transactional(readOnly = true)
 	@Override
 	public List<ApplyWait> getList() {
 		return applyWaitRepository.findAll();
@@ -73,5 +74,10 @@ public class ApplyWaitServiceImpl implements ApplyWaitService {
 	@Override
 	public List<ApplyWait> getList(int subjectId) {
 		return applyWaitRepository.findBySubjectId(subjectId);
+	}
+
+	@Override
+	public List<ApplyWait> getGroupList(int invitationId) {
+		return applyWaitRepository.findByInvitationIdGroupByStudentId(invitationId);
 	}
 }

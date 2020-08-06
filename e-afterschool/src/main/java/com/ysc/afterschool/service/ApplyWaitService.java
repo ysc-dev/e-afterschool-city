@@ -12,4 +12,6 @@ public interface ApplyWaitService extends CRUDService<ApplyWait, Integer> {
 	ApplyWait get(int infoId, int subjectId, OrderType type);
 	
 	List<ApplyWait> getList(int subjectId);
+	
+	List<ApplyWait> getGroupList(int invitationId);
 }

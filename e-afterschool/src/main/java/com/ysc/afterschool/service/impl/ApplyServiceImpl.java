@@ -17,11 +17,13 @@ public class ApplyServiceImpl implements ApplyService {
 	@Autowired
 	private ApplyRepository applyRepository;
 
+	@Transactional(readOnly = true)
 	@Override
 	public Apply get(Integer id) {
 		return applyRepository.findById(id).get();
 	}
 	
+	@Transactional(readOnly = true)
 	@Override
 	public List<Apply> getList() {
 		return applyRepository.findAll();

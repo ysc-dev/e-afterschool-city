@@ -22,6 +22,8 @@ import com.ysc.afterschool.domain.db.Student.TargetType;
 import com.ysc.afterschool.service.SchoolService;
 import com.ysc.afterschool.service.StudentService;
 
+import reactor.core.publisher.Mono;
+
 /**
  * 학생 관리 컨트롤러 클래스
  * 
@@ -48,26 +50,26 @@ public class StudentController {
 		model.addAttribute("cityId", cityId);
 	}
 	
-	/***
+	/**
 	 * 주민번호 중복 확인
 	 * @param student
 	 * @return
 	 */
 	@GetMapping("search/jumin")
 	@ResponseBody
-	public boolean jumin(Student student) {
-		return studentService.searchJumin(student);
+	public Mono<Boolean> jumin(Student student) {
+		return Mono.just(studentService.searchJumin(student));
 	}
 	
-	/***
+	/**
 	 * 등록된 학생인지 확인
 	 * @param student
 	 * @return
 	 */
 	@GetMapping("search")
 	@ResponseBody
-	public boolean search(Student student) {
-		return studentService.search(student);
+	public Mono<Boolean> search(Student student) {
+		return Mono.just(studentService.search(student));
 	}
 	
 	/**

@@ -30,9 +30,10 @@ public class SmsService {
 	private String tokenType;
 	private String token;
 	
-	private final String message = "<캠퍼스형방과후학교> 학부모교육장입장불가, 개별마스크반드시착용, 수업10분전도착";
-//	private final String callback = "0552740518"; //0552870513, 창원
-	private final String callback = "0557930159"; //진주
+	private final String message = "캠퍼스형방과후 수강대기중인 과목의 수강이 승인되었습니다. 전화 연락 부탁드립니다.";
+//	private final String message = "캠퍼스형방과후학교\r\n2분기 수강신청기간\r\n8/18 오전 9시 선착순 접수\r\nhttp://e-afterschool.kr/cw";
+	private final String callback = "0552740518"; //0552870513, 창원
+//	private final String callback = "0557930159"; //진주
 	
 	public void init() throws IOException {
 		String text = "ysc2019:505e4c6d61dbe9dbf93e0f8861dc2c5d";

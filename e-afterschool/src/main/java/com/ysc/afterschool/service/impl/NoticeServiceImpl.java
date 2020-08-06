@@ -26,6 +26,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeRepository.findById(id).get();
 	}
 	
+	@Transactional(readOnly = true)
 	@Override
 	public List<Notice> getList() {
 		return noticeRepository.findAll();

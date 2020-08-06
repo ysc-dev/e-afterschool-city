@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.service.InvitationService;
 
+import reactor.core.publisher.Mono;
+
 /**
  * 안내장 관리 컨트롤러 클래스
  * 
@@ -37,7 +39,8 @@ public class InvitationController {
 		if (cityId == 0) {
 			cityId = Integer.parseInt(cookie.getValue());
 		} 
-		model.addAttribute("invitations", invitationService.getList(cityId));
+		
+		model.addAttribute("invitations", invitationService.getList(cityId).collectList().block());
 		model.addAttribute("cityId", cityId);
 		model.addAttribute("student", student);
 	}
@@ -48,7 +51,7 @@ public class InvitationController {
 	 */
 	@GetMapping("info/get")
 	@ResponseBody
-	public ResponseEntity<?> get(int id) {
-		return new ResponseEntity<>(invitationService.get(id), HttpStatus.OK);
+	public Mono<ResponseEntity<?>> get(int id) {
+		return Mono.just(new ResponseEntity<>(invitationService.get(id), HttpStatus.OK));
 	}
 }

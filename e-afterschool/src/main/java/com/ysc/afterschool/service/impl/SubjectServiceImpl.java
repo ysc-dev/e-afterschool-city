@@ -17,11 +17,13 @@ public class SubjectServiceImpl implements SubjectService {
 	@Autowired
 	private SubjectRepository subjectRepository;
 
+	@Transactional(readOnly = true)
 	@Override
 	public Subject get(Integer id) {
 		return subjectRepository.findById(id).get();
 	}
 	
+	@Transactional(readOnly = true)
 	@Override
 	public List<Subject> getList() {
 		return subjectRepository.findAll();

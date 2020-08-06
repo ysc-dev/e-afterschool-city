@@ -17,11 +17,13 @@ public class StudentServiceImpl implements StudentService {
 	@Autowired
 	private StudentRepository studentRepository;
 
+	@Transactional(readOnly = true)
 	@Override
 	public Student get(Integer id) {
 		return studentRepository.findById(id).get();
 	}
 	
+	@Transactional(readOnly = true)
 	@Override
 	public List<Student> getList() {
 		return studentRepository.findAll();

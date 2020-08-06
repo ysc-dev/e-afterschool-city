@@ -22,6 +22,7 @@ public class CommentServiceImpl implements CommentService {
 		return commentRepository.findById(id).get();
 	}
 	
+	@Transactional(readOnly = true)
 	@Override
 	public List<Comment> getList() {
 		return commentRepository.findAll();
