@@ -23,7 +23,7 @@
 
 <div class="content home-content">
 	<div class="home-title justify-content-center align-items-center">
-		<span>${city.content} <span class="text-info-600">캠퍼스형</span> 방과후학교에</span><span>오신 것을 환영합니다.</span>
+		<span>${city.content} <span class="text-info-600">${city.campus}</span> 방과후학교에</span><span>오신 것을 환영합니다.</span>
 	</div>
 	
 	<div class="row mt-3">

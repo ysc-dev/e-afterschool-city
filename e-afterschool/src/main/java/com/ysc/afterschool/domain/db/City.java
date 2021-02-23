@@ -36,6 +36,9 @@ public class City implements Domain {
 	@Column(nullable = false, length = 20)
 	private String content;
 	
+	@Column(length = 45)
+	private String campus;
+	
 	@Column(length = 20)
 	private String logo;
 	

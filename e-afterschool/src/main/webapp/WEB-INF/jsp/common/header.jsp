@@ -6,12 +6,12 @@
 		<c:choose>
 			 <c:when test="${param.home ne null}">
 		     	<a href="${pageContext.request.contextPath}/info?cityId=${cityId}" 
-					class="btn btn-outline bg-slate-300 text-slate-600 header-icon px-0">
-					<i class="icon-home8 pl-1 pr-2"></i>
+					class="btn btn-outline bg-slate-300 text-slate-600 header-icon px-1">
+					<i class="icon-home8 pl-1 pr-1"></i>
 				</a>
 		    </c:when>
 		    <c:otherwise>
-		       	<div class="px-3">&nbsp;</div>
+		       	<div class="px-3">&nbsp;&nbsp;&nbsp;&nbsp;</div>
 		    </c:otherwise>
 		</c:choose>
 	</div>
@@ -19,11 +19,14 @@
 	<div class="navbar-brand">
 		<a href="#" class="d-inline-block">
 		<c:choose>
-		    <c:when test="${cityId eq '1'}">
+		    <c:when test="${cityId == '1'}">
 		        <img src="${pageContext.request.contextPath}/images/cw_logo.png" alt="logo">
 		    </c:when>
-		    <c:when test="${cityId eq '2'}">
+		    <c:when test="${cityId == '2'}">
 		        <img src="${pageContext.request.contextPath}/images/jj_logo.png" alt="logo"> 
+		    </c:when>
+		    <c:when test="${cityId == '5'}">
+		        <img src="${pageContext.request.contextPath}/images/hy_logo.jpg" alt="logo"> 
 		    </c:when>
 		    <c:otherwise>
 		        <img src="${pageContext.request.contextPath}/images/logo.png" alt="logo">
@@ -38,7 +41,7 @@
 	<div class="d-flex align-items-center">
 		<c:if test="${param.left ne null}">
 			<a href="${pageContext.request.contextPath}/${param.left}" 
-				class="btn btn-outline bg-slate-300 text-slate-600 header-icon px-0">
+				class="btn btn-outline bg-slate-300 text-slate-600 header-icon px-2">
 				<i class="icon-arrow-left32"></i>
 			</a>
 		</c:if>
