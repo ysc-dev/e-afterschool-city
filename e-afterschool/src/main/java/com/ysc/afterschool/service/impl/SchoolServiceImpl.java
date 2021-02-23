@@ -56,4 +56,9 @@ public class SchoolServiceImpl implements SchoolService {
 	private boolean isNew(School domain) {
 		return !schoolRepository.existsById(domain.getId());
 	}
+
+	@Override
+	public School get(String name) {
+		return schoolRepository.findByName(name);
+	}
 }

@@ -4,4 +4,5 @@ import com.ysc.afterschool.domain.db.School;
 
 public interface SchoolService extends CRUDService<School, Integer> {
 
+	School get(String name);
 }

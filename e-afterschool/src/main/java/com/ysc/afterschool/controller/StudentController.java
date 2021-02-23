@@ -92,6 +92,7 @@ public class StudentController {
 		
 		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
 		student.setSchoolInfo(school);
+		student.setCity(schoolService.get(school).getCity());
 		
 		if (student.isAgree()) {
 			student.setResidentNumber(student.getJumin1() + "-" + student.getJumin2());
@@ -132,17 +133,19 @@ public class StudentController {
 	@ResponseBody
 	public ResponseEntity<?> update(Student student) {
 		Student temp = studentService.get(student.getId());
-		temp.setSchool(student.getSchool());
 		temp.setGrade(student.getGrade());
 		temp.setClassType(student.getClassType());
 		temp.setNumber(student.getNumber());
 		temp.setAgree(student.isAgree());
+		
 		if (student.isAgree()) {
 			temp.setResidentNumber(student.getJumin1() + "-" + student.getJumin2());
 		}
 		
 		String school = student.getSchool();
+		temp.setSchool(school);
 		temp.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
+		temp.setCity(schoolService.get(school).getCity());
 		
 		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
 		temp.setSchoolInfo(school);

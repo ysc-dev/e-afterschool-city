@@ -61,6 +61,10 @@ public class Student extends AbstractDomain {
 	@Column(nullable = false)
 	private TargetType targetType;
 	
+	/** 캠퍼스 */
+	@Column(length = 20)
+	private String city;
+	
 	/** 핸드폰 앞자리 */
 	@Transient
 	private String service;

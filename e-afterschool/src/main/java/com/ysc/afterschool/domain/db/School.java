@@ -35,6 +35,9 @@ public class School extends AbstractDomain {
     @Column(nullable = false)
 	private SchoolType schoolType;
 	
+	@Column(length = 45)
+	private String city;
+	
 	@Getter
 	public enum SchoolType {
 		초등("초등학교"),
