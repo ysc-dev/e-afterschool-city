@@ -49,7 +49,10 @@
 						</a>
 					</h6>
 					<div class="header-elements">
-						<a href="list?infoId=${invitation.id}&groupId=${subjectGroup.id}" class="btn bg-teal btn-sm">과목 리스트</a>
+						<a href="list?infoId=${invitation.id}&groupId=${subjectGroup.id}"
+							 class="btn ${subjectGroup.subjects == 0 ? 'bg-slate-300' : 'bg-teal' } btn-sm">
+							과목 리스트(${subjectGroup.subjects})
+						</a>
 		           	</div>
 				</div>
 		

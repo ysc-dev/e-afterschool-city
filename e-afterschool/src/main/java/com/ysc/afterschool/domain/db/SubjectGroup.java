@@ -3,6 +3,7 @@ package com.ysc.afterschool.domain.db;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.ysc.afterschool.domain.AbstractDomain;
 
@@ -28,4 +29,7 @@ public class SubjectGroup extends AbstractDomain {
 	/** 설명 */
 	@Column(nullable = false, length = 255)
 	private String description;
+	
+	@Transient
+	private int subjects;
 }

@@ -48,7 +48,10 @@
 						<span class="font-size-md text-default font-weight-bold">${subject.name}</span>
 					</h6>
 					<div class="header-elements">
-						<a href="micro?infoId=${infoId}&id=${subject.id}" class="btn bg-teal btn-sm px-2">상세보기</a>
+						<a href="micro?infoId=${infoId}&id=${subject.id}" 
+							class="btn ${subject.applyNumber == subject.fixedNumber ? 'bg-slate-300' : 'bg-teal' } btn-sm px-2">
+							상세보기 (${subject.applyNumber}/${subject.fixedNumber})
+						</a>
 		           	</div>
 				</div>
 			</div>

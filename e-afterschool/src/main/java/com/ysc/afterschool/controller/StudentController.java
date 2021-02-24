@@ -46,7 +46,7 @@ public class StudentController {
 	 */
 	@GetMapping("regist")
 	public void regist(Model model, int cityId) { 
-		model.addAttribute("schools", schoolService.getList().stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
+		model.addAttribute("schools", schoolService.getList(cityId).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("cityId", cityId);
 	}
 	
@@ -79,6 +79,7 @@ public class StudentController {
 	@PostMapping(value = "regist")
 	@ResponseBody
 	public ResponseEntity<?> regist(Student student) {
+		
 		String school = student.getSchool();
 		
 		if (!student.getTel().contains("-")) {
@@ -90,9 +91,9 @@ public class StudentController {
 		}
 		student.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
 		
+		student.setCity(schoolService.get(school).getCity());
 		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
 		student.setSchoolInfo(school);
-		student.setCity(schoolService.get(school).getCity());
 		
 		if (student.isAgree()) {
 			student.setResidentNumber(student.getJumin1() + "-" + student.getJumin2());
@@ -110,7 +111,9 @@ public class StudentController {
 	 * @param model
 	 */
 	@GetMapping("update")
-	public void update(Model model, int infoId, Authentication authentication, @CookieValue(value = "cityId", required = false) Cookie cookie) { 
+	public void update(Model model, int infoId, Authentication authentication, 
+			@CookieValue(value = "cityId", required = false) Cookie cookie) { 
+		
 		Student student = (Student) authentication.getPrincipal();
 		
 		model.addAttribute("schools", schoolService.getList().stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
@@ -132,6 +135,7 @@ public class StudentController {
 	@PutMapping(value = "update")
 	@ResponseBody
 	public ResponseEntity<?> update(Student student) {
+		
 		Student temp = studentService.get(student.getId());
 		temp.setGrade(student.getGrade());
 		temp.setClassType(student.getClassType());

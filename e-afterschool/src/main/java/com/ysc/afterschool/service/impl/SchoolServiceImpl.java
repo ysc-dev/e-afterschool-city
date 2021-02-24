@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ysc.afterschool.domain.db.City;
 import com.ysc.afterschool.domain.db.School;
 import com.ysc.afterschool.repository.SchoolRepository;
+import com.ysc.afterschool.service.CityService;
 import com.ysc.afterschool.service.SchoolService;
 
 @Transactional
@@ -16,6 +18,9 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Autowired
 	private SchoolRepository schoolRepository;
+	
+	@Autowired
+	private CityService cityService;
 
 	@Transactional(readOnly = true)
 	@Override
@@ -60,5 +65,11 @@ public class SchoolServiceImpl implements SchoolService {
 	@Override
 	public School get(String name) {
 		return schoolRepository.findByName(name);
+	}
+
+	@Override
+	public List<School> getList(int cityId) {
+		City city = cityService.get(cityId);
+		return schoolRepository.findByCity(city.getName());
 	}
 }

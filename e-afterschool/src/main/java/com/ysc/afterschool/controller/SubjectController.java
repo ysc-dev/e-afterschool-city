@@ -60,7 +60,7 @@ public class SubjectController {
 	public void group(Model model, int infoId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
 		model.addAttribute("invitation", invitationService.get(infoId));
 		model.addAttribute("cityId", cookie.getValue());
-		model.addAttribute("subjectGroups", subjectGroupService.getList());
+		model.addAttribute("subjectGroups", subjectGroupService.getList(infoId));
 	}
 	
 	/**
@@ -110,6 +110,7 @@ public class SubjectController {
 	@GetMapping("micro")
 	public void micro(Model model, int infoId, int id, Authentication authentication, 
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("invitation", invitationService.get(infoId));
 		
