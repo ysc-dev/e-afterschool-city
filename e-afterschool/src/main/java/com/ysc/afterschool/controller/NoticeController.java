@@ -35,12 +35,15 @@ public class NoticeController {
 	
 	/**
 	 * 전체 공지사항 화면
+	 * 
 	 * @param model
 	 * @param infoId
 	 * @param cookie
 	 */
 	@GetMapping("list")
-	public void list(Model model, int infoId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+	public void list(Model model, int infoId, 
+			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("notices", noticeService.getList(Integer.parseInt(cookie.getValue())));
@@ -48,12 +51,15 @@ public class NoticeController {
 	
 	/**
 	 * 전체 공지사항 상세보기 화면
+	 * 
 	 * @param model
 	 * @param infoId
 	 * @param cookie
 	 */
 	@GetMapping("detail")
-	public void detail(Model model, int infoId, int noticeId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+	public void detail(Model model, int infoId, int noticeId, 
+			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		
@@ -67,6 +73,7 @@ public class NoticeController {
 	
 	/**
 	 * 공지사항 정보 가져오기
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -77,6 +84,7 @@ public class NoticeController {
 	
 	/**
 	 * 공지사항 파일 가져오기
+	 * 
 	 * @param id
 	 * @return
 	 */

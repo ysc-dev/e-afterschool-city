@@ -42,16 +42,21 @@ public class StudentController {
 
 	/**
 	 * 학생 등록 화면
+	 * 
 	 * @param model
+	 * @param cityId
 	 */
 	@GetMapping("regist")
 	public void regist(Model model, int cityId) { 
-		model.addAttribute("schools", schoolService.getList(cityId).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
+		
+		model.addAttribute("schools", schoolService.getList(cityId).stream()
+				.map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("cityId", cityId);
 	}
 	
 	/**
 	 * 주민번호 중복 확인
+	 * 
 	 * @param student
 	 * @return
 	 */
@@ -63,6 +68,7 @@ public class StudentController {
 	
 	/**
 	 * 등록된 학생인지 확인
+	 * 
 	 * @param student
 	 * @return
 	 */
@@ -74,6 +80,7 @@ public class StudentController {
 	
 	/**
 	 * 학생 등록 기능
+	 * 
 	 * @param student
 	 */
 	@PostMapping(value = "regist")
@@ -109,6 +116,9 @@ public class StudentController {
 	/**
 	 * 학생 정보 변경 화면
 	 * @param model
+	 * @param infoId
+	 * @param authentication
+	 * @param cookie
 	 */
 	@GetMapping("update")
 	public void update(Model model, int infoId, Authentication authentication, 
@@ -116,7 +126,8 @@ public class StudentController {
 		
 		Student student = (Student) authentication.getPrincipal();
 		
-		model.addAttribute("schools", schoolService.getList().stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
+		model.addAttribute("schools", schoolService.getList().stream()
+				.map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("cityId", cookie.getValue());
 		
@@ -130,6 +141,7 @@ public class StudentController {
 	
 	/**
 	 * 학생 정보 변경 기능
+	 * 
 	 * @param student
 	 */
 	@PutMapping(value = "update")

@@ -10,6 +10,12 @@ import com.ysc.afterschool.domain.db.SubjectNotice;
 import com.ysc.afterschool.repository.SubjectNoticeRepository;
 import com.ysc.afterschool.service.SubjectNoticeService;
 
+/**
+ * 과목 공지사항 관리
+ * 
+ * @author hgko
+ *
+ */
 @Transactional
 @Service
 public class SubjectNoticeServiceImpl implements SubjectNoticeService {

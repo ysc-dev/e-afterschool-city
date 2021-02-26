@@ -11,6 +11,12 @@ import com.ysc.afterschool.domain.db.ApplyWait;
 import com.ysc.afterschool.repository.ApplyWaitRepository;
 import com.ysc.afterschool.service.ApplyWaitService;
 
+/**
+ * 수강 대기 관리
+ * 
+ * @author hgko
+ *
+ */
 @Transactional
 @Service
 public class ApplyWaitServiceImpl implements ApplyWaitService {

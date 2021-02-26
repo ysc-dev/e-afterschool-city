@@ -11,6 +11,12 @@ import com.ysc.afterschool.repository.NoticeRepository;
 import com.ysc.afterschool.service.CityService;
 import com.ysc.afterschool.service.NoticeService;
 
+/**
+ * 공지사항 관리
+ * 
+ * @author hgko
+ *
+ */
 @Transactional
 @Service
 public class NoticeServiceImpl implements NoticeService {

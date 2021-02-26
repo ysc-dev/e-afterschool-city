@@ -10,6 +10,12 @@ import com.ysc.afterschool.domain.db.ApplyCancel;
 import com.ysc.afterschool.repository.ApplyCancelRepository;
 import com.ysc.afterschool.service.ApplyCancelService;
 
+/**
+ * 수강 취소 관리
+ * 
+ * @author hgko
+ *
+ */
 @Transactional
 @Service
 public class ApplyCancelServiceImpl implements ApplyCancelService {

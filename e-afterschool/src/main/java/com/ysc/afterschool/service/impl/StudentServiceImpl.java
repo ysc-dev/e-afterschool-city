@@ -10,6 +10,12 @@ import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.repository.StudentRepository;
 import com.ysc.afterschool.service.StudentService;
 
+/**
+ * 학생 관리
+ * 
+ * @author hgko
+ *
+ */
 @Transactional
 @Service
 public class StudentServiceImpl implements StudentService {

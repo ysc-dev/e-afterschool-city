@@ -2,8 +2,12 @@ package com.ysc.afterschool.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.Cookie;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,6 +32,7 @@ public class SmsController {
 	
 	@GetMapping("send")
 	public String send() throws IOException {
+		
 		int site = 8; // 8: 창원, 9: 진주
 		
 		smsService.send("010-4613-1202", site);
@@ -37,6 +42,7 @@ public class SmsController {
 //		for (ApplyWait wait : applyWaitService.getGroupList(site)) {
 //			smsService.send(wait.getStudent().getTel(), site);
 //		}
+		
 		return "home";
 	}
 }

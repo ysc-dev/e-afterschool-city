@@ -52,12 +52,15 @@ public class SubjectController {
 
 	/**
 	 * 수강신청 첫 화면 - 과목 리스트
+	 * 
 	 * @param model
 	 * @param infoId
 	 * @param cookie
 	 */
 	@GetMapping("group")
-	public void group(Model model, int infoId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+	public void group(Model model, int infoId, 
+			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
 		model.addAttribute("invitation", invitationService.get(infoId));
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("subjectGroups", subjectGroupService.getList(infoId));
@@ -65,13 +68,16 @@ public class SubjectController {
 	
 	/**
 	 * 수강신청 확인 화면
+	 * 
 	 * @param model
 	 * @param infoId
+	 * @param authentication
 	 * @param cookie
 	 */
 	@GetMapping("mylist")
 	public void mylist(Model model, int infoId, Authentication authentication, 
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("invitation", invitationService.get(infoId));
 		
@@ -87,13 +93,16 @@ public class SubjectController {
 	
 	/**
 	 * 수강신청 하위 과목 리스트 화면
+	 * 
 	 * @param model
 	 * @param infoId
 	 * @param groupId
 	 * @param cookie
 	 */
 	@GetMapping("list")
-	public void list(Model model, int infoId, int groupId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+	public void list(Model model, int infoId, int groupId, 
+			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subjectGroup", subjectGroupService.get(groupId));
@@ -102,9 +111,11 @@ public class SubjectController {
 	
 	/**
 	 * 수강신청 하위 과목 마이크로 페이지 화면
+	 * 
 	 * @param model
 	 * @param infoId
 	 * @param id
+	 * @param authentication
 	 * @param cookie
 	 */
 	@GetMapping("micro")
@@ -123,7 +134,7 @@ public class SubjectController {
 			subject.setApplyType(ApplyType.APPLY);
 		} else if (applyWaitService.search(infoId, student.getId(), subject.getId())) { //신청 대기 중일 경우
 			subject.setApplyType(ApplyType.APPLYWAIT);
-		} else if (subject.getWaitFixedNumber() <= subject.getWaitingNumber()) { // 대기인원 초과일 경우
+		} else if (subject.getWaitFixedNumber() != 0 && subject.getWaitFixedNumber() <= subject.getWaitingNumber()) { // 대기인원 초과일 경우
 			subject.setApplyType(ApplyType.WAITING);
 		} else if (subject.getFixedNumber() <= subject.getApplyNumber()) { // 정원초과 일 경우
 			subject.setApplyType(ApplyType.FILL);
@@ -161,11 +172,13 @@ public class SubjectController {
 	}
 	
 	/**
-	 * 수강 신청이 2개 등록이 완료된 학생은 수강신청을 못하도록
+	 * 수강 신청이 2개 등록이 완료된 학생은 수강신청을 못함
+	 * 
 	 * @param subject
 	 * @param applyCount
 	 */
 	private void applyCheck(Subject subject, long applyCount) {
+		
 		if (applyCount >= 2) {
 			subject.setApplyType(ApplyType.NOTAPPLY);
 		} else {
@@ -175,13 +188,16 @@ public class SubjectController {
 	
 	/**
 	 * 과목정보 및 과목특징 화면
+	 * 
 	 * @param model
 	 * @param infoId
 	 * @param id
 	 * @param cookie
 	 */
 	@GetMapping("info")
-	public void info(Model model, int infoId, int id, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+	public void info(Model model, int infoId, int id, 
+			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		

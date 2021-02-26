@@ -25,7 +25,7 @@ import com.ysc.afterschool.service.SubjectService;
 import com.ysc.afterschool.service.common.SmsService;
 
 /**
- * 수강신청 기능
+ * 수강신청 기능 컨트롤러
  * 
  * @author hgko
  *
@@ -51,6 +51,8 @@ public class ApplyController {
 	
 	/**
 	 * 수강 신청 기능
+	 * 
+	 * @param infoId
 	 * @param subjectId
 	 * @param authentication
 	 * @return
@@ -82,6 +84,8 @@ public class ApplyController {
 	
 	/**
 	 * 수강 신청 대기 기능
+	 * 
+	 * @param infoId
 	 * @param subjectId
 	 * @param authentication
 	 * @return
@@ -112,12 +116,13 @@ public class ApplyController {
 	
 	/**
 	 * 수강 취소 기능
-	 * @param subjectId
-	 * @param authentication
+	 * 
+	 * @param applyId
 	 * @return
 	 */
 	@DeleteMapping("delete")
 	public ResponseEntity<?> delete(int applyId) {
+		
 		Apply apply = applyService.get(applyId);
 		Subject subject = subjectService.get(apply.getSubjectId());
 		

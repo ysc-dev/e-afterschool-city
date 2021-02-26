@@ -31,11 +31,16 @@ public class InvitationController {
 	
 	/**
 	 * 안내장 목록 화면
+	 * 
 	 * @param model
+	 * @param cityId
+	 * @param student
+	 * @param cookie
 	 */
 	@GetMapping("info")
 	public void info(Model model, int cityId, @AuthenticationPrincipal Student student,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
 		if (cityId == 0) {
 			cityId = Integer.parseInt(cookie.getValue());
 		} 
@@ -47,7 +52,8 @@ public class InvitationController {
 	
 	/**
 	 * 안내장 목록 화면
-	 * @param model
+	 * 
+	 * @param id
 	 */
 	@GetMapping("info/get")
 	@ResponseBody

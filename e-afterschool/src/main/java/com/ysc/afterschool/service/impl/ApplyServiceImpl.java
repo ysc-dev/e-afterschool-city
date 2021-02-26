@@ -10,6 +10,12 @@ import com.ysc.afterschool.domain.db.Apply;
 import com.ysc.afterschool.repository.ApplyRepository;
 import com.ysc.afterschool.service.ApplyService;
 
+/**
+ * 수강 신청 관리
+ * 
+ * @author hgko
+ *
+ */
 @Transactional
 @Service
 public class ApplyServiceImpl implements ApplyService {

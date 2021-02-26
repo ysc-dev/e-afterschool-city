@@ -12,6 +12,12 @@ import com.ysc.afterschool.provider.CustomAuthenticationFailHandler;
 import com.ysc.afterschool.provider.CustomLoginSuccessHandler;
 import com.ysc.afterschool.provider.UserAuthenticationProvider;
 
+/**
+ * 인증 설정
+ * 
+ * @author hgko
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

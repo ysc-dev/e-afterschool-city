@@ -53,13 +53,16 @@ public class CommunityController {
 	
 	/**
 	 * 커뮤니티 화면
+	 * 
 	 * @param model
 	 * @param infoId
 	 * @param id
 	 * @param cookie
 	 */
 	@GetMapping("list")
-	public void list(Model model, int infoId, int id, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+	public void list(Model model, int infoId, int id, 
+			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subject", subjectService.get(id));
@@ -68,13 +71,16 @@ public class CommunityController {
 	
 	/**
 	 * 글 등록 화면
+	 * 
 	 * @param model
 	 * @param infoId
 	 * @param id
 	 * @param cookie
 	 */
 	@GetMapping("regist")
-	public void regist(Model model, int infoId, int subjectId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+	public void regist(Model model, int infoId, int subjectId, 
+			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subject", subjectService.get(subjectId));
@@ -82,6 +88,7 @@ public class CommunityController {
 	
 	/**
 	 * 글 등록 기능
+	 * 
 	 * @param subjectNotice
 	 * @param authentication
 	 * @return
@@ -89,11 +96,15 @@ public class CommunityController {
 	@PostMapping("regist")
 	@ResponseBody
 	public ResponseEntity<?> notice(SubjectNotice subjectNotice, Authentication authentication) {
+		
 		List<SubjectNoticeFile> uploadedFiles = new ArrayList<>();
+		
 		for (MultipartFile file : subjectNotice.getFiles()) {
 			String fileName = file.getOriginalFilename();
+			
 			if (!fileName.isEmpty()) {
 				CommonFile commonFile = fileUploadService.restore(file, CommonFile.COMMUNITY_PATH);
+				
 				SubjectNoticeFile uploadedFile = new SubjectNoticeFile(commonFile);
 				uploadedFile.setSubjectNotice(subjectNotice);
 				
@@ -115,13 +126,16 @@ public class CommunityController {
 	
 	/**
 	 * 커뮤니티 상세보기 화면
+	 * 
 	 * @param model
 	 * @param infoId
 	 * @param id
 	 * @param cookie
 	 */
 	@GetMapping("detail")
-	public void detail(Model model, int infoId, int subjectId, int id, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+	public void detail(Model model, int infoId, int subjectId, int id, 
+			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subjectId", subjectId);
@@ -137,12 +151,14 @@ public class CommunityController {
 	
 	/**
 	 * 정보 삭제
+	 * 
 	 * @param id
 	 * @return
 	 */
 	@DeleteMapping("delete")
 	@ResponseBody
 	public ResponseEntity<?> delete(int id) {
+		
 		if (subjectNoticeService.delete(id)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
@@ -150,6 +166,12 @@ public class CommunityController {
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
+	/**
+	 * 파일 조회
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("file/get")
 	public ResponseEntity<?> getFile(int id) {
 		return new ResponseEntity<>(subjectNoticeService.get(id), HttpStatus.OK);

@@ -12,6 +12,12 @@ import com.ysc.afterschool.repository.SchoolRepository;
 import com.ysc.afterschool.service.CityService;
 import com.ysc.afterschool.service.SchoolService;
 
+/**
+ * 학교 관리
+ * 
+ * @author hgko
+ *
+ */
 @Transactional
 @Service
 public class SchoolServiceImpl implements SchoolService {

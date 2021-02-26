@@ -10,6 +10,12 @@ import com.ysc.afterschool.domain.db.Subject;
 import com.ysc.afterschool.repository.SubjectRepository;
 import com.ysc.afterschool.service.SubjectService;
 
+/**
+ * 과목 관리
+ * 
+ * @author hgko
+ *
+ */
 @Transactional
 @Service
 public class SubjectServiceImpl implements SubjectService {

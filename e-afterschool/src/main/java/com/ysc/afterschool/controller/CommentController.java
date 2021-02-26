@@ -31,6 +31,7 @@ public class CommentController {
 	
 	/**
 	 * 한개의 댓글 정보 불러오기
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -42,6 +43,7 @@ public class CommentController {
 	
 	/**
 	 * 댓글 등록
+	 * 
 	 * @param comment
 	 * @param authentication
 	 * @return
@@ -49,6 +51,7 @@ public class CommentController {
 	@PostMapping(value = "regist")
 	@ResponseBody
 	public ResponseEntity<?> regist(Comment comment, Authentication authentication) {
+		
 		Student student = (Student) authentication.getPrincipal();
 		comment.setUserId(student.getId());
 		comment.setUserName(student.getName());
@@ -62,6 +65,7 @@ public class CommentController {
 	
 	/**
 	 * 댓글 수정
+	 * 
 	 * @param id
 	 * @param content
 	 * @return
@@ -69,6 +73,7 @@ public class CommentController {
 	@PutMapping(value = "update")
 	@ResponseBody
 	public ResponseEntity<?> update(int id, String content) {
+		
 		Comment comment = commentService.get(id);
 		comment.setContent(content);
 		
@@ -81,12 +86,14 @@ public class CommentController {
 	
 	/**
 	 * 댓글 삭제
+	 * 
 	 * @param id
 	 * @return
 	 */
 	@DeleteMapping(value = "delete")
 	@ResponseBody
 	public ResponseEntity<?> delete(int id) {
+		
 		if (commentService.delete(id)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}

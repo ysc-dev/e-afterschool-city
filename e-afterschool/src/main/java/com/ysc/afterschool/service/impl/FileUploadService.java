@@ -12,6 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ysc.afterschool.domain.CommonFile;
 import com.ysc.afterschool.domain.CommonFile.FileType;
 
+/**
+ * 파일 업로드 관리
+ * 
+ * @author hgko
+ *
+ */
 @Service
 public class FileUploadService {
 	

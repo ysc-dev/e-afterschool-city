@@ -10,6 +10,12 @@ import com.ysc.afterschool.domain.db.Comment;
 import com.ysc.afterschool.repository.CommentRepository;
 import com.ysc.afterschool.service.CommentService;
 
+/**
+ * 댓글 관리
+ * 
+ * @author hgko
+ *
+ */
 @Transactional
 @Service
 public class CommentServiceImpl implements CommentService {

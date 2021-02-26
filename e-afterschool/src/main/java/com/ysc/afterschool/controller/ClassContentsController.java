@@ -32,19 +32,28 @@ public class ClassContentsController {
 	
 	/**
 	 * 횟수별 수업내용 화면
+	 * 
 	 * @param model
 	 * @param infoId
 	 * @param id
 	 * @param cookie
 	 */
 	@GetMapping("")
-	public void classView(Model model, int infoId, int id, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+	public void classView(Model model, int infoId, int id, 
+			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subject", subjectService.get(id));
 		model.addAttribute("classContents", classContentsService.getList(id));
 	}
 	
+	/**
+	 * 파일 조회
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("file/get")
 	public ResponseEntity<?> getFile(int id) {
 		return new ResponseEntity<>(classContentsService.get(id), HttpStatus.OK);
