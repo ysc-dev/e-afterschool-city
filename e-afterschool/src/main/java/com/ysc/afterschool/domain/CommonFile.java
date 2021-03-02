@@ -21,7 +21,9 @@ public class CommonFile {
 	@Getter
 	public enum FileType {
 		IMAGE("image"),
-		VIDEO("video");
+		VIDEO("video"),
+		PDF("pdf"),
+		HWP("hwp");
 		
 		private String name;
 		

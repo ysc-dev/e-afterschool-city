@@ -60,6 +60,6 @@ public class SubjectUploadedFile implements Domain {
 	private FileType fileType;
     
 	public enum FileType {
-		IMAGE, VIDEO;
+		IMAGE, VIDEO, PDF, HWP;
 	}
 }

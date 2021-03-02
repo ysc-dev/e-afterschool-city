@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -56,4 +57,7 @@ public class ClassContents implements Domain {
 	@OneToMany(mappedBy = "classContents", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<SubjectUploadedFile> uploadedFiles;
+	
+	@Transient
+	private String fileType;
 }

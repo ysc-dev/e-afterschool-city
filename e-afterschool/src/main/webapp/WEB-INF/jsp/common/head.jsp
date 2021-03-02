@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
-	<title>방과후학교 관리시스템</title>
+	<title>캠퍼스형 방과후학교</title>
 	
 	<script>
 		var contextPath = "${pageContext.request.contextPath}";

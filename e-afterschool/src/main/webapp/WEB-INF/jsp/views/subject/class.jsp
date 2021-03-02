@@ -20,12 +20,18 @@
 		<table class="table" id="contentTable">
 			<tbody class="tbody-xs">
 				<c:forEach var="content" items="${classContents}" varStatus="status">
-					<tr>
-						<td class="font-size-sm text-center">${status.count}</td>
+					<tr class="text-center">
+						<td class="font-size-sm" width="50">${status.count}</td>
 						<td class="font-size-sm font-weight-bold">${content.content}</td>
-						<td class="font-size-sm">
-							<button type="button" class="btn btn-outline bg-primary text-primary-600 btn-sm font-weight-bold" 
-								onClick="imageModal(${content.id})">사진/동영상</button>
+						<td class="font-size-sm" width="110">
+							<c:if test="${content.fileType eq 'IMAGE'}">
+								<button type="button" class="btn btn-outline bg-primary text-primary-600 btn-sm font-weight-bold" 
+										onClick="imageModal(${content.id})">사진/동영상</button>
+							</c:if>
+						</td>
+						<td class="font-size-sm" width="90">
+							<button type="button" class="btn btn-outline bg-info text-info-600 btn-sm font-weight-bold" 
+								onClick="download(${content.id})">다운로드</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -75,7 +81,7 @@ function imageModal(id) {
 		        	img.setAttribute("src", contextPath + "/uploads/class/" + file.fileName);
 		        	img.setAttribute("class", "img-fluid");
 			        $("#file-viewer").append(img);
-				} else {
+				} else if (file.fileType == 'VIDEO') {
 					var div = document.createElement("div");
 					div.setAttribute("class", "card-img embed-responsive embed-responsive-16by9");
 					var video = document.createElement("video");
@@ -91,6 +97,30 @@ function imageModal(id) {
 				}
             });
         	$("#fileModal").modal();
+        }
+    });
+}
+
+function download(id) {
+	$.ajax({
+        url: contextPath + "/subject/class/file/get",
+        type: "GET",
+        data: {"id" : id},
+        success : function(response) {
+	        response.uploadedFiles.forEach(function(file, index) {
+		        console.log(file);
+	        	var url = contextPath + '/uploads/class/' + file.fileName;
+	        	console.log(url);
+		        
+		        const a = document.createElement('a');
+		        a.style.display = 'none';
+		        a.href = url;
+		        a.download = file.fileName;
+		        document.body.appendChild(a);
+		        a.click();
+		        
+		        window.URL.revokeObjectURL(url);
+            });
         }
     });
 }
