@@ -54,6 +54,10 @@ input, select, textarea { font-size:12px; font-family:myFirstFont, NanumGothic,V
 
 .font-size-md { font-size: 13px !important; }
 
+.display-none {
+	display: none !important;
+}
+
 /*******************************************************************************************************
  header µðÀÚÀÎ
 *******************************************************************************************************/

@@ -79,30 +79,42 @@
 				<fieldset class="mb-0">
 					<legend class="fs-14 font-weight-bold">개인정보제공 동의</legend>
 					<label class="text-grey-600">학생보험 가입 시 필요한 개인정보제공에 동의를 해 주셔야 가입이 가능합니다.<br>보험가입목적 외에는 절대 사용하지 않습니다.</label>
-					<div class="form-check mt-1 mb-0">
-						<label class="form-check-label">
-							<input id="agreeCheck" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
-							보험가입에 필요한 개인정보를 보험사에 제공하는 것에 동의합니다.
-						</label>
-					</div>
-					<div id="residentNumberInput" class="mt-1 mb-0 d-none">
-						<div class="form-group ml-3">
-							<button id="modalBtn" type="button" class="btn bg-teal-600 px-2" data-toggle="modal" data-target="#modal">보험관련 규약추가항목 확인</button>
-						</div>
-						<div class="form-group mt-2 mb-0">
-							<label class="font-weight-bold">학생주민등록번호 입력 :</label>
-							<div class="d-flex align-items-center">
-								<input type="text" class="form-control format-jumin1" id="jumin1" name="jumin1">
-								<span class="font-weight-bold mx-2">-</span>
-								<input type="password" class="form-control format-jumin2" id="jumin2" name="jumin2">
+					<c:choose>
+						<c:when test="${city.link eq 'hy'}">
+							<div class="form-check mt-1 mb-0">
+								<label class="form-check-label">
+									<input id="agreeCheckBtn" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
+									개인정보를 제공하는 것에 동의합니다.
+								</label>
 							</div>
-						</div>
-					</div>
+						</c:when>
+						<c:otherwise>
+							<div class="form-check mt-1 mb-0">
+								<label class="form-check-label">
+									<input id="agreeCheck" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
+									보험가입에 필요한 개인정보를 보험사에 제공하는 것에 동의합니다.
+								</label>
+							</div>
+							<div id="residentNumberInput" class="mt-1 mb-0 d-none">
+								<div class="form-group ml-3">
+									<button id="modalBtn" type="button" class="btn bg-teal-600 px-2" data-toggle="modal" data-target="#modal">보험관련 규약추가항목 확인</button>
+								</div>
+								<div class="form-group mt-2 mb-0">
+									<label class="font-weight-bold">학생주민등록번호 입력 :</label>
+									<div class="d-flex align-items-center">
+										<input type="text" class="form-control format-jumin1" id="jumin1" name="jumin1">
+										<span class="font-weight-bold mx-2">-</span>
+										<input type="password" class="form-control format-jumin2" id="jumin2" name="jumin2">
+									</div>
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</fieldset>
 			</div>
 			<div class="card-footer text-center">
 				<button id="registBtn" type="submit" class="btn bg-teal-600 rounded-round custom-btn mr-2">학생등록</button>
-				<a href="${pageContext.request.contextPath}/home/${cityId}" class="btn btn-light rounded-round custom-btn">취 소</a>
+				<a href="${pageContext.request.contextPath}/home/${city.id}" class="btn btn-light rounded-round custom-btn">취 소</a>
 			</div>
 		</div>
 	</form>
@@ -162,6 +174,21 @@ $("#confirmBtn").click(function() {
 	$("#registBtn").prop("disabled", false);
 	$("#modal").modal('hide');
 });
+
+// 합양캠퍼스일 경우 ------------------------------------------
+if (!$("#agreeCheckBtn").is(":checked")) {
+	$("#registBtn").prop("disabled", true);
+}
+
+/** 개인정보 동의 체크 버튼 클릭 시 */
+$("#agreeCheckBtn").click(function(){
+    if ($(this).is(':checked')){
+    	$("#registBtn").prop("disabled", false);
+    } else {
+    	$("#registBtn").prop("disabled", true);
+    }
+});
+// ----------------------------------------------------
 
 // 전송 상태 설정 : false
 var isSubmitted = false;
@@ -245,14 +272,14 @@ function registStudent(student, url) {
        	           	data: student,
        	           	success: function(response) {
 	       	           	if (checkIE()) {
-	       	           		location.href = contextPath + "/home/${cityId}";
+	       	           		location.href = contextPath + "/home/${city.id}";
 	       	           	} else {
 	       	           	swalInit.fire({
 			       				title: "학생 등록 되었습니다.", 
 			       				type: "success",
 			       				position: 'top'
 			       			}).then(function(e) {
-			       				location.href = contextPath + "/home/${cityId}";
+			       				location.href = contextPath + "/home/${city.id}";
 			       			});
 	       	           	}
        	           	},

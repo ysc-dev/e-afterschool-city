@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.domain.db.Student.TargetType;
+import com.ysc.afterschool.service.CityService;
 import com.ysc.afterschool.service.SchoolService;
 import com.ysc.afterschool.service.StudentService;
 
@@ -39,6 +40,9 @@ public class StudentController {
 	
 	@Autowired
 	private SchoolService schoolService;
+	
+	@Autowired
+	private CityService cityService;
 
 	/**
 	 * 학생 등록 화면
@@ -51,7 +55,7 @@ public class StudentController {
 		
 		model.addAttribute("schools", schoolService.getList(cityId).stream()
 				.map(s -> s.getName()).sorted().collect(Collectors.toList()));
-		model.addAttribute("cityId", cityId);
+		model.addAttribute("city", cityService.get(cityId));
 	}
 	
 	/**
@@ -62,7 +66,7 @@ public class StudentController {
 	 */
 	@GetMapping("search/jumin")
 	@ResponseBody
-	public Mono<Boolean> jumin(Student student) {
+	public Mono<Boolean> juminCheck(Student student) {
 		return Mono.just(studentService.searchJumin(student));
 	}
 	
@@ -80,8 +84,8 @@ public class StudentController {
 	
 	/**
 	 * 학생 등록 기능
-	 * 
 	 * @param student
+	 * @return
 	 */
 	@PostMapping(value = "regist")
 	@ResponseBody
@@ -96,6 +100,7 @@ public class StudentController {
 		} else {
 			student.setTel(student.getService() + "-" + student.getTel());
 		}
+		
 		student.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
 		
 		student.setCity(schoolService.get(school).getCity());
@@ -136,6 +141,7 @@ public class StudentController {
 			student.setJumin1(residentNumber[0]);
 			student.setJumin2(residentNumber[1]);
 		}
+		
 		model.addAttribute("student", student);
 	}
 	
@@ -143,6 +149,7 @@ public class StudentController {
 	 * 학생 정보 변경 기능
 	 * 
 	 * @param student
+	 * @return
 	 */
 	@PutMapping(value = "update")
 	@ResponseBody

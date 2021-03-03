@@ -2,17 +2,11 @@ package com.ysc.afterschool.controller;
 
 import java.io.IOException;
 
-import javax.servlet.http.Cookie;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ysc.afterschool.domain.db.Apply;
-import com.ysc.afterschool.domain.db.ApplyWait;
 import com.ysc.afterschool.service.ApplyService;
 import com.ysc.afterschool.service.ApplyWaitService;
 import com.ysc.afterschool.service.common.SmsService;

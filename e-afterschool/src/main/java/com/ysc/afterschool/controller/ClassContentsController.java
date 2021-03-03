@@ -1,6 +1,5 @@
 package com.ysc.afterschool.controller;
 
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.Cookie;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ysc.afterschool.domain.db.ClassContents;
 import com.ysc.afterschool.domain.db.SubjectUploadedFile;
 import com.ysc.afterschool.domain.db.SubjectUploadedFile.FileType;
 import com.ysc.afterschool.service.ClassContentsService;

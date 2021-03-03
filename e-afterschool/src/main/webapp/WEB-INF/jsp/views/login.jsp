@@ -26,7 +26,7 @@
 				</div>
 				
 				<div class="form-group form-group-feedback form-group-feedback-left">
-					<input type="tel" class="form-control" placeholder="전화 번호" autocomplete="off" name="password" required>
+					<input type="tel" class="form-control" placeholder="가입하신 전화번호" autocomplete="off" name="password" required>
 					<div class="form-control-feedback">
 						<i class="icon-phone2 text-muted"></i>
 					</div>

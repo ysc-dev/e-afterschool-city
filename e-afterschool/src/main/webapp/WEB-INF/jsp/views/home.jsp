@@ -65,7 +65,7 @@
 		</div>
 		<div class="col-6 py-2 px-0">
 			<div class="d-flex flex-column align-items-center text-center text-grey-800">
-				<div>
+				<div class="${city.link == 'hy' ? 'mt-3 mb-2' : ''}">
 					<div>수강신청주소</div>
 					<span class="fs-10 font-weight-bold" style="letter-spacing:0rem">
 						http://e-afterschool.kr/${city.link}
@@ -75,7 +75,7 @@
 					<div>수강신청문의</div>
 					<div class="font-weight-bold">${city.tel1}</div>
 				</div>
-				<div class="mt-1">
+				<div class="${city.link == 'hy' ? 'display-none' : 'mt-1'}">
 					<div>기타운영문의</div>
 					<div class="font-weight-bold">${city.tel2}</div>
 				</div>
