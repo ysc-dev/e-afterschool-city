@@ -35,6 +35,6 @@ public class SubjectGroupService {
 		return subjectGroupRepository.findAll().stream().map(data -> {
 			data.setSubjects(subjectRepository.countByInvitationIdAndSubjectGroupId(infoId, data.getId()));
 			return data;
-		}).collect(Collectors.toList());
+		}).filter(data -> data.getSubjects() > 0).collect(Collectors.toList());
 	}
 }
