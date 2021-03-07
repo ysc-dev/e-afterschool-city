@@ -38,7 +38,7 @@ public class Subject extends AbstractDomain {
 	/** 강사 */
 	@OneToOne
     @JoinColumn(name = "teacher_id")
-	private Teacher teacher;
+	private int teacher;
 	
 	/** 과목 그룹 */
 	@OneToOne
