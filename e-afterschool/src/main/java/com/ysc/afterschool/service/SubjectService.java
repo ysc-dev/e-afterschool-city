@@ -9,4 +9,6 @@ public interface SubjectService extends CRUDService<Subject, Integer> {
 	List<Subject> getList(int subjectGroupId);
 
 	List<Subject> getList(int infoId, int groupId);
+
+	List<Subject> getListFromCity(int cityId);
 }

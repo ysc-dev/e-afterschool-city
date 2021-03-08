@@ -3,7 +3,7 @@
 
 <link href="${pageContext.request.contextPath}/css/student.css" rel="stylesheet" type="text/css">
 
-<div class="content d-flex justify-content-center align-items-center"> 
+<div class="content d-flex justify-content-center align-items-center mb-0"> 
 	<form id="studentRegistForm" class="form-validate" action="${pageContext.request.contextPath}/student/regist" method="POST"> 
 		<div class="card mb-0">
 			<div class="card-header bg-teal-400 text-white py-2">
@@ -156,6 +156,24 @@ $('[name="tel"]').formatter({
     pattern: '{{9999}}-{{9999}}'
 });
 
+//합양캠퍼스일 경우 ------------------------------------------
+var cityLink = '${city.link}';
+if (cityLink === 'hy') {
+	if (!$("#agreeCheckBtn").is(":checked")) {
+		$("#registBtn").prop("disabled", true);
+	}
+	
+	/** 개인정보 동의 체크 버튼 클릭 시 */
+	$("#agreeCheckBtn").click(function(){
+	    if ($(this).is(':checked')){
+	    	$("#registBtn").prop("disabled", false);
+	    } else {
+	    	$("#registBtn").prop("disabled", true);
+	    }
+	});
+}
+// ----------------------------------------------------
+
 /** 개인정보 동의 체크 버튼 클릭 시 */
 $("#agreeCheck").click(function(){
     if ($(this).is(':checked')){
@@ -174,21 +192,6 @@ $("#confirmBtn").click(function() {
 	$("#registBtn").prop("disabled", false);
 	$("#modal").modal('hide');
 });
-
-// 합양캠퍼스일 경우 ------------------------------------------
-if (!$("#agreeCheckBtn").is(":checked")) {
-	$("#registBtn").prop("disabled", true);
-}
-
-/** 개인정보 동의 체크 버튼 클릭 시 */
-$("#agreeCheckBtn").click(function(){
-    if ($(this).is(':checked')){
-    	$("#registBtn").prop("disabled", false);
-    } else {
-    	$("#registBtn").prop("disabled", true);
-    }
-});
-// ----------------------------------------------------
 
 // 전송 상태 설정 : false
 var isSubmitted = false;

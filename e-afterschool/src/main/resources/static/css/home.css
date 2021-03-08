@@ -3,7 +3,6 @@
 /*******************************************************************************************************
  박스형 버튼 화면 디자인
 *******************************************************************************************************/
-
 .home-content .row {
 	border-top: 1px solid #90a4ae;
 	border-bottom: 1px solid #90a4ae;
@@ -18,15 +17,15 @@
 	border-bottom: 1px solid #90a4ae;
 }
 
- .home-title {
-	display: flex; 
+.home-title {
+	display: flex;
 	flex-direction: column;
 	height: 100px;
 	width: 100%;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #353535;
-    text-shadow: 1px 1px 1px #D5D5D5;
+	font-size: 1.2rem;
+	font-weight: bold;
+	color: #353535;
+	text-shadow: 1px 1px 1px #D5D5D5;
 }
 
 .btn-title {

@@ -12,4 +12,6 @@ public interface SubjectRepository extends DefaultRepository<Subject, Integer> {
 
 	int countByInvitationIdAndSubjectGroupId(int infoId, int groupId);
 
+	List<Subject> findByInvitationId(int id);
+
 }

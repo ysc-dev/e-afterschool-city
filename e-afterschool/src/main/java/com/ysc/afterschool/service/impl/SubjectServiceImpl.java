@@ -1,12 +1,15 @@
 package com.ysc.afterschool.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ysc.afterschool.domain.db.Invitation;
 import com.ysc.afterschool.domain.db.Subject;
+import com.ysc.afterschool.repository.InvitationRepository;
 import com.ysc.afterschool.repository.SubjectRepository;
 import com.ysc.afterschool.service.SubjectService;
 
@@ -22,6 +25,9 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Autowired
 	private SubjectRepository subjectRepository;
+	
+	@Autowired
+	private InvitationRepository invitationRepository;
 
 	@Transactional(readOnly = true)
 	@Override
@@ -71,5 +77,17 @@ public class SubjectServiceImpl implements SubjectService {
 	@Override
 	public List<Subject> getList(int infoId, int groupId) {
 		return subjectRepository.findByInvitationIdAndSubjectGroupId(infoId, groupId);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public List<Subject> getListFromCity(int cityId) {
+		List<Subject> subjects = new ArrayList<>();
+		
+		for (Invitation invitation : invitationRepository.findByCityId(cityId)) {
+			subjects.addAll(subjectRepository.findByInvitationId(invitation.getId()));
+		}
+		
+		return subjects;
 	}
 }

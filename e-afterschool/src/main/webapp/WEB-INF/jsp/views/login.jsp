@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp" %>
 
-<div class="content d-flex justify-content-center align-items-center px-3">
+<div class="content d-flex justify-content-center align-items-center px-3 mb-0">
 	<form class="login-form form-validate" action="${pageContext.request.contextPath}/login" method="POST"> 
 		<div class="card mb-0">
 			<div class="card-body">

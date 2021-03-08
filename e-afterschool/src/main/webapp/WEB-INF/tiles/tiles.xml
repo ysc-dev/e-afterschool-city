@@ -37,4 +37,8 @@
     <definition name="notice/*" extends="layout">
 		<put-attribute name="content" value="/WEB-INF/jsp/views/notice/{1}.jsp" />
     </definition>
+    
+    <definition name="survey/*" extends="basic">
+		<put-attribute name="content" value="/WEB-INF/jsp/views/survey/{1}.jsp" />
+    </definition>
 </tiles-definitions>

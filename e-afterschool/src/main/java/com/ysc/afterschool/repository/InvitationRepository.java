@@ -8,4 +8,6 @@ public interface InvitationRepository extends DefaultRepository<Invitation, Inte
 
 	List<Invitation> findByCityIdOrderByDeadlineDateDesc(int cityId);
 
+	List<Invitation> findByCityId(int cityId);
+
 }
