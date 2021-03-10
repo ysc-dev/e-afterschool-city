@@ -103,6 +103,8 @@ public class SubjectController {
 	public void list(Model model, int infoId, int groupId, 
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 		
+		System.err.println(cookie.getValue());
+		
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subjectGroup", subjectGroupService.get(groupId));

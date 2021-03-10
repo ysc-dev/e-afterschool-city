@@ -5,7 +5,7 @@
 	<div class="d-flex align-items-center">
 		<c:choose>
 			 <c:when test="${param.home ne null}">
-		     	<a href="${pageContext.request.contextPath}/info?cityId=${city.id}"
+		     	<a href="${pageContext.request.contextPath}/info?cityId=${cityId}"
 					class="btn btn-outline bg-slate-300 text-slate-600 header-icon px-1">
 					<i class="icon-home8 pl-1 pr-1"></i>
 				</a>
@@ -19,13 +19,13 @@
 	<div class="navbar-brand">
 		<a href="#" class="d-inline-block">
 		<c:choose>
-		    <c:when test="${city.id == '1'}">
+		    <c:when test="${cityId == '1'}">
 		        <img src="${pageContext.request.contextPath}/images/cw_logo.png" alt="logo">
 		    </c:when>
-		    <c:when test="${city.id == '2'}">
+		    <c:when test="${cityId == '2'}">
 		        <img src="${pageContext.request.contextPath}/images/jj_logo.png" alt="logo"> 
 		    </c:when>
-		    <c:when test="${city.id == '5'}">
+		    <c:when test="${cityId == '5'}">
 		        <img src="${pageContext.request.contextPath}/images/hy_logo.jpg" alt="logo"> 
 		    </c:when>
 		    <c:otherwise>

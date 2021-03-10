@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ysc.afterschool.domain.db.Survey;
 import com.ysc.afterschool.service.CityService;
 import com.ysc.afterschool.service.SubjectService;
+import com.ysc.afterschool.service.SurveyService;
 
 /**
  * 만족도 조사 및 설문조사 컨트롤러 클래스
@@ -29,6 +30,9 @@ public class SurveyController {
 	
 	@Autowired
 	private SubjectService subjectService;
+	
+	@Autowired
+	private SurveyService surveyService;
 
 	/**
 	 * 만족도 조사 및 설문조사 화면
@@ -39,6 +43,7 @@ public class SurveyController {
 	@GetMapping("regist")
 	private void info(Model model, int cityId) {
 		model.addAttribute("city", cityService.get(cityId));
+		model.addAttribute("cityId", cityId);
 		model.addAttribute("subjects", subjectService.getListFromCity(cityId));
 	}
 	
@@ -52,6 +57,10 @@ public class SurveyController {
 	public ResponseEntity<?> regist(Survey survey) {
 		
 		System.err.println(survey);
+		
+		if (surveyService.regist(survey)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
 		
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}

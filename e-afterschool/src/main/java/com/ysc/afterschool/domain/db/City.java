@@ -2,6 +2,8 @@ package com.ysc.afterschool.domain.db;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,4 +55,13 @@ public class City implements Domain {
 	// SMS연락처
 	@Column(length = 20)
 	private String sms;
+	
+	// 설문조사 여부
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private SurveyType survey;
+	
+	public enum SurveyType {
+		ON, OFF;
+	}
 }

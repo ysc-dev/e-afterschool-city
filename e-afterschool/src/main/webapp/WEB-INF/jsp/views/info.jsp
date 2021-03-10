@@ -107,7 +107,13 @@ function applyClick(id) {
 		if (checkIE()) {
 			alert("로그인 한 후에 수강신청 할 수 있습니다.");
 		} else {
-			swalInit.fire({ title: "로그인 한 후에 수강신청 할 수 있습니다.", type: "warning", position: 'top' });
+			swalInit.fire({
+				title: "로그인 한 후에 수강신청 할 수 있습니다.", 
+				type: "warning",
+				position: 'top'
+   			}).then(function(e) {
+   				location.href = contextPath + "/login/${cityId}";
+   			});
 		}
 		return;
 	}
@@ -121,7 +127,13 @@ function deadlineClick(id) {
 		if (checkIE()) {
 			alert("로그인 한 후에 확인 할 수 있습니다.");
 		} else {
-			swalInit.fire({ title: "로그인 한 후에 확인 할 수 있습니다.", type: "warning", position: 'top' });
+			swalInit.fire({
+				title: "로그인 한 후에 확인 할 수 있습니다.", 
+				type: "warning",
+				position: 'top'
+   			}).then(function(e) {
+   				location.href = contextPath + "/login/${cityId}";
+   			});
 		}
 		return;
 	}

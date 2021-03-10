@@ -64,15 +64,25 @@
 			</button>
 		</div>
 		<div class="col-6">
-			<button type="button" id="surveyBtn" class="btn btn-block bg-transparent py-4" data-fouc>
-				<div class="d-flex flex-column text-center">
-					<div class="mb-2">
-						<i class="fas fa-clipboard-list fa-2x text-info-400"></i>
+			<c:choose>
+				<c:when test="${city.survey == 'ON'}">
+					<button type="button" id="surveyBtn" class="btn btn-block bg-transparent py-4" data-fouc>
+						<div class="d-flex flex-column text-center">
+							<div class="mb-2">
+								<i class="fas fa-clipboard-list fa-2x text-info-400"></i>
+							</div>
+							<div class="btn-title text-info-400">만족도 조사 및</div>
+							<div class="btn-title text-info-400">설문조사</div> 
+						</div>
+					</button>
+				</c:when>
+				<c:otherwise>
+					<div class="btn-content py-5 text-grey-800">
+						<div class="font-weight-bold text-center">지금은 설문조사 기간이<br>아닙니다.</div>
 					</div>
-					<div class="btn-title text-info-400">만족도 조사 및</div>
-					<div class="btn-title text-info-400">설문조사</div> 
-				</div>
-			</button>
+				</c:otherwise>
+			</c:choose>
+			
 			<%-- <div class="d-flex flex-column align-items-center text-center text-grey-800">
 				<div class="${city.link == 'hy' ? 'mt-3 mb-2' : ''}">
 					<div>수강신청주소</div>

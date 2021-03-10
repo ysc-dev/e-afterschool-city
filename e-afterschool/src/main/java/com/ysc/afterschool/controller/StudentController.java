@@ -56,6 +56,7 @@ public class StudentController {
 		model.addAttribute("schools", schoolService.getList(cityId).stream()
 				.map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("city", cityService.get(cityId));
+		model.addAttribute("cityId", cityId);
 	}
 	
 	/**
