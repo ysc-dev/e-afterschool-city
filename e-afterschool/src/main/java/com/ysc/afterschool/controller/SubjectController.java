@@ -88,6 +88,7 @@ public class SubjectController {
 			data.setSubject(subject);
 			return data;
 		}).collect(Collectors.toList());
+		
 		model.addAttribute("applies", applies);
 	}
 	
@@ -102,8 +103,6 @@ public class SubjectController {
 	@GetMapping("list")
 	public void list(Model model, int infoId, int groupId, 
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
-		
-		System.err.println(cookie.getValue());
 		
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
@@ -213,6 +212,7 @@ public class SubjectController {
 		} else {
 			subject.setTarget(subject.getTargetType().getName() + " " + subject.getGradeType().getName());
 		}
+		
 		model.addAttribute("subject", subject);
 	}
 }

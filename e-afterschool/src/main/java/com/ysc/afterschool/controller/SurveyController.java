@@ -56,8 +56,6 @@ public class SurveyController {
 	@ResponseBody
 	public ResponseEntity<?> regist(Survey survey) {
 		
-		System.err.println(survey);
-		
 		if (surveyService.regist(survey)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}

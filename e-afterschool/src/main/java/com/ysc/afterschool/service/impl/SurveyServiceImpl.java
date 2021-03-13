@@ -37,6 +37,13 @@ public class SurveyServiceImpl implements SurveyService {
 
 	@Override
 	public boolean regist(Survey domain) {
+		
+		domain.setTotalScore(domain.getValue1().getScore() + domain.getValue2().getScore()
+				+ domain.getValue3().getScore() + domain.getValue4().getScore()
+				+ domain.getValue5().getScore() + domain.getValue6().getScore()
+				+ domain.getValue7().getScore() + domain.getValue8().getScore()
+				+ domain.getValue9().getScore() + domain.getValue10().getScore()); 
+		
 		if (isNew(domain)) {
 			return surveyRepository.save(domain) != null;
 		} else {
@@ -46,6 +53,13 @@ public class SurveyServiceImpl implements SurveyService {
 
 	@Override
 	public boolean update(Survey domain) {
+		
+		domain.setTotalScore(domain.getValue1().getScore() + domain.getValue2().getScore()
+				+ domain.getValue3().getScore() + domain.getValue4().getScore()
+				+ domain.getValue5().getScore() + domain.getValue6().getScore()
+				+ domain.getValue7().getScore() + domain.getValue8().getScore()
+				+ domain.getValue9().getScore() + domain.getValue10().getScore()); 
+		
 		if (!isNew(domain)) {
 			return surveyRepository.save(domain) != null;
 		} else {
