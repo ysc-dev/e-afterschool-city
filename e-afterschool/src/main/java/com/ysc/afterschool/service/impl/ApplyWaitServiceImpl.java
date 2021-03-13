@@ -77,11 +77,13 @@ public class ApplyWaitServiceImpl implements ApplyWaitService {
 		}
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<ApplyWait> getList(int subjectId) {
 		return applyWaitRepository.findBySubjectId(subjectId);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<ApplyWait> getGroupList(int invitationId) {
 		return applyWaitRepository.findByInvitationIdGroupByStudentId(invitationId);

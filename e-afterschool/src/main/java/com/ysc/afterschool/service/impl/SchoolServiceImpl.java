@@ -68,11 +68,13 @@ public class SchoolServiceImpl implements SchoolService {
 		return !schoolRepository.existsById(domain.getId());
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public School get(String name) {
 		return schoolRepository.findByName(name);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<School> getList(int cityId) {
 		City city = cityService.get(cityId);

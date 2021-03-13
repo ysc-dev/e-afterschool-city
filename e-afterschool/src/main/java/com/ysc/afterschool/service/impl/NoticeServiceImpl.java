@@ -27,6 +27,7 @@ public class NoticeServiceImpl implements NoticeService {
 	@Autowired
 	private CityService cityService;
 
+	@Transactional(readOnly = true)
 	@Override
 	public Notice get(Integer id) {
 		return noticeRepository.findById(id).get();
@@ -66,6 +67,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return !noticeRepository.existsById(domain.getId());
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<Notice> getList(int cityId) {
 		return noticeRepository.findByCityOrderByCreateDateDesc(cityService.get(cityId).getName());

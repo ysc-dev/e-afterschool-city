@@ -63,6 +63,7 @@ public class StudentServiceImpl implements StudentService {
 		return !studentRepository.existsById(domain.getId());
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public boolean searchJumin(Student student) {
 		return studentRepository.findByResidentNumber(student.getJumin1() + "-" + student.getJumin2()) != null;

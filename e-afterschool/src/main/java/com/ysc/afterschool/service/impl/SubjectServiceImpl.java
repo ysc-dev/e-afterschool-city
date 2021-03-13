@@ -69,11 +69,13 @@ public class SubjectServiceImpl implements SubjectService {
 		return !subjectRepository.existsById(domain.getId());
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<Subject> getList(int subjectGroupId) {
 		return subjectRepository.findBySubjectGroupId(subjectGroupId);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<Subject> getList(int infoId, int groupId) {
 		return subjectRepository.findByInvitationIdAndSubjectGroupId(infoId, groupId);
@@ -82,6 +84,7 @@ public class SubjectServiceImpl implements SubjectService {
 	@Transactional(readOnly = true)
 	@Override
 	public List<Subject> getListFromCity(int cityId) {
+		
 		List<Subject> subjects = new ArrayList<>();
 		
 		for (Invitation invitation : invitationRepository.findByCityId(cityId)) {

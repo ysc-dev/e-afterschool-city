@@ -26,6 +26,7 @@ public class SubjectGroupService {
 		return subjectGroupRepository.findAll();
 	}
 
+	@Transactional(readOnly = true)
 	public SubjectGroup get(int id) {
 		return subjectGroupRepository.findById(id).get();
 	}

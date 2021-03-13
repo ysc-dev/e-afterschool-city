@@ -63,6 +63,7 @@ public class SubjectNoticeServiceImpl implements SubjectNoticeService {
 		return !subjectNoticeRepository.existsById(domain.getId());
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<SubjectNotice> getList(int subjectId) {
 		return subjectNoticeRepository.findBySubjectIdOrderByImportantDescCreateDateDesc(subjectId);

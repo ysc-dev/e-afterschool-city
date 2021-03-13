@@ -63,9 +63,16 @@ public class ApplyServiceImpl implements ApplyService {
 		return !applyRepository.existsById(domain.getId());
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<Apply> getList(int infoId, int studentId) {
 		return applyRepository.findByInvitationIdAndStudentId(infoId, studentId);
+	}
+	
+	@Transactional(readOnly = true)
+	@Override
+	public List<Apply> getList(int invitationId) {
+		return applyRepository.findByInvitationIdGroupByStudentId(invitationId);
 	}
 
 	@Override
@@ -76,10 +83,5 @@ public class ApplyServiceImpl implements ApplyService {
 	@Override
 	public long count(int infoId, int studentId) {
 		return applyRepository.findCountByInvitationIdAndStudentId(infoId, studentId);
-	}
-
-	@Override
-	public List<Apply> getList(int invitationId) {
-		return applyRepository.findByInvitationIdGroupByStudentId(invitationId);
 	}
 }
