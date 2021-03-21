@@ -54,6 +54,7 @@ public class NoticeController {
 	 * 
 	 * @param model
 	 * @param infoId
+	 * @param noticeId
 	 * @param cookie
 	 */
 	@GetMapping("detail")

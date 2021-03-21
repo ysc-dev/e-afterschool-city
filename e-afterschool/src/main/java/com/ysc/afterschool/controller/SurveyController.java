@@ -49,6 +49,7 @@ public class SurveyController {
 	
 	/**
 	 * 설문 등록 기능
+	 * 
 	 * @param survey
 	 * @return
 	 */

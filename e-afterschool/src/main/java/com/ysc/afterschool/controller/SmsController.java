@@ -11,6 +11,12 @@ import com.ysc.afterschool.service.ApplyService;
 import com.ysc.afterschool.service.ApplyWaitService;
 import com.ysc.afterschool.service.common.SmsService;
 
+/**
+ * 문자 서비스 관리
+ * 
+ * @author hgko
+ *
+ */
 @Controller
 @RequestMapping("sms")
 public class SmsController {

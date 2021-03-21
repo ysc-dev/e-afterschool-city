@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
+/**
+ * 로그인 성공 관리
+ * 
+ * @author hgko
+ *
+ */
 public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 	
 	private final String COOKIE_NAME = "cityId";

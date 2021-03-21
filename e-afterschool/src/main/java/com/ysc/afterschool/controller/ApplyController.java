@@ -126,15 +126,13 @@ public class ApplyController {
 		Apply apply = applyService.get(applyId);
 		Subject subject = subjectService.get(apply.getSubjectId());
 		
-////		List<ApplyWait> applyWaits = applyWaitService.getList(144);
-////		for (ApplyWait applyWait : applyWaits) {
-////			List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
-////			System.err.println(applies.size());
-////			if (applies.size() < 2) {
-////				System.err.println(applyWait);
-////				return new ResponseEntity<String>("수강취소 실패하였습니다.", HttpStatus.BAD_REQUEST);
-////			}
-////		}
+//		List<ApplyWait> applyWaits = applyWaitService.getList(144);
+//		for (ApplyWait applyWait : applyWaits) {
+//			List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
+//			if (applies.size() < 2) {
+//				return new ResponseEntity<String>("수강취소 실패하였습니다.", HttpStatus.BAD_REQUEST);
+//			}
+//		}
 		
 		if (applyService.delete(applyId)) {
 			applyCancelService.regist(new ApplyCancel(apply));

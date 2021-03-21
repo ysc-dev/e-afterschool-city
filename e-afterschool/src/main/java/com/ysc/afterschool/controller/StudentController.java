@@ -121,6 +121,7 @@ public class StudentController {
 	
 	/**
 	 * 학생 정보 변경 화면
+	 * 
 	 * @param model
 	 * @param infoId
 	 * @param authentication

@@ -6,6 +6,12 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
+/**
+ * 화면 레이아웃 설정
+ * 
+ * @author hgko
+ *
+ */
 @Configuration
 public class TilesConfig {
 
