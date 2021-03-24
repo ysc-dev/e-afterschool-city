@@ -75,11 +75,13 @@ public class ApplyServiceImpl implements ApplyService {
 		return applyRepository.findByInvitationIdGroupByStudentId(invitationId);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public boolean search(int infoId, int studentId, int subjectId) {
 		return applyRepository.findByInvitationIdAndStudentIdAndSubjectId(infoId, studentId, subjectId) != null;
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public long count(int infoId, int studentId) {
 		return applyRepository.findCountByInvitationIdAndStudentId(infoId, studentId);

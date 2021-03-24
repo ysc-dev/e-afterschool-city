@@ -24,6 +24,7 @@ public class ApplyWaitServiceImpl implements ApplyWaitService {
 	@Autowired
 	private ApplyWaitRepository applyWaitRepository;
 
+	@Transactional(readOnly = true)
 	@Override
 	public ApplyWait get(Integer id) {
 		return applyWaitRepository.findById(id).get();
@@ -63,11 +64,13 @@ public class ApplyWaitServiceImpl implements ApplyWaitService {
 		return !applyWaitRepository.existsById(domain.getId());
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public boolean search(int infoId, int studentId, int subjectId) {
 		return applyWaitRepository.findByInvitationIdAndStudentIdAndSubjectId(infoId, studentId, subjectId) != null;
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public ApplyWait get(int infoId, int subjectId, OrderType type) {
 		if (type == OrderType.오름차순) {

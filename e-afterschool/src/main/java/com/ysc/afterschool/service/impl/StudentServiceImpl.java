@@ -69,6 +69,7 @@ public class StudentServiceImpl implements StudentService {
 		return studentRepository.findByResidentNumber(student.getJumin1() + "-" + student.getJumin2()) != null;
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public boolean search(Student student) {
 		String tel = student.getTel();
@@ -78,6 +79,7 @@ public class StudentServiceImpl implements StudentService {
 		return studentRepository.findByNameAndTel(student.getName(), student.getService() + "-" + tel) != null;
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public Student login(String name, String tel) {
 		if (!tel.contains("-")) {

@@ -23,6 +23,7 @@ public class CommentServiceImpl implements CommentService {
 	@Autowired
 	private CommentRepository commentRepository;
 
+	@Transactional(readOnly = true)
 	@Override
 	public Comment get(Integer id) {
 		return commentRepository.findById(id).get();
