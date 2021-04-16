@@ -36,7 +36,8 @@ public class SmsService {
 	private String tokenType = "";
 	private String token = "";
 	
-	private final String message = "창원캠퍼스형방과후가 코로나 19\r\n확산방지를 위해 2분기 개강이\r\n9월 14일로 연기되었습니다.";
+	private final String message = "대기 중인 강좌의 수강 승인이 완료되었습니다. 사이트에서 확인해주세요.";
+//	private final String message = "창원캠퍼스형방과후가 코로나 19\r\n확산방지를 위해 2분기 개강이\r\n9월 14일로 연기되었습니다.";
 //	private final String message = "캠퍼스형방과후학교\r\n2분기 수강신청기간\r\n8/18 오전 9시 선착순 접수\r\nhttp://e-afterschool.kr/cw";
 //	private final String callback = "0552740518"; //0552870513, 창원
 //	private final String callback = "0557930159"; //진주

@@ -39,7 +39,7 @@
 					<div class="col-9">
 						<select data-placeholder="- 선 택 -" class="form-control form-control-select2" name="classType" required>
 							<option></option>
-							<c:forEach var="item" begin="1" end="10" step="1">
+							<c:forEach var="item" begin="1" end="15" step="1">
 								<option <c:if test="${student.classType == item}">selected</c:if> value="${item}">${item} 반</option>
 							</c:forEach>
 						</select>
@@ -72,26 +72,38 @@
 				<fieldset class="mb-0">
 					<legend class="text-uppercase font-weight-bold">개인정보제공 동의</legend>
 					<label class="text-grey-600">학생보험 가입 시 필요한 개인정보제공에 동의를 해 주셔야 가입이 가능합니다.<br>보험가입목적 외에는 절대 사용하지 않습니다.</label>
-					<div class="form-check mt-2">
-						<label class="form-check-label">
-							<input id="agreeCheck" type="checkbox" name="agree" class="form-check-input-styled" data-fouc
-								<c:if test="${student.agree == true}">checked</c:if>>
-							보험가입에 필요한 개인정보를 보험사에 제공하는 것에 동의합니다.
-						</label>
-					</div>
-					<div id="residentNumberInput" class="mt-2 <c:if test="${student.agree == false}">d-none</c:if>">
-						<div class="form-group ml-3 mb-3">
-							<button id="modalBtn" type="button" class="btn bg-teal-600 px-2" data-toggle="modal" data-target="#modal">보험관련 규약추가항목 확인</button>
-						</div>
-						<div class="form-group">
-							<label class="font-weight-bold">학생주민등록번호 입력 :</label>
-							<div class="d-flex align-items-center">
-								<input type="text" class="form-control format-jumin1" id="jumin1" name="jumin1" value="${student.jumin1}">
-								<span class="font-weight-bold mx-2">-</span>
-								<input type="password" class="form-control format-jumin2" id="jumin2" name="jumin2" value="${student.jumin2}">
+					<c:choose>
+						<c:when test="${city.link eq 'hy'}">
+							<div class="form-check mt-1 mb-0">
+								<label class="form-check-label">
+									<input id="agreeCheckBtn" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
+									개인정보를 제공하는 것에 동의합니다.
+								</label>
 							</div>
-						</div>
-					</div>
+						</c:when>
+						<c:otherwise>
+							<div class="form-check mt-2">
+								<label class="form-check-label">
+									<input id="agreeCheck" type="checkbox" name="agree" class="form-check-input-styled" data-fouc
+										<c:if test="${student.agree == true}">checked</c:if>>
+									보험가입에 필요한 개인정보를 보험사에 제공하는 것에 동의합니다.
+								</label>
+							</div>
+							<div id="residentNumberInput" class="mt-1 mb-0">
+								<div class="form-group mt-2">
+									<button id="modalBtn" type="button" class="btn bg-teal-600 px-2" data-toggle="modal" data-target="#modal">보험관련 규약추가항목 확인</button>
+								</div>
+								<div class="form-group mt-3 mb-0">
+									<label class="font-weight-bold">학생주민등록번호 입력 :</label>
+									<div class="d-flex align-items-center">
+										<input type="text" class="form-control format-jumin1" id="jumin1" name="jumin1" value="${student.jumin1}">
+										<span class="font-weight-bold mx-2">-</span>
+										<input type="password" class="form-control format-jumin2" id="jumin2" name="jumin2" value="${student.jumin2}">
+									</div>
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</fieldset>
 			</div>
 			<div class="card-footer text-center">
@@ -125,175 +137,219 @@
 </div>
 
 <script>
-var agent = navigator.userAgent.toLowerCase();
-function checkIE() {
-	if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1)) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-$('[name="tel"]').formatter({
-    pattern: '{{9999}}-{{9999}}'
-});
-
-if ("${student.agree}" == "true") {
-	$("#updateBtn").prop("disabled", true);
-}
-
-$("#agreeCheck").click(function(){
-    if ($(this).is(':checked')){
-    	$("#residentNumberInput").removeClass("d-none");
-    	$("#updateBtn").prop("disabled", true);
-    	$("#modalBtn").prop("disabled", false);
-    } else {
-    	$("#residentNumberInput").addClass("d-none");
-    	$("#updateBtn").prop("disabled", false);
-    }
-});
-
-$("#confirmBtn").click(function() {
-	$("#modalBtn").prop("disabled", true);
-	$("#updateBtn").prop("disabled", false);
-	$("#modal").modal('hide');
-});
-
-//전송 상태 설정 : false
-var isSubmitted = false;
-
-$("#studentUpdateForm").submit(function(e) {
-	e.preventDefault();
-	
-	// 한번 등록버튼을 클릭 시 중복으로 클릭이 안되도록
-	if (isSubmitted) { 
-		isSubmitted = false;
-		return;
+$(function() {
+	var agent = navigator.userAgent.toLowerCase();
+	function checkIE() {
+		if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
-	isSubmitted = true;
+	$('[name="tel"]').formatter({
+	    pattern: '{{9999}}-{{9999}}'
+	});
 	
-	var form = $(this);
-    var url = form.attr('action');
-    var student = form.serialize();
+	if ("${student.agree}" == "true") {
+		$("#updateBtn").prop("disabled", true);
+	}
 
-    if ($("#agreeCheck").is(":checked")) {
-		if ($("#jumin1").val() == '' || $("#jumin2").val() == '') {
-			$("#jumin1").focus();
+	// 보험관련 규약추가항목 확인 여부
+	var isConfirm = false;
+
+	var cityLink = '${city.link}';
+	//합양캠퍼스일 경우 ------------------------------------------
+	if (cityLink === 'hy') { 
+		$("#residentNumberInput").addClass("d-none");
+		isConfirm = true;
+		
+		/** 개인정보 동의 체크 버튼 클릭 시 */
+		$("#agreeCheckBtn").click(function(){
+		    if ($(this).is(':checked')) {
+		    	$("#registBtn").prop("disabled", false);
+		    } else {
+		    	$("#registBtn").prop("disabled", true);
+		    }
+		});
+	}
+	// ----------------------------------------------------
+	else {
+		$("#agreeCheck").click(function(){
+		    if ($(this).is(':checked')){
+		    	//$("#residentNumberInput").removeClass("d-none");
+		    	$("#updateBtn").prop("disabled", false);
+		    	$("#modalBtn").prop("disabled", false);
+		    } else {
+		    	//$("#residentNumberInput").addClass("d-none");
+		    	$("#updateBtn").prop("disabled", true);
+		    	isConfirm = false;
+		    }
+		});
+		
+		$("#confirmBtn").click(function() {
+			$("#modalBtn").prop("disabled", true);
+			$("#modal").modal('hide');
+			$("#updateBtn").prop("disabled", false);
+			isConfirm = true;
+		});
+	}
+	
+	//전송 상태 설정 : false
+	var isSubmitted = false;
+	
+	$("#studentUpdateForm").submit(function(e) {
+		e.preventDefault();
+
+		$("#updateBtn").prop("disabled", true);
+		
+		// 한번 등록버튼을 클릭 시 중복으로 클릭이 안되도록
+		if (isSubmitted) { 
 			isSubmitted = false;
+			return;
+		}
+
+		if (!isConfirm) {
+			if (checkIE()) {
+				alert("보험관련 규악추가항목을 확인하세요.");
+			} else {
+				swalInit.fire({title: "보험관련 규악추가항목을 확인하세요.", type: "warning", position: 'top'});
+			}
+			
+			updateError();
 			return;
 		}
 		
-		if (!validate()) {
-			if (checkIE()) {
-				alert("올바른 주민번호가 아닙니다.");
-			} else {
-				swalInit.fire({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
+		isSubmitted = true;
+		
+		var form = $(this);
+	    var url = form.attr('action');
+	    var student = form.serialize();
+	
+	    if ($("#agreeCheck").is(":checked")) {
+			if ($("#jumin1").val() == '' || $("#jumin2").val() == '') {
+				$("#jumin1").focus();
+				updateError();
+				return;
 			}
-			isSubmitted = false;
-			return;
-		}
-
-		if (!${student.agree}) { // 처음에 개인정보제공 동의가 안되어 있을 때
-			$.ajax({
-				url: contextPath + "/student/search/jumin",
-				type: "GET",
-				data: student,
-				success: function(response) {
-					if (response) {
-						if (checkIE()) {
-							alert("이미 등록된 주민번호입니다.");
-						} else {
-							swalInit.fire({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
-						}
-						isSubmitted = false;
-					} else {
-						updateStudent(student, url);
-					}
+			
+			if (!validate()) {
+				if (checkIE()) {
+					alert("올바른 주민번호가 아닙니다.");
+				} else {
+					swalInit.fire({title: "올바른 주민번호가 아닙니다.", type: "warning", position: 'top'});
 				}
-			});
+				updateError();
+				return;
+			}
+	
+			if (!${student.agree}) { // 처음에 개인정보제공 동의가 안되어 있을 때
+				$.ajax({
+					url: contextPath + "/student/search/jumin",
+					type: "GET",
+					data: student,
+					success: function(response) {
+						if (response) {
+							if (checkIE()) {
+								alert("이미 등록된 주민번호입니다.");
+							} else {
+								swalInit.fire({title: "이미 등록된 주민번호입니다.", type: "warning", position: 'top'});
+							}
+							updateError();
+						} else {
+							updateStudent(student, url);
+						}
+					}
+				});
+			} else {
+				updateStudent(student, url);
+			}
 		} else {
 			updateStudent(student, url);
-		}
-	} else {
-		updateStudent(student, url);
-   	}
-});
-
-function updateStudent(student, url) {
-	$.ajax({
-       	url: url,
-		type: "PUT",
-       	data: student,
-       	success: function(response) {
-       		if (checkIE()) {
-       			location.href = contextPath + "/home/${cityId}";
-       		} else {
-       			swalInit.fire({
-      				title: "학생 정보 수정 되었습니다.", 
-      				type: "success",
-      				position: 'top'
-      			}).then(function(e) {
-      				location.href = contextPath + "/home/${cityId}";
-      			});
-       		}
-       	},
-        error: function(response) {
-        	if (checkIE()) {
-            	alert("학생 정보 수정을 실패하였습니다.");
-        	} else {
-        		swalInit.fire({title: "학생 정보 수정을 실패하였습니다.", type: "error", position: 'top'});
-           	}
-          	isSubmitted = false;
-        }
+	   	}
 	});
-}
+	
+	function updateStudent(student, url) {
+		$.ajax({
+	       	url: url,
+			type: "PUT",
+	       	data: student,
+	       	success: function(response) {
+	       		if (checkIE()) {
+	       			location.href = contextPath + "/home/${cityId}";
+	       		} else {
+	       			swalInit.fire({
+	      				title: "학생 정보 수정 되었습니다.", 
+	      				type: "success",
+	      				position: 'top'
+	      			}).then(function(e) {
+	      				location.href = contextPath + "/home/${cityId}";
+	      			});
+	       		}
+	       	},
+	        error: function(response) {
+	        	if (checkIE()) {
+	            	alert("학생 정보 수정을 실패하였습니다.");
+	        	} else {
+	        		swalInit.fire({title: "학생 정보 수정을 실패하였습니다.", type: "error", position: 'top'});
+	           	}
+	        	updateError();
+	        }
+		});
+	}
 
-//주민번호 검증 확인
-function validate() {
-    var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
-    var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    // 이메일이 적합한지 검사할 정규식
-
-    var num1 = document.getElementById("jumin1");
-    var num2 = document.getElementById("jumin2");
-
-    var arrNum1 = new Array(); // 주민번호 앞자리숫자 6개를 담을 배열
-    var arrNum2 = new Array(); // 주민번호 뒷자리숫자 7개를 담을 배열
-
-    // -------------- 주민번호 -------------
-    for (var i = 0; i < num1.value.length; i++) {
-        arrNum1[i] = num1.value.charAt(i);
-    } // 주민번호 앞자리를 배열에 순서대로 담는다.
-
-    for (var i = 0; i < num2.value.length; i++) {
-        arrNum2[i] = num2.value.charAt(i);
-    } // 주민번호 뒷자리를 배열에 순서대로 담는다.
-
-    var tempSum = 0;
-
-    for (var i = 0; i < num1.value.length; i++) {
-        tempSum += arrNum1[i] * (2+i);
-    } // 주민번호 검사방법을 적용하여 앞 번호를 모두 계산하여 더함
-
-    for (var i = 0; i < num2.value.length-1; i++) {
-        if (i >= 2) {
-            tempSum += arrNum2[i] * i;
-        }
-        else {
-            tempSum += arrNum2[i] * (8+i);
-        }
-    } // 같은방식으로 앞 번호 계산한것의 합에 뒷번호 계산한것을 모두 더함
-
-    if ((11-(tempSum%11))%10 != arrNum2[6]) {
-        //alert("올바른 주민번호가 아닙니다.");
-        num1.value = "";
-        num2.value = "";
-        num1.focus();
-        return false;
-    } else{
-    	//alert("올바른 주민등록번호 입니다.");
-    	return true;
-    }
-}
+	// 수정 오류
+	function updateError() {
+		isSubmitted = false;
+		$("#updateBtn").prop("disabled", false);
+	}
+	
+	//주민번호 검증 확인
+	function validate() {
+	    var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+	    var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	    // 이메일이 적합한지 검사할 정규식
+	
+	    var num1 = document.getElementById("jumin1");
+	    var num2 = document.getElementById("jumin2");
+	
+	    var arrNum1 = new Array(); // 주민번호 앞자리숫자 6개를 담을 배열
+	    var arrNum2 = new Array(); // 주민번호 뒷자리숫자 7개를 담을 배열
+	
+	    // -------------- 주민번호 -------------
+	    for (var i = 0; i < num1.value.length; i++) {
+	        arrNum1[i] = num1.value.charAt(i);
+	    } // 주민번호 앞자리를 배열에 순서대로 담는다.
+	
+	    for (var i = 0; i < num2.value.length; i++) {
+	        arrNum2[i] = num2.value.charAt(i);
+	    } // 주민번호 뒷자리를 배열에 순서대로 담는다.
+	
+	    var tempSum = 0;
+	
+	    for (var i = 0; i < num1.value.length; i++) {
+	        tempSum += arrNum1[i] * (2+i);
+	    } // 주민번호 검사방법을 적용하여 앞 번호를 모두 계산하여 더함
+	
+	    for (var i = 0; i < num2.value.length-1; i++) {
+	        if (i >= 2) {
+	            tempSum += arrNum2[i] * i;
+	        }
+	        else {
+	            tempSum += arrNum2[i] * (8+i);
+	        }
+	    } // 같은방식으로 앞 번호 계산한것의 합에 뒷번호 계산한것을 모두 더함
+	
+	    if ((11-(tempSum%11))%10 != arrNum2[6]) {
+	        //alert("올바른 주민번호가 아닙니다.");
+	        num1.value = "";
+	        num2.value = "";
+	        num1.focus();
+	        return false;
+	    } else{
+	    	//alert("올바른 주민등록번호 입니다.");
+	    	return true;
+	    }
+	}
+});
 </script>

@@ -92,8 +92,6 @@ public class StudentController {
 	@ResponseBody
 	public ResponseEntity<?> regist(Student student) {
 		
-		String school = student.getSchool();
-		
 		if (!student.getTel().contains("-")) {
 			String tel = student.getTel();
 			tel = tel.substring(0, 4) + "-" + tel.substring(4, tel.length());
@@ -102,13 +100,16 @@ public class StudentController {
 			student.setTel(student.getService() + "-" + student.getTel());
 		}
 		
+		student.setName(student.getName().trim());
+		
+		String school = student.getSchool();
 		student.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
 		
 		student.setCity(schoolService.get(school).getCity());
 		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
 		student.setSchoolInfo(school);
 		
-		if (student.isAgree()) {
+		if (student.isAgree() && !student.getCity().equals("함양")) {
 			student.setResidentNumber(student.getJumin1() + "-" + student.getJumin2());
 		}
 		
@@ -136,6 +137,7 @@ public class StudentController {
 		model.addAttribute("schools", schoolService.getList().stream()
 				.map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("infoId", infoId);
+		model.addAttribute("city", cityService.get(cookie.getValue()));
 		model.addAttribute("cityId", cookie.getValue());
 		
 		if (student.isAgree()) {

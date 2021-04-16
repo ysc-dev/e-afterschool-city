@@ -30,6 +30,9 @@ public class SubjectGroup extends AbstractDomain {
 	@Column(nullable = false, length = 255)
 	private String description;
 	
+	/** 순서 */
+	private int sequence;
+	
 	@Transient
 	private int subjects;
 }

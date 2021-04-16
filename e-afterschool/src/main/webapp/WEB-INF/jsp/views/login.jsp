@@ -55,7 +55,9 @@
 </div>
 
 <script>
-$('[name="password"]').formatter({
-    pattern: '{{999}}-{{9999}}-{{9999}}'
+$(function() {
+	$('[name="password"]').formatter({
+	    pattern: '{{999}}-{{9999}}-{{9999}}'
+	});
 });
 </script>

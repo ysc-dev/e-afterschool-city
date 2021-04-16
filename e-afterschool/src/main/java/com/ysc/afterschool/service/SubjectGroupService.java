@@ -33,7 +33,7 @@ public class SubjectGroupService {
 
 	@Transactional(readOnly = true)
 	public List<SubjectGroup> getList(int infoId) {
-		return subjectGroupRepository.findAll().stream().map(data -> {
+		return subjectGroupRepository.OrderBySequence().stream().map(data -> {
 			data.setSubjects(subjectRepository.countByInvitationIdAndSubjectGroupId(infoId, data.getId()));
 			return data;
 		}).filter(data -> data.getSubjects() > 0).collect(Collectors.toList());

@@ -32,7 +32,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 		String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
         
-        Student student = studentService.login(username, password);
+        Student student = studentService.login(username.trim(), password);
         if (student != null) {
         	Collection<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
         	roles.add(new SimpleGrantedAuthority("ROLE_USER"));
