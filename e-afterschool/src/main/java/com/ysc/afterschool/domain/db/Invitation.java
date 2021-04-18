@@ -36,6 +36,7 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class Invitation extends AbstractDomain {
 
+	/** 이름 */
 	@Column(nullable = false, length = 255)
 	private String name;
 	
@@ -43,9 +44,11 @@ public class Invitation extends AbstractDomain {
 	@Column(nullable = false, length = 45)
 	private String deadlineDate;
 	
+	/** 설명 */
 	@Column(length = 255)
 	private String description;
 	
+	/** 안내장 타입 */
 	@Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
 	private InvitationType type;
@@ -55,6 +58,7 @@ public class Invitation extends AbstractDomain {
     @JoinColumn(name = "city_id")
 	private City city;
 	
+	/** 첨부파일 */
 	@OneToMany(mappedBy = "invitation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<InvitationFile> uploadedFiles;
