@@ -118,6 +118,40 @@
 	</div>
 </div>
 
+<div id="surveyModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title">
+                    <i class="fas fa-clipboard-list mr-2"></i>만족도 조사 및 설문조사 선택
+                </h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+            	<div class="d-flex">
+            		<button type="button" id="surveyParentsBtn" class="btn btn-block bg-transparent py-4" data-fouc>
+						<div class="d-flex flex-column text-center">
+							<div class="mb-2">
+								<i class="icon-users fa-2x text-teal-400"></i>
+							</div>
+							<div class="btn-title text-teal-400">학부모용</div>
+						</div>
+					</button>
+					
+					<button type="button" id="surveyStudentBtn" class="btn btn-block bg-transparent py-4" data-fouc>
+						<div class="d-flex flex-column text-center">
+							<div class="mb-2">
+								<i class="icon-users fa-2x regist-title"></i>
+							</div>
+							<div class="btn-title regist-title">학생용</div>
+						</div>
+					</button>
+            	</div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 $("#registBtn").click(function() {
 	location.href = contextPath + "/student/regist?cityId=${city.id}";
@@ -132,6 +166,14 @@ $("#infoBtn").click(function() {
 });
 
 $("#surveyBtn").click(function() {
-	location.href = contextPath + "/survey/regist?cityId=${city.id}";
+	$('#surveyModal').modal();
+});
+
+$("#surveyStudentBtn").click(function() {
+	location.href = contextPath + "/survey/student?cityId=${city.id}";
+});
+
+$("#surveyParentsBtn").click(function() {
+	location.href = contextPath + "/survey/parents?cityId=${city.id}";
 });
 </script>

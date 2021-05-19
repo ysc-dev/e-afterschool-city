@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ysc.afterschool.domain.db.Survey;
+import com.ysc.afterschool.domain.db.Survey.ScoreType;
+import com.ysc.afterschool.domain.db.Survey.SurveyType;
 import com.ysc.afterschool.service.CityService;
 import com.ysc.afterschool.service.SubjectService;
 import com.ysc.afterschool.service.SurveyService;
@@ -35,27 +37,60 @@ public class SurveyController {
 	private SurveyService surveyService;
 
 	/**
-	 * 만족도 조사 및 설문조사 화면
+	 * 만족도 조사 및 설문조사 화면(학생용)
 	 * 
 	 * @param model
 	 * @param cityId
 	 */
-	@GetMapping("regist")
-	private void info(Model model, int cityId) {
+	@GetMapping("student")
+	private void student(Model model, int cityId) {
 		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("cityId", cityId);
 		model.addAttribute("subjects", subjectService.getListFromCity(cityId));
 	}
 	
 	/**
-	 * 설문 등록 기능
+	 * 만족도 조사 및 설문조사 화면(학부모용)
+	 * 
+	 * @param model
+	 * @param cityId
+	 */
+	@GetMapping("parents")
+	private void parents(Model model, int cityId) {
+		model.addAttribute("city", cityService.get(cityId));
+		model.addAttribute("cityId", cityId);
+		model.addAttribute("subjects", subjectService.getListFromCity(cityId));
+	}
+	
+	/**
+	 * 설문 등록 기능(학생용)
 	 * 
 	 * @param survey
 	 * @return
 	 */
-	@PostMapping(value = "regist")
+	@PostMapping(value = "regist/student")
 	@ResponseBody
-	public ResponseEntity<?> regist(Survey survey) {
+	public ResponseEntity<?> registStudent(Survey survey) {
+		survey.setSurveyType(SurveyType.Student);
+		
+		if (surveyService.regist(survey)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
+	/**
+	 * 설문 등록 기능(학생용)
+	 * 
+	 * @param survey
+	 * @return
+	 */
+	@PostMapping(value = "regist/parents")
+	@ResponseBody
+	public ResponseEntity<?> registParents(Survey survey) {
+		survey.setSurveyType(SurveyType.Parents);
+		survey.setValue10(ScoreType.SCORE10);
 		
 		if (surveyService.regist(survey)) {
 			return new ResponseEntity<>(HttpStatus.OK);

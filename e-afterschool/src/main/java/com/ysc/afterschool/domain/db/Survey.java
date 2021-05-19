@@ -84,6 +84,15 @@ public class Survey implements Domain {
 	@CreationTimestamp
 	private LocalDateTime createDate;
 	
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private SurveyType surveyType;
+	
+	@Getter
+	public enum SurveyType {
+		Parents, Student
+	}
+	
 	@Getter
 	public enum ScoreType {
 		SCORE10(10, "매우만족"),
