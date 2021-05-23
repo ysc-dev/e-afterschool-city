@@ -10,4 +10,6 @@ public interface InvitationRepository extends DefaultRepository<Invitation, Inte
 
 	List<Invitation> findByCityId(int cityId);
 
+	List<Invitation> findByCityIdAndAddType(int cityId, boolean addType);
+
 }

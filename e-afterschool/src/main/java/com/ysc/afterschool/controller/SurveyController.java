@@ -90,7 +90,6 @@ public class SurveyController {
 	@ResponseBody
 	public ResponseEntity<?> registParents(Survey survey) {
 		survey.setSurveyType(SurveyType.Parents);
-		survey.setValue10(ScoreType.SCORE10);
 		
 		if (surveyService.regist(survey)) {
 			return new ResponseEntity<>(HttpStatus.OK);

@@ -76,7 +76,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-form-label">4. 프로그램을 운영하기 위한 준비는 잘 되었다.</label>
+					<label class="col-form-label">4. 프로그램을 운영하기 위한 준비가 잘 되었다.</label>
 					<div class="ml-2">
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input" name="value3" id="radio3_1" value="SCORE10">

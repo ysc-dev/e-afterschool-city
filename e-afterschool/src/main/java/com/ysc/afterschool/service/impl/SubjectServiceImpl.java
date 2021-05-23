@@ -87,7 +87,7 @@ public class SubjectServiceImpl implements SubjectService {
 		
 		List<Subject> subjects = new ArrayList<>();
 		
-		for (Invitation invitation : invitationRepository.findByCityId(cityId)) {
+		for (Invitation invitation : invitationRepository.findByCityIdAndAddType(cityId, false)) {
 			subjects.addAll(subjectRepository.findByInvitationId(invitation.getId()));
 		}
 		
