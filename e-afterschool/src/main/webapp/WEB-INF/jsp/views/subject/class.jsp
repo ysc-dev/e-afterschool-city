@@ -8,12 +8,12 @@
   	<c:param name="home" value="info?cityId=${cityId}" />
 </c:import>
 
-<div class="content px-0">
-	<div class="content-title d-flex justify-content-center align-items-center mt-2">
+<div class="content px-0 d-flex flex-column">
+	<div class="content-title justify-content-center align-items-start mt-2">
 		<span class="fs-18">${subject.name}</span>
 	</div>
 	
-	<div class="card card-table mt-3">
+	<div class="card card-table mt-3 mb-auto">
 		<div class="card-header text-center bg-info-600 text-white">
 			<h5 class="card-title font-weight-bold">횟수별 수업내용</h5>
 		</div>
@@ -37,6 +37,10 @@
 				</c:forEach>
 			</tbody>
 		</table>
+	</div>
+	
+	<div class="align-items-end d-flex justify-content-center">
+		<h6 class="text-center text-danger font-weight-bold">개인적인 용도로 무단복제 및 유포는 금지하며<br>적발시 불이익을 받으실 수 있습니다.</h6>
 	</div>
 </div>
 
