@@ -23,16 +23,16 @@
 					<tr class="text-center">
 						<td class="font-size-sm" width="50">${status.count}</td>
 						<td class="font-size-sm font-weight-bold">${content.content}</td>
-						<td class="font-size-sm" width="110">
+						<td class="font-size-sm" width="120">
 							<c:if test="${content.fileType eq 'IMAGE'}">
 								<button type="button" class="btn btn-outline bg-primary text-primary-600 btn-sm font-weight-bold" 
 										onClick="imageModal(${content.id})">사진/동영상</button>
 							</c:if>
 						</td>
-						<td class="font-size-sm" width="90">
+						<%-- <td class="font-size-sm" width="90">
 							<button type="button" class="btn btn-outline bg-info text-info-600 btn-sm font-weight-bold" 
 								onClick="download(${content.id})">다운로드</button>
-						</td>
+						</td> --%>
 					</tr>
 				</c:forEach>
 			</tbody>
