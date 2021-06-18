@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ysc.afterschool.domain.db.Survey;
-import com.ysc.afterschool.domain.db.Survey.ScoreType;
 import com.ysc.afterschool.domain.db.Survey.SurveyType;
 import com.ysc.afterschool.service.CityService;
 import com.ysc.afterschool.service.SubjectService;

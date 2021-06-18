@@ -112,9 +112,7 @@ function download(id) {
         data: {"id" : id},
         success : function(response) {
 	        response.uploadedFiles.forEach(function(file, index) {
-		        console.log(file);
 	        	var url = contextPath + '/uploads/class/' + file.fileName;
-	        	console.log(url);
 		        
 		        const a = document.createElement('a');
 		        a.style.display = 'none';
