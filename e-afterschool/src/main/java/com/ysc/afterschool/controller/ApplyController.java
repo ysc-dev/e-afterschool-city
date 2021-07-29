@@ -16,11 +16,13 @@ import com.ysc.afterschool.domain.db.Apply;
 import com.ysc.afterschool.domain.db.ApplyCancel;
 import com.ysc.afterschool.domain.db.Apply.OrderType;
 import com.ysc.afterschool.domain.db.ApplyWait;
+import com.ysc.afterschool.domain.db.Invitation;
 import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.domain.db.Subject;
 import com.ysc.afterschool.service.ApplyCancelService;
 import com.ysc.afterschool.service.ApplyService;
 import com.ysc.afterschool.service.ApplyWaitService;
+import com.ysc.afterschool.service.InvitationService;
 import com.ysc.afterschool.service.SubjectService;
 import com.ysc.afterschool.service.common.SmsService;
 
@@ -33,6 +35,9 @@ import com.ysc.afterschool.service.common.SmsService;
 @Controller
 @RequestMapping("apply")
 public class ApplyController {
+	
+	@Autowired
+	private InvitationService invitationService;
 
 	@Autowired
 	private ApplyService applyService;
@@ -62,9 +67,12 @@ public class ApplyController {
 		
 		Student student = (Student) authentication.getPrincipal();
 		
-		List<Apply> applies = applyService.getList(infoId, student.getId());
-		if (applies.size() == 2) {
-			return new ResponseEntity<String>("한 학생이 최대 2개 강좌까지<br>신청 할 수 있습니다.", HttpStatus.BAD_REQUEST);
+		Invitation invitation = invitationService.get(infoId);
+		if (!invitation.getCity().getName().equals("함양")) {
+			List<Apply> applies = applyService.getList(infoId, student.getId());
+			if (applies.size() == 2) {
+				return new ResponseEntity<String>("한 학생이 최대 2개 강좌까지<br>신청 할 수 있습니다.", HttpStatus.BAD_REQUEST);
+			}
 		}
 		
 		Subject subject = subjectService.get(subjectId);
@@ -126,14 +134,6 @@ public class ApplyController {
 		Apply apply = applyService.get(applyId);
 		Subject subject = subjectService.get(apply.getSubjectId());
 		
-//		List<ApplyWait> applyWaits = applyWaitService.getList(144);
-//		for (ApplyWait applyWait : applyWaits) {
-//			List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
-//			if (applies.size() < 2) {
-//				return new ResponseEntity<String>("수강취소 실패하였습니다.", HttpStatus.BAD_REQUEST);
-//			}
-//		}
-		
 		if (applyService.delete(applyId)) {
 			applyCancelService.regist(new ApplyCancel(apply));
 			
@@ -147,8 +147,8 @@ public class ApplyController {
 				}
 			} else { // 대기 인원이 있을 경우
 				for (ApplyWait applyWait : applyWaits) {
-					List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
 					
+					List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
 					if (applies.size() < 2) { // 수강대기 첫번째 학생의 수강신청 한 과목이 두개가 아닐 경우
 						if (applyService.regist(new Apply(applyWait.getInvitationId(), applyWait.getStudent(), subject))) {
 							if (applyWaitService.delete(applyWait.getId())) {
