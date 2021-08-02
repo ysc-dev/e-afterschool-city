@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ysc.afterschool.domain.db.Apply;
+import com.ysc.afterschool.domain.db.Invitation;
 import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.domain.db.Student.TargetType;
 import com.ysc.afterschool.domain.db.Subject;
@@ -123,7 +124,8 @@ public class SubjectController {
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
 		model.addAttribute("cityId", cookie.getValue());
-		model.addAttribute("invitation", invitationService.get(infoId));
+		Invitation invitation = invitationService.get(infoId);
+		model.addAttribute("invitation", invitation);
 
 		Student student = (Student) authentication.getPrincipal();
 		Subject subject = subjectService.get(id);
@@ -143,23 +145,23 @@ public class SubjectController {
 				if (subject.getGradeType() == GradeType.초_3_6_중등 || subject.getGradeType() == GradeType.초_5_6_중등) {
 					if (student.getTargetType() == TargetType.초등) {
 						if (subject.targetTrue(subject.getGradeType(), student.getGrade())) {
-							applyCheck(subject, applyCount);
+							applyCheck(subject, applyCount, invitation.getApplyNumber());
 						} else {
 							subject.setApplyType(ApplyType.NOTAPPLY);
 						}
 					} else if (student.getTargetType() == TargetType.중등) {
-						applyCheck(subject, applyCount);
+						applyCheck(subject, applyCount, invitation.getApplyNumber());
 					}
 				} else {
 					if (subject.targetTrue(subject.getGradeType(), student.getGrade())) {
-						applyCheck(subject, applyCount);
+						applyCheck(subject, applyCount, invitation.getApplyNumber());
 					} else {
 						subject.setApplyType(ApplyType.NOTAPPLY);
 					}
 				}
 			} else if (subject.getTargetType() == student.getTargetType()) {
 				if (subject.targetTrue(subject.getGradeType(), student.getGrade())) { // 학생의 학년이 과목의 학년 범위에 해당할 경우
-					applyCheck(subject, applyCount);
+					applyCheck(subject, applyCount, invitation.getApplyNumber());
 				} else {
 					subject.setApplyType(ApplyType.NOTAPPLY);
 				}
@@ -176,10 +178,11 @@ public class SubjectController {
 	 * 
 	 * @param subject
 	 * @param applyCount
+	 * @param applyNumber 수강신청제한인원수
 	 */
-	private void applyCheck(Subject subject, long applyCount) {
+	private void applyCheck(Subject subject, long applyCount, int applyNumber) {
 
-		if (applyCount >= 2) {
+		if (applyCount >= applyNumber) {
 			subject.setApplyType(ApplyType.NOTAPPLY);
 		} else {
 			subject.setApplyType(ApplyType.NONE);

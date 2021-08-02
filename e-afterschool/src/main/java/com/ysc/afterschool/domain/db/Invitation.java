@@ -58,6 +58,9 @@ public class Invitation extends AbstractDomain {
     @JoinColumn(name = "city_id")
 	private City city;
 	
+	/** 수강신청제한 인원 */
+	private int applyNumber;
+	
 	/** 첨부파일 */
 	@OneToMany(mappedBy = "invitation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@Fetch(FetchMode.SUBSELECT)

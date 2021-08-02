@@ -68,11 +68,9 @@ public class ApplyController {
 		Student student = (Student) authentication.getPrincipal();
 		
 		Invitation invitation = invitationService.get(infoId);
-		if (!invitation.getCity().getName().equals("함양")) {
-			List<Apply> applies = applyService.getList(infoId, student.getId());
-			if (applies.size() == 2) {
-				return new ResponseEntity<String>("한 학생이 최대 2개 강좌까지<br>신청 할 수 있습니다.", HttpStatus.BAD_REQUEST);
-			}
+		List<Apply> applies = applyService.getList(infoId, student.getId());
+		if (applies.size() == invitation.getApplyNumber()) {
+			return new ResponseEntity<String>("한 학생이 최대 2개 강좌까지<br>신청 할 수 있습니다.", HttpStatus.BAD_REQUEST);
 		}
 		
 		Subject subject = subjectService.get(subjectId);
