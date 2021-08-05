@@ -44,9 +44,12 @@
 		<c:forEach var="subject" items="${subjects}" varStatus="status">
 			<div class="card ${status.last ? 'card-last' : '' }">
 				<div class="card-header bg-light header-elements-inline">
-					<h6 class="card-title">
-						<span class="font-size-md text-default font-weight-bold">${subject.name}</span>
-					</h6>
+					<div class="card-title">
+						<div class="font-size-md text-default font-weight-bold">${subject.name}</div>
+						<c:if test="${subject.cost != '무료'}">
+							<div class="font-size-md text-default font-weight-bold">(${subject.cost})</div>
+						</c:if>
+					</div>
 					<div class="header-elements">
 						<a href="micro?infoId=${infoId}&id=${subject.id}" 
 							class="btn ${subject.applyNumber == subject.fixedNumber ? 'bg-slate-300' : 'bg-teal' } btn-sm px-2">
