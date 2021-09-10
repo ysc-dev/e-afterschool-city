@@ -28,6 +28,9 @@
 		    <c:when test="${cityId == '5'}">
 		        <img src="${pageContext.request.contextPath}/images/hy_logo.jpg" alt="logo"> 
 		    </c:when>
+		    <c:when test="${cityId == '6'}">
+		        <img src="${pageContext.request.contextPath}/images/educare_logo.png" alt="logo"> 
+		    </c:when>
 		    <c:otherwise>
 		        <img src="${pageContext.request.contextPath}/images/logo.png" alt="logo">
 		    </c:otherwise>
