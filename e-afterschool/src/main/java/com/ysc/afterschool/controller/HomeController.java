@@ -21,23 +21,23 @@ import com.ysc.afterschool.service.CityService;
  */
 @Controller
 public class HomeController {
-	
+
 	@Autowired
 	private CityService cityService;
-	
+
 	@GetMapping("/")
 	public String index() {
 		return "redirect:cw";
 	}
-	
+
 	@GetMapping("/{link}")
 	public String link(@PathVariable String link) {
-		
+
 		City city = cityService.get(link);
 		if (city != null) {
 			return "redirect:home/" + city.getId();
 		}
-		
+
 		return "fail";
 	}
 
@@ -51,7 +51,7 @@ public class HomeController {
 	public String home(@CookieValue(value = "cityId", required = false) Cookie cookie) {
 		return "redirect:home/" + cookie.getValue();
 	}
-	
+
 	/**
 	 * 홈 화면
 	 * 
@@ -61,13 +61,13 @@ public class HomeController {
 	 */
 	@GetMapping("home/{cityId}")
 	public String home(Model model, @PathVariable int cityId) {
-		
+
 		City city = cityService.get(cityId);
 		model.addAttribute("city", city);
-		
+
 		return "home";
 	}
-	
+
 	/**
 	 * 로그인 화면
 	 * 
@@ -78,7 +78,7 @@ public class HomeController {
 	public String login(@CookieValue(value = "cityId", required = false) Cookie cookie) {
 		return "redirect:login/" + cookie.getValue();
 	}
-	
+
 	/**
 	 * 로그인 시
 	 * 
@@ -88,15 +88,15 @@ public class HomeController {
 	 * @return
 	 */
 	@GetMapping("login/{cityId}")
-	public String login(Model model, @PathVariable int cityId, 
+	public String login(Model model, @PathVariable int cityId,
 			@RequestParam(value = "error", required = false) String error) {
-		
+
 		if (error != null) {
 			model.addAttribute("error", "falied");
 		}
-		
+
 		model.addAttribute("cityId", cityId);
-		
+
 		return "login";
 	}
 }

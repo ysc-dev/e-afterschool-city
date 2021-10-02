@@ -28,7 +28,7 @@ public class CommentController {
 
 	@Autowired
 	private CommentService commentService;
-	
+
 	/**
 	 * 한개의 댓글 정보 불러오기
 	 * 
@@ -40,7 +40,7 @@ public class CommentController {
 	public ResponseEntity<Comment> get(int id) {
 		return new ResponseEntity<>(commentService.get(id), HttpStatus.OK);
 	}
-	
+
 	/**
 	 * 댓글 등록
 	 * 
@@ -51,18 +51,18 @@ public class CommentController {
 	@PostMapping(value = "regist")
 	@ResponseBody
 	public ResponseEntity<?> regist(Comment comment, Authentication authentication) {
-		
+
 		Student student = (Student) authentication.getPrincipal();
 		comment.setUserId(student.getId());
 		comment.setUserName(student.getName());
-		
+
 		if (commentService.regist(comment)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-	
+
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
-	
+
 	/**
 	 * 댓글 수정
 	 * 
@@ -73,17 +73,17 @@ public class CommentController {
 	@PutMapping(value = "update")
 	@ResponseBody
 	public ResponseEntity<?> update(int id, String content) {
-		
+
 		Comment comment = commentService.get(id);
 		comment.setContent(content);
-		
+
 		if (commentService.update(comment)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-	
+
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
-	
+
 	/**
 	 * 댓글 삭제
 	 * 
@@ -93,11 +93,11 @@ public class CommentController {
 	@DeleteMapping(value = "delete")
 	@ResponseBody
 	public ResponseEntity<?> delete(int id) {
-		
+
 		if (commentService.delete(id)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		
+
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 }

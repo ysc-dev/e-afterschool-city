@@ -27,13 +27,13 @@ import com.ysc.afterschool.service.SubjectService;
 @Controller
 @RequestMapping("subject/class")
 public class ClassContentsController {
-	
+
 	@Autowired
 	private SubjectService subjectService;
-	
+
 	@Autowired
 	private ClassContentsService classContentsService;
-	
+
 	/**
 	 * 횟수별 수업내용 화면
 	 * 
@@ -43,13 +43,13 @@ public class ClassContentsController {
 	 * @param cookie
 	 */
 	@GetMapping("")
-	public void classView(Model model, int infoId, int id, 
+	public void classView(Model model, int infoId, int id,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
-		
+
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subject", subjectService.get(id));
-		
+
 		model.addAttribute("classContents", classContentsService.getList(id).stream().map(data -> {
 			String fileType = "";
 			for (SubjectUploadedFile file : data.getUploadedFiles()) {
@@ -57,12 +57,12 @@ public class ClassContentsController {
 					fileType = "IMAGE";
 				}
 			}
-			
+
 			data.setFileType(fileType);
 			return data;
 		}).collect(Collectors.toList()));
 	}
-	
+
 	/**
 	 * 파일 조회
 	 * 

@@ -25,13 +25,13 @@ import com.ysc.afterschool.service.SurveyService;
 @Controller
 @RequestMapping("survey")
 public class SurveyController {
-	
+
 	@Autowired
 	private CityService cityService;
-	
+
 	@Autowired
 	private SubjectService subjectService;
-	
+
 	@Autowired
 	private SurveyService surveyService;
 
@@ -47,7 +47,7 @@ public class SurveyController {
 		model.addAttribute("cityId", cityId);
 		model.addAttribute("subjects", subjectService.getListFromCity(cityId));
 	}
-	
+
 	/**
 	 * 만족도 조사 및 설문조사 화면(학부모용)
 	 * 
@@ -60,7 +60,7 @@ public class SurveyController {
 		model.addAttribute("cityId", cityId);
 		model.addAttribute("subjects", subjectService.getListFromCity(cityId));
 	}
-	
+
 	/**
 	 * 설문 등록 기능(학생용)
 	 * 
@@ -71,14 +71,14 @@ public class SurveyController {
 	@ResponseBody
 	public ResponseEntity<?> registStudent(Survey survey) {
 		survey.setSurveyType(SurveyType.Student);
-		
+
 		if (surveyService.regist(survey)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		
+
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
-	
+
 	/**
 	 * 설문 등록 기능(학생용)
 	 * 
@@ -89,11 +89,11 @@ public class SurveyController {
 	@ResponseBody
 	public ResponseEntity<?> registParents(Survey survey) {
 		survey.setSurveyType(SurveyType.Parents);
-		
+
 		if (surveyService.regist(survey)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		
+
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 }

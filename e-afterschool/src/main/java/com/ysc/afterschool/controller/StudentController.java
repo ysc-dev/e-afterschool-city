@@ -34,13 +34,13 @@ import reactor.core.publisher.Mono;
 @Controller
 @RequestMapping("student")
 public class StudentController {
-	
+
 	@Autowired
 	private StudentService studentService;
-	
+
 	@Autowired
 	private SchoolService schoolService;
-	
+
 	@Autowired
 	private CityService cityService;
 
@@ -51,14 +51,14 @@ public class StudentController {
 	 * @param cityId
 	 */
 	@GetMapping("regist")
-	public void regist(Model model, int cityId) { 
-		
-		model.addAttribute("schools", schoolService.getList(cityId).stream()
-				.map(s -> s.getName()).sorted().collect(Collectors.toList()));
+	public void regist(Model model, int cityId) {
+
+		model.addAttribute("schools",
+				schoolService.getList(cityId).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("cityId", cityId);
 	}
-	
+
 	/**
 	 * 주민번호 중복 확인
 	 * 
@@ -70,7 +70,7 @@ public class StudentController {
 	public Mono<Boolean> juminCheck(Student student) {
 		return Mono.just(studentService.searchJumin(student));
 	}
-	
+
 	/**
 	 * 등록된 학생인지 확인
 	 * 
@@ -82,16 +82,17 @@ public class StudentController {
 	public Mono<Boolean> search(Student student) {
 		return Mono.just(studentService.search(student));
 	}
-	
+
 	/**
 	 * 학생 등록 기능
+	 * 
 	 * @param student
 	 * @return
 	 */
 	@PostMapping(value = "regist")
 	@ResponseBody
 	public ResponseEntity<?> regist(Student student) {
-		
+
 		if (!student.getTel().contains("-")) {
 			String tel = student.getTel();
 			tel = tel.substring(0, 4) + "-" + tel.substring(4, tel.length());
@@ -99,27 +100,28 @@ public class StudentController {
 		} else {
 			student.setTel(student.getService() + "-" + student.getTel());
 		}
-		
+
 		student.setName(student.getName().trim());
-		
+
 		String school = student.getSchool();
 		student.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
-		
+
 		student.setCity(schoolService.get(school).getCity());
-		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
+		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4)
+				: school.substring(0, school.length() - 3);
 		student.setSchoolInfo(school);
-		
+
 		if (student.isAgree() && !student.getCity().equals("함양")) {
 			student.setResidentNumber(student.getJumin1() + "-" + student.getJumin2());
 		}
-		
+
 		if (studentService.regist(student)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		
+
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
-	
+
 	/**
 	 * 학생 정보 변경 화면
 	 * 
@@ -129,26 +131,26 @@ public class StudentController {
 	 * @param cookie
 	 */
 	@GetMapping("update")
-	public void update(Model model, int infoId, Authentication authentication, 
-			@CookieValue(value = "cityId", required = false) Cookie cookie) { 
-		
+	public void update(Model model, int infoId, Authentication authentication,
+			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+
 		Student student = (Student) authentication.getPrincipal();
-		
-		model.addAttribute("schools", schoolService.getList().stream()
-				.map(s -> s.getName()).sorted().collect(Collectors.toList()));
+
+		model.addAttribute("schools",
+				schoolService.getList().stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("city", cityService.get(cookie.getValue()));
 		model.addAttribute("cityId", cookie.getValue());
-		
+
 		if (student.isAgree()) {
 			String[] residentNumber = student.getResidentNumber().split("-");
 			student.setJumin1(residentNumber[0]);
 			student.setJumin2(residentNumber[1]);
 		}
-		
+
 		model.addAttribute("student", student);
 	}
-	
+
 	/**
 	 * 학생 정보 변경 기능
 	 * 
@@ -158,29 +160,30 @@ public class StudentController {
 	@PutMapping(value = "update")
 	@ResponseBody
 	public ResponseEntity<?> update(Student student) {
-		
+
 		Student temp = studentService.get(student.getId());
 		temp.setGrade(student.getGrade());
 		temp.setClassType(student.getClassType());
 		temp.setNumber(student.getNumber());
 		temp.setAgree(student.isAgree());
-		
+
 		if (student.isAgree()) {
 			temp.setResidentNumber(student.getJumin1() + "-" + student.getJumin2());
 		}
-		
+
 		String school = student.getSchool();
 		temp.setSchool(school);
 		temp.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
 		temp.setCity(schoolService.get(school).getCity());
-		
-		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
+
+		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4)
+				: school.substring(0, school.length() - 3);
 		temp.setSchoolInfo(school);
-		
+
 		if (studentService.update(temp)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		
+
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 }

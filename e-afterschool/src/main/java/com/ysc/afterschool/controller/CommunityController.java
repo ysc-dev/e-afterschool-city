@@ -41,16 +41,16 @@ public class CommunityController {
 
 	@Autowired
 	private SubjectService subjectService;
-	
+
 	@Autowired
 	private SubjectNoticeService subjectNoticeService;
-	
+
 	@Autowired
 	private CommentService commentService;
-	
+
 	@Autowired
 	private FileUploadService fileUploadService;
-	
+
 	/**
 	 * 커뮤니티 화면
 	 * 
@@ -60,15 +60,14 @@ public class CommunityController {
 	 * @param cookie
 	 */
 	@GetMapping("list")
-	public void list(Model model, int infoId, int id, 
-			@CookieValue(value = "cityId", required = false) Cookie cookie) {
-		
+	public void list(Model model, int infoId, int id, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subject", subjectService.get(id));
 		model.addAttribute("subjectNotices", subjectNoticeService.getList(id));
 	}
-	
+
 	/**
 	 * 글 등록 화면
 	 * 
@@ -78,14 +77,14 @@ public class CommunityController {
 	 * @param cookie
 	 */
 	@GetMapping("regist")
-	public void regist(Model model, int infoId, int subjectId, 
+	public void regist(Model model, int infoId, int subjectId,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
-		
+
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subject", subjectService.get(subjectId));
 	}
-	
+
 	/**
 	 * 글 등록 기능
 	 * 
@@ -96,34 +95,34 @@ public class CommunityController {
 	@PostMapping("regist")
 	@ResponseBody
 	public ResponseEntity<?> notice(SubjectNotice subjectNotice, Authentication authentication) {
-		
+
 		List<SubjectNoticeFile> uploadedFiles = new ArrayList<>();
-		
+
 		for (MultipartFile file : subjectNotice.getFiles()) {
 			String fileName = file.getOriginalFilename();
-			
+
 			if (!fileName.isEmpty()) {
 				CommonFile commonFile = fileUploadService.restore(file, CommonFile.COMMUNITY_PATH);
-				
+
 				SubjectNoticeFile uploadedFile = new SubjectNoticeFile(commonFile);
 				uploadedFile.setSubjectNotice(subjectNotice);
-				
+
 				uploadedFiles.add(uploadedFile);
 			}
 		}
-		
+
 		Student student = (Student) authentication.getPrincipal();
 		subjectNotice.setUserId(student.getId());
 		subjectNotice.setUserName(student.getName());
 		subjectNotice.setUploadedFiles(uploadedFiles);
-		
+
 		if (subjectNoticeService.regist(subjectNotice)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		
+
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
-	
+
 	/**
 	 * 커뮤니티 상세보기 화면
 	 * 
@@ -133,22 +132,22 @@ public class CommunityController {
 	 * @param cookie
 	 */
 	@GetMapping("detail")
-	public void detail(Model model, int infoId, int subjectId, int id, 
+	public void detail(Model model, int infoId, int subjectId, int id,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
-		
+
 		model.addAttribute("cityId", cookie.getValue());
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subjectId", subjectId);
-		
+
 		SubjectNotice notice = subjectNoticeService.get(id);
 		model.addAttribute("localDateTimeFormat", new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss"));
 		model.addAttribute("notice", notice);
 		model.addAttribute("comments", commentService.getList(id));
-		
+
 		notice.setHit(notice.getHit() + 1);
 		subjectNoticeService.update(notice);
 	}
-	
+
 	/**
 	 * 정보 삭제
 	 * 
@@ -158,14 +157,14 @@ public class CommunityController {
 	@DeleteMapping("delete")
 	@ResponseBody
 	public ResponseEntity<?> delete(int id) {
-		
+
 		if (subjectNoticeService.delete(id)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		
+
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
-	
+
 	/**
 	 * 파일 조회
 	 * 

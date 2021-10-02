@@ -25,10 +25,10 @@ import reactor.core.publisher.Mono;
  */
 @Controller
 public class InvitationController {
-	
+
 	@Autowired
 	private InvitationService invitationService;
-	
+
 	/**
 	 * 안내장 목록 화면
 	 * 
@@ -40,16 +40,16 @@ public class InvitationController {
 	@GetMapping("info")
 	public void info(Model model, int cityId, @AuthenticationPrincipal Student student,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
-		
+
 		if (cityId == 0) {
 			cityId = Integer.parseInt(cookie.getValue());
-		} 
-		
+		}
+
 		model.addAttribute("invitations", invitationService.getList(cityId).collectList().block());
 		model.addAttribute("cityId", cityId);
 		model.addAttribute("student", student);
 	}
-	
+
 	/**
 	 * 안내장 목록 화면
 	 * 
