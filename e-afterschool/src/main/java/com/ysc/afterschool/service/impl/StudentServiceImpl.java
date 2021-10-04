@@ -28,7 +28,7 @@ public class StudentServiceImpl implements StudentService {
 	public Student get(Integer id) {
 		return studentRepository.findById(id).get();
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public List<Student> getList() {
@@ -41,7 +41,7 @@ public class StudentServiceImpl implements StudentService {
 			return studentRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class StudentServiceImpl implements StudentService {
 			return studentRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override

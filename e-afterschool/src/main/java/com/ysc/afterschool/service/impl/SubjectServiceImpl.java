@@ -25,7 +25,7 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Autowired
 	private SubjectRepository subjectRepository;
-	
+
 	@Autowired
 	private InvitationRepository invitationRepository;
 
@@ -34,7 +34,7 @@ public class SubjectServiceImpl implements SubjectService {
 	public Subject get(Integer id) {
 		return subjectRepository.findById(id).get();
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public List<Subject> getList() {
@@ -47,7 +47,7 @@ public class SubjectServiceImpl implements SubjectService {
 			return subjectRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class SubjectServiceImpl implements SubjectService {
 			return subjectRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
@@ -84,13 +84,13 @@ public class SubjectServiceImpl implements SubjectService {
 	@Transactional(readOnly = true)
 	@Override
 	public List<Subject> getListFromCity(int cityId) {
-		
+
 		List<Subject> subjects = new ArrayList<>();
-		
+
 		for (Invitation invitation : invitationRepository.findByCityIdAndAddType(cityId, false)) {
 			subjects.addAll(subjectRepository.findByInvitationId(invitation.getId()));
 		}
-		
+
 		return subjects;
 	}
 }

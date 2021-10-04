@@ -23,7 +23,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Autowired
 	private NoticeRepository noticeRepository;
-	
+
 	@Autowired
 	private CityService cityService;
 
@@ -32,7 +32,7 @@ public class NoticeServiceImpl implements NoticeService {
 	public Notice get(Integer id) {
 		return noticeRepository.findById(id).get();
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public List<Notice> getList() {
@@ -45,7 +45,7 @@ public class NoticeServiceImpl implements NoticeService {
 			return noticeRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class NoticeServiceImpl implements NoticeService {
 			return noticeRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override

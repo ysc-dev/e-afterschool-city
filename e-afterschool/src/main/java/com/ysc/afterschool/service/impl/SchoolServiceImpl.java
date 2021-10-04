@@ -24,7 +24,7 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Autowired
 	private SchoolRepository schoolRepository;
-	
+
 	@Autowired
 	private CityService cityService;
 
@@ -33,7 +33,7 @@ public class SchoolServiceImpl implements SchoolService {
 	public School get(Integer id) {
 		return schoolRepository.findById(id).get();
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public List<School> getList() {
@@ -46,7 +46,7 @@ public class SchoolServiceImpl implements SchoolService {
 			return schoolRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class SchoolServiceImpl implements SchoolService {
 			return schoolRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override

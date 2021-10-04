@@ -28,7 +28,7 @@ public class ApplyCancelServiceImpl implements ApplyCancelService {
 	public ApplyCancel get(Integer id) {
 		return applyCancelRepository.findById(id).get();
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public List<ApplyCancel> getList() {
@@ -41,7 +41,7 @@ public class ApplyCancelServiceImpl implements ApplyCancelService {
 			return applyCancelRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class ApplyCancelServiceImpl implements ApplyCancelService {
 			return applyCancelRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override

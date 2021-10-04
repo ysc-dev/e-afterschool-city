@@ -28,7 +28,7 @@ public class ApplyServiceImpl implements ApplyService {
 	public Apply get(Integer id) {
 		return applyRepository.findById(id).get();
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public List<Apply> getList() {
@@ -41,7 +41,7 @@ public class ApplyServiceImpl implements ApplyService {
 			return applyRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class ApplyServiceImpl implements ApplyService {
 			return applyRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class ApplyServiceImpl implements ApplyService {
 	public List<Apply> getList(int infoId, int studentId) {
 		return applyRepository.findByInvitationIdAndStudentId(infoId, studentId);
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public List<Apply> getList(int invitationId) {

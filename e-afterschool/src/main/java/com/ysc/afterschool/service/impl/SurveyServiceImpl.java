@@ -22,13 +22,13 @@ public class SurveyServiceImpl implements SurveyService {
 
 	@Autowired
 	private SurveyRepository surveyRepository;
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public Survey get(Long id) {
 		return surveyRepository.findById(id).get();
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public List<Survey> getList() {
@@ -37,34 +37,32 @@ public class SurveyServiceImpl implements SurveyService {
 
 	@Override
 	public boolean regist(Survey domain) {
-		
+
 		domain.setTotalScore(domain.getValue1().getScore() + domain.getValue2().getScore()
-				+ domain.getValue3().getScore() + domain.getValue4().getScore()
-				+ domain.getValue5().getScore() + domain.getValue6().getScore()
-				+ domain.getValue7().getScore() + domain.getValue8().getScore()
-				+ domain.getValue9().getScore() + domain.getValue10().getScore()); 
-		
+				+ domain.getValue3().getScore() + domain.getValue4().getScore() + domain.getValue5().getScore()
+				+ domain.getValue6().getScore() + domain.getValue7().getScore() + domain.getValue8().getScore()
+				+ domain.getValue9().getScore() + domain.getValue10().getScore());
+
 		if (isNew(domain)) {
 			return surveyRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
 	public boolean update(Survey domain) {
-		
+
 		domain.setTotalScore(domain.getValue1().getScore() + domain.getValue2().getScore()
-				+ domain.getValue3().getScore() + domain.getValue4().getScore()
-				+ domain.getValue5().getScore() + domain.getValue6().getScore()
-				+ domain.getValue7().getScore() + domain.getValue8().getScore()
-				+ domain.getValue9().getScore() + domain.getValue10().getScore()); 
-		
+				+ domain.getValue3().getScore() + domain.getValue4().getScore() + domain.getValue5().getScore()
+				+ domain.getValue6().getScore() + domain.getValue7().getScore() + domain.getValue8().getScore()
+				+ domain.getValue9().getScore() + domain.getValue10().getScore());
+
 		if (!isNew(domain)) {
 			return surveyRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override

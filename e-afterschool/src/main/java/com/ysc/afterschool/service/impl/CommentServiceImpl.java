@@ -28,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
 	public Comment get(Integer id) {
 		return commentRepository.findById(id).get();
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public List<Comment> getList() {
@@ -41,7 +41,7 @@ public class CommentServiceImpl implements CommentService {
 			return commentRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class CommentServiceImpl implements CommentService {
 			return commentRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override

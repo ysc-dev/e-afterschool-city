@@ -20,19 +20,20 @@ import com.ysc.afterschool.domain.CommonFile.FileType;
  */
 @Service
 public class FileUploadService {
-	
+
 	@Value("${resource.uploads.root}")
 	private String uploadsRoot;
 
 	/**
 	 * 파일 업로드
+	 * 
 	 * @param multipartFile
 	 * @param path
 	 * @return
 	 */
 	public CommonFile restore(MultipartFile multipartFile, String path) {
 		CommonFile uploadedFile = new CommonFile();
-		
+
 		try {
 			// 파일 정보
 			String originFilename = multipartFile.getOriginalFilename();
@@ -41,7 +42,7 @@ public class FileUploadService {
 
 			// 서버에서 저장 할 파일 이름
 			String saveFileName = getSaveFileName(extName);
-			
+
 			uploadedFile.setFileName(saveFileName);
 			uploadedFile.setSize(size);
 			uploadedFile.setContentType(multipartFile.getContentType());
@@ -54,10 +55,10 @@ public class FileUploadService {
 			// throw new FileUploadException();
 			throw new RuntimeException(e);
 		}
-		
+
 		return uploadedFile;
 	}
-	
+
 	/**
 	 * 파일 삭제
 	 */

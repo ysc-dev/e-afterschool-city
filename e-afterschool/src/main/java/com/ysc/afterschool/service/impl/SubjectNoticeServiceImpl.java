@@ -28,7 +28,7 @@ public class SubjectNoticeServiceImpl implements SubjectNoticeService {
 	public SubjectNotice get(Integer id) {
 		return subjectNoticeRepository.findById(id).get();
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public List<SubjectNotice> getList() {
@@ -41,7 +41,7 @@ public class SubjectNoticeServiceImpl implements SubjectNoticeService {
 			return subjectNoticeRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class SubjectNoticeServiceImpl implements SubjectNoticeService {
 			return subjectNoticeRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override

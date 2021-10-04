@@ -29,7 +29,7 @@ public class ApplyWaitServiceImpl implements ApplyWaitService {
 	public ApplyWait get(Integer id) {
 		return applyWaitRepository.findById(id).get();
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public List<ApplyWait> getList() {
@@ -42,7 +42,7 @@ public class ApplyWaitServiceImpl implements ApplyWaitService {
 			return applyWaitRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class ApplyWaitServiceImpl implements ApplyWaitService {
 			return applyWaitRepository.save(domain) != null;
 		} else {
 			return false;
-		}	
+		}
 	}
 
 	@Override
