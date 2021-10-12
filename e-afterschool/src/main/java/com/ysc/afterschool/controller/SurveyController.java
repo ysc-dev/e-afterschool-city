@@ -67,7 +67,7 @@ public class SurveyController {
 	 * @param survey
 	 * @return
 	 */
-	@PostMapping(value = "regist/student")
+	@PostMapping("regist/student")
 	@ResponseBody
 	public ResponseEntity<?> registStudent(Survey survey) {
 		survey.setSurveyType(SurveyType.Student);
@@ -85,7 +85,7 @@ public class SurveyController {
 	 * @param survey
 	 * @return
 	 */
-	@PostMapping(value = "regist/parents")
+	@PostMapping("regist/parents")
 	@ResponseBody
 	public ResponseEntity<?> registParents(Survey survey) {
 		survey.setSurveyType(SurveyType.Parents);

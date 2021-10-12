@@ -43,6 +43,7 @@ public class SmsService {
 //	private final String callback = "0557930159"; //진주
 	
 	public boolean init() throws IOException {
+		
 		String text = "ysc2019:505e4c6d61dbe9dbf93e0f8861dc2c5d";
 		byte[] encodedBytes = Base64.encodeBase64(text.getBytes());
 		
@@ -63,9 +64,12 @@ public class SmsService {
 		
 		OkHttpClient client = new OkHttpClient();
 		Response response = client.newCall(request).execute();
+		
 		log.debug("init response : " + response.toString());
+		
 		if (response.isSuccessful()) {
 			RealResponseBody result = (RealResponseBody) response.body();
+			
 			try {
 				JSONParser jsonParser = new JSONParser();
 				JSONObject jsonObject = (JSONObject) jsonParser.parse(result.string());
@@ -92,27 +96,29 @@ public class SmsService {
 	 * @throws IOException
 	 */
 	public void send(String phone, int invitationId) throws IOException {
+		
 		Invitation invitation = invitationService.get(invitationId);
+		
 		if (invitation != null) {
 			if (init()) {
 				String callback = invitation.getCity().getSms();
 				phone = phone.replaceAll("-", "");
-				
+
 				String sendType = message.getBytes("euc-kr").length > 90 ? "lms" : "sms";
-				
+
 				MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-				RequestBody body = RequestBody.create(mediaType, "phone=" + phone + "&callback=" + callback + "&message=" + message + "&refkey=12132214");
-				Request request = new Request.Builder()
-						.url("https://sms.gabia.com/api/send/" + sendType)
-						.post(body)
+				RequestBody body = RequestBody.create(mediaType,
+						"phone=" + phone + "&callback=" + callback + "&message=" + message + "&refkey=12132214");
+				
+				Request request = new Request.Builder().url("https://sms.gabia.com/api/send/" + sendType).post(body)
 						.addHeader("Content-Type", "application/x-www-form-urlencoded")
 						.addHeader("Authorization", tokenType + " " + new String(Base64.encodeBase64(token.getBytes())))
-						.addHeader("cache-control", "no-cache")
-						.build();
-				
+						.addHeader("cache-control", "no-cache").build();
+
 				OkHttpClient client = new OkHttpClient();
 				Response response = client.newCall(request).execute();
 				response.body().close();
+				
 				log.debug("send response : " + response.toString());
 			}
 		}
