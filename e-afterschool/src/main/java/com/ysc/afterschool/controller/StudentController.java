@@ -60,6 +60,21 @@ public class StudentController {
 	}
 
 	/**
+	 * 에듀빌리지 학생 등록 화면
+	 * 
+	 * @param model
+	 * @param cityId
+	 */
+	@GetMapping("educare/regist")
+	public void registEducare(Model model, int cityId) {
+
+		model.addAttribute("schools",
+				schoolService.getList(cityId).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
+		model.addAttribute("city", cityService.get(cityId));
+		model.addAttribute("cityId", cityId);
+	}
+
+	/**
 	 * 주민번호 중복 확인
 	 * 
 	 * @param student

@@ -28,14 +28,13 @@
 	
 	<div class="row mt-3">
 		<div class="col-6 border-right border-bottom">
-			<button type="button" id="registBtn" class="btn btn-block bg-transparent py-4" data-fouc>
+			<button type="button" id="registBtn" class="btn btn-block bg-transparent py-4" data-fouc onclick="studentRegist(${city.id})">
 				<div class="d-flex flex-column text-center">
 					<div class="mb-2">
 						<i class="fas fa-user-plus fa-2x regist-title"></i>
 					</div>
 					<div class="btn-title regist-title">학생 등록</div>
 					<div class="fs-12 text-grey-400">처음이신가요?</div>
-					<!-- <button type="button" id="registBtn" class="btn btn-outline-info btn-lg rounded-round mt-2">들어가기</button> -->
 				</div>
 			</button>
 		</div>
@@ -47,7 +46,6 @@
 					</div>
 					<div class="btn-title text-grey-800 login-title">로그인</div>
 					<div class="fs-12 text-grey-400">&nbsp;로그인하시겠습니까?</div>
-					<!-- <button type="button" id="loginBtn" class="btn btn-outline-info btn-lg rounded-round mt-2">들어가기</button> -->
 				</div>
 			</button>
 		</div>
@@ -59,7 +57,6 @@
 					</div>
 					<div class="btn-title info-title">프로그램 안내</div>
 					<div class="fs-12 text-grey-400">안내장 정보입니다.</div>
-					<!-- <button type="button" id="infoBtn" class="btn btn-outline-info btn-lg rounded-round mt-2">들어가기</button> -->
 				</div>
 			</button>
 		</div>
@@ -82,23 +79,6 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
-			
-			<%-- <div class="d-flex flex-column align-items-center text-center text-grey-800">
-				<div class="${city.link == 'hy' ? 'mt-3 mb-2' : ''}">
-					<div>수강신청주소</div>
-					<span class="fs-10 font-weight-bold" style="letter-spacing:0rem">
-						http://e-afterschool.kr/${city.link}
-					</span>
-				</div>
-				<div class="mt-1">
-					<div>수강신청문의</div>
-					<div class="font-weight-bold">${city.tel1}</div>
-				</div>
-				<div class="${city.link == 'hy' ? 'display-none' : 'mt-1'}">
-					<div>기타운영문의</div>
-					<div class="font-weight-bold">${city.tel2}</div>
-				</div>
-			</div> --%>
 		</div>
 	</div>
 	
@@ -153,6 +133,15 @@
 </div>
 
 <script>
+function studentRegist(cityId) {
+	console.log(cityId);
+	if (cityId == 6) {
+		location.href = contextPath + "/student/educare/regist?cityId=" + cityId;
+	} else {
+		location.href = contextPath + "/student/regist?cityId=" + cityId;
+	}
+}
+
 $("#registBtn").click(function() {
 	location.href = contextPath + "/student/regist?cityId=${city.id}";
 });
