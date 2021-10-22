@@ -167,9 +167,9 @@ $(function() {
 		/** 개인정보 동의 체크 버튼 클릭 시 */
 		$("#agreeCheckBtn").click(function(){
 		    if ($(this).is(':checked')) {
-		    	$("#registBtn").prop("disabled", false);
+		    	$("#updateBtn").prop("disabled", false);
 		    } else {
-		    	$("#registBtn").prop("disabled", true);
+		    	$("#updateBtn").prop("disabled", true);
 		    }
 		});
 	}

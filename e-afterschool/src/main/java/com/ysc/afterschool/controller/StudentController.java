@@ -68,8 +68,6 @@ public class StudentController {
 	@GetMapping("educare/regist")
 	public void registEducare(Model model, int cityId) {
 		
-		System.err.println(cityId);
-
 		model.addAttribute("schools",
 				schoolService.getList(1).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("city", cityService.get(cityId));
@@ -152,12 +150,14 @@ public class StudentController {
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
 		Student student = (Student) authentication.getPrincipal();
+		
+		int cityId = Integer.parseInt(cookie.getValue());
 
 		model.addAttribute("schools",
-				schoolService.getList().stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
+				schoolService.getList(cityId).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("infoId", infoId);
-		model.addAttribute("city", cityService.get(cookie.getValue()));
-		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("city", cityService.get(cityId));
+		model.addAttribute("cityId", cityId);
 
 		if (student.isAgree()) {
 			String[] residentNumber = student.getResidentNumber().split("-");
@@ -187,6 +187,100 @@ public class StudentController {
 		if (student.isAgree()) {
 			temp.setResidentNumber(student.getJumin1() + "-" + student.getJumin2());
 		}
+
+		String school = student.getSchool();
+		temp.setSchool(school);
+		temp.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
+		temp.setCity(schoolService.get(school).getCity());
+
+		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4)
+				: school.substring(0, school.length() - 3);
+		temp.setSchoolInfo(school);
+
+		if (studentService.update(temp)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
+	/**
+	 * 학생 등록 기능(에듀빌리지)
+	 * 
+	 * @param student
+	 * @return
+	 */
+	@PostMapping(value = "educare/regist")
+	@ResponseBody
+	public ResponseEntity<?> registEducare(Student student) {
+
+		if (!student.getTel().contains("-")) {
+			String tel = student.getTel();
+			tel = tel.substring(0, 4) + "-" + tel.substring(4, tel.length());
+			student.setTel(student.getService() + "-" + tel);
+		} else {
+			student.setTel(student.getService() + "-" + student.getTel());
+		}
+
+		student.setName(student.getName().trim());
+
+		String school = student.getSchool();
+		student.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
+
+		student.setCity(schoolService.get(school).getCity());
+		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4)
+				: school.substring(0, school.length() - 3);
+		student.setSchoolInfo(school);
+
+		if (studentService.regist(student)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
+	/**
+	 * 학생 정보 변경 화면(에듀빌리지)
+	 * 
+	 * @param model
+	 * @param infoId
+	 * @param authentication
+	 * @param cookie
+	 */
+	@GetMapping("educare/update")
+	public void updateEducare(Model model, int infoId, Authentication authentication,
+			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+
+		Student student = (Student) authentication.getPrincipal();
+		
+		int cityId = Integer.parseInt(cookie.getValue());
+
+		model.addAttribute("schools",
+				schoolService.getList(1).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
+		model.addAttribute("infoId", infoId);
+		model.addAttribute("city", cityService.get(cityId));
+		model.addAttribute("cityId", cityId);
+
+		model.addAttribute("student", student);
+	}
+	
+	/**
+	 * 학생 정보 변경 기능
+	 * 
+	 * @param student
+	 * @return
+	 */
+	@PutMapping(value = "educare/update")
+	@ResponseBody
+	public ResponseEntity<?> updateEducare(Student student) {
+
+		Student temp = studentService.get(student.getId());
+		temp.setGrade(student.getGrade());
+		temp.setClassType(student.getClassType());
+		temp.setNumber(student.getNumber());
+		temp.setAgree(student.isAgree());
+		temp.setDong(student.getDong());
+		temp.setHo(student.getHo());
 
 		String school = student.getSchool();
 		temp.setSchool(school);

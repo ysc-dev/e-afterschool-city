@@ -65,6 +65,18 @@ public class Student extends AbstractDomain {
 	@Column(length = 20)
 	private String city;
 	
+	/** 아파트 */
+	@Column(length = 45)
+	private String apartment;
+	
+	/** 동 */
+	@Column(length = 45)
+	private String dong;
+	
+	/** 호수 */
+	@Column(length = 45)
+	private String ho;
+	
 	/** 핸드폰 앞자리 */
 	@Transient
 	private String service;

@@ -4,7 +4,7 @@
 <link href="${pageContext.request.contextPath}/css/student.css" rel="stylesheet" type="text/css">
 
 <div class="content d-flex justify-content-center align-items-center mb-0"> 
-	<form id="studentRegistForm" class="form-validate" action="${pageContext.request.contextPath}/student/regist" method="POST"> 
+	<form id="studentRegistForm" class="form-validate" action="${pageContext.request.contextPath}/student/educare/regist" method="POST"> 
 		<div class="card mb-0">
 			<div class="card-header bg-teal-400 text-white py-2">
 				<h2>방과후학교 학생 등록</h2>
@@ -20,13 +20,13 @@
 				<div class="form-group row">
 					<label class="col-form-label col-3">동</label>
 					<div class="col-9">
-						<input type="text" class="form-control" name="dong" autocomplete="off" required>
+						<input type="number" class="form-control" name="dong" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-form-label col-3">호 수</label>
 					<div class="col-9">
-						<input type="text" class="form-control" name="ho" autocomplete="off" required>
+						<input type="number" class="form-control" name="ho" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="form-group row">

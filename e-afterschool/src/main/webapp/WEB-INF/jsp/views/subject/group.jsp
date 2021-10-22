@@ -26,9 +26,18 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="${pageContext.request.contextPath}/student/update?infoId=${invitation.id}" class="navbar-nav-link nav-border-left">
-						<i class="icon-user mr-1"></i>학생정보변경
-					</a>
+				<c:choose>
+					<c:when test="${cityId == 6}">
+						<a href="${pageContext.request.contextPath}/student/educare/update?infoId=${invitation.id}" class="navbar-nav-link nav-border-left">
+							<i class="icon-user mr-1"></i>학생정보변경
+						</a>
+					</c:when>
+					<c:otherwise>
+						<a href="${pageContext.request.contextPath}/student/update?infoId=${invitation.id}" class="navbar-nav-link nav-border-left">
+							<i class="icon-user mr-1"></i>학생정보변경
+						</a>
+					</c:otherwise>
+				</c:choose>
 				</li>
 				<li class="nav-item bg-grey">
 					<a href="${pageContext.request.contextPath}/logout" class="navbar-nav-link nav-border-left">
