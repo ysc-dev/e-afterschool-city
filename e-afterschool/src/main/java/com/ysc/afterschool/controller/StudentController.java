@@ -67,9 +67,11 @@ public class StudentController {
 	 */
 	@GetMapping("educare/regist")
 	public void registEducare(Model model, int cityId) {
+		
+		System.err.println(cityId);
 
 		model.addAttribute("schools",
-				schoolService.getList(cityId).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
+				schoolService.getList(1).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("cityId", cityId);
 	}

@@ -143,7 +143,12 @@ function studentRegist(cityId) {
 }
 
 $("#registBtn").click(function() {
-	location.href = contextPath + "/student/regist?cityId=${city.id}";
+	var cityId = "${city.id}"; 
+	if (cityId == 6) {
+		location.href = contextPath + "/student/educare/regist?cityId=" + cityId;
+	} else {
+		location.href = contextPath + "/student/regist?cityId=" + cityId;
+	}
 });
 
 $("#loginBtn").click(function() {

@@ -72,7 +72,7 @@
 							<option value="018">018</option>
 							<option value="019">019</option>
 						</select>
-						<input type="tel" class="form-control ml-2" name="tel" autocomplete="off" required>
+						<input type="tel" class="form-control ml-2" name="tel" autocomplete="off" required placeholder="1234-5678">
 					</div>
 				</div>
 				

@@ -12,6 +12,24 @@
 			<div class="card-body student-content">
 				<p class="info-text">* 정보 입력 후 하단 [학생등록]을 클릭하세요.<br>핸드폰에 반드시 수업관련안내를 받으실 번호<br>(학부모 전화번호)를 입력하세요.
 				<div class="form-group row pt-2">
+					<label class="col-form-label col-3">아파트</label>
+					<div class="col-9">
+						<input type="text" class="form-control" name="apartment" readonly="readonly" value="마린애시앙">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-form-label col-3">동</label>
+					<div class="col-9">
+						<input type="text" class="form-control" name="dong" autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-form-label col-3">호 수</label>
+					<div class="col-9">
+						<input type="text" class="form-control" name="ho" autocomplete="off" required>
+					</div>
+				</div>
+				<div class="form-group row">
 					<label class="col-form-label col-3">학 교</label>
 					<div class="col-9">
 						<select data-placeholder="- 선 택 -" class="form-control select-search" name="school" required>
@@ -72,45 +90,19 @@
 							<option value="018">018</option>
 							<option value="019">019</option>
 						</select>
-						<input type="tel" class="form-control ml-2" name="tel" autocomplete="off" required>
+						<input type="tel" class="form-control ml-2" name="tel" autocomplete="off" required placeholder="1234-5678">
 					</div>
 				</div>
 				
 				<fieldset class="mb-0">
 					<legend class="fs-14 font-weight-bold">개인정보제공 동의</legend>
-					<label class="text-grey-600">학생보험 가입 시 필요한 개인정보제공에 동의를 해 주셔야 가입이 가능합니다.<br>보험가입목적 외에는 절대 사용하지 않습니다.</label>
-					<c:choose>
-						<c:when test="${city.link eq 'hy'}">
-							<div class="form-check mt-1 mb-0">
-								<label class="form-check-label">
-									<input id="agreeCheckBtn" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
-									개인정보를 제공하는 것에 동의합니다.
-								</label>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="form-check mt-1 mb-0">
-								<label class="form-check-label">
-									<input id="agreeCheck" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
-									보험가입에 필요한 개인정보를 보험사에 제공하는 것에 동의합니다.
-								</label>
-							</div>
-							<div id="residentNumberInput" class="mt-1 mb-0">
-								<div class="form-group mt-2">
-									<button id="modalBtn" type="button" class="btn bg-teal-600 px-2" disabled
-										data-toggle="modal" data-target="#modal">보험관련 규약추가항목 확인</button>
-								</div>
-								<div class="form-group mt-3 mb-0">
-									<label class="font-weight-bold">학생주민등록번호 입력 :</label>
-									<div class="d-flex align-items-center">
-										<input type="text" class="form-control format-jumin1" id="jumin1" name="jumin1" required>
-										<span class="font-weight-bold mx-2">-</span>
-										<input type="password" class="form-control format-jumin2" id="jumin2" name="jumin2" required>
-									</div>
-								</div>
-							</div>
-						</c:otherwise>
-					</c:choose>
+					<label class="text-grey-600">개인정보제공에 동의를 해 주셔야 가입이 가능합니다.<br>수집된 개인정보를 방과후학교 외의 용도로는 사용하지 않습니다.</label>
+					<div class="form-check mt-1 mb-0">
+						<label class="form-check-label">
+							<input id="agreeCheckBtn" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
+							개인정보를 제공하는 것에 동의합니다.
+						</label>
+					</div>
 				</fieldset>
 			</div>
 			<div class="card-footer text-center">
@@ -119,28 +111,6 @@
 			</div>
 		</div>
 	</form>
-</div>
-
-<div id="modal" class="modal fade" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title">[단체보험 가입-규약]</h1>
-			</div>
-
-			<div class="modal-body">
-				<p>1. 회사는 회사를 계약자로, 회원을 피보험자로 하는 단체상해보험을 체결할 수 있습니다.</p>
-				<p>2. 회원은 회사가 회원을 피보험자로 하는 단체상해보험을 체결함에 있어 회사가 일괄로 가입하는 방식에 동의합니다.</p>
-				<p>3. 회원은 제1항의 보험계약에 따른 담보항목 및 내용을 회사가 제공하는 범주 내에서 선택할 수 있으며, 소정의 절차에 따라 보험 청약을 합니다.</p>
-				<p>4. 회원이 가입하는 단체상해보험의 보험금 수익자는 사망보험금인 경우에는 피보험자의 법정상속인, 그 외의 경우에는 피보험자 본인으로 합니다.</p>
-				<p>5. 보험계약에 관한 세부내용은 보험사가 제공하는 보험약관에 따르며 이 규약에서 정하지 않은 사항은 회사가 보험사와 약정한 바에 따릅니다.</p>
-			</div>
-
-			<div class="modal-footer text-center">
-				<button id="confirmBtn" type="button" class="btn bg-teal-600 px-4">확 인</button>
-			</div>
-		</div>
-	</div>
 </div>
 
 <script>
@@ -157,47 +127,14 @@ $(function() {
 	    pattern: '{{9999}}-{{9999}}'
 	});
 
-	// 보험관련 규약추가항목 확인 여부
-	var isConfirm = false;
-	
-	var cityLink = '${city.link}';
-	//합양캠퍼스일 경우 ------------------------------------------
-	if (cityLink === 'hy') {
-		$("#residentNumberInput").addClass("d-none");
-		isConfirm = true;
-		
-		/** 개인정보 동의 체크 버튼 클릭 시 */
-		$("#agreeCheckBtn").click(function(){
-		    if ($(this).is(':checked')) {
-		    	$("#registBtn").prop("disabled", false);
-		    } else {
-		    	$("#registBtn").prop("disabled", true);
-		    }
-		});
-	}
-	// ----------------------------------------------------
-	else {
-		/** 개인정보 동의 체크 버튼 클릭 시 */
-		$("#agreeCheck").click(function(){
-		    if ($(this).is(':checked')) {
-		    	//$("#residentNumberInput").removeClass("d-none");
-		    	$("#registBtn").prop("disabled", false);
-		    	$("#modalBtn").prop("disabled", false);
-		    } else {
-		    	//$("#residentNumberInput").addClass("d-none");
-		    	$("#registBtn").prop("disabled", true);
-		    	isConfirm = false;
-		    }
-		});
-		
-		/** 단체보험 가입 확인 버튼 클릭 시 */
-		$("#confirmBtn").click(function() {
-			$("#modalBtn").prop("disabled", true);
-			$("#modal").modal('hide');
-			//$("#registBtn").prop("disabled", false);
-			isConfirm = true;
-		});
-	}
+	/** 개인정보 동의 체크 버튼 클릭 시 */
+	$("#agreeCheckBtn").click(function(){
+	    if ($(this).is(':checked')) {
+	    	$("#registBtn").prop("disabled", false);
+	    } else {
+	    	$("#registBtn").prop("disabled", true);
+	    }
+	});
 	
 	// 전송 상태 설정 : false
 	var isSubmitted = false;
@@ -209,17 +146,6 @@ $(function() {
 
 		// 한번 등록 버튼을 클릭 시 중복으로 클릭이 안되도록
 		if (isSubmitted) { 
-			registError();
-			return;
-		}
-
-		if (!isConfirm) {
-			if (checkIE()) {
-				alert("보험관련 규악추가항목을 확인하세요.");
-			} else {
-				swalInit.fire({title: "보험관련 규악추가항목을 확인하세요.", type: "warning", position: 'top'});
-			}
-			
 			registError();
 			return;
 		}
