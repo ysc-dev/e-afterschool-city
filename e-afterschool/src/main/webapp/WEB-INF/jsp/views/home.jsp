@@ -28,7 +28,7 @@
 	
 	<div class="row mt-3">
 		<div class="col-6 border-right border-bottom">
-			<button type="button" id="registBtn" class="btn btn-block bg-transparent py-4" data-fouc onclick="studentRegist(${city.id})">
+			<button type="button" id="registBtn" class="btn btn-block bg-transparent py-4" data-fouc>
 				<div class="d-flex flex-column text-center">
 					<div class="mb-2">
 						<i class="fas fa-user-plus fa-2x regist-title"></i>
@@ -133,15 +133,6 @@
 </div>
 
 <script>
-function studentRegist(cityId) {
-	console.log(cityId);
-	if (cityId == 6) {
-		location.href = contextPath + "/student/educare/regist?cityId=" + cityId;
-	} else {
-		location.href = contextPath + "/student/regist?cityId=" + cityId;
-	}
-}
-
 $("#registBtn").click(function() {
 	var cityId = "${city.id}"; 
 	if (cityId == 6) {
