@@ -23,7 +23,14 @@
 
 <div class="content home-content mb-0">
 	<div class="home-title justify-content-center align-items-center">
-		<span>${city.content} <span class="text-info-600">${city.campus}</span> 방과후학교에</span><span>오신 것을 환영합니다.</span>
+		<c:choose>
+		    <c:when test="${city.id == '6'}">
+		        <span><span class="text-info-600">${city.content}</span> 커뮤니티센터 프로그램에</span><span>오신 것을 환영합니다.</span>
+		    </c:when>
+		    <c:otherwise>
+		        <span>${city.content} <span class="text-info-600">${city.campus}</span> 방과후학교에</span><span>오신 것을 환영합니다.</span>
+		    </c:otherwise>
+		</c:choose>
 	</div>
 	
 	<div class="row mt-3">

@@ -24,7 +24,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-form-label">2. 프로그램 운영과 관련된 안내가 충분히 이루어졌다.</label>
+					<label class="col-form-label">2. 수업 시간을 정확하게 잘 지킵니까?</label>
 					<div class="ml-2">
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input" name="value1" id="radio1_1" value="SCORE10">
@@ -50,7 +50,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-form-label">3. 프로그램 운영시간이 잘 지켜졌다.</label>
+					<label class="col-form-label">3. 학생의 질문에 성실하게 응답해 줍니까?</label>
 					<div class="ml-2">
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input" name="value2" id="radio2_1" value="SCORE10">
@@ -76,7 +76,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-form-label">4. 프로그램을 운영하기 위한 준비가 잘 되었다.</label>
+					<label class="col-form-label">4. 프로그램 내용을 이해하기 쉽게 설명해 줍니까?</label>
 					<div class="ml-2">
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input" name="value3" id="radio3_1" value="SCORE10">
@@ -102,7 +102,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-form-label">5. 프로그램 구성이 잘 짜여졌다.</label>
+					<label class="col-form-label">5. 수업 시간에 수업만 전념합니까?</label>
 					<div class="ml-2">
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input" name="value4" id="radio4_1" value="SCORE10">
@@ -128,7 +128,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-form-label">6. 프로그램의 내용과 분량은 학생들에게 적절하였다.</label>
+					<label class="col-form-label">6. 프로그램 운영과 관련된 안내가 이루어집니까?</label>
 					<div class="ml-2">
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input" name="value5" id="radio5_1" value="SCORE10">
@@ -154,7 +154,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-form-label">7. 프로그램 운영에 선택된 도서(교재)및 교구(재료)는 학생들의 수준에 맞고 도움이 되었다.</label>
+					<label class="col-form-label">7. 학습이나 활동하기에 적절한 프로그램의 내용과 분량입니까?</label>
 					<div class="ml-2">
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input" name="value6" id="radio6_1" value="SCORE10">
@@ -180,7 +180,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-form-label">8. 학생의 출결상황, 활동상황 결과에 대한 통지가 적절히 이루어졌다. </label>
+					<label class="col-form-label">8. 학생의 출결사항 및 평가 결과를 안내합니까?</label>
 					<div class="ml-2">
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input" name="value7" id="radio7_1" value="SCORE10">
@@ -206,7 +206,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-form-label">9. 프로그램 운영을 통해 자녀의 소질 계발과 실력 향상에 많은 도움이 되었다.</label>
+					<label class="col-form-label">9. 프로그램에 적극 참여하도록 관심을 가지고 지도합니까?</label>
 					<div class="ml-2">
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input" name="value8" id="radio8_1" value="SCORE10">
@@ -232,7 +232,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-form-label">10. 다른사람에게 이 프로그램을 권유하겠다.</label>
+					<label class="col-form-label">10. 프로그램이 특기 적성 계발 및 실력 향상에 도움이 됩니까?</label>
 					<div class="ml-2">
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input" name="value9" id="radio9_1" value="SCORE10">
@@ -258,7 +258,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-form-label">11. 앞으로 이 프로그램에 계속 참여하고싶다.</label>
+					<label class="col-form-label">11. 앞으로 이 프로그램에 계속 참여하거나 다른 친구에게 권유하겠습니까?</label>
 					<div class="ml-2">
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input" name="value10" id="radio10_1" value="SCORE10">
@@ -280,6 +280,19 @@
 							<input type="radio" class="custom-control-input" name="value10" id="radio10_5" value="SCORE0">
 							<label class="custom-control-label" for="radio10_5">매우불만(0)</label>
 						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-form-label">12. 현재 진행되고있는 방과후 학교 프로그램 중 재개설 되었으면 하는 강좌를 적어 주시기 바랍니다.(3가지)</label>
+					<div class="col-8">
+						<input type="text" class="form-control" name="subject1" autocomplete="off">
+					</div>
+					<div class="col-8 mt-1">
+						<input type="text" class="form-control" name="subject2" autocomplete="off">
+					</div>
+					<div class="col-8 mt-1">
+						<input type="text" class="form-control" name="subject3" autocomplete="off">
 					</div>
 				</div>
 				
@@ -320,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				|| !$('input:radio[name=value3]').is(':checked') || !$('input:radio[name=value4]').is(':checked')
 				|| !$('input:radio[name=value5]').is(':checked') || !$('input:radio[name=value6]').is(':checked')
 				|| !$('input:radio[name=value7]').is(':checked') || !$('input:radio[name=value8]').is(':checked')
-				|| !$('input:radio[name=value9]').is(':checked')) {
+				|| !$('input:radio[name=value9]').is(':checked') || !$('input:radio[name=value10]').is(':checked')) {
 			swalInit.fire({title: "설문에 대해 모두 응답해주세요.", type: "warning", position: 'top'});
 			return;
 		}

@@ -1,5 +1,8 @@
 package com.ysc.afterschool.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,7 +73,24 @@ public class SurveyController {
 	@PostMapping("regist/student")
 	@ResponseBody
 	public ResponseEntity<?> registStudent(Survey survey) {
+
 		survey.setSurveyType(SurveyType.Student);
+		
+		List<String> subjects = new ArrayList<String>();
+		
+		if (!survey.getSubject1().isEmpty()) {
+			subjects.add(survey.getSubject1());
+		}
+		if (!survey.getSubject2().isEmpty()) {
+			subjects.add(survey.getSubject2());
+		}
+		if (!survey.getSubject3().isEmpty()) {
+			subjects.add(survey.getSubject3());
+		}
+		
+		if (subjects.size() > 0) {
+			survey.setSubjects(String.join(",", subjects));
+		}
 
 		if (surveyService.regist(survey)) {
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -80,7 +100,7 @@ public class SurveyController {
 	}
 
 	/**
-	 * 설문 등록 기능(학생용)
+	 * 설문 등록 기능(학부모용)
 	 * 
 	 * @param survey
 	 * @return
@@ -88,7 +108,24 @@ public class SurveyController {
 	@PostMapping("regist/parents")
 	@ResponseBody
 	public ResponseEntity<?> registParents(Survey survey) {
+		
 		survey.setSurveyType(SurveyType.Parents);
+		
+		List<String> subjects = new ArrayList<String>();
+		
+		if (!survey.getSubject1().isEmpty()) {
+			subjects.add(survey.getSubject1());
+		}
+		if (!survey.getSubject2().isEmpty()) {
+			subjects.add(survey.getSubject2());
+		}
+		if (!survey.getSubject3().isEmpty()) {
+			subjects.add(survey.getSubject3());
+		}
+		
+		if (subjects.size() > 0) {
+			survey.setSubjects(String.join(",", subjects));
+		}
 
 		if (surveyService.regist(survey)) {
 			return new ResponseEntity<>(HttpStatus.OK);

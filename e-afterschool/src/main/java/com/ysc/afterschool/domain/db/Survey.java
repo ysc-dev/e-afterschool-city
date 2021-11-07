@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -77,6 +78,9 @@ public class Survey implements Domain {
 	@Column(nullable = false)
 	private ScoreType value10;
 	
+	@Column(length = 255)
+	private String subjects;
+	
 	/** 총 점수 */
 	private int totalScore;
 	
@@ -87,6 +91,15 @@ public class Survey implements Domain {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private SurveyType surveyType;
+	
+	@Transient
+	private String subject1;
+	
+	@Transient
+	private String subject2;
+	
+	@Transient
+	private String subject3;
 	
 	@Getter
 	public enum SurveyType {
