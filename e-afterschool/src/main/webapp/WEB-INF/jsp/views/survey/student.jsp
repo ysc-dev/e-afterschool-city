@@ -285,6 +285,26 @@
 				
 				<div class="form-group">
 					<label class="col-form-label">12. 현재 진행되고있는 방과후 학교 프로그램 중 재개설 되었으면 하는 강좌를 적어 주시기 바랍니다.(3가지)</label>
+					<div class="ml-2 border p-2 font-weight-bold text-grey-800">
+						<c:choose>
+						    <c:when test="${city.id == '1'}">
+						    	<div>
+						    		● 프로젝트형 (굿사이클, 드론아놀자, 전자실로폰만들기, 뉴스마트시티)
+						    	</div>
+						    	<div class="mt-1">
+						    		● 과정형 (프리미어리그체험, 쉬지말고농구하자, 원리를알면나도골프천재, 키크는데必필라테스, 광클라이밍, 춤추는가얏고, 창의융합매직토이, 숲에서배우는과학)
+						    	</div>
+						    </c:when>
+						    <c:when test="${city.id == '2'}">
+						    	<div>
+						    		● 기수형 (둘이서하나되는승마, 특산물요리, 드론 크리에이터)
+						    	</div>
+						    	<div class="mt-1">
+						    		● 과정형 (프리미어리그체험, 춤추는가얏고, 토요스트라이크, 원리를알면나도골프천재, Y캠프, 키크는데必필라테스, 나도1인방송가, 꿈꾸는뮤지션, 꿈꾸는미디작업실, 메이크업아티스트, 나만의보드게임, 한국사와인문학이야기, 캠퍼스수학, 카톡이모티콘작가되기, 랜선메이커, 랜선창의융합매직토이, 재활용업사이클링, 클로벌커뮤니케이션, 웹툰크리에이터)
+						    	</div>
+						    </c:when>
+						</c:choose>
+					</div>
 					<div class="col-8">
 						<input type="text" class="form-control" name="subject1" autocomplete="off">
 					</div>

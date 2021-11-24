@@ -231,7 +231,7 @@ public class StudentController {
 		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4)
 				: school.substring(0, school.length() - 3);
 		student.setSchoolInfo(school);
-
+		
 		if (studentService.regist(student)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
