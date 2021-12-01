@@ -136,9 +136,7 @@ public class SubjectController {
 			subject.setApplyType(ApplyType.APPLY);
 		} else if (applyWaitService.search(infoId, student.getId(), subject.getId())) { // 신청 대기 중일 경우
 			subject.setApplyType(ApplyType.APPLYWAIT);
-		} else if (subject.getWaitFixedNumber() != 0 && subject.getWaitFixedNumber() <= subject.getWaitingNumber()) { // 대기인원
-																														// 초과일
-																														// 경우
+		} else if (subject.getWaitFixedNumber() != 0 && subject.getWaitFixedNumber() <= subject.getWaitingNumber()) { // 대기인원 초과일 경우
 			subject.setApplyType(ApplyType.WAITING);
 		} else if (subject.getFixedNumber() <= subject.getApplyNumber()) { // 정원초과 일 경우
 			subject.setApplyType(ApplyType.FILL);

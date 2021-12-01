@@ -134,8 +134,6 @@ public class ApplyController {
 		if (applyService.delete(applyId)) {
 			applyCancelService.regist(new ApplyCancel(apply));
 
-			// ApplyWait applyWait = applyWaitService.get(apply.getInvitationId(),
-			// subject.getId(), OrderType.오름차순);
 			List<ApplyWait> applyWaits = applyWaitService.getList(subject.getId());
 			if (applyWaits.size() == 0) { // 대기 인원이 없을 경우
 				subject.setApplyNumber(subject.getApplyNumber() - 1);
@@ -146,11 +144,9 @@ public class ApplyController {
 			} else { // 대기 인원이 있을 경우
 				for (ApplyWait applyWait : applyWaits) {
 
-					List<Apply> applies = applyService.getList(applyWait.getInvitationId(),
-							applyWait.getStudent().getId());
+					List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
 					if (applies.size() < 2) { // 수강대기 첫번째 학생의 수강신청 한 과목이 두개가 아닐 경우
-						if (applyService
-								.regist(new Apply(applyWait.getInvitationId(), applyWait.getStudent(), subject))) {
+						if (applyService.regist(new Apply(applyWait.getInvitationId(), applyWait.getStudent(), subject))) {
 							if (applyWaitService.delete(applyWait.getId())) {
 								subject.setWaitingNumber(subject.getWaitingNumber() - 1);
 
@@ -176,34 +172,6 @@ public class ApplyController {
 				}
 			}
 		}
-
-//		if (applyService.delete(applyId)) {
-//			ApplyWait applyWait = applyWaitService.get(apply.getInvitationId(), subject.getId(), OrderType.오름차순);
-//			if (applyWait == null) {  // 대기 인원이 없을 경우
-//				subject.setApplyNumber(subject.getApplyNumber() - 1);
-//				if (subjectService.update(subject)) {
-//					return new ResponseEntity<>(HttpStatus.OK);
-//				}
-//			} else { // 대기 인원이 있을 경우
-//				List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
-//				if (applies.size() < 3) { // 수강신청 한 과목이 두개가 아닐 경우
-//					if (applyService.regist(new Apply(applyWait.getInvitationId(), applyWait.getStudent(), subject))) {
-//						if (applyWaitService.delete(applyWait.getId())) {
-//							subject.setWaitingNumber(subject.getWaitingNumber() - 1);
-//							if (subjectService.update(subject)) {
-//								try {
-//									smsService.send(applyWait.getStudent().getTel());
-//								} catch (IOException e) {
-//									e.printStackTrace();
-//								}
-//								
-//								return new ResponseEntity<>(HttpStatus.OK);
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
 
 		return new ResponseEntity<String>("수강 취소를 실패하였습니다.", HttpStatus.BAD_REQUEST);
 	}
