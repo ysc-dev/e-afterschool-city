@@ -24,7 +24,7 @@
 <div class="content home-content mb-0">
 	<div class="home-title justify-content-center align-items-center">
 		<c:choose>
-		    <c:when test="${city.id == '6'}">
+		    <c:when test="${city.link == 'educare' || city.link == 'educare1'}">
 		        <span><span class="text-info-600">${city.content}</span> 커뮤니티센터 프로그램에</span><span>오신 것을 환영합니다.</span>
 		    </c:when>
 		    <c:otherwise>
@@ -141,8 +141,9 @@
 
 <script>
 $("#registBtn").click(function() {
-	var cityId = "${city.id}"; 
-	if (cityId == 6) {
+	var cityId = "${city.id}";
+	var cityLink = "${city.link}";
+	if (cityLink == 'educare' || cityLink == 'educare1') {
 		location.href = contextPath + "/student/educare/regist?cityId=" + cityId;
 	} else {
 		location.href = contextPath + "/student/regist?cityId=" + cityId;

@@ -27,7 +27,7 @@
 				</li>
 				<li class="nav-item">
 				<c:choose>
-					<c:when test="${cityId == 6}">
+					<c:when test="${cityId == 6 || cityId == 7}">
 						<a href="${pageContext.request.contextPath}/student/educare/update?infoId=${invitation.id}" class="navbar-nav-link nav-border-left">
 							<i class="icon-user mr-1"></i>학생정보변경
 						</a>
