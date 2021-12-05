@@ -44,7 +44,7 @@ public class School extends AbstractDomain {
 	public enum SchoolType {
 		초등("초등학교"),
 		중등("중학교"),
-		고등("고등학교");
+		유치부("유치부");
 		
 		private String name;
 		

@@ -143,7 +143,6 @@ public class ApplyController {
 				}
 			} else { // 대기 인원이 있을 경우
 				for (ApplyWait applyWait : applyWaits) {
-
 					List<Apply> applies = applyService.getList(applyWait.getInvitationId(), applyWait.getStudent().getId());
 					if (applies.size() < 2) { // 수강대기 첫번째 학생의 수강신청 한 과목이 두개가 아닐 경우
 						if (applyService.regist(new Apply(applyWait.getInvitationId(), applyWait.getStudent(), subject))) {

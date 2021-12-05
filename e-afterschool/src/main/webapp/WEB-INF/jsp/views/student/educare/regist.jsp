@@ -15,8 +15,14 @@
 					<label class="col-form-label col-3">아파트</label>
 					<div class="col-9">
 						<select class="form-control form-control-select2" name="apartment" required>
-							<option value="마린애시앙">마린애시앙</option>
-							<option value="석전메트로">석전메트로</option>
+						<c:choose>
+						    <c:when test="${city.link == 'educare'}">
+						        <option value="마린애시앙">마린애시앙</option>
+						    </c:when>
+						    <c:when test="${city.link == 'educare1'}">
+						        <option value="석전메트로">석전메트로</option>
+						    </c:when>
+						</c:choose>
 						</select>
 					</div>
 				</div>
@@ -37,6 +43,14 @@
 					<div class="col-9">
 						<select data-placeholder="- 선 택 -" class="form-control select-search" name="school" required>
 							<option></option>
+							<c:choose>
+							    <c:when test="${city.link == 'educare'}">
+							        <option value="마린애시앙-유치부">마린애시앙-유치부</option>
+							    </c:when>
+							    <c:when test="${city.link == 'educare1'}">
+							        <option value="석전메트로-유치부">석전메트로-유치부</option>
+							    </c:when>
+							</c:choose>
 							<c:forEach var="school" items="${schools}" varStatus="status">
 								<option value="${school}">${school}</option>
 							</c:forEach>
@@ -48,7 +62,7 @@
 					<div class="col-9">
 						<select data-placeholder="- 선 택 -" class="form-control form-control-select2" name="grade" required>
 							<option></option>
-							<c:forEach var="item" begin="1" end="6" step="1">
+							<c:forEach var="item" begin="0" end="6" step="1">
 								<option value="${item}">${item} 학년</option>
 							</c:forEach>
 						</select>
@@ -59,7 +73,7 @@
 					<div class="col-9">
 						<select data-placeholder="- 선 택 -" class="form-control form-control-select2" name="classType" required>
 							<option></option>
-							<c:forEach var="item" begin="1" end="15" step="1">
+							<c:forEach var="item" begin="0" end="15" step="1">
 								<option value="${item}">${item} 반</option>
 							</c:forEach>
 						</select>
@@ -70,7 +84,7 @@
 					<div class="col-9">
 						<select data-placeholder="- 선 택 -" class="form-control form-control-select2" name="number" required>
 							<option></option>
-							<c:forEach var="item" begin="1" end="40" step="1">
+							<c:forEach var="item" begin="0" end="40" step="1">
 								<option value="${item}">${item} 번</option>
 							</c:forEach>
 						</select>

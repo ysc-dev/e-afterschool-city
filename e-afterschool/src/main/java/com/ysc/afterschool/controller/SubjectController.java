@@ -131,6 +131,8 @@ public class SubjectController {
 		Subject subject = subjectService.get(id);
 
 		long applyCount = applyService.count(infoId, student.getId());
+		
+		System.err.println(subject.getTargetType());
 
 		if (applyService.search(infoId, student.getId(), subject.getId())) { // 신청 완료일 경우
 			subject.setApplyType(ApplyType.APPLY);
@@ -169,7 +171,7 @@ public class SubjectController {
 				subject.setApplyType(ApplyType.NOTAPPLY);
 			}
 		}
-
+		
 		model.addAttribute("subject", subject);
 	}
 

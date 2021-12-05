@@ -24,7 +24,7 @@
 <div class="content home-content mb-0">
 	<div class="home-title justify-content-center align-items-center">
 		<c:choose>
-		    <c:when test="${city.link == 'educare' || city.link == 'educare1'}">
+		    <c:when test="${fn:contains(city.link, 'educare')}">
 		        <span><span class="text-info-600">${city.content}</span> 커뮤니티센터 프로그램에</span><span>오신 것을 환영합니다.</span>
 		    </c:when>
 		    <c:otherwise>
@@ -143,7 +143,7 @@
 $("#registBtn").click(function() {
 	var cityId = "${city.id}";
 	var cityLink = "${city.link}";
-	if (cityLink == 'educare' || cityLink == 'educare1') {
+	if (cityLink.includes('educare')) {
 		location.href = contextPath + "/student/educare/regist?cityId=" + cityId;
 	} else {
 		location.href = contextPath + "/student/regist?cityId=" + cityId;

@@ -225,11 +225,11 @@ public class StudentController {
 		student.setName(student.getName().trim());
 
 		String school = student.getSchool();
-		student.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
+		student.setTargetType(school.contains("초등학교") ? TargetType.초등 : school.contains("유치부") ? TargetType.유치부 : TargetType.중등);
 
 		student.setCity(schoolService.get(school).getCity());
-		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4)
-				: school.substring(0, school.length() - 3);
+		school = school.contains("유치부") ? school : school.endsWith("초등학교") ? 
+				school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
 		student.setSchoolInfo(school);
 		
 		if (studentService.regist(student)) {
@@ -281,14 +281,14 @@ public class StudentController {
 		temp.setAgree(student.isAgree());
 		temp.setDong(student.getDong());
 		temp.setHo(student.getHo());
-
+		
 		String school = student.getSchool();
 		temp.setSchool(school);
-		temp.setTargetType(school.contains("초등학교") ? TargetType.초등 : TargetType.중등);
+		temp.setTargetType(school.contains("초등학교") ? TargetType.초등 : school.contains("유치부") ? TargetType.유치부 : TargetType.중등);
 		temp.setCity(schoolService.get(school).getCity());
 
-		school = school.endsWith("초등학교") ? school.substring(0, school.length() - 4)
-				: school.substring(0, school.length() - 3);
+		school = school.contains("유치부") ? school : school.endsWith("초등학교") ? 
+				school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
 		temp.setSchoolInfo(school);
 
 		if (studentService.update(temp)) {

@@ -91,7 +91,8 @@ public class Student extends AbstractDomain {
 	public enum TargetType {
 		전체("전체", ""),
 		초등("초등", "초"),
-		중등("중등", "중");
+		중등("중등", "중"),
+		유치부("유치부", "");
 		
 		private String name;
 		
