@@ -40,6 +40,10 @@ public class City implements Domain {
 	@Column(nullable = false, length = 20)
 	private String content;
 	
+	/** 아파트 */
+	@Column(length = 45)
+	private String apartment;
+	
 	/** 캠퍼스 */
 	@Column(length = 45)
 	private String campus;

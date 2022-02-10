@@ -15,10 +15,7 @@
 				<div class="form-group row pt-2">
 					<label class="col-form-label col-3">아파트</label>
 					<div class="col-9">
-						<select class="form-control form-control-select2" name="apartment" required>
-							<option value="마린애시앙">마린애시앙</option>
-							<option value="석전메트로">석전메트로</option>
-						</select>
+						<input type="text" class="form-control" name="apartment" value="${student.apartment}" readonly>
 					</div>
 				</div>
 				<div class="form-group row">
