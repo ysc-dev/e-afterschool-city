@@ -15,16 +15,6 @@
 					<label class="col-form-label col-3">아파트</label>
 					<div class="col-9">
 						<input type="text" class="form-control" name="apartment" value="${city.apartment}" readonly>
-						<%-- <select class="form-control form-control-select2" name="apartment" required>
-						<c:choose>
-						    <c:when test="${city.link == 'educare'}">
-						        <option value="마린애시앙">마린애시앙</option>
-						    </c:when>
-						    <c:when test="${city.link == 'educare1'}">
-						        <option value="석전메트로">석전메트로</option>
-						    </c:when>
-						</c:choose>
-						</select> --%>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -44,15 +34,8 @@
 					<div class="col-9">
 						<select data-placeholder="- 선 택 -" class="form-control select-search" name="school" required>
 							<option></option>
-							<%-- <c:choose>
-							    <c:when test="${city.link == 'educare'}">
-							        <option value="마린애시앙-유치부">마린애시앙-유치부</option>
-							    </c:when>
-							    <c:when test="${city.link == 'educare1'}">
-							        <option value="석전메트로-유치부">석전메트로-유치부</option>
-							    </c:when>
-							</c:choose> --%>
 							<option value="${city.apartment}-유치부">유치부</option>
+							<option value="${city.apartment}-성인부">성인부</option>
 							<c:forEach var="school" items="${schools}" varStatus="status">
 								<option value="${school}">${school}</option>
 							</c:forEach>

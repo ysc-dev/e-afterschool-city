@@ -133,7 +133,8 @@ public class Subject extends AbstractDomain {
 		유치부_6_MORE("유치부 6세 이상", 0, 7),
 		유치부_7_MORE("유치부 7세 이상", 0, 7),
 		유치부_5_6("유치부 5~6세", 0, 7),
-		유치부_5_7("유치부 5~7세", 0, 7);
+		유치부_5_7("유치부 5~7세", 0, 7),
+		성인부("성인부", 0, 0);
 		
 		private String name;
 		
@@ -157,7 +158,7 @@ public class Subject extends AbstractDomain {
 	public boolean targetTrue(GradeType gradeType, int grade) {
 		if (gradeType == GradeType.NONE 
 				|| (gradeType.getMin() <= grade && grade <= gradeType.getMax())
-				|| gradeType.getName().contains("유치부")) {
+				|| gradeType.getName().contains("유치부") || gradeType.getName().contains("성인부")) {
 			return true;
 		}
 		return false;

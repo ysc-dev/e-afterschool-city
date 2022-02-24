@@ -225,12 +225,10 @@ public class StudentController {
 		student.setName(student.getName().trim());
 
 		String school = student.getSchool();
-		student.setTargetType(school.contains("초등학교") ? TargetType.초등 : school.contains("유치부") ? TargetType.유치부 : TargetType.중등);
+		student.setTargetType(getTargetType(school));
 
 		student.setCity(schoolService.get(school).getCity());
-		school = school.contains("유치부") ? school : school.endsWith("초등학교") ? 
-				school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
-		student.setSchoolInfo(school);
+		student.setSchoolInfo(getSchoolInfo(school));
 		
 		if (studentService.regist(student)) {
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -284,17 +282,36 @@ public class StudentController {
 		
 		String school = student.getSchool();
 		temp.setSchool(school);
-		temp.setTargetType(school.contains("초등학교") ? TargetType.초등 : school.contains("유치부") ? TargetType.유치부 : TargetType.중등);
+		temp.setTargetType(getTargetType(school));
 		temp.setCity(schoolService.get(school).getCity());
-
-		school = school.contains("유치부") ? school : school.endsWith("초등학교") ? 
-				school.substring(0, school.length() - 4) : school.substring(0, school.length() - 3);
-		temp.setSchoolInfo(school);
+		temp.setSchoolInfo(getSchoolInfo(school));
 
 		if (studentService.update(temp)) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
+	private TargetType getTargetType(String school) {
+		if (school.contains("초등학교")) {
+			return TargetType.초등;
+		} else if (school.contains("유치부")) {
+			return TargetType.유치부;
+		} else if (school.contains("성인부")) {
+			return TargetType.성인부;
+		} else {
+			return TargetType.중등;
+		}
+	}
+	
+	private String getSchoolInfo(String school) {
+		if (school.contains("유치부") || school.contains("성인부")) {
+			return school;
+		} else if (school.endsWith("초등학교")) {
+			return school.substring(0, school.length() - 4);
+		} else {
+			return school.substring(0, school.length() - 3);
+		}
 	}
 }

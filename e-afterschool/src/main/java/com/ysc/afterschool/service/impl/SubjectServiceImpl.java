@@ -78,7 +78,7 @@ public class SubjectServiceImpl implements SubjectService {
 	@Transactional(readOnly = true)
 	@Override
 	public List<Subject> getList(int infoId, int groupId) {
-		return subjectRepository.findByInvitationIdAndSubjectGroupId(infoId, groupId);
+		return subjectRepository.findByInvitationIdAndSubjectGroupIdOrderByCreateDate(infoId, groupId);
 	}
 
 	@Transactional(readOnly = true)

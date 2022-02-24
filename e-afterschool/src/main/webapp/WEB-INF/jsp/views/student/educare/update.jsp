@@ -35,6 +35,8 @@
 					<div class="col-9">
 						<select data-placeholder="- 선 택 -" class="form-control select-search" name="school" required>
 							<option></option>
+							<option value="${city.apartment}-유치부">유치부</option>
+							<option value="${city.apartment}-성인부">성인부</option>
 							<c:forEach var="school" items="${schools}" varStatus="status">
 								<option <c:if test="${student.school == school}">selected</c:if> value="${school}">${school}</option>
 							</c:forEach>
