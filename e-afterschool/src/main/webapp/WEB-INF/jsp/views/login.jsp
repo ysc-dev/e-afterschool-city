@@ -32,7 +32,7 @@
 					</div>
 				</div>
 				
-				<input type="hidden" value="${cityId}" name="cityId"/>
+				<input type="hidden" value="${city.id}" name="cityId"/>
 
 				<div class="form-group mb-2">
 					<!-- <button type="submit" class="btn bg-info-600 btn-block">로그인<i class="icon-circle-right2 ml-2"></i></button> -->
@@ -44,10 +44,20 @@
 				</div>
 				
 				<div class="form-group mb-1">
-					<a href="${pageContext.request.contextPath}/home/${cityId}" 
-						class="btn btn-outline text-slate border-slate-300 bg-slate-300 rounded-round btn-block">
-						뒤로가기<i class="icon-circle-left2 ml-2"></i>
-					</a>
+					<c:choose>
+					    <c:when test="${fn:contains(city.link, 'jin-ro')}">
+					        <a href="${pageContext.request.contextPath}/home/jinro/${city.id}" 
+								class="btn btn-outline text-slate border-slate-300 bg-slate-300 rounded-round btn-block">
+								뒤로가기<i class="icon-circle-left2 ml-2"></i>
+							</a>
+					    </c:when>
+					    <c:otherwise>
+					       	<a href="${pageContext.request.contextPath}/home/${city.id}" 
+								class="btn btn-outline text-slate border-slate-300 bg-slate-300 rounded-round btn-block">
+								뒤로가기<i class="icon-circle-left2 ml-2"></i>
+							</a>
+					    </c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>

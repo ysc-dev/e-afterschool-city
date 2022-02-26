@@ -276,14 +276,14 @@ $(function() {
 	       	data: student,
 	       	success: function(response) {
 	       		if (checkIE()) {
-	       			location.href = contextPath + "/home/${cityId}";
+	       			location.href = contextPath + "/home/${city.id}";
 	       		} else {
 	       			swalInit.fire({
 	      				title: "학생 정보 수정 되었습니다.", 
 	      				type: "success",
 	      				position: 'top'
 	      			}).then(function(e) {
-	      				location.href = contextPath + "/home/${cityId}";
+	      				location.href = contextPath + "/home/${city.id}";
 	      			});
 	       		}
 	       	},

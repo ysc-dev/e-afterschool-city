@@ -35,7 +35,10 @@ public class HomeController {
 
 		City city = cityService.get(link);
 		if (city != null) {
-			return "redirect:home/" + city.getId();
+			if (link.contains("jin-ro"))
+				return "redirect:home/jinro/" + city.getId();
+			else 
+				return "redirect:home/" + city.getId();
 		}
 
 		return "fail";
@@ -67,6 +70,33 @@ public class HomeController {
 
 		return "home";
 	}
+	
+	/**
+	 * 홈 화면
+	 * 
+	 * @param cookie
+	 * @return
+	 */
+	@GetMapping("home/jinro")
+	public String homeJinro(@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		return "redirect:home/jinro/" + cookie.getValue();
+	}
+	
+	/**
+	 * 홈 화면
+	 * 
+	 * @param model
+	 * @param cityId
+	 * @return
+	 */
+	@GetMapping("home/jinro/{cityId}")
+	public String homeJinro(Model model, @PathVariable int cityId) {
+
+		City city = cityService.get(cityId);
+		model.addAttribute("city", city);
+
+		return "home/jinro";
+	}
 
 	/**
 	 * 로그인 화면
@@ -95,7 +125,8 @@ public class HomeController {
 			model.addAttribute("error", "falied");
 		}
 
-		model.addAttribute("cityId", cityId);
+		City city = cityService.get(cityId);
+		model.addAttribute("city", city);
 
 		return "login";
 	}

@@ -5,7 +5,7 @@
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
   	<c:param name="left" value="subject/micro?infoId=${infoId}&id=${subject.id}" />
-  	<c:param name="home" value="info?cityId=${cityId}" />
+  	<c:param name="home" value="info?cityId=${city.id}" />
 </c:import>
 
 <div class="content px-0 d-flex flex-column">

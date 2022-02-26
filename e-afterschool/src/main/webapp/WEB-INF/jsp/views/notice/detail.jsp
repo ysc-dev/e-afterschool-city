@@ -5,7 +5,7 @@
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
   	<c:param name="left" value="notice/list?infoId=${infoId}" />
-  	<c:param name="home" value="info?cityId=${cityId}" />
+  	<c:param name="home" value="info?cityId=${city.id}" />
 </c:import>
 
 <div class="content">

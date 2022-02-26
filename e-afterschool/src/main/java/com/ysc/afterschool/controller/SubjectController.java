@@ -22,6 +22,7 @@ import com.ysc.afterschool.domain.db.Subject.ApplyType;
 import com.ysc.afterschool.domain.db.Subject.GradeType;
 import com.ysc.afterschool.service.ApplyService;
 import com.ysc.afterschool.service.ApplyWaitService;
+import com.ysc.afterschool.service.CityService;
 import com.ysc.afterschool.service.InvitationService;
 import com.ysc.afterschool.service.SubjectGroupService;
 import com.ysc.afterschool.service.SubjectService;
@@ -35,6 +36,9 @@ import com.ysc.afterschool.service.SubjectService;
 @Controller
 @RequestMapping("subject")
 public class SubjectController {
+	
+	@Autowired
+	private CityService cityService;
 
 	@Autowired
 	private SubjectGroupService subjectGroupService;
@@ -62,7 +66,7 @@ public class SubjectController {
 	public void group(Model model, int infoId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
 
 		model.addAttribute("invitation", invitationService.get(infoId));
-		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("city", cityService.get(cookie.getValue()));
 		model.addAttribute("subjectGroups", subjectGroupService.getList(infoId));
 	}
 
@@ -78,7 +82,7 @@ public class SubjectController {
 	public void mylist(Model model, int infoId, Authentication authentication,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("city", cityService.get(cookie.getValue()));
 		model.addAttribute("invitation", invitationService.get(infoId));
 
 		Student student = (Student) authentication.getPrincipal();
@@ -104,7 +108,7 @@ public class SubjectController {
 	public void list(Model model, int infoId, int groupId,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("city", cityService.get(cookie.getValue()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subjectGroup", subjectGroupService.get(groupId));
 		model.addAttribute("subjects", subjectService.getList(infoId, groupId));
@@ -123,7 +127,7 @@ public class SubjectController {
 	public void micro(Model model, int infoId, int id, Authentication authentication,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("city", cityService.get(cookie.getValue()));
 		Invitation invitation = invitationService.get(infoId);
 		model.addAttribute("invitation", invitation);
 
@@ -132,8 +136,6 @@ public class SubjectController {
 
 		long applyCount = applyService.count(infoId, student.getId());
 		
-		System.err.println(subject.getTargetType());
-
 		if (applyService.search(infoId, student.getId(), subject.getId())) { // 신청 완료일 경우
 			subject.setApplyType(ApplyType.APPLY);
 		} else if (applyWaitService.search(infoId, student.getId(), subject.getId())) { // 신청 대기 중일 경우
@@ -144,7 +146,9 @@ public class SubjectController {
 			subject.setApplyType(ApplyType.FILL);
 		} else {
 			if (subject.getTargetType() == TargetType.전체) {
-				if (subject.getGradeType() == GradeType.초_3_6_중등 || subject.getGradeType() == GradeType.초_5_6_중등) {
+				if (subject.getGradeType() == GradeType.초_3_6_중등 
+						|| subject.getGradeType() == GradeType.초_5_6_중등
+						|| subject.getGradeType() == GradeType.초_1_6_중등) {
 					if (student.getTargetType() == TargetType.초등) {
 						if (subject.targetTrue(subject.getGradeType(), student.getGrade())) {
 							applyCheck(subject, applyCount, invitation.getApplyNumber());
@@ -202,12 +206,14 @@ public class SubjectController {
 	@GetMapping("info")
 	public void info(Model model, int infoId, int id, @CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("city", cityService.get(cookie.getValue()));
 		model.addAttribute("infoId", infoId);
 
 		Subject subject = subjectService.get(id);
 		if (subject.getTargetType() == TargetType.전체) {
-			if (subject.getGradeType() == GradeType.초_3_6_중등 || subject.getGradeType() == GradeType.초_5_6_중등) {
+			if (subject.getGradeType() == GradeType.초_3_6_중등
+					|| subject.getGradeType() == GradeType.초_5_6_중등
+					|| subject.getGradeType() == GradeType.초_1_6_중등) {
 				subject.setTarget(subject.getGradeType().getName());
 			} else {
 				subject.setTarget("전체");

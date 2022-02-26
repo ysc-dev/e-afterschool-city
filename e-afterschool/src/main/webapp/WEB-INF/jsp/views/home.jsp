@@ -27,6 +27,9 @@
 		    <c:when test="${fn:contains(city.link, 'educare')}">
 		        <span><span class="text-info-600">${city.content}</span> 커뮤니티센터 프로그램에</span><span>오신 것을 환영합니다.</span>
 		    </c:when>
+		    <c:when test="${fn:contains(city.link, 'jin-ro')}">
+		        <span><span class="text-info-600">${city.content}</span>에</span><span>오신 것을 환영합니다.</span>
+		    </c:when>
 		    <c:otherwise>
 		        <span>${city.content} <span class="text-info-600">${city.campus}</span> 방과후학교에</span><span>오신 것을 환영합니다.</span>
 		    </c:otherwise>

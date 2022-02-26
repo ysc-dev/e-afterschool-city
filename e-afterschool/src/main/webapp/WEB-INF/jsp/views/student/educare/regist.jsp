@@ -36,6 +36,7 @@
 							<option></option>
 							<option value="${city.apartment}-유치부">유치부</option>
 							<option value="${city.apartment}-성인부">성인부</option>
+							<option value="${city.apartment}-고등부">고등부</option>
 							<c:forEach var="school" items="${schools}" varStatus="status">
 								<option value="${school}">${school}</option>
 							</c:forEach>

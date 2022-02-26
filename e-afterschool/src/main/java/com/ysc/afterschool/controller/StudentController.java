@@ -56,7 +56,6 @@ public class StudentController {
 		model.addAttribute("schools",
 				schoolService.getList(cityId).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("city", cityService.get(cityId));
-		model.addAttribute("cityId", cityId);
 	}
 
 	/**
@@ -71,7 +70,19 @@ public class StudentController {
 		model.addAttribute("schools",
 				schoolService.getList(1).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("city", cityService.get(cityId));
-		model.addAttribute("cityId", cityId);
+	}
+	
+	/**
+	 * 진로센터 학생 등록 화면
+	 * 
+	 * @param model
+	 * @param cityId
+	 */
+	@GetMapping("jinro/regist")
+	public void registJinro(Model model, int cityId) {
+		
+		model.addAttribute("schools", schoolService.getList(cityId).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
+		model.addAttribute("city", cityService.get(cityId));
 	}
 
 	/**
@@ -157,7 +168,6 @@ public class StudentController {
 				schoolService.getList(cityId).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("city", cityService.get(cityId));
-		model.addAttribute("cityId", cityId);
 
 		if (student.isAgree()) {
 			String[] residentNumber = student.getResidentNumber().split("-");
@@ -257,7 +267,6 @@ public class StudentController {
 				schoolService.getList(1).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("city", cityService.get(cityId));
-		model.addAttribute("cityId", cityId);
 
 		model.addAttribute("student", student);
 	}
@@ -293,6 +302,44 @@ public class StudentController {
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
+	/**
+	 * 학생 등록 기능(김해진로센터)
+	 * 
+	 * @param student
+	 * @return
+	 */
+	@PostMapping(value = "jinro/regist")
+	@ResponseBody
+	public ResponseEntity<?> registJinro(Student student) {
+
+		if (!student.getTel().contains("-")) {
+			String tel = student.getTel();
+			tel = tel.substring(0, 4) + "-" + tel.substring(4, tel.length());
+			student.setTel(student.getService() + "-" + tel);
+		} else {
+			student.setTel(student.getService() + "-" + student.getTel());
+		}
+
+		student.setName(student.getName().trim());
+
+		String school = student.getSchool();
+		student.setTargetType(getTargetType(school));
+
+		student.setCity(schoolService.get(school).getCity());
+		student.setSchoolInfo(getSchoolInfo(school));
+		
+		if (studentService.regist(student)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
+	/**
+	 * 
+	 * @param school
+	 * @return
+	 */
 	private TargetType getTargetType(String school) {
 		if (school.contains("초등학교")) {
 			return TargetType.초등;
@@ -300,13 +347,20 @@ public class StudentController {
 			return TargetType.유치부;
 		} else if (school.contains("성인부")) {
 			return TargetType.성인부;
+		}  else if (school.contains("고등")) {
+			return TargetType.고등;
 		} else {
 			return TargetType.중등;
 		}
 	}
 	
+	/**
+	 * 학교 정보
+	 * @param school
+	 * @return
+	 */
 	private String getSchoolInfo(String school) {
-		if (school.contains("유치부") || school.contains("성인부")) {
+		if (school.contains("유치부") || school.contains("성인부") || school.contains("고등")) {
 			return school;
 		} else if (school.endsWith("초등학교")) {
 			return school.substring(0, school.length() - 4);

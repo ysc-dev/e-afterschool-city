@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ysc.afterschool.domain.db.Notice;
 import com.ysc.afterschool.repository.UploadedFileRepository;
+import com.ysc.afterschool.service.CityService;
 import com.ysc.afterschool.service.NoticeService;
 
 /**
@@ -26,6 +27,9 @@ import com.ysc.afterschool.service.NoticeService;
 @Controller
 @RequestMapping("notice")
 public class NoticeController {
+	
+	@Autowired
+	private CityService cityService;
 
 	@Autowired
 	private NoticeService noticeService;
@@ -43,7 +47,7 @@ public class NoticeController {
 	@GetMapping("list")
 	public void list(Model model, int infoId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("city", cityService.get(cookie.getValue()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("notices", noticeService.getList(Integer.parseInt(cookie.getValue())));
 	}
@@ -60,7 +64,7 @@ public class NoticeController {
 	public void detail(Model model, int infoId, int noticeId,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("city", cityService.get(cookie.getValue()));
 		model.addAttribute("infoId", infoId);
 
 		Notice notice = noticeService.get(noticeId);

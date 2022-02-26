@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ysc.afterschool.domain.db.City;
 import com.ysc.afterschool.domain.db.Student;
+import com.ysc.afterschool.service.CityService;
 import com.ysc.afterschool.service.InvitationService;
 
 import reactor.core.publisher.Mono;
@@ -28,6 +30,9 @@ public class InvitationController {
 
 	@Autowired
 	private InvitationService invitationService;
+	
+	@Autowired
+	private CityService cityService;
 
 	/**
 	 * 안내장 목록 화면
@@ -46,7 +51,8 @@ public class InvitationController {
 		}
 
 		model.addAttribute("invitations", invitationService.getList(cityId).collectList().block());
-		model.addAttribute("cityId", cityId);
+		City city = cityService.get(cityId);
+		model.addAttribute("city", city);
 		model.addAttribute("student", student);
 	}
 

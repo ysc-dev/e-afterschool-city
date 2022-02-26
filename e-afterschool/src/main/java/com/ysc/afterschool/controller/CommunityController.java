@@ -24,6 +24,7 @@ import com.ysc.afterschool.domain.CommonFile;
 import com.ysc.afterschool.domain.db.Student;
 import com.ysc.afterschool.domain.db.SubjectNotice;
 import com.ysc.afterschool.domain.db.SubjectNoticeFile;
+import com.ysc.afterschool.service.CityService;
 import com.ysc.afterschool.service.CommentService;
 import com.ysc.afterschool.service.SubjectNoticeService;
 import com.ysc.afterschool.service.SubjectService;
@@ -38,6 +39,9 @@ import com.ysc.afterschool.service.impl.FileUploadService;
 @Controller
 @RequestMapping("subject/community")
 public class CommunityController {
+	
+	@Autowired
+	private CityService cityService;
 
 	@Autowired
 	private SubjectService subjectService;
@@ -62,7 +66,7 @@ public class CommunityController {
 	@GetMapping("list")
 	public void list(Model model, int infoId, int id, @CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("city", cityService.get(cookie.getValue()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subject", subjectService.get(id));
 		model.addAttribute("subjectNotices", subjectNoticeService.getList(id));
@@ -80,7 +84,7 @@ public class CommunityController {
 	public void regist(Model model, int infoId, int subjectId,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("city", cityService.get(cookie.getValue()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subject", subjectService.get(subjectId));
 	}
@@ -135,7 +139,7 @@ public class CommunityController {
 	public void detail(Model model, int infoId, int subjectId, int id,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("city", cityService.get(cookie.getValue()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subjectId", subjectId);
 

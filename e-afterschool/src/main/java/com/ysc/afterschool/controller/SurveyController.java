@@ -47,7 +47,6 @@ public class SurveyController {
 	@GetMapping("student")
 	private void student(Model model, int cityId) {
 		model.addAttribute("city", cityService.get(cityId));
-		model.addAttribute("cityId", cityId);
 		model.addAttribute("subjects", subjectService.getListFromCity(cityId));
 	}
 
@@ -60,7 +59,6 @@ public class SurveyController {
 	@GetMapping("parents")
 	private void parents(Model model, int cityId) {
 		model.addAttribute("city", cityService.get(cityId));
-		model.addAttribute("cityId", cityId);
 		model.addAttribute("subjects", subjectService.getListFromCity(cityId));
 	}
 

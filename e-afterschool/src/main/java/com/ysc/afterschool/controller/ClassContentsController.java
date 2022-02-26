@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ysc.afterschool.domain.db.SubjectUploadedFile;
 import com.ysc.afterschool.domain.db.SubjectUploadedFile.FileType;
+import com.ysc.afterschool.service.CityService;
 import com.ysc.afterschool.service.ClassContentsService;
 import com.ysc.afterschool.service.SubjectService;
 
@@ -27,6 +28,9 @@ import com.ysc.afterschool.service.SubjectService;
 @Controller
 @RequestMapping("subject/class")
 public class ClassContentsController {
+	
+	@Autowired
+	private CityService cityService;
 
 	@Autowired
 	private SubjectService subjectService;
@@ -46,7 +50,7 @@ public class ClassContentsController {
 	public void classView(Model model, int infoId, int id,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("cityId", cookie.getValue());
+		model.addAttribute("city", cityService.get(cookie.getValue()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subject", subjectService.get(id));
 
