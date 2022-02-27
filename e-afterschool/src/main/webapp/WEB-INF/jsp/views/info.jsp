@@ -4,7 +4,7 @@
 <link href="${pageContext.request.contextPath}/css/info.css" rel="stylesheet" type="text/css">
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
-  	<c:param name="left" value="home/${cityId}" />
+	<c:param name="left" value="home/${city.id}" />
 </c:import>
 
 <div class="content px-0"> 

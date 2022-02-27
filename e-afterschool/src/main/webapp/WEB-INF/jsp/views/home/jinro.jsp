@@ -43,30 +43,21 @@
 					<div class="mb-2">
 						<i class="fas fa-info-circle fa-2x info-title"></i>
 					</div>
-					<div class="btn-title info-title">프로그램 안내</div>
+					<div class="btn-title info-title">아이꿈틀 진로체험<br>프로그램 안내</div>
 					<div class="fs-12 text-grey-400">준비중입니다.</div>
 				</div>
 			</button>
 		</div>
 		<div class="col-6 border-bottom">
-			<c:choose>
-				<c:when test="${city.survey == 'ON'}">
-					<button type="button" id="surveyBtn" class="btn btn-block bg-transparent py-4" data-fouc>
-						<div class="d-flex flex-column text-center">
-							<div class="mb-2">
-								<i class="fas fa-clipboard-list fa-2x text-info-400"></i>
-							</div>
-							<div class="btn-title text-info-400">만족도 조사 및</div>
-							<div class="btn-title text-info-400">설문조사</div> 
-						</div>
-					</button>
-				</c:when>
-				<c:otherwise>
-					<div class="btn-content py-5 text-grey-800">
-						<div class="font-weight-bold text-center">지금은 설문조사 기간이<br>아닙니다.</div>
+			<button type="button" id="infoBtn" class="btn btn-block bg-transparent py-4" data-fouc>
+				<div class="d-flex flex-column text-center">
+					<div class="mb-2">
+						<i class="fas fa-info-circle fa-2x text-teal-400"></i>
 					</div>
-				</c:otherwise>
-			</c:choose>
+					<div class="btn-title text-teal-400">꿈길안내</div>
+					<div class="fs-12 text-grey-400">준비중입니다.</div>
+				</div>
+			</button>
 		</div>
 		<div class="col-6 border-right">
 			<button type="button" id="infoBtn" class="btn btn-block bg-transparent py-4" data-fouc>
@@ -92,54 +83,29 @@
 		</div>
 	</div>
 	
-	<div class="mt-2 d-flex flex-column text-center text-grey-800 fs-12">
+	<div class="mt-2 d-flex flex-column text-center text-grey-800 fs-13">
 		<div>
-			수강신청주소 :
-			<span class="font-weight-bold">http://e-afterschool.kr/${city.link}</span>
+			이용안내 : <span class="font-weight-bold">김해진로교육지원센터</span> 
 		</div>
 		<div>
-			수강신청문의 :
-			<span class="font-weight-bold">${city.tel1}</span>
+			Tel. <span class="font-weight-bold">055-325-1577</span>
 		</div>
-		<div class="${city.link == 'hy' ? 'display-none' : ''}">
-			기타운영문의 :
-			<span class="font-weight-bold">${city.tel2}</span>
+		<div>
+			FAX. <span class="font-weight-bold">055-338-1588</span>
+		</div>
+		<div>
+			E-mail. <span class="font-weight-bold">ghjinro2022@naver.com</span>
+		</div>
+		<div>
+			<span class="font-weight-bold">운영시간  월~토 09:00~17:00</span>
+		</div>
+		<div>
+			<span class="font-weight-bold">(일요일/공휴일 휴무)</span>
+		</div>
+		<div class="mt-2">
+			<span class="font-weight-bold">경상남도 김해시 주촌면 골든루트로 80-16<br>김해중소기업비지니스센터 2층 206~7호</span>
 		</div>
 	</div>
-</div>
-
-<div id="surveyModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h5 class="modal-title">
-                    <i class="fas fa-clipboard-list mr-2"></i>만족도 조사 및 설문조사 선택
-                </h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body text-center">
-            	<div class="d-flex">
-            		<button type="button" id="surveyParentsBtn" class="btn btn-block bg-transparent py-4" data-fouc>
-						<div class="d-flex flex-column text-center">
-							<div class="mb-2">
-								<i class="icon-users fa-2x text-teal-400"></i>
-							</div>
-							<div class="btn-title text-teal-400">학부모용</div>
-						</div>
-					</button>
-					
-					<button type="button" id="surveyStudentBtn" class="btn btn-block bg-transparent py-4" data-fouc>
-						<div class="d-flex flex-column text-center">
-							<div class="mb-2">
-								<i class="icon-users fa-2x regist-title"></i>
-							</div>
-							<div class="btn-title regist-title">학생용</div>
-						</div>
-					</button>
-            	</div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script>
@@ -148,9 +114,9 @@ $("#registBtn").click(function() {
 	location.href = contextPath + "/student/jinro/regist?cityId=" + cityId;
 });
 
-$("#loginBtn").click(function() {
+/* $("#loginBtn").click(function() {
 	location.href = contextPath + "/login/${city.id}";
-});
+}); */
 
 /* $("#infoBtn").click(function() {
 	location.href = contextPath + "/info?cityId=${city.id}";

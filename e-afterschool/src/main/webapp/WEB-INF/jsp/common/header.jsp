@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/jsp/common/tagLib.jsp" %>
 
 <div class="navbar navbar-expand-md navbar-light fixed-top px-1 px-md-2 d-flex justify-content-between">
 	<div class="d-flex align-items-center">
@@ -17,12 +17,21 @@
 	</div>
 	
 	<div class="navbar-brand">
-		<a href="#" class="d-inline-block">
+		<a href="#" class="d-inline-block mr-2">
 			 <img src="${pageContext.request.contextPath}/images/${city.logo}" alt="logo">
 		</a>
-		<a href="#" class="d-inline-block">
-			<img src="${pageContext.request.contextPath}/images/logo2.png" alt="logo">
-		</a>
+		<c:choose>
+		    <c:when test="${fn:contains(city.link, 'jin-ro')}">
+		    	<a href="#" class="d-inline-block">
+					<img src="${pageContext.request.contextPath}/images/jinro_logo.png" alt="logo">
+				</a>
+		    </c:when>
+		    <c:otherwise>
+		        <a href="#" class="d-inline-block">
+					<img src="${pageContext.request.contextPath}/images/logo2.png" alt="logo">
+				</a>
+		    </c:otherwise>
+		</c:choose>
 	</div>
 	
 	<div class="d-flex align-items-center">
