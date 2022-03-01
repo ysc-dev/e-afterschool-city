@@ -236,6 +236,9 @@ public class StudentController {
 
 		String school = student.getSchool();
 		student.setTargetType(getTargetType(school));
+		
+		System.err.println(school);
+		System.err.println(student);
 
 		student.setCity(schoolService.get(school).getCity());
 		student.setSchoolInfo(getSchoolInfo(school));
