@@ -44,20 +44,10 @@
 				</div>
 				
 				<div class="form-group mb-1">
-					<c:choose>
-					    <c:when test="${fn:contains(city.link, 'jin-ro')}">
-					        <a href="${pageContext.request.contextPath}/home/jinro/${city.id}" 
-								class="btn btn-outline text-slate border-slate-300 bg-slate-300 rounded-round btn-block">
-								뒤로가기<i class="icon-circle-left2 ml-2"></i>
-							</a>
-					    </c:when>
-					    <c:otherwise>
-					       	<a href="${pageContext.request.contextPath}/home/${city.id}" 
-								class="btn btn-outline text-slate border-slate-300 bg-slate-300 rounded-round btn-block">
-								뒤로가기<i class="icon-circle-left2 ml-2"></i>
-							</a>
-					    </c:otherwise>
-					</c:choose>
+					<a href="${pageContext.request.contextPath}/home/${city.id}" 
+						class="btn btn-outline text-slate border-slate-300 bg-slate-300 rounded-round btn-block">
+						뒤로가기<i class="icon-circle-left2 ml-2"></i>
+					</a>
 				</div>
 			</div>
 		</div>

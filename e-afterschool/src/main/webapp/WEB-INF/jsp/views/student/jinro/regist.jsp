@@ -89,7 +89,7 @@
 			</div>
 			<div class="card-footer text-center">
 				<button id="registBtn" type="submit" class="btn bg-teal-600 rounded-round custom-btn mr-2" disabled>학생등록</button>
-				<a href="${pageContext.request.contextPath}/home/jinro/${city.id}" class="btn btn-light rounded-round custom-btn">취 소</a>
+				<a href="${pageContext.request.contextPath}/home/${city.id}" class="btn btn-light rounded-round custom-btn">취 소</a>
 			</div>
 		</div>
 	</form>
@@ -198,14 +198,14 @@ $(function() {
 	       	           	data: student,
 	       	           	success: function(response) {
 		       	           	if (checkIE()) {
-		       	           		location.href = contextPath + "/home/jinro/${city.id}";
+		       	           		location.href = contextPath + "/home/${city.id}";
 		       	           	} else {
 		       	           		swalInit.fire({
 				       				title: "학생 등록 되었습니다.", 
 				       				type: "success",
 				       				position: 'top'
 				       			}).then(function(e) {
-				       				location.href = contextPath + "/home/jinro/${city.id}";
+				       				location.href = contextPath + "/home/${city.id}";
 				       			});
 		       	           	}
 	       	           	},
