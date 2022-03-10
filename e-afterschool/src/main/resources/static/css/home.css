@@ -42,3 +42,31 @@
 	align-content: center;
 	font-size: 1rem;
 }
+
+/*******************************************************************************************************
+ 진로지원센터 팝업 디자인
+*******************************************************************************************************/
+.jinro-popup td {
+	font-weight: bold;
+}
+
+.jinro-popup .thead-no { background: #B2CCFF;}
+.jinro-popup .thead-title { background: #FFA7A7;}
+.jinro-popup .thead-content { background: #B7F0B1;}
+
+.jinro-popup .tbody-no { background: #C7E9FC;}
+.jinro-popup .tbody-title { background: #FFEAE0;}
+.jinro-popup .tbody-content { background: #E5EEDD;}
+
+.td-border-righr {
+    border-right: 1px solid #ddd;
+}
+
+.jinro-popup .table td {
+	padding: 0.5rem 0.45rem;
+	font-size: 12px;
+}
+
+.table-bordered, .table thead th, .table tbody td {
+	border: 1px solid gray;
+}

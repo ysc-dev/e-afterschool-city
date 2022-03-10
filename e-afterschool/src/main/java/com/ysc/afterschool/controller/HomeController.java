@@ -27,7 +27,7 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String index() {
-		return "redirect:cw";
+		return "redirect:jin-ro";
 	}
 
 	@GetMapping("/{link}")

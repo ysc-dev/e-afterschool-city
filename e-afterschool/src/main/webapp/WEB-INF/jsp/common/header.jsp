@@ -17,16 +17,30 @@
 	</div>
 	
 	<div class="navbar-brand">
-		<a href="#" class="d-inline-block mr-2">
-			 <img src="${pageContext.request.contextPath}/images/${city.logo}" alt="logo">
-		</a>
 		<c:choose>
 		    <c:when test="${fn:contains(city.link, 'jin-ro')}">
-		    	<a href="#" class="d-inline-block">
-					<img src="${pageContext.request.contextPath}/images/jinro_logo.png" alt="logo">
-				</a>
+		    	<div>
+		    		<a href="#" class="d-inline-block">
+		    			<img src="${pageContext.request.contextPath}/images/jinro_logo1.png" alt="logo">
+					</a>
+					<a href="#" class="d-inline-block">
+			    		<img src="${pageContext.request.contextPath}/images/jinro_logo2.png" alt="logo">
+					</a>
+					<a href="#" class="d-inline-block">
+			    		<img src="${pageContext.request.contextPath}/images/jinro_logo3.png" alt="logo">
+					</a>
+					<a href="#" class="d-inline-block">
+			    		<img src="${pageContext.request.contextPath}/images/jinro_logo4.png" alt="logo">
+					</a>
+					<a href="#" class="d-inline-block">
+			    		<img src="${pageContext.request.contextPath}/images/jinro_logo.png" alt="logo">
+					</a>
+		    	</div>
 		    </c:when>
 		    <c:otherwise>
+		    	<a href="#" class="d-inline-block mr-2">
+			 		<img src="${pageContext.request.contextPath}/images/${city.logo}" alt="logo">
+				</a>
 		        <a href="#" class="d-inline-block">
 					<img src="${pageContext.request.contextPath}/images/logo2.png" alt="logo">
 				</a>
