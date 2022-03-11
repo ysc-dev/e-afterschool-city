@@ -32,9 +32,6 @@
 					<a href="#" class="d-inline-block">
 			    		<img src="${pageContext.request.contextPath}/images/jinro_logo4.png" alt="logo">
 					</a>
-					<a href="#" class="d-inline-block">
-			    		<img src="${pageContext.request.contextPath}/images/jinro_logo.png" alt="logo">
-					</a>
 		    	</div>
 		    </c:when>
 		    <c:otherwise>

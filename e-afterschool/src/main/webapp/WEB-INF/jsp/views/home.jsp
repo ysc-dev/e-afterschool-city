@@ -12,10 +12,16 @@
 <div class="content home-content mb-0">
 	<c:choose>
 	    <c:when test="${fn:contains(city.link, 'jin-ro')}">
-	    	<div class="home-title justify-content-center align-items-center">
-				<span><span class="text-info-600">${city.content}</span>에</span><span>오신 것을 환영합니다.</span>
-			</div>
-			
+	    	<div class="d-flex justify-content-center">
+	    		<div class="navbar-brand mr-3">
+	    			<a href="#">
+			    		<img style="height: 70px;" src="${pageContext.request.contextPath}/images/jinro_logo.png" alt="logo">
+					</a>
+	    		</div>
+	    		<div class="home-title justify-content-center align-items-center">
+					<span><span class="text-info-600">${city.content}</span>에</span><span>오신 것을 환영합니다.</span>
+				</div>
+	    	</div>
 			<div class="row mt-3">
 				<div class="col-6 border-right border-bottom">
 					<button type="button" id="registBtn_jinro" class="btn btn-block bg-transparent py-4" data-fouc>
@@ -304,7 +310,7 @@
 				</table>
 				<div class="font-weight-bold mt-2" style="font-size: 1rem">
 					☆ 홈페이지를 이용자 신청 편의를 위하여 반응형 웹버전으로 업그레이드 중입니다. 4월전에 완료예정입니다. 
-					그 전에는 불편하시더라도 하기에 첨부된 신청서를 작성하시어 진로교육지원센터이메일로 보내주시면 정말 감사하겠습니다. !!
+					그 전에는 불편하시더라도 첨부된 신청서를 작성하시어 진로교육지원센터 이메일로 보내주시면 정말 감사하겠습니다. !!
 				</div>
 				<div class="mt-2">
 					☆ 김해진로교육지원센터 운영시간: 월~금 09:00~18:00 (토요일은 프로그램 운영시)
