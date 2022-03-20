@@ -10,7 +10,8 @@
 				<h2>방과후학교 학생 등록</h2>
 			</div>
 			<div class="card-body student-content">
-				<p class="info-text">* 정보 입력 후 하단 [학생등록]을 클릭하세요.<br>핸드폰에 반드시 수업관련안내를 받으실 번호<br>(학부모 전화번호)를 입력하세요.
+				<p class="info-text">* 정보 입력 후 하단 [학생등록]을 클릭하세요.<br>핸드폰에 반드시 수업관련안내를 받으실 번호<br>
+					<span class="text-orange" style="font-size: 18px; font-weight: bold;">학부모 전화번호</span>를 입력하세요.
 				<div class="form-group row pt-2">
 					<label class="col-form-label col-3">학 교</label>
 					<div class="col-9">

@@ -6,8 +6,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
-	<title></title>
-	
+	<c:choose>
+	    <c:when test="${fn:contains(city.link, 'jin-ro')}">
+	    	<title>김해진로교육지원센터</title>
+	    </c:when>
+	    <c:otherwise>
+	    	<title>캠퍼스형 방과후학교</title>
+	    </c:otherwise>
+    </c:choose>
+    
 	<script>
 		var contextPath = "${pageContext.request.contextPath}";
 	</script>
@@ -50,12 +57,12 @@
 	<script src="${contextName}/js/common.js"></script>
 	<script src="${contextName}/js/table.js"></script>
 	
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		var cityLink = "${city.link}";
 		if (cityLink.includes('jin-ro')) {
 			document.title = "김해진로교육지원센터"; 
 		} else {
 			document.title = "캠퍼스형 방과후학교";
 		}
-	</script>
+	</script> -->
 </head>
