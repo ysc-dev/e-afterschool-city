@@ -10,6 +10,9 @@
 	    <c:when test="${fn:contains(city.link, 'jin-ro')}">
 	    	<title>김해진로교육지원센터</title>
 	    </c:when>
+	    <c:when test="${fn:contains(city.link, 'educare')}">
+	    	<title>에듀빌리지</title>
+	    </c:when>
 	    <c:otherwise>
 	    	<title>캠퍼스형 방과후학교</title>
 	    </c:otherwise>
