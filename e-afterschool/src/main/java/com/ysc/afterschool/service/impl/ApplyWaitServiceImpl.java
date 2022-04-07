@@ -86,9 +86,21 @@ public class ApplyWaitServiceImpl implements ApplyWaitService {
 		return applyWaitRepository.findBySubjectId(subjectId);
 	}
 
+	/**
+	 * 안내장으로 조회
+	 */
 	@Transactional(readOnly = true)
 	@Override
 	public List<ApplyWait> getGroupList(int invitationId) {
 		return applyWaitRepository.findByInvitationIdGroupByStudentId(invitationId);
+	}
+	
+	/**
+	 * 안내장, 학생을 통해 조회
+	 */
+	@Transactional(readOnly = true)
+	@Override
+	public List<ApplyWait> getList(int infoId, int studentId) {
+		return applyWaitRepository.findByInvitationIdAndStudentId(infoId, studentId);
 	}
 }

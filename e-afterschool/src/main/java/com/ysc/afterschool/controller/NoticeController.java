@@ -47,7 +47,9 @@ public class NoticeController {
 	@GetMapping("list")
 	public void list(Model model, int infoId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("city", cityService.get(cookie.getValue()));
+		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
+		
+		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("notices", noticeService.getList(Integer.parseInt(cookie.getValue())));
 	}
@@ -64,7 +66,9 @@ public class NoticeController {
 	public void detail(Model model, int infoId, int noticeId,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("city", cityService.get(cookie.getValue()));
+		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
+		
+		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
 
 		Notice notice = noticeService.get(noticeId);

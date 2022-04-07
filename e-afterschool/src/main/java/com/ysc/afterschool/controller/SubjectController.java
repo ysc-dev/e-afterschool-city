@@ -65,8 +65,10 @@ public class SubjectController {
 	@GetMapping("group")
 	public void group(Model model, int infoId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
 
+		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
+		
 		model.addAttribute("invitation", invitationService.get(infoId));
-		model.addAttribute("city", cityService.get(cookie.getValue()));
+		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("subjectGroups", subjectGroupService.getList(infoId));
 	}
 
@@ -81,8 +83,10 @@ public class SubjectController {
 	@GetMapping("mylist")
 	public void mylist(Model model, int infoId, Authentication authentication,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+		
+		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
 
-		model.addAttribute("city", cityService.get(cookie.getValue()));
+		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("invitation", invitationService.get(infoId));
 
 		Student student = (Student) authentication.getPrincipal();
@@ -94,6 +98,7 @@ public class SubjectController {
 		}).collect(Collectors.toList());
 
 		model.addAttribute("applies", applies);
+		model.addAttribute("applyWaits", applyWaitService.getList(infoId, student.getId()));
 	}
 
 	/**
@@ -108,7 +113,9 @@ public class SubjectController {
 	public void list(Model model, int infoId, int groupId,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("city", cityService.get(cookie.getValue()));
+		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
+		
+		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subjectGroup", subjectGroupService.get(groupId));
 		model.addAttribute("subjects", subjectService.getList(infoId, groupId));
@@ -127,7 +134,9 @@ public class SubjectController {
 	public void micro(Model model, int infoId, int id, Authentication authentication,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("city", cityService.get(cookie.getValue()));
+		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
+		
+		model.addAttribute("city", cityService.get(cityId));
 		Invitation invitation = invitationService.get(infoId);
 		model.addAttribute("invitation", invitation);
 
@@ -206,7 +215,9 @@ public class SubjectController {
 	@GetMapping("info")
 	public void info(Model model, int infoId, int id, @CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("city", cityService.get(cookie.getValue()));
+		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
+		
+		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
 
 		Subject subject = subjectService.get(id);

@@ -50,7 +50,9 @@ public class ClassContentsController {
 	public void classView(Model model, int infoId, int id,
 			@CookieValue(value = "cityId", required = false) Cookie cookie) {
 
-		model.addAttribute("city", cityService.get(cookie.getValue()));
+		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
+		
+		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subject", subjectService.get(id));
 

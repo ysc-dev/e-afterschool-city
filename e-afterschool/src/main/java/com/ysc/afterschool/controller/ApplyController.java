@@ -174,4 +174,20 @@ public class ApplyController {
 
 		return new ResponseEntity<String>("수강 취소를 실패하였습니다.", HttpStatus.BAD_REQUEST);
 	}
+	
+	/**
+	 * 수강 대기 취소 기능
+	 * 
+	 * @param applyWaitId
+	 * @return
+	 */
+	@DeleteMapping("wait/delete")
+	public ResponseEntity<?> deleteApplyWait(int applyWaitId) {
+
+		if (applyWaitService.delete(applyWaitId)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+
+		return new ResponseEntity<String>("수강대기 취소를 실패하였습니다.", HttpStatus.BAD_REQUEST);
+	}
 }
