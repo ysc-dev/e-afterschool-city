@@ -332,19 +332,19 @@
 </div>
 
 <div id="modal_jinju" class="modal fade jinro-popup" data-backdrop="true" data-keyboard="false" tabindex="-1">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title font-weight-bold">새로운 안내장 시간요일 확인하시고 신청 바랍니다.</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 
-			<div class="modal-body">
-				<img src="${pageContext.request.contextPath}/images/popup/jinju_popup.jpg" alt="logo">
+			<div class="modal-body text-center">
+				<img src="${pageContext.request.contextPath}/images/popup/jinju_popup.png" alt="logo">
 			</div>
 
-			<div class="modal-footer" style="margin-top: -20px; padding: 0.75rem"> 
-				<button type="button" class="btn bg-info" data-dismiss="modal">닫기</button>
+			<div class="modal-footer text-center" style="margin-top: 0px;"> 
+				<button type="button" class="btn bg-info" data-dismiss="modal">&nbsp;&nbsp;&nbsp;닫기&nbsp;&nbsp;&nbsp;</button>
 			</div>
 		</div>
 	</div>
