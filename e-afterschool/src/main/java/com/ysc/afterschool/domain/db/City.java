@@ -64,6 +64,8 @@ public class City implements Domain {
 	@Column(length = 20)
 	private String sms;
 	
+	private boolean popup;
+	
 	/** 설문조사 여부 */
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)

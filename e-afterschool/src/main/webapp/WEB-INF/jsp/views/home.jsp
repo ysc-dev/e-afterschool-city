@@ -331,19 +331,19 @@
 	</div>
 </div>
 
-<div id="modal_jinju" class="modal fade jinro-popup" data-backdrop="true" data-keyboard="false" tabindex="-1">
+<div id="modal_popup" class="modal fade" data-backdrop="true" data-keyboard="false" tabindex="-1">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<div class="modal-header">
+			<div class="modal-header modal-header-sm bg-info">
 				<h4 class="modal-title font-weight-bold">새로운 안내장 시간요일 확인하시고 신청 바랍니다.</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 
-			<div class="modal-body text-center">
-				<img src="${pageContext.request.contextPath}/images/popup/jinju_popup.png" alt="logo">
+			<div class="modal-body image-modal-body text-center">
+				<div id="image-viewer"></div>
 			</div>
 
-			<div class="modal-footer text-center" style="margin-top: 0px;"> 
+			<div class="modal-footer text-center" style="margin-top: 10px;"> 
 				<button type="button" class="btn bg-info" data-dismiss="modal">&nbsp;&nbsp;&nbsp;닫기&nbsp;&nbsp;&nbsp;</button>
 			</div>
 		</div>
@@ -353,11 +353,26 @@
 <script>
 var cityId = "${city.id}";
 var cityLink = "${city.link}";
+var isPopup = "${city.popup}";
 
-if (cityLink.includes('jin-ro')) {
-	$('#modal_jinro').modal();
-} else if (cityLink.includes('jj')) {
-	$('#modal_jinju').modal();
+/* if (cityLink.includes('jin-ro')) {
+	//$('#modal_jinro').modal();
+}*/
+
+if (isPopup === "true") {
+	imageModalPopup(cityLink + "_popup.jpg");
+}
+
+function imageModalPopup(fileName) {
+	var img = document.createElement("img");
+	img.setAttribute("src", contextPath + "/images/popup/" + fileName);
+	img.setAttribute("class", "img-fluid");
+	$("#image-viewer").append(img);
+	
+	//var imageContent = '<img src="' + contextPath + '/images/popup/' + fileName + '" class="img-fluid"/>';
+    //$("#image-viewer").append(imageContent);
+	
+	$('#modal_popup').modal();
 }
 
 $("#registBtn").click(function() {

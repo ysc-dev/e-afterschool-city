@@ -98,7 +98,6 @@ function imageModal(id) {
         type: "GET",
         data: {"id" : id},
         success: function(response) {
-            console.log(response);
 	        response.uploadedFiles.forEach(function(file, index) {
 	        	var img = document.createElement("img");
 	        	img.setAttribute("src", contextPath + "/uploads/community/" + file.fileName);
