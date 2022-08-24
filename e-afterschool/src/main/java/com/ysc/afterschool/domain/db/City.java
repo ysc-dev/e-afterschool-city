@@ -66,6 +66,9 @@ public class City implements Domain {
 	
 	private boolean popup;
 	
+	@Column(length = 1024)
+	private String images;
+	
 	/** 설문조사 여부 */
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)

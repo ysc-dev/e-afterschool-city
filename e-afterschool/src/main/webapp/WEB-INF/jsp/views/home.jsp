@@ -354,25 +354,27 @@
 var cityId = "${city.id}";
 var cityLink = "${city.link}";
 var isPopup = "${city.popup}";
+var images = "${city.images}";
 
 /* if (cityLink.includes('jin-ro')) {
 	//$('#modal_jinro').modal();
 }*/
 
-if (isPopup === "true") {
-	imageModalPopup(cityLink + "_popup.jpg");
+if (isPopup === "true" && images !== "") {
+	images.split(",").forEach(image => {
+		addImage(image);
+	});
+	$('#modal_popup').modal();
 }
 
-function imageModalPopup(fileName) {
+function addImage(fileName) {
 	var img = document.createElement("img");
-	img.setAttribute("src", contextPath + "/images/popup/" + fileName);
+	img.setAttribute("src", contextPath + "/uploads/city/" + fileName);
 	img.setAttribute("class", "img-fluid");
 	$("#image-viewer").append(img);
 	
 	//var imageContent = '<img src="' + contextPath + '/images/popup/' + fileName + '" class="img-fluid"/>';
     //$("#image-viewer").append(imageContent);
-	
-	$('#modal_popup').modal();
 }
 
 $("#registBtn").click(function() {
