@@ -146,6 +146,44 @@ var CommonWidget = function() {
     }
 }();
 
+const CommonUtil = function() {
+
+	/** 내국민/외국민 주민등록번호 유효성 검사 */
+	const validRegistrationNumber = function(rn, type) {
+		rn = rn.split("-").join('');
+		if (rn.length !== 13) return false;
+
+		var checkSum = 0;
+		for (var i = 0; i < 12; i++) {
+			checkSum += ((rn.substr(i, 1) >> 0) * ((i % 8) + 2));
+		}
+
+		var korMatch = (11 - (checkSum % 11)) % 10 == rn.substr(12, 1);
+		var frnMatch = (13 - (checkSum % 11)) % 10 == rn.substr(12, 1);
+
+		if (type === 'kor') return korMatch;
+		else if (type === 'frn') return frnMatch;
+		else return korMatch || frnMatch;
+	}
+	
+	return {
+		/** 내국민/외국민 주민등록번호 유효성 검사 */
+		// 뒤 7자리의 첫번째 숫자가 1,2,3,4 일경우 내국인 / 5,6,7,8 일경우 외국인
+		validateJumin: function(ssn1, ssn2) {
+			const ssn2f = ssn2.substr(0, 1);
+			const rn = ssn1 + ssn2;
+
+			if (ssn2f == '5' || ssn2f == '6' || ssn2f == '7' || ssn2f == '8') {
+				var type = 'frn';
+			} else {
+				var type = 'kor';
+			}
+			
+		    return validRegistrationNumber(rn, type);
+		}
+	}
+}();
+
 document.addEventListener('DOMContentLoaded', function() {
 	CommonWidget.init();
 });
