@@ -72,38 +72,26 @@
 				<fieldset class="mb-0">
 					<legend class="text-uppercase font-weight-bold">개인정보제공 동의</legend>
 					<label class="text-grey-600">학생보험 가입 시 필요한 개인정보제공에 동의를 해 주셔야 가입이 가능합니다.<br>보험가입목적 외에는 절대 사용하지 않습니다.</label>
-					<c:choose>
-						<c:when test="${city.link eq 'hy'}">
-							<div class="form-check mt-1 mb-0">
-								<label class="form-check-label">
-									<input id="agreeCheckBtn" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
-									개인정보를 제공하는 것에 동의합니다.
-								</label>
+					<div class="form-check mt-2">
+						<label class="form-check-label">
+							<input id="agreeCheck" type="checkbox" name="agree" class="form-check-input-styled" data-fouc
+								<c:if test="${student.agree == true}">checked</c:if>>
+							보험가입에 필요한 개인정보를 보험사에 제공하는 것에 동의합니다.
+						</label>
+					</div>
+					<div id="residentNumberInput" class="mt-1 mb-0">
+						<div class="form-group mt-2">
+							<button id="modalBtn" type="button" class="btn bg-teal-600 px-2" data-toggle="modal" data-target="#modal">보험관련 규약추가항목 확인</button>
+						</div>
+						<div class="form-group mt-3 mb-0">
+							<label class="font-weight-bold">학생주민등록번호 입력 :</label>
+							<div class="d-flex align-items-center">
+								<input type="text" class="form-control format-jumin1" id="jumin1" name="jumin1" value="${student.jumin1}">
+								<span class="font-weight-bold mx-2">-</span>
+								<input type="password" class="form-control format-jumin2" id="jumin2" name="jumin2" value="${student.jumin2}">
 							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="form-check mt-2">
-								<label class="form-check-label">
-									<input id="agreeCheck" type="checkbox" name="agree" class="form-check-input-styled" data-fouc
-										<c:if test="${student.agree == true}">checked</c:if>>
-									보험가입에 필요한 개인정보를 보험사에 제공하는 것에 동의합니다.
-								</label>
-							</div>
-							<div id="residentNumberInput" class="mt-1 mb-0">
-								<div class="form-group mt-2">
-									<button id="modalBtn" type="button" class="btn bg-teal-600 px-2" data-toggle="modal" data-target="#modal">보험관련 규약추가항목 확인</button>
-								</div>
-								<div class="form-group mt-3 mb-0">
-									<label class="font-weight-bold">학생주민등록번호 입력 :</label>
-									<div class="d-flex align-items-center">
-										<input type="text" class="form-control format-jumin1" id="jumin1" name="jumin1" value="${student.jumin1}">
-										<span class="font-weight-bold mx-2">-</span>
-										<input type="password" class="form-control format-jumin2" id="jumin2" name="jumin2" value="${student.jumin2}">
-									</div>
-								</div>
-							</div>
-						</c:otherwise>
-					</c:choose>
+						</div>
+					</div>
 				</fieldset>
 			</div>
 			<div class="card-footer text-center">
@@ -157,43 +145,25 @@ $(function() {
 
 	// 보험관련 규약추가항목 확인 여부
 	var isConfirm = false;
-
-	var cityLink = '${city.link}';
-	//합양캠퍼스일 경우 ------------------------------------------
-	if (cityLink === 'hy') { 
-		$("#residentNumberInput").addClass("d-none");
+	
+	$("#agreeCheck").click(function(){
+	    if ($(this).is(':checked')){
+	    	//$("#residentNumberInput").removeClass("d-none");
+	    	$("#updateBtn").prop("disabled", false);
+	    	$("#modalBtn").prop("disabled", false);
+	    } else {
+	    	//$("#residentNumberInput").addClass("d-none");
+	    	$("#updateBtn").prop("disabled", true);
+	    	isConfirm = false;
+	    }
+	});
+	
+	$("#confirmBtn").click(function() {
+		$("#modalBtn").prop("disabled", true);
+		$("#modal").modal('hide');
+		$("#updateBtn").prop("disabled", false);
 		isConfirm = true;
-		
-		/** 개인정보 동의 체크 버튼 클릭 시 */
-		$("#agreeCheckBtn").click(function(){
-		    if ($(this).is(':checked')) {
-		    	$("#updateBtn").prop("disabled", false);
-		    } else {
-		    	$("#updateBtn").prop("disabled", true);
-		    }
-		});
-	}
-	// ----------------------------------------------------
-	else {
-		$("#agreeCheck").click(function(){
-		    if ($(this).is(':checked')){
-		    	//$("#residentNumberInput").removeClass("d-none");
-		    	$("#updateBtn").prop("disabled", false);
-		    	$("#modalBtn").prop("disabled", false);
-		    } else {
-		    	//$("#residentNumberInput").addClass("d-none");
-		    	$("#updateBtn").prop("disabled", true);
-		    	isConfirm = false;
-		    }
-		});
-		
-		$("#confirmBtn").click(function() {
-			$("#modalBtn").prop("disabled", true);
-			$("#modal").modal('hide');
-			$("#updateBtn").prop("disabled", false);
-			isConfirm = true;
-		});
-	}
+	});
 	
 	//전송 상태 설정 : false
 	var isSubmitted = false;
