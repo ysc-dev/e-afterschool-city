@@ -15,12 +15,14 @@
 - 수강대기 신청
 - 공지사항
 - 커뮤니티
-- 만족도 및 설문 조사
+- 만족도 및 설문 조사 등록
 
 ## 기술
 - Spring Boot
-- JPA
-- JSP
+- Spring Security
+- Spring Data JPA
+- JSP, HTML5, CSS
 - Tiles
 - MySQL
 - Maven
+- OkHttp
