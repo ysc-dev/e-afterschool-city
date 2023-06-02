@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ include file="/WEB-INF/jsp/common/tagLib.jsp"%>
 
 <sec:authentication property="principal" var="user"></sec:authentication>
 
@@ -8,7 +8,7 @@
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
-	padding: 8px 0;
+	padding: 4px 0;
 	font-weight: bold;
 }
 
@@ -18,10 +18,22 @@
 </style>
 
 <sec:authorize access="isAuthenticated()">
-	<div class="navbar navbar-expand-lg navbar-light fixed-bottom">
+	<div class="navbar navbar-expand-lg navbar-light fixed-bottom px-3">
 		<div class="footer-content">
-			학생정보 : ${user.schoolInfo}${user.targetType.info} ${user.grade}학년 ${user.classType}반 ${user.number}번 ${user.name}<br>
-			연락번호 : ${user.tel}
+		<c:choose>
+			<c:when test="${fn:contains(city.link, 'educare')}">
+		       	학생정보 : ${user.schoolInfo} ${user.dong}동 ${user.ho}호 ${user.name}<br>
+				연락번호 : ${user.tel}
+		    </c:when>
+		    <c:when test="${fn:contains(city.link, 'jin-ro')}">
+	        	학생정보 : ${user.schoolInfo}${user.targetType.info} ${user.grade}학년 ${user.classType}반 ${user.number}번 ${user.name}<br>
+				연락번호 : ${user.tel}
+		    </c:when>
+		    <c:otherwise>
+		       	학생정보 : ${user.schoolInfo}${user.targetType.info} ${user.grade}학년 ${user.classType}반 ${user.number}번 ${user.name}<br>
+				연락번호 : ${user.tel}
+		    </c:otherwise>
+		</c:choose>
 		</div>
 	</div>
 </sec:authorize>

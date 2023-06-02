@@ -13,7 +13,7 @@
     padding: 0;
     /* border-bottom: 1px dashed #a0a0a0; */
     text-align: center;
-    font-size: 23px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -26,10 +26,14 @@
 
 .student-content .col-form-label {
     color: #333;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
     float: left;
-    padding: 6px 10px 0 10px;
+    padding: 6px 0 0 10px;
+}
+
+.student-content .form-group {
+	margin-bottom: 0.75rem;
 }
 
 .custom-btn {
@@ -41,8 +45,8 @@
 }
 
 legend {
-	padding-top: .4rem;
-    padding-bottom: .4rem;
-    margin-bottom: .5rem;
-    font-size: 15px;
+	padding-top: .3rem;
+    padding-bottom: .3rem;
+    margin-bottom: .4rem;
+    font-size: 1rem;
 }

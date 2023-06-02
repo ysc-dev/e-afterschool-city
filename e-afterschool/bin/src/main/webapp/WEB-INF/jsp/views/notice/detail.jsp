@@ -5,16 +5,15 @@
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
   	<c:param name="left" value="notice/list?infoId=${infoId}" />
-  	<c:param name="home" value="info?cityId=${cityId}" />
+  	<c:param name="home" value="info?cityId=${city.id}" />
 </c:import>
-
 
 <div class="content">
 	<!-- <div class="content-title d-flex justify-content-center align-items-center mt-2">
 		<span class="fs-18">공지사항 상세정보</span>
 	</div> -->
 	
-	<div class="card notice-detail">
+	<div class="card notice-detail mt-2">
 		<div class="card-header bg-info-600">
 			<h5 class="card-title font-weight-bold">${notice.title}</h5>
 		</div>

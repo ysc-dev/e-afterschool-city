@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp"%>
 
-<link href="${pageContext.request.contextPath}/css/box.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/micro.css" rel="stylesheet" type="text/css">
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
   	<c:param name="left" value="subject/group?infoId=${invitation.id}" />
-  	<c:param name="home" value="info?cityId=${cityId}" />
+  	<c:param name="home" value="info?cityId=${city.id}" />
 </c:import>
 
 <div class="content">  
-	<div class="content-title justify-content-center align-items-center mt-3 px-2">  
+	<div class="content-title justify-content-center align-items-center mt-2 px-2">  
 		<span class="fs-18">${subject.name}</span>
 	</div>
 	
 	<div class="">
 		<div class="row mt-4 mx-0">
 			<div class="col-6">
-				<button type="button" id="subjectInfoBtn" class="btn btn-box btn-outline bg-white border-slate-300">
+				<button type="button" id="subjectInfoBtn" class="btn btn-box btn-outline bg-light border-slate-300">
 					<div class="fs-20 text-info-600 py-3">
 						<p><span>과 목 정 보 및</span></p>
 						<p class="mb-0"><span>과 목 특 징</span></p>
@@ -47,7 +47,7 @@
 						<div class="card-body">
 							<div class="card-box">
 								<p class="mb-1">현재 정원</p>
-								<p>${subject.applyNumber}/${subject.fixedNumber}명</p>
+								<p>${subject.applyNumber} / ${subject.fixedNumber}명</p>
 							</div>
 						</div>
 					</div>

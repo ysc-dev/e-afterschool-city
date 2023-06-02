@@ -88,7 +88,7 @@
 }
 
 .card-header {
-	padding: .9375rem 0.75rem;
+	padding: .75rem .75rem;
 	border-bottom: 0;
 }
 
@@ -113,12 +113,6 @@
 	padding-left: 1.2rem;
 }
 
-.subscribe-header {
-	width: 80px;
-	margin-left: 0px !important;
-	justify-content: flex-end;
-}
-
 .card-body {
 	padding: 1rem 1rem;
 	border-top: 1px solid rgba(0,0,0,.125);
@@ -135,7 +129,7 @@
 }
 
 .subject-group .card-header {
-	padding: .9375rem 1.25rem;
+	padding: .9375rem;
 }
 
 .subject-group .card-header a {
@@ -155,7 +149,7 @@
  mylist µğÀÚÀÎ
 *******************************************************************************************************/
 .mylist-header {
-	width: 80px;
+	width: 100px;
 	margin-left: 1rem !important;
 	justify-content: flex-end;
 }

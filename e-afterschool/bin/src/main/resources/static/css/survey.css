@@ -1,0 +1,23 @@
+@charset "EUC-KR";
+
+/*******************************************************************************************************
+ survey µðÀÚÀÎ
+*******************************************************************************************************/
+.survey-title {
+	display: flex;
+	flex-direction: column;
+	height: 100px;
+	width: 100%;
+	font-size: 1.2rem;
+	font-weight: bold;
+	color: #353535;
+	text-shadow: 1px 1px 1px #D5D5D5;
+}
+
+.custom-btn {
+	width: 120px;
+    height: 36px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 14px;
+}

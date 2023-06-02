@@ -1,31 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp" %>
 
+<link href="${pageContext.request.contextPath}/css/info.css" rel="stylesheet" type="text/css">
+
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
-  	<c:param name="left" value="home/${cityId}" />
+	<c:param name="left" value="home/${city.id}" />
 </c:import>
 
-<div class="content info-content"> 
+<div class="content px-0"> 
 	<div class="info-title justify-content-center align-items-center mt-2">
-		<span class="ml-2">회원 등록 후 수강신청 할 수 있습니다.</span>
+		<span class="ml-2">학생 등록 후 수강신청 할 수 있습니다.</span>
 	</div>
 	
-	<table class="table table-border-solid mt-4" id="invitationTable">
+	<table class="table table-border-solid mt-3" id="invitationTable">
 		<thead class="text-center">
 			<tr class="bg-info-600">
-				<th>번호</th> 
 				<th>안내장 제목</th>
-				<th>신청<br>마감일</th>
-				<th>수강<br>신청</th>
+				<th>마감일</th>
+				<th>수강안내</th>
 			</tr>
 		</thead>
 		<tbody class="tbody-xs text-center">
 			<c:forEach var="invitation" items="${invitations}" varStatus="status">
-				<tr class="">
-					<td class="font-size-sm">${status.count}</td>
-					<td><a href="#" class="text-dark font-weight-bold" onclick="showInfo(${invitation.id})">${invitation.name}</a></td>
-					<td class="font-size-xs">${invitation.deadlineDate}</td>
-					<td class="font-size-sm">
+				<tr>
+					<td class="font-size-sm info-title-text"><a href="#" class="text-dark font-weight-bold" onclick="showInfo(${invitation.id})">${invitation.name}</a></td>
+					<td class="font-size-xs info-content-text">${invitation.deadlineDate}</td>
+					<td class="font-size-xs info-content-text">
 						<c:choose>
 							<c:when test="${invitation.type.id == 1}">
 								<a href="#" class="text-grey-600" onclick="deadlineClick(${invitation.id})">${invitation.type.name}</a>
@@ -48,7 +48,7 @@
 <div id="imageModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-primary">
+            <div class="modal-header modal-header-sm bg-info">
                 <h5 class="modal-title">
                     <i class="icon-images2 mr-2"></i>안내장 상세정보
                 </h5>
@@ -71,15 +71,15 @@ function checkIE() {
 	}
 }
 
-$("#invitationTable").DataTable({
+/* $("#invitationTable").DataTable({
 	pageLength: 5,
 	order: [[0, 'asc']],
 	columns: [
-	{ width: "5%" },
-	{ width: "50%" },
-	{ width: "19%" },
-	{ width: "26%" }],
-});
+	{ width: "4%" },
+	{ width: "51%" },
+	{ width: "18%" },
+	{ width: "27%" }],
+}); */
 
 function showInfo(id) {
 	$("#image-viewer").empty();
@@ -107,7 +107,13 @@ function applyClick(id) {
 		if (checkIE()) {
 			alert("로그인 한 후에 수강신청 할 수 있습니다.");
 		} else {
-			swalInit.fire({ title: "로그인 한 후에 수강신청 할 수 있습니다.", type: "warning", position: 'top' });
+			swalInit.fire({
+				title: "로그인 한 후에 수강신청 할 수 있습니다.", 
+				type: "warning",
+				position: 'top'
+   			}).then(function(e) {
+   				location.href = contextPath + "/login/${city.id}";
+   			});
 		}
 		return;
 	}
@@ -121,7 +127,13 @@ function deadlineClick(id) {
 		if (checkIE()) {
 			alert("로그인 한 후에 확인 할 수 있습니다.");
 		} else {
-			swalInit.fire({ title: "로그인 한 후에 확인 할 수 있습니다.", type: "warning", position: 'top' });
+			swalInit.fire({
+				title: "로그인 한 후에 확인 할 수 있습니다.", 
+				type: "warning",
+				position: 'top'
+   			}).then(function(e) {
+   				location.href = contextPath + "/login/${city.id}";
+   			});
 		}
 		return;
 	}

@@ -6,8 +6,18 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
-	<title>방과후학교 관리시스템</title>
-	
+	<c:choose>
+	    <c:when test="${fn:contains(city.link, 'jin-ro')}">
+	    	<title>김해진로교육지원센터</title>
+	    </c:when>
+	    <c:when test="${fn:contains(city.link, 'educare')}">
+	    	<title>에듀빌리지</title>
+	    </c:when>
+	    <c:otherwise>
+	    	<title>캠퍼스형 방과후학교</title>
+	    </c:otherwise>
+    </c:choose>
+    
 	<script>
 		var contextPath = "${pageContext.request.contextPath}";
 	</script>
@@ -16,6 +26,7 @@
 	
 	<!-- Global stylesheets -->
 	<link href="${contextName}/limitless/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css">
+	<link href="${contextName}/limitless/css/icons/fontawesome/styles.min.css" rel="stylesheet" type="text/css">
 	<link href="${contextName}/limitless/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link href="${contextName}/limitless/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css">
 	<link href="${contextName}/limitless/css/layout.min.css" rel="stylesheet" type="text/css">
@@ -48,4 +59,13 @@
 	
 	<script src="${contextName}/js/common.js"></script>
 	<script src="${contextName}/js/table.js"></script>
+	
+	<!-- <script type="text/javascript">
+		var cityLink = "${city.link}";
+		if (cityLink.includes('jin-ro')) {
+			document.title = "김해진로교육지원센터"; 
+		} else {
+			document.title = "캠퍼스형 방과후학교";
+		}
+	</script> -->
 </head>
