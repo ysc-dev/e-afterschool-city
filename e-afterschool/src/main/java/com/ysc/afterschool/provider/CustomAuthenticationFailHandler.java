@@ -16,7 +16,7 @@ public class CustomAuthenticationFailHandler implements AuthenticationFailureHan
 			AuthenticationException exception) throws IOException, ServletException {
 		
 		String cityId = request.getParameter("cityId");
-		String defaultFailureUrl = request.getContextPath() + "/login/" + cityId + "?error";
+		String defaultFailureUrl = request.getContextPath() + "/user/login/" + cityId + "?error";
 		
 		response.sendRedirect(defaultFailureUrl);
 	}

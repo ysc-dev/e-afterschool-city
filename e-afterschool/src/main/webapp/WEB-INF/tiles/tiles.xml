@@ -42,6 +42,10 @@
 		<put-attribute name="content" value="/WEB-INF/jsp/views/notice/{1}.jsp" />
     </definition>
     
+    <definition name="user/*" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/jsp/views/user/{1}.jsp" />
+    </definition>
+    
     <definition name="survey/*" extends="basic">
 		<put-attribute name="content" value="/WEB-INF/jsp/views/survey/{1}.jsp" />
     </definition>

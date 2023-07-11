@@ -391,7 +391,7 @@ $("#registBtn_jinro").click(function() {
 });
 
 $("#loginBtn").click(function() {
-	location.href = contextPath + "/login/${city.id}";
+	location.href = contextPath + "/user/login/${city.id}";
 });
 
 $("#infoBtn").click(function() {

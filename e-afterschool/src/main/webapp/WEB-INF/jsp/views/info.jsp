@@ -112,7 +112,7 @@ function applyClick(id) {
 				type: "warning",
 				position: 'top'
    			}).then(function(e) {
-   				location.href = contextPath + "/login/${city.id}";
+   				location.href = contextPath + "/user/login/${city.id}";
    			});
 		}
 		return;
@@ -132,7 +132,7 @@ function deadlineClick(id) {
 				type: "warning",
 				position: 'top'
    			}).then(function(e) {
-   				location.href = contextPath + "/login/${city.id}";
+   				location.href = contextPath + "/user/login/${city.id}";
    			});
 		}
 		return;

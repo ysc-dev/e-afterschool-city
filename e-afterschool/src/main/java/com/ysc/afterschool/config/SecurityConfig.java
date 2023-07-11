@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 			// 로그인 페이지 및 성공 url, handler 그리고 로그인 시 사용되는 id, password 파라미터 정의
 			.formLogin()
-			.loginPage("/login")
+			.loginPage("/user/login")
 			.usernameParameter("username")
             .passwordParameter("password")
             //.failureUrl("/login?error")

@@ -74,9 +74,9 @@ public class HomeController {
 	 * @param cookie
 	 * @return
 	 */
-	@GetMapping("login")
+	@GetMapping("user/login")
 	public String login(@CookieValue(value = "cityId", required = false) Cookie cookie) {
-		return "redirect:login/" + cookie.getValue();
+		return "redirect:user/login/" + cookie.getValue();
 	}
 
 	/**
@@ -87,10 +87,10 @@ public class HomeController {
 	 * @param error
 	 * @return
 	 */
-	@GetMapping("login/{cityId}")
+	@GetMapping("user/login/{cityId}")
 	public String login(Model model, @PathVariable int cityId,
 			@RequestParam(value = "error", required = false) String error) {
-
+		
 		if (error != null) {
 			model.addAttribute("error", "falied");
 		}
@@ -98,6 +98,6 @@ public class HomeController {
 		City city = cityService.get(cityId);
 		model.addAttribute("city", city);
 
-		return "login";
+		return "user/login";
 	}
 }
