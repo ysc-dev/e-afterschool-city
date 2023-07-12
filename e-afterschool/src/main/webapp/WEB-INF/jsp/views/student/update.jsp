@@ -96,7 +96,7 @@
 			</div>
 			<div class="card-footer text-center">
 				<button id="updateBtn" type="submit" class="btn bg-teal-600 rounded-round custom-btn mr-2">정보변경</button>
-				<a href="${pageContext.request.contextPath}/subject/group?infoId=${infoId}" class="btn btn-light rounded-round custom-btn">취 소</a>
+				<a href="${pageContext.request.contextPath}/subject/group/${city.id}/${infoId}" class="btn btn-light rounded-round custom-btn">취 소</a>
 			</div>
 		</div>
 	</form>

@@ -4,7 +4,7 @@
 <link href="${pageContext.request.contextPath}/css/notice.css" rel="stylesheet" type="text/css">
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
-  	<c:param name="left" value="notice/list?infoId=${infoId}" />
+  	<c:param name="left" value="notice/list/${city.id}/${infoId}" />
   	<c:param name="home" value="info?cityId=${city.id}" />
 </c:import>
 

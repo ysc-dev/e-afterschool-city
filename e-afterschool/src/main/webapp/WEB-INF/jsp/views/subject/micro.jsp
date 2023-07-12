@@ -4,7 +4,7 @@
 <link href="${pageContext.request.contextPath}/css/micro.css" rel="stylesheet" type="text/css">
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
-  	<c:param name="left" value="subject/group?infoId=${invitation.id}" />
+  	<c:param name="left" value="subject/group/${city.id}/${invitation.id}" />
   	<c:param name="home" value="info?cityId=${city.id}" />
 </c:import>
 
@@ -95,15 +95,15 @@ function checkIE() {
 }
 
 $("#subjectInfoBtn").click(function() {
-	location.href = contextPath + "/subject/info?infoId=${invitation.id}&id=${subject.id}";
+	location.href = contextPath + "/subject/info/${city.id}/${invitation.id}/${subject.id}";
 });
 
 $("#communityBtn").click(function() {
-	location.href = contextPath + "/subject/community/list?infoId=${invitation.id}&id=${subject.id}";
+	location.href = contextPath + "/subject/community/list/${city.id}/${invitation.id}/${subject.id}";
 });
 
 $("#classContentsBtn").click(function() {
-	location.href = contextPath + "/subject/class?infoId=${invitation.id}&id=${subject.id}";
+	location.href = contextPath + "/subject/class/${city.id}/${invitation.id}/${subject.id}";
 });
 
 function registWait(subjectId) {

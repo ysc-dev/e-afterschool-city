@@ -4,7 +4,7 @@
 <link href="${pageContext.request.contextPath}/css/table.css" rel="stylesheet" type="text/css">
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
-  	<c:param name="left" value="subject/micro?infoId=${infoId}&id=${subject.id}" />
+  	<c:param name="left" value="subject/micro/${city.id}/${infoId}/${subject.id}" />
   	<c:param name="home" value="info?cityId=${city.id}" />
 </c:import>
 
@@ -18,7 +18,7 @@
 			<div>&nbsp;</div>
 			<h5 class="card-title font-weight-bold">커 뮤 니 티</h5>
 			<div class="text-right">
-				<a href="${pageContext.request.contextPath}/subject/community/regist?infoId=${infoId}&subjectId=${subject.id}"
+				<a href="${pageContext.request.contextPath}/subject/community/regist/${city.id}/${infoId}/${subject.id}"
 					class="btn bg-primary-700 btn-sm"><i class="icon-pencil7 mr-2"></i>등록</a>
 			</div>
 		</div>
@@ -30,7 +30,7 @@
 						<td class="font-size-sm text-center">${status.count}</td>
 						<td class="font-size-sm text-center">${notice.userName}</td>
 						<td class="font-size-sm">
-							<a href="${pageContext.request.contextPath}/subject/community/detail?infoId=${infoId}&subjectId=${subject.id}&id=${notice.id}" 
+							<a href="${pageContext.request.contextPath}/subject/community/detail/${city.id}/${infoId}/${subject.id}/${notice.id}" 
 								class="text-default font-weight-bold">
 								<c:if test="${notice.important}">
 									<span class="text-danger font-weight-bold mr-1">[공지사항]</span>
@@ -67,29 +67,6 @@
 </div>
 
 <script>
-/* var table = $("#noticeTable").DataTable({
-	select: {
-        style: 'single'
-    },
-	pageLength: 10,
-	order: [[0, 'asc']],
-	columns: [
-		{ width: "0%" },
-		{ width: "10%" },
-		{ width: "20%" },
-		{ width: "70%" },
-		{ width: "10%" }
-	],
- 	columnDefs: [
- 		{ visible: false, targets: 0 }
- 	]
-}); */
-
-/* $('#noticeTable tbody').on( 'click', 'tr', function () {
-    var noticeId = table.row(this).data()[0];
-    location.href = contextPath + "/subject/community/detail?infoId=${infoId}&subjectId=${subject.id}&id=" + noticeId;
-}); */
-
 function imageModal(id) {
 	$("#file-viewer").empty();
 	

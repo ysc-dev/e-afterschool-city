@@ -1,11 +1,8 @@
 package com.ysc.afterschool.controller;
 
-import javax.servlet.http.Cookie;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,17 +41,6 @@ public class HomeController {
 	/**
 	 * 홈 화면
 	 * 
-	 * @param cookie
-	 * @return
-	 */
-	@GetMapping("home")
-	public String home(@CookieValue(value = "cityId", required = false) Cookie cookie) {
-		return "redirect:home/" + cookie.getValue();
-	}
-
-	/**
-	 * 홈 화면
-	 * 
 	 * @param model
 	 * @param cityId
 	 * @return
@@ -62,21 +48,9 @@ public class HomeController {
 	@GetMapping("home/{cityId}")
 	public String home(Model model, @PathVariable int cityId) {
 
-		City city = cityService.get(cityId);
-		model.addAttribute("city", city);
+		model.addAttribute("city", cityService.get(cityId));
 
 		return "home";
-	}
-
-	/**
-	 * 로그인 화면
-	 * 
-	 * @param cookie
-	 * @return
-	 */
-	@GetMapping("user/login")
-	public String login(@CookieValue(value = "cityId", required = false) Cookie cookie) {
-		return "redirect:user/login/" + cookie.getValue();
 	}
 
 	/**

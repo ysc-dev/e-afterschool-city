@@ -16,24 +16,24 @@
 		<div class="navbar-collapse">
 			<ul class="navbar-nav navbar-nav-highlight">
 				<li class="nav-item">
-					<a href="${pageContext.request.contextPath}/notice/list?infoId=${invitation.id}" class="navbar-nav-link">
+					<a href="${pageContext.request.contextPath}/notice/list/${city.id}/${invitation.id}" class="navbar-nav-link">
 						<i class="icon-bubble-notification mr-1"></i>전체공지사항
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="${pageContext.request.contextPath}/subject/mylist?infoId=${invitation.id}" class="navbar-nav-link nav-border-left">
+					<a href="${pageContext.request.contextPath}/subject/mylist/${city.id}/${invitation.id}" class="navbar-nav-link nav-border-left">
 						<i class="icon-folder-search mr-1"></i>수강신청확인
 					</a>
 				</li>
 				<li class="nav-item">
 				<c:choose>
 					 <c:when test="${fn:contains(city.link, 'educare')}">
-				       	<a href="${pageContext.request.contextPath}/student/educare/update?infoId=${invitation.id}" class="navbar-nav-link nav-border-left">
+				       	<a href="${pageContext.request.contextPath}/student/educare/update/${city.id}/${invitation.id}" class="navbar-nav-link nav-border-left">
 							<i class="icon-user mr-1"></i>학생정보변경
 						</a>
 				    </c:when>
 				    <c:otherwise>
-				        <a href="${pageContext.request.contextPath}/student/update?infoId=${invitation.id}" class="navbar-nav-link nav-border-left">
+				        <a href="${pageContext.request.contextPath}/student/update/${city.id}/${invitation.id}" class="navbar-nav-link nav-border-left">
 							<i class="icon-user mr-1"></i>학생정보변경
 						</a>
 				    </c:otherwise>
@@ -58,7 +58,7 @@
 						</a>
 					</h6>
 					<div class="header-elements">
-						<a href="list?infoId=${invitation.id}&groupId=${subjectGroup.id}"
+						<a href="${pageContext.request.contextPath}/subject/list/${city.id}/${invitation.id}/${subjectGroup.id}"
 							 class="btn ${subjectGroup.subjects == 0 ? 'bg-slate-300' : 'bg-teal' } btn-sm">
 							과목 리스트(${subjectGroup.subjects})
 						</a>

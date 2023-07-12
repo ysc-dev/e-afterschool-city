@@ -2,15 +2,13 @@ package com.ysc.afterschool.controller;
 
 import java.text.SimpleDateFormat;
 
-import javax.servlet.http.Cookie;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ysc.afterschool.domain.db.Notice;
@@ -41,33 +39,32 @@ public class NoticeController {
 	 * 전체 공지사항 화면
 	 * 
 	 * @param model
+	 * @param cityId
 	 * @param infoId
-	 * @param cookie
+	 * @return
 	 */
-	@GetMapping("list")
-	public void list(Model model, int infoId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+	@GetMapping("list/{cityId}/{infoId}")
+	public String list(Model model, @PathVariable("cityId") int cityId, @PathVariable("infoId") int infoId) {
 
-		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
-		
 		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
-		model.addAttribute("notices", noticeService.getList(Integer.parseInt(cookie.getValue())));
+		model.addAttribute("notices", noticeService.getList(cityId));
+		
+		return "notice/list";
 	}
 
 	/**
 	 * 전체 공지사항 상세보기 화면
 	 * 
 	 * @param model
+	 * @param cityId
 	 * @param infoId
 	 * @param noticeId
-	 * @param cookie
 	 */
-	@GetMapping("detail")
-	public void detail(Model model, int infoId, int noticeId,
-			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+	@GetMapping("detail/{cityId}/{infoId}/{noticeId}")
+	public void detail(Model model, @PathVariable("cityId") int cityId, @PathVariable("infoId") int infoId,
+			@PathVariable("noticeId") int noticeId) {
 
-		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
-		
 		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
 
@@ -75,8 +72,10 @@ public class NoticeController {
 		model.addAttribute("notice", notice);
 		model.addAttribute("localDateTimeFormat", new SimpleDateFormat("yyyy-MM-dd'T'hh:mm"));
 
-		notice.setHit(notice.getHit() + 1);
-		noticeService.update(notice);
+		if (notice != null) {
+			notice.setHit(notice.getHit() + 1);
+			noticeService.update(notice);
+		}
 	}
 
 	/**

@@ -4,17 +4,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,38 +57,44 @@ public class CommunityController {
 	 * 커뮤니티 화면
 	 * 
 	 * @param model
+	 * @param cityId
 	 * @param infoId
-	 * @param id
-	 * @param cookie
+	 * @param subjectId
 	 */
-	@GetMapping("list")
-	public void list(Model model, int infoId, int id, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+	@GetMapping("list/{cityId}/{infoId}/{subjectId}")
+	public String list(Model model, 
+			@PathVariable("cityId") int cityId, 
+			@PathVariable("infoId") int infoId, 
+			@PathVariable("subjectId") int subjectId) {
 
-		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
-		
 		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
-		model.addAttribute("subject", subjectService.get(id));
-		model.addAttribute("subjectNotices", subjectNoticeService.getList(id));
+		model.addAttribute("subject", subjectService.get(subjectId));
+		model.addAttribute("subjectNotices", subjectNoticeService.getList(subjectId));
+		
+		return "subject/community/list";
 	}
 
 	/**
 	 * 글 등록 화면
 	 * 
 	 * @param model
+	 * @param cityId
 	 * @param infoId
-	 * @param id
-	 * @param cookie
+	 * @param subjectId
+	 * @return
 	 */
-	@GetMapping("regist")
-	public void regist(Model model, int infoId, int subjectId,
-			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+	@GetMapping("regist/{cityId}/{infoId}/{subjectId}")
+	public String regist(Model model, 
+			@PathVariable("cityId") int cityId, 
+			@PathVariable("infoId") int infoId, 
+			@PathVariable("subjectId") int subjectId) {
 
-		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
-		
 		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subject", subjectService.get(subjectId));
+		
+		return "subject/community/regist";
 	}
 
 	/**
@@ -139,23 +143,28 @@ public class CommunityController {
 	 * @param id
 	 * @param cookie
 	 */
-	@GetMapping("detail")
-	public void detail(Model model, int infoId, int subjectId, int id,
-			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+	@GetMapping("detail/{cityId}/{infoId}/{subjectId}/{noticeId}")
+	public String detail(Model model, 
+			@PathVariable("cityId") int cityId, 
+			@PathVariable("infoId") int infoId, 
+			@PathVariable("subjectId") int subjectId,
+			@PathVariable("noticeId") int noticeId) {
 
-		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
-		
 		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subjectId", subjectId);
 
-		SubjectNotice notice = subjectNoticeService.get(id);
+		SubjectNotice notice = subjectNoticeService.get(noticeId);
 		model.addAttribute("localDateTimeFormat", new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss"));
 		model.addAttribute("notice", notice);
-		model.addAttribute("comments", commentService.getList(id));
+		model.addAttribute("comments", commentService.getList(noticeId));
 
-		notice.setHit(notice.getHit() + 1);
-		subjectNoticeService.update(notice);
+		if (notice != null) {
+			notice.setHit(notice.getHit() + 1);
+			subjectNoticeService.update(notice);
+		}
+		
+		return "subject/community/detail";
 	}
 
 	/**

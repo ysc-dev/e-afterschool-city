@@ -2,15 +2,13 @@ package com.ysc.afterschool.controller;
 
 import java.util.stream.Collectors;
 
-import javax.servlet.http.Cookie;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ysc.afterschool.domain.db.SubjectUploadedFile;
@@ -46,17 +44,17 @@ public class ClassContentsController {
 	 * @param id
 	 * @param cookie
 	 */
-	@GetMapping("")
-	public void classView(Model model, int infoId, int id,
-			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+	@GetMapping("{cityId}/{infoId}/{subjectId}")
+	public String classView(Model model, 
+			@PathVariable("cityId") int cityId, 
+			@PathVariable("infoId") int infoId, 
+			@PathVariable("subjectId") int subjectId) {
 
-		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
-		
 		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
-		model.addAttribute("subject", subjectService.get(id));
+		model.addAttribute("subject", subjectService.get(subjectId));
 
-		model.addAttribute("classContents", classContentsService.getList(id).stream().map(data -> {
+		model.addAttribute("classContents", classContentsService.getList(subjectId).stream().map(data -> {
 			String fileType = "";
 			for (SubjectUploadedFile file : data.getUploadedFiles()) {
 				if (file.getFileType() == FileType.IMAGE || file.getFileType() == FileType.VIDEO) {
@@ -67,6 +65,8 @@ public class ClassContentsController {
 			data.setFileType(fileType);
 			return data;
 		}).collect(Collectors.toList()));
+		
+		return "subject/class";
 	}
 
 	/**

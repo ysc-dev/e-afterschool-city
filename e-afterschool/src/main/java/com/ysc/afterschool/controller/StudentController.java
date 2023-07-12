@@ -2,16 +2,14 @@ package com.ysc.afterschool.controller;
 
 import java.util.stream.Collectors;
 
-import javax.servlet.http.Cookie;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -156,26 +154,30 @@ public class StudentController {
 	 * @param authentication
 	 * @param cookie
 	 */
-	@GetMapping("update")
-	public void update(Model model, int infoId, Authentication authentication,
-			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+	@GetMapping("update/{cityId}/{infoId}")
+	public String update(Model model, 
+			@PathVariable("cityId") int cityId, 
+			@PathVariable("infoId") int infoId, 
+			Authentication authentication) {
 
 		Student student = (Student) authentication.getPrincipal();
 		
-		int cityId = Integer.parseInt(cookie.getValue());
-
 		model.addAttribute("schools",
 				schoolService.getList(cityId).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("city", cityService.get(cityId));
 
-		if (student.isAgree()) {
-			String[] residentNumber = student.getResidentNumber().split("-");
-			student.setJumin1(residentNumber[0]);
-			student.setJumin2(residentNumber[1]);
+		if (student != null && student.isAgree()) {
+			if (student.getResidentNumber() != null) {
+				String[] residentNumber = student.getResidentNumber().split("-");
+				student.setJumin1(residentNumber[0]);
+				student.setJumin2(residentNumber[1]);
+			}
 		}
 
 		model.addAttribute("student", student);
+		
+		return "student/update";
 	}
 
 	/**
@@ -255,20 +257,22 @@ public class StudentController {
 	 * @param authentication
 	 * @param cookie
 	 */
-	@GetMapping("educare/update")
-	public void updateEducare(Model model, int infoId, Authentication authentication,
-			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+	@GetMapping("educare/update/{cityId}/{infoId}")
+	public String updateEducare(Model model, 
+			@PathVariable("cityId") int cityId, 
+			@PathVariable("infoId") int infoId,
+			Authentication authentication) {
 
 		Student student = (Student) authentication.getPrincipal();
 		
-		int cityId = Integer.parseInt(cookie.getValue());
-
 		model.addAttribute("schools",
 				schoolService.getList(1).stream().map(s -> s.getName()).sorted().collect(Collectors.toList()));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("city", cityService.get(cityId));
 
 		model.addAttribute("student", student);
+		
+		return "student/educare/update";
 	}
 	
 	/**

@@ -3,14 +3,12 @@ package com.ysc.afterschool.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.servlet.http.Cookie;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ysc.afterschool.domain.db.Apply;
@@ -59,33 +57,32 @@ public class SubjectController {
 	 * 수강신청 첫 화면 - 과목 리스트
 	 * 
 	 * @param model
+	 * @param cityId
 	 * @param infoId
-	 * @param cookie
+	 * @return
 	 */
-	@GetMapping("group")
-	public void group(Model model, int infoId, @CookieValue(value = "cityId", required = false) Cookie cookie) {
-
-		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
-		
+	@GetMapping("group/{cityId}/{infoId}")
+	public String group(Model model, @PathVariable int cityId, @PathVariable int infoId) {
 		model.addAttribute("invitation", invitationService.get(infoId));
-		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("subjectGroups", subjectGroupService.getList(infoId));
+		model.addAttribute("city", cityService.get(cityId));
+		
+		return "subject/group";
 	}
 
 	/**
 	 * 수강신청 확인 화면
 	 * 
 	 * @param model
+	 * @param cityId
 	 * @param infoId
 	 * @param authentication
-	 * @param cookie
+	 * @return
 	 */
-	@GetMapping("mylist")
-	public void mylist(Model model, int infoId, Authentication authentication,
-			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+	@GetMapping("mylist/{cityId}/{infoId}")
+	public String mylist(Model model, @PathVariable int cityId, @PathVariable int infoId,
+			Authentication authentication) {
 		
-		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
-
 		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("invitation", invitationService.get(infoId));
 
@@ -99,49 +96,50 @@ public class SubjectController {
 
 		model.addAttribute("applies", applies);
 		model.addAttribute("applyWaits", applyWaitService.getList(infoId, student.getId()));
+		
+		return "subject/mylist";
 	}
 
 	/**
 	 * 수강신청 하위 과목 리스트 화면
 	 * 
 	 * @param model
+	 * @param cityId
 	 * @param infoId
 	 * @param groupId
-	 * @param cookie
+	 * @return
 	 */
-	@GetMapping("list")
-	public void list(Model model, int infoId, int groupId,
-			@CookieValue(value = "cityId", required = false) Cookie cookie) {
-
-		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
+	@GetMapping("list/{cityId}/{infoId}/{groupId}")
+	public String list(Model model, @PathVariable int cityId, @PathVariable int infoId, @PathVariable int groupId) {
 		
 		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
 		model.addAttribute("subjectGroup", subjectGroupService.get(groupId));
 		model.addAttribute("subjects", subjectService.getList(infoId, groupId));
+		
+		return "subject/list";
 	}
 
 	/**
 	 * 수강신청 하위 과목 마이크로 페이지 화면
 	 * 
 	 * @param model
+	 * @param cityId
 	 * @param infoId
-	 * @param id
+	 * @param subjectId
 	 * @param authentication
-	 * @param cookie
+	 * @return
 	 */
-	@GetMapping("micro")
-	public void micro(Model model, int infoId, int id, Authentication authentication,
-			@CookieValue(value = "cityId", required = false) Cookie cookie) {
+	@GetMapping("micro/{cityId}/{infoId}/{subjectId}")
+	public String micro(Model model, @PathVariable int cityId, @PathVariable int infoId, @PathVariable int subjectId,
+			Authentication authentication) {
 
-		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
-		
 		model.addAttribute("city", cityService.get(cityId));
 		Invitation invitation = invitationService.get(infoId);
 		model.addAttribute("invitation", invitation);
 
 		Student student = (Student) authentication.getPrincipal();
-		Subject subject = subjectService.get(id);
+		Subject subject = subjectService.get(subjectId);
 
 		long applyCount = applyService.count(infoId, student.getId());
 		
@@ -186,6 +184,8 @@ public class SubjectController {
 		}
 		
 		model.addAttribute("subject", subject);
+		
+		return "subject/micro";
 	}
 
 	/**
@@ -208,19 +208,18 @@ public class SubjectController {
 	 * 과목정보 및 과목특징 화면
 	 * 
 	 * @param model
+	 * @param cityId
 	 * @param infoId
-	 * @param id
-	 * @param cookie
+	 * @param subjectId
+	 * @return
 	 */
-	@GetMapping("info")
-	public void info(Model model, int infoId, int id, @CookieValue(value = "cityId", required = false) Cookie cookie) {
+	@GetMapping("info/{cityId}/{infoId}/{subjectId}")
+	public String info(Model model, @PathVariable int cityId, @PathVariable int infoId, @PathVariable int subjectId) {
 
-		int cityId = cookie.getValue() == null ? 1 : Integer.parseInt(cookie.getValue());
-		
 		model.addAttribute("city", cityService.get(cityId));
 		model.addAttribute("infoId", infoId);
 
-		Subject subject = subjectService.get(id);
+		Subject subject = subjectService.get(subjectId);
 		if (subject.getTargetType() == TargetType.전체) {
 			if (subject.getGradeType() == GradeType.초_3_6_중등
 					|| subject.getGradeType() == GradeType.초_5_6_중등
@@ -234,5 +233,7 @@ public class SubjectController {
 		}
 
 		model.addAttribute("subject", subject);
+		
+		return "subject/info";
 	}
 }

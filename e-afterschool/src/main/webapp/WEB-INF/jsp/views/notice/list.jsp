@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp"%>
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
-  	<c:param name="left" value="subject/group?infoId=${infoId}" />
+  	<c:param name="left" value="subject/group/${city.id}/${infoId}" />
   	<c:param name="home" value="info?cityId=${city.id}" />
 </c:import>
 
@@ -24,7 +24,7 @@
 				<tr>
 					<td class="font-size-sm">${status.count}</td>
 					<td class="text-left">
-						<a href="${pageContext.request.contextPath}/notice/detail?infoId=${infoId}&noticeId=${notice.id}" 
+						<a href="${pageContext.request.contextPath}/notice/detail/${city.id}/${infoId}/${notice.id}" 
 							class="text-primary font-weight-bold">${notice.title}</a>
 					</td>
 					<td class="font-size-sm">

@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp"%>
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
-  	<c:param name="left" value="subject/micro?infoId=${infoId}&id=${subject.id}" />
+  	<c:param name="left" value="subject/micro/${city.id}/${infoId}/${subject.id}" />
   	<c:param name="home" value="info?cityId=${city.id}" />
 </c:import>
 

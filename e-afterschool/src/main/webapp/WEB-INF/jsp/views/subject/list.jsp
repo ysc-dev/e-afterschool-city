@@ -4,7 +4,7 @@
 <link href="${pageContext.request.contextPath}/css/subject.css" rel="stylesheet" type="text/css">
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
-  	<c:param name="left" value="subject/group?infoId=${infoId}"/>
+  	<c:param name="left" value="subject/group/${city.id}/${infoId}"/>
   	<c:param name="home" value="info?cityId=${city.id}"/>
 </c:import>
 
@@ -17,17 +17,17 @@
 		<div class="navbar-collapse">
 			<ul class="navbar-nav navbar-nav-highlight">
 				<li class="nav-item">
-					<a href="${pageContext.request.contextPath}/notice/list?infoId=${infoId}" class="navbar-nav-link">
+					<a href="${pageContext.request.contextPath}/notice/list/${city.id}/${infoId}" class="navbar-nav-link">
 						<i class="icon-bubble-notification mr-1"></i>전체공지사항
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="${pageContext.request.contextPath}/subject/mylist?infoId=${infoId}" class="navbar-nav-link nav-border-left">
+					<a href="${pageContext.request.contextPath}/subject/mylist/${city.id}/${infoId}" class="navbar-nav-link nav-border-left">
 						<i class="icon-folder-search mr-1"></i>수강신청확인
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="${pageContext.request.contextPath}/student/update?infoId=${infoId}" class="navbar-nav-link nav-border-left">
+					<a href="${pageContext.request.contextPath}/student/update/${city.id}/${infoId}" class="navbar-nav-link nav-border-left">
 						<i class="icon-user mr-1"></i>학생정보변경
 					</a>
 				</li>
@@ -51,7 +51,7 @@
 						</c:if>
 					</div>
 					<div class="header-elements">
-						<a href="micro?infoId=${infoId}&id=${subject.id}" 
+						<a href="${pageContext.request.contextPath}/subject/micro/${city.id}/${infoId}/${subject.id}" 
 							class="btn ${subject.applyNumber == subject.fixedNumber ? 'bg-slate-300' : 'bg-teal' } btn-sm px-2">
 							상세보기 (${subject.applyNumber}/${subject.fixedNumber})
 						</a>

@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp"%>
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
-  	<c:param name="left" value="subject/community/list?infoId=${infoId}&id=${subject.id}" />
+  	<c:param name="left" value="subject/community/list/${city.id}/${infoId}/${subject.id}" />
   	<c:param name="home" value="info?cityId=${city.id}" />
 </c:import>
 
@@ -79,14 +79,14 @@ $('#registForm').submit(function(e) {
        	contentType: false,
        	success: function(response) {
            	if (checkIE()) {
-           		location.replace(contextPath + "/subject/community/list?infoId=${infoId}&id=${subject.id}");
+           		location.replace(contextPath + "/subject/community/list/${city.id}/${infoId}/${subject.id}");
            	} else {
            		swalInit.fire({
        				title: "글 등록이 되었습니다.", 
        				type: "success",
        				position: "top"
        			}).then(function(e) {
-       				location.replace(contextPath + "/subject/community/list?infoId=${infoId}&id=${subject.id}");
+       				location.replace(contextPath + "/subject/community/list/${city.id}/${infoId}/${subject.id}");
        			});
            	}
        	},

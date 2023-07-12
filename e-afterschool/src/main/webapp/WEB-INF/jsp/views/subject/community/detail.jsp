@@ -6,7 +6,7 @@
 <sec:authentication property="principal" var="user"></sec:authentication>
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" >
-  	<c:param name="left" value="subject/community/list?infoId=${infoId}&id=${subjectId}" />
+  	<c:param name="left" value="subject/community/list/${city.id}/${infoId}/${subjectId}" />
   	<c:param name="home" value="info?cityId=${city.id}" />
 </c:import>
 
@@ -244,7 +244,7 @@ function deleteNotice(id) {
    				title: "글이 삭제 되었습니다.", 
    				type: "success"
    			}).then(function(e) {
-   				location.replace(contextPath + "/subject/community/list?infoId=${infoId}&id=${subjectId}");
+   				location.replace(contextPath + "/subject/community/list/${city.id}/${infoId}/${subjectId}");
    			});
        	},
         error: function(response) {

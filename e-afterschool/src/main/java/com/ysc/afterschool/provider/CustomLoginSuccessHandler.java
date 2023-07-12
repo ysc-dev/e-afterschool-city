@@ -29,6 +29,8 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 		
 		String cityId = request.getParameter(COOKIE_NAME);
 		
+		System.err.println(cityId);
+		
 		Cookie cookie = new Cookie(COOKIE_NAME, cityId);
 		cookie.setMaxAge(maxAge);
 		response.addCookie(cookie);
