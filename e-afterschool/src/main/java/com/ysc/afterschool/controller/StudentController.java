@@ -135,7 +135,7 @@ public class StudentController {
 				: school.substring(0, school.length() - 3);
 		student.setSchoolInfo(school);
 
-		if (student.isAgree() && !student.getCity().equals("함양")) {
+		if (student.isAgree()) {
 			student.setResidentNumber(student.getJumin1() + "-" + student.getJumin2());
 		}
 

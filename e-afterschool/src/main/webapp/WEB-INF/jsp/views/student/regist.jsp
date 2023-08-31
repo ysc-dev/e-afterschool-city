@@ -77,31 +77,48 @@
 					</div>
 				</div>
 				
-				<fieldset class="mb-0">
-					<legend class="fs-14 font-weight-bold">개인정보제공 동의</legend>
-					<label class="text-grey-600">학생보험 가입 시 필요한 개인정보제공에 동의를 해 주셔야 가입이 가능합니다.<br>보험가입목적 외에는 절대 사용하지 않습니다.</label>
-					<div class="form-check mt-1 mb-0">
-						<label class="form-check-label">
-							<input id="agreeCheck" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
-							보험가입에 필요한 개인정보를 보험사에 제공하는 것에 동의합니다.
-						</label>
-					</div>
-					<div id="residentNumberInput" class="mt-1 mb-0">
-						<div class="form-group mt-2">
-							<button id="modalBtn" type="button" class="btn bg-teal-600 px-2" disabled
-								data-toggle="modal" data-target="#modal">보험관련 규약추가항목 확인</button>
-						</div>
-						<div class="form-group mt-3 mb-0">
-							<label class="font-weight-bold">학생주민등록번호 입력 :</label>
-							<div class="d-flex align-items-center">
-								<input type="text" class="form-control format-jumin1" id="jumin1" name="jumin1" required>
-								<span class="font-weight-bold mx-2">-</span>
-								<input type="password" class="form-control format-jumin2" id="jumin2" name="jumin2" required>
+				<c:choose>
+	   				<c:when test="${fn:contains(city.link, 'hy')}">
+	   					<fieldset class="mb-0">
+							<legend class="fs-14 font-weight-bold">개인정보제공 동의</legend>
+							<label class="text-grey-600">개인정보제공에 동의를 해 주셔야 가입이 가능합니다.<br>수집된 개인정보를 방과후학교 외의 용도로는 사용하지 않습니다.</label>
+							<div class="form-check mt-1 mb-0">
+								<label class="form-check-label">
+									<input id="agreeCheckBtn" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
+									개인정보를 제공하는 것에 동의합니다.
+								</label>
 							</div>
-						</div>
-					</div>
-				</fieldset>
+						</fieldset>
+	   				</c:when>
+	   				<c:otherwise>
+	   					<fieldset class="mb-0">
+							<legend class="fs-14 font-weight-bold">개인정보제공 동의</legend>
+							<label class="text-grey-600">학생보험 가입 시 필요한 개인정보제공에 동의를 해 주셔야 가입이 가능합니다.<br>보험가입목적 외에는 절대 사용하지 않습니다.</label>
+							<div class="form-check mt-1 mb-0">
+								<label class="form-check-label">
+									<input id="agreeCheck" type="checkbox" name="agree" class="form-check-input-styled" data-fouc>
+									보험가입에 필요한 개인정보를 보험사에 제공하는 것에 동의합니다.
+								</label>
+							</div>
+							<div id="residentNumberInput" class="mt-1 mb-0">
+								<div class="form-group mt-2">
+									<button id="modalBtn" type="button" class="btn bg-teal-600 px-2" disabled
+										data-toggle="modal" data-target="#modal">보험관련 규약추가항목 확인</button>
+								</div>
+								<div class="form-group mt-3 mb-0">
+									<label class="font-weight-bold">학생주민등록번호 입력 :</label>
+									<div class="d-flex align-items-center">
+										<input type="text" class="form-control format-jumin1" id="jumin1" name="jumin1" required>
+										<span class="font-weight-bold mx-2">-</span>
+										<input type="password" class="form-control format-jumin2" id="jumin2" name="jumin2" required>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+	   				</c:otherwise>
+   				</c:choose>
 			</div>
+			
 			<div class="card-footer text-center">
 				<button id="registBtn" type="submit" class="btn bg-teal-600 rounded-round custom-btn mr-2" disabled>학생등록</button>
 				<a href="${pageContext.request.contextPath}/home/${city.id}" class="btn btn-light rounded-round custom-btn">취 소</a>
@@ -148,6 +165,16 @@ $(function() {
 
 	// 보험관련 규약추가항목 확인 여부
 	var isConfirm = false;
+
+	/** 개인정보 동의 체크 버튼 클릭 시 */
+	$("#agreeCheckBtn").click(function(){
+	    if ($(this).is(':checked')) {
+	    	isConfirm = true;
+	    	$("#registBtn").prop("disabled", false);
+	    } else {
+	    	$("#registBtn").prop("disabled", true);
+	    }
+	});
 	
 	/** 개인정보 동의 체크 버튼 클릭 시 */
 	$("#agreeCheck").click(function(){
